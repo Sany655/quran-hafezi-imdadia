@@ -1,0 +1,1026 @@
+[
+  {
+    "caption": "Sura",
+    "page": 1,
+    "url": "",
+    "level": 1,
+    "children": [
+      {
+        "caption": "1. Al-Fatiha (The Opening)",
+        "page": 2,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "2. Al-Baqara (The Cow)",
+        "page": 3,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "3. Aal-E-Imran (The Family Of Imran)",
+        "page": 51,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "4. An-Nisa (Women)",
+        "page": 78,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "5. Al-Maeda (The Table)",
+        "page": 107,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "6. Al-Anaam (Cattle, Livestock)",
+        "page": 129,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "7. Al-Araf (The Heights)",
+        "page": 152,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "8. Al-Anfal (Spoils Of War, Booty)",
+        "page": 178,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "9. At-Tawba (Repentance, Dispensation)",
+        "page": 188,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "10. Yunus (Jonah)",
+        "page": 209,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "11. Hud (Hud)",
+        "page": 222,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "12. Yusuf (Joseph)",
+        "page": 236,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "13. Ar-Rad (The Thunder)",
+        "page": 250,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "14. Ibrahim (Abraham)",
+        "page": 256,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "15. Al-Hijr (Al-Hijr, Stoneland, Rock City)",
+        "page": 262,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "16. An-Nahl (The Bee)",
+        "page": 268,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "17. Al-Isra (Isra, The Night Journey)",
+        "page": 283,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "18. Al-Kahf (The Cave)",
+        "page": 294,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "19. Maryam (Mary)",
+        "page": 306,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "20. Ta-Ha (Ta-Ha)",
+        "page": 313,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "21. Al-Anbiya (The Prophets)",
+        "page": 323,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "22. Al-Hajj (The Pilgrimage)",
+        "page": 332,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "23. Al-Mumenoon (The Believers)",
+        "page": 343,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "24. An-Noor (The Light)",
+        "page": 351,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "25. Al-Furqan (The Criterion,The Standard)",
+        "page": 360,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "26. Ash-Shuara (The Poets)",
+        "page": 367,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "27. An-Naml (The Ant, The Ants)",
+        "page": 377,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "28. Al-Qasas (The Story, Stories)",
+        "page": 386,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "29. Al-Ankaboot (The Spider)",
+        "page": 397,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "30. Ar-Room (The Romans,The Byzantines)",
+        "page": 405,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "31. Luqman (Luqman)",
+        "page": 412,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "32. As-Sajda (The Prostration, Adoration)",
+        "page": 416,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "33. Al-Ahzab (The Clans, The Combined Forces)",
+        "page": 419,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "34. Saba (Saba, Sheba)",
+        "page": 429,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "35. Fatir (The Angels, Orignator)",
+        "page": 435,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "36. Ya-Seen (Ya-Seen)",
+        "page": 441,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "37. As-Saaffat (Those Who Set The Ranks)",
+        "page": 446,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "38. Sad (The Letter Sad)",
+        "page": 453,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "39. Az-Zumar (The Troops, Throngs)",
+        "page": 459,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "40. Al-Ghafir (The Forgiver (God))",
+        "page": 468,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "41. Fussilat (Explained In Detail)",
+        "page": 478,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "42. Ash-Shura (Council, Consultation)",
+        "page": 484,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "43. Az-Zukhruf (Ornaments Of Gold)",
+        "page": 490,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "44. Ad-Dukhan (Smoke)",
+        "page": 496,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "45. Al-Jathiya (Crouching)",
+        "page": 499,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "46. Al-Ahqaf (The Wind-Curved Sandhills)",
+        "page": 503,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "47. Muhammad (Muhammad)",
+        "page": 507,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "48. Al-Fath (Victory, Conquest)",
+        "page": 512,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "49. Al-Hujraat (The Private Apartments)",
+        "page": 516,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "50. Qaf (The Letter Qaf)",
+        "page": 519,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "51. Adh-Dhariyat (The Winnowing Winds)",
+        "page": 521,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "52. At-Tur (The Mount)",
+        "page": 524,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "53. An-Najm (The Star)",
+        "page": 527,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "54. Al-Qamar (The Moon)",
+        "page": 529,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "55. Ar-Rahman (The Beneficent)",
+        "page": 532,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "56. Al-Waqia (The Inevitable)",
+        "page": 535,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "57. Al-Hadid (The Iron)",
+        "page": 538,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "58. Al-Mujadila (The Pleading Woman)",
+        "page": 543,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "59. Al-Hashr (Exile, Banishment)",
+        "page": 546,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "60. Al-Mumtahina (Examining Her)",
+        "page": 550,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "61. As-Saff (The Ranks, Battle Array)",
+        "page": 552,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "62. Al-Jumua (The Congregation, Friday)",
+        "page": 554,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "63. Al-Munafiqoon (The Hypocrites)",
+        "page": 555,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "64. At-Taghabun (Mutual Disillusion)",
+        "page": 557,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "65. At-Talaq (Divorce)",
+        "page": 559,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "66. At-Tahrim (Banning, Prohibition)",
+        "page": 561,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "67. Al-Mulk (The Sovereignty, Control)",
+        "page": 563,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "68. Al-Qalam (The Pen)",
+        "page": 565,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "69. Al-Haaqqa (The Reality)",
+        "page": 568,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "70. Al-Maarij (The Ascending Stairways)",
+        "page": 570,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "71. Nooh (Nooh)",
+        "page": 572,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "72. Al-Jinn (The Jinn)",
+        "page": 574,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "73. Al-Muzzammil (The Enshrouded One)",
+        "page": 577,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "74. Al-Muddaththir (The Cloaked One)",
+        "page": 579,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "75. Al-Qiyama (The Rising Of The Dead)",
+        "page": 581,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "76. Al-Insan (Man)",
+        "page": 583,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "77. Al-Mursalat (The Emissaries)",
+        "page": 585,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "78. An-Naba (The Tidings)",
+        "page": 587,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "79. An-Naziat (Those Who Drag Forth)",
+        "page": 588,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "80. Abasa (He Frowned)",
+        "page": 590,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "81. At-Takwir (The Overthrowing)",
+        "page": 591,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "82. Al-Infitar (The Cleaving)",
+        "page": 592,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "83. Al-Mutaffifin (Defrauding, Cheating)",
+        "page": 593,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "84. Al-Inshiqaq (The Sundering)",
+        "page": 595,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "85. Al-Burooj (The Mansions Of The Stars)",
+        "page": 596,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "86. At-Tariq (The Morning Star)",
+        "page": 597,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "87. Al-Ala (The Most High)",
+        "page": 598,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "88. Al-Ghashiya (The Overwhelming)",
+        "page": 598,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "89. Al-Fajr (The Dawn, Daybreak)",
+        "page": 599,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "90. Al-Balad (The City)",
+        "page": 601,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "91. Ash-Shams (The Sun)",
+        "page": 601,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "92. Al-Lail (The Night)",
+        "page": 602,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "93. Ad-Dhuha (The Morning Hours)",
+        "page": 603,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "94. Al-Inshirah (Solace, Consolation)",
+        "page": 603,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "95. At-Tin (The Fig, The Figtree)",
+        "page": 604,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "96. Al-Alaq (The Clot, Read)",
+        "page": 604,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "97. Al-Qadr (Power, Fate)",
+        "page": 605,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "98. Al-Bayyina (The Clear Proof)",
+        "page": 605,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "99. Az-Zalzala (The Earthquake)",
+        "page": 606,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "100. Al-Adiyat (The Courser)",
+        "page": 606,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "101. Al-Qaria (The Calamity",
+        "page": 607,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "102. At-Takathur (Competition",
+        "page": 607,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "103. Al-Asr (The Declining Day)",
+        "page": 608,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "104. Al-Humaza (The Traducer)",
+        "page": 608,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "105. Al-Fil (The Elephant)",
+        "page": 608,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "106. Quraish (Winter, Quraysh)",
+        "page": 609,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "107. Al-Maun (Small Kindnesses)",
+        "page": 609,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "108. Al-Kauther (Abundance)",
+        "page": 609,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "109. Al-Kafiroon (The Disbelievers)",
+        "page": 609,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "110. An-Nasr (Succour, Divine Support)",
+        "page": 610,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "111. Al-Masadd (Palm Fibre)",
+        "page": 610,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "112. Al-Ikhlas (Sincerity)",
+        "page": 610,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "113. Al-Falaq (The Daybreak, Dawn)",
+        "page": 611,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "114. An-Nas (Mankind)",
+        "page": 611,
+        "url": "",
+        "level": 2,
+        "children": []
+      }
+    ]
+  },
+  {
+    "caption": "Juz",
+    "page": 1,
+    "url": "",
+    "level": 1,
+    "children": [
+      {
+        "caption": "Juz 1",
+        "page": 2,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 2",
+        "page": 23,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 3",
+        "page": 43,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 4",
+        "page": 63,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 5",
+        "page": 83,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 6",
+        "page": 103,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 7",
+        "page": 123,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 8",
+        "page": 143,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 9",
+        "page": 163,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 10",
+        "page": 183,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 11",
+        "page": 203,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 12",
+        "page": 223,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 13",
+        "page": 243,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 14",
+        "page": 263,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 15",
+        "page": 283,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 16",
+        "page": 303,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 17",
+        "page": 323,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 18",
+        "page": 343,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 19",
+        "page": 363,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 20",
+        "page": 383,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 21",
+        "page": 403,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 22",
+        "page": 423,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 23",
+        "page": 443,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 24",
+        "page": 463,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 25",
+        "page": 483,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 26",
+        "page": 503,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 27",
+        "page": 523,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 28",
+        "page": 543,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 29",
+        "page": 563,
+        "url": "",
+        "level": 2,
+        "children": []
+      },
+      {
+        "caption": "Juz 30",
+        "page": 587,
+        "url": "",
+        "level": 2,
+        "children": []
+      }
+    ]
+  }
+]
