@@ -87,6 +87,56 @@ class _IndexScreenState extends State<IndexScreen> {
     );
   }
 
+  void _showAboutDialog() {
+    showDialog(
+      context: context,
+      builder: (ctx) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          title: Row(
+            children: [
+              const Icon(Icons.verified_outlined, color: Color(0xFF0F5132)),
+              const SizedBox(width: 8),
+              Text(
+                'উৎস ও তথ্যের বিবরণ',
+                style: GoogleFonts.notoSansBengali(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+            ],
+          ),
+          content: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  '• ১০০% অফলাইন ও কোনো পারমিশন প্রয়োজন নেই।\n'
+                  '• ক্যালিগ্রাফি ও পৃষ্ঠা: ঐতিহ্যবাহী ইমদাদিয়া লাইব্রেরী ১৫ লাইন ছাপা (চকবাজার, ঢাকা)।\n'
+                  '• আরবি পাঠ্য: তানযীল প্রজেক্ট ও বাদশাহ ফাহদ কুরআন কমপ্লেক্স (মদিনা)।\n'
+                  '• বাংলা অনুবাদ ১: ড. আবু বকর মুহাম্মাদ যাকারিয়া (বাদশাহ ফাহদ কমপ্লেক্স অনুমোদিত)।\n'
+                  '• বাংলা অনুবাদ ২: তাইসীরুল কুরআন (তাওহীদ পাবলিকেশন্স)।\n'
+                  '• শব্দে শব্দে অর্থ: কুরআন ডট কম ওপেন কর্পাস।\n'
+                  '• তাফসীর: তাফসীরে আহসানুল বায়ান ও তাফসীর ইবনে কাসীর।\n\n'
+                  'সকল তথ্য ওপেন ডাটা ও উন্মুক্ত ধর্মীয় কল্যাণার্থে সংকলিত।',
+                  style: GoogleFonts.notoSansBengali(fontSize: 13, height: 1.6, color: Colors.black87),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF0F5132),
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () => Navigator.pop(ctx),
+              child: Text('ঠিক আছে', style: GoogleFonts.notoSansBengali()),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -100,6 +150,11 @@ class _IndexScreenState extends State<IndexScreen> {
           backgroundColor: const Color(0xFF0F5132),
           foregroundColor: Colors.white,
           actions: [
+            IconButton(
+              icon: const Icon(Icons.info_outline),
+              tooltip: 'উৎস ও তথ্য',
+              onPressed: _showAboutDialog,
+            ),
             IconButton(
               icon: const Icon(Icons.search),
               tooltip: 'অনুসন্ধান',
