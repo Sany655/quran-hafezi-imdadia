@@ -3,9 +3,24 @@ import 'package:quran_hafezi_imdadia/models/surah.dart';
 import 'package:quran_hafezi_imdadia/models/juz.dart';
 import 'package:quran_hafezi_imdadia/models/ayah.dart';
 import 'package:quran_hafezi_imdadia/models/word_wbw.dart';
+import 'package:quran_hafezi_imdadia/models/bookmark.dart';
 
 void main() {
   group('Quran Data Models Verification Tests', () {
+    test('Bookmark model mapping should parse correctly', () {
+      final map = {
+        'id': 1,
+        'page_number': 45,
+        'surah_name': 'আল-বাকারাহ',
+        'juz_number': 3,
+        'created_at': '2026-11-01T12:00:00Z',
+      };
+      final bm = Bookmark.fromMap(map);
+      expect(bm.id, 1);
+      expect(bm.pageNumber, 45);
+      expect(bm.surahName, 'আল-বাকারাহ');
+      expect(bm.juzNumber, 3);
+    });
     test('Surah model mapping should parse correctly', () {
       final map = {
         'id': 1,

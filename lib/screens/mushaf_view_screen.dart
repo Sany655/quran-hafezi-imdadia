@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../database/quran_db_helper.dart';
 import '../models/surah.dart';
 import 'study_sheet.dart';
-import 'index_screen.dart';
 import 'search_screen.dart';
 
 class MushafViewScreen extends StatefulWidget {
   final int initialPage;
 
-  const MushafViewScreen({super.key, this.initialPage = 2});
+  const MushafViewScreen({super.key, required this.initialPage});
 
   @override
   State<MushafViewScreen> createState() => _MushafViewScreenState();
@@ -20,25 +17,42 @@ class MushafViewScreen extends StatefulWidget {
 class _MushafViewScreenState extends State<MushafViewScreen> {
   late PageController _pageController;
   late int _currentPage;
-  final AudioPlayer _audioPlayer = AudioPlayer();
-  bool _soundEnabled = true;
   bool _isUiVisible = true;
+  bool _isBookmarked = false;
   List<Surah> _surahs = [];
 
   @override
   void initState() {
     super.initState();
     _currentPage = widget.initialPage;
-    // Standard Quran is read Right-to-Left (RTL)
     _pageController = PageController(initialPage: _currentPage - 1);
     _loadSurahs();
+    _checkBookmarkStatus();
+    _saveCurrentLastRead();
   }
 
   void _loadSurahs() async {
     final list = await QuranDbHelper.instance.getAllSurahs();
-    setState(() {
-      _surahs = list;
-    });
+    if (mounted) {
+      setState(() {
+        _surahs = list;
+      });
+    }
+  }
+
+  void _checkBookmarkStatus() async {
+    final status = await QuranDbHelper.instance.isBookmarked(_currentPage);
+    if (mounted) {
+      setState(() {
+        _isBookmarked = status;
+      });
+    }
+  }
+
+  void _saveCurrentLastRead() async {
+    final s = _getCurrentSurah(_currentPage);
+    final sname = s?.nameBn ?? 'সূরা';
+    await QuranDbHelper.instance.saveLastRead(_currentPage, sname);
   }
 
   Surah? _getCurrentSurah(int page) {
@@ -54,12 +68,22 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
     return current;
   }
 
-  void _playPageTurnSound() async {
-    if (!_soundEnabled) return;
-    try {
-      await _audioPlayer.stop();
-      await _audioPlayer.play(AssetSource('audio/flipsound.mp3'), mode: PlayerMode.lowLatency);
-    } catch (_) {}
+  int _getCurrentJuz(int page) {
+    // Standard 30 Juz page boundaries
+    final juzStarts = [
+      2, 23, 43, 63, 83, 103, 123, 143, 163, 183,
+      203, 223, 243, 263, 283, 303, 323, 343, 363, 383,
+      403, 423, 443, 463, 483, 503, 523, 543, 563, 587
+    ];
+    int juz = 1;
+    for (int i = 0; i < juzStarts.length; i++) {
+      if (page >= juzStarts[i]) {
+        juz = i + 1;
+      } else {
+        break;
+      }
+    }
+    return juz;
   }
 
   void _goToPage(int pageNumber) {
@@ -68,6 +92,8 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
       setState(() {
         _currentPage = pageNumber;
       });
+      _checkBookmarkStatus();
+      _saveCurrentLastRead();
     }
   }
 
@@ -112,9 +138,13 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx),
-              child: const Text('বাতিল'),
+              child: Text('বাতিল', style: GoogleFonts.notoSansBengali()),
             ),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF0F5132),
+                foregroundColor: Colors.white,
+              ),
               onPressed: () {
                 final p = int.tryParse(controller.text);
                 if (p != null && p >= 1 && p <= 612) {
@@ -122,7 +152,7 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
                   _goToPage(p);
                 }
               },
-              child: const Text('যাও'),
+              child: Text('যাও', style: GoogleFonts.notoSansBengali()),
             ),
           ],
         );
@@ -130,10 +160,123 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
     );
   }
 
+  // Bookmark Toggle with Yes/No Prompt
+  void _promptBookmarkDialog() {
+    final s = _getCurrentSurah(_currentPage);
+    final sname = s?.nameBn ?? 'কুরআন শরীফ';
+    final juzNum = _getCurrentJuz(_currentPage);
+
+    if (_isBookmarked) {
+      // Prompt to Remove
+      showDialog(
+        context: context,
+        builder: (ctx) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            title: Row(
+              children: [
+                const Icon(Icons.bookmark_remove, color: Colors.redAccent),
+                const SizedBox(width: 8),
+                Text(
+                  'বুকমার্ক অপসারণ',
+                  style: GoogleFonts.notoSansBengali(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+              ],
+            ),
+            content: Text(
+              'পৃষ্ঠা $_currentPage ($sname) ইতিমধ্যে বুকমার্ক করা আছে। আপনি কি এটি মুছে ফেলতে চান?',
+              style: GoogleFonts.notoSansBengali(fontSize: 15, height: 1.5),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx),
+                child: Text('না', style: GoogleFonts.notoSansBengali(color: Colors.grey[700])),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.redAccent,
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: () async {
+                  Navigator.pop(ctx);
+                  await QuranDbHelper.instance.removeBookmark(_currentPage);
+                  setState(() {
+                    _isBookmarked = false;
+                  });
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('পৃষ্ঠা $_currentPage বুকমার্ক মুছে ফেলা হয়েছে', style: GoogleFonts.notoSansBengali()),
+                        duration: const Duration(seconds: 2),
+                      ),
+                    );
+                  }
+                },
+                child: Text('হ্যাঁ, মুছুন', style: GoogleFonts.notoSansBengali()),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      // Prompt to Add
+      showDialog(
+        context: context,
+        builder: (ctx) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            title: Row(
+              children: [
+                const Icon(Icons.bookmark_add, color: Color(0xFFD4AF37)),
+                const SizedBox(width: 8),
+                Text(
+                  'বুকমার্ক সংরক্ষণ',
+                  style: GoogleFonts.notoSansBengali(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+              ],
+            ),
+            content: Text(
+              'আপনি কি পৃষ্ঠা $_currentPage ($sname) বুকমার্ক হিসেবে সংরক্ষণ করতে চান?',
+              style: GoogleFonts.notoSansBengali(fontSize: 15, height: 1.5),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx),
+                child: Text('না', style: GoogleFonts.notoSansBengali(color: Colors.grey[700])),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF0F5132),
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: () async {
+                  Navigator.pop(ctx);
+                  await QuranDbHelper.instance.addBookmark(_currentPage, sname, juzNum);
+                  setState(() {
+                    _isBookmarked = true;
+                  });
+                  if (mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: const Color(0xFF0F5132),
+                        content: Text('পৃষ্ঠা $_currentPage বুকমার্ক সংরক্ষণ করা হয়েছে', style: GoogleFonts.notoSansBengali()),
+                        duration: const Duration(seconds: 2),
+                      ),
+                    );
+                  }
+                },
+                child: Text('হ্যাঁ, সংরক্ষণ করুন', style: GoogleFonts.notoSansBengali()),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
   @override
   void dispose() {
     _pageController.dispose();
-    _audioPlayer.dispose();
     super.dispose();
   }
 
@@ -148,6 +291,11 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
               backgroundColor: const Color(0xFF0F5132),
               foregroundColor: Colors.white,
               elevation: 0,
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back),
+                tooltip: 'সূচীপত্র',
+                onPressed: () => Navigator.pop(context),
+              ),
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -163,13 +311,12 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
               ),
               actions: [
                 IconButton(
-                  icon: Icon(_soundEnabled ? Icons.volume_up : Icons.volume_off),
-                  tooltip: 'পৃষ্ঠা উল্টানোর শব্দ',
-                  onPressed: () {
-                    setState(() {
-                      _soundEnabled = !_soundEnabled;
-                    });
-                  },
+                  icon: Icon(
+                    _isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                    color: _isBookmarked ? const Color(0xFFD4AF37) : Colors.white,
+                  ),
+                  tooltip: _isBookmarked ? 'বুকমার্ক সরানো' : 'বুকমার্ক করা',
+                  onPressed: _promptBookmarkDialog,
                 ),
                 IconButton(
                   icon: const Icon(Icons.search),
@@ -188,18 +335,6 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
                     );
                   },
                 ),
-                IconButton(
-                  icon: const Icon(Icons.list),
-                  tooltip: 'সূচীপত্র',
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => IndexScreen(onPageSelected: _goToPage),
-                      ),
-                    );
-                  },
-                ),
               ],
             )
           : null,
@@ -209,36 +344,60 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
             _isUiVisible = !_isUiVisible;
           });
         },
-        child: Directionality(
-          textDirection: TextDirection.rtl, // Authentic Right-to-Left Quran pagination
-          child: PageView.builder(
-            controller: _pageController,
-            itemCount: 612,
-            onPageChanged: (index) {
-              setState(() {
-                _currentPage = index + 1;
-              });
-              _playPageTurnSound();
-            },
-            itemBuilder: (context, index) {
-              final pageNum = index + 1;
-              final fileName = 'assets/pages/page_${pageNum.toString().padLeft(3, '0')}.jpg';
+        onLongPress: _promptBookmarkDialog, // Long press with Yes/No prompt!
+        child: Stack(
+          children: [
+            Directionality(
+              textDirection: TextDirection.rtl, // Authentic Right-to-Left Quran pagination
+              child: PageView.builder(
+                controller: _pageController,
+                itemCount: 612,
+                onPageChanged: (index) {
+                  setState(() {
+                    _currentPage = index + 1;
+                  });
+                  _checkBookmarkStatus();
+                  _saveCurrentLastRead();
+                },
+                itemBuilder: (context, index) {
+                  final pageNum = index + 1;
+                  final fileName = 'assets/pages/page_${pageNum.toString().padLeft(3, '0')}.jpg';
 
-              return InteractiveViewer(
-                minScale: 1.0,
-                maxScale: 3.5,
-                child: Center(
-                  child: Image.asset(
-                    fileName,
-                    fit: BoxFit.contain,
-                    errorBuilder: (_, __, ___) => Center(
-                      child: Text('পৃষ্ঠা $pageNum লোড করা যায়নি'),
+                  return InteractiveViewer(
+                    minScale: 1.0,
+                    maxScale: 3.5,
+                    child: Center(
+                      child: Image.asset(
+                        fileName,
+                        fit: BoxFit.contain,
+                        errorBuilder: (_, __, ___) => Center(
+                          child: Text('পৃষ্ঠা $pageNum লোড করা যায়নি'),
+                        ),
+                      ),
                     ),
+                  );
+                },
+              ),
+            ),
+            // Gold Bookmark Ribbon Indicator when bookmarked
+            if (_isBookmarked)
+              Positioned(
+                top: 0,
+                left: 16,
+                child: Container(
+                  width: 32,
+                  height: 44,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFFD4AF37),
+                    borderRadius: BorderRadius.vertical(bottom: Radius.circular(6)),
+                    boxShadow: [
+                      BoxShadow(color: Colors.black26, blurRadius: 4, offset: Offset(0, 2)),
+                    ],
                   ),
+                  child: const Icon(Icons.bookmark, color: Colors.white, size: 20),
                 ),
-              );
-            },
-          ),
+              ),
+          ],
         ),
       ),
       bottomNavigationBar: _isUiVisible

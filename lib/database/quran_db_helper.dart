@@ -6,6 +6,7 @@ import '../models/surah.dart';
 import '../models/juz.dart';
 import '../models/ayah.dart';
 import '../models/word_wbw.dart';
+import '../models/bookmark.dart';
 
 class QuranDbHelper {
   static final QuranDbHelper instance = QuranDbHelper._init();
@@ -23,25 +24,41 @@ class QuranDbHelper {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
 
-    // Check if the database exists in the app storage
     final exists = await databaseExists(path);
 
     if (!exists) {
-      // Create parent directory if needed
       try {
         await Directory(dirname(path)).create(recursive: true);
       } catch (_) {}
 
-      // Copy from asset
       ByteData data = await rootBundle.load('data/quran_imdadia.db');
       List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
       await File(path).writeAsBytes(bytes, flush: true);
     }
 
-    return await openDatabase(
-      path,
-      readOnly: true,
-    );
+    final db = await openDatabase(path, readOnly: false);
+
+    // Create Bookmarks & Last Read tables if they don't exist
+    await db.execute('''
+      CREATE TABLE IF NOT EXISTS bookmarks (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        page_number INTEGER NOT NULL UNIQUE,
+        surah_name TEXT NOT NULL,
+        juz_number INTEGER NOT NULL,
+        created_at TEXT NOT NULL
+      );
+    ''');
+
+    await db.execute('''
+      CREATE TABLE IF NOT EXISTS last_read (
+        id INTEGER PRIMARY KEY,
+        page_number INTEGER NOT NULL,
+        surah_name TEXT NOT NULL,
+        updated_at TEXT NOT NULL
+      );
+    ''');
+
+    return db;
   }
 
   // 1. Fetch all Surahs
@@ -80,7 +97,6 @@ class QuranDbHelper {
 
     List<Ayah> ayahs = ayahMaps.map((e) => Ayah.fromMap(e)).toList();
 
-    // Attach translations
     final transMaps = await db.query(
       'translations',
       where: 'surah_id = ?',
@@ -99,7 +115,6 @@ class QuranDbHelper {
       }
     }
 
-    // Attach word-by-word
     final wordMaps = await db.query(
       'words_wbw',
       where: 'surah_id = ?',
@@ -147,5 +162,69 @@ class QuranDbHelper {
       LIMIT 100;
     ''', [query]);
     return results;
+  }
+
+  // 7. Bookmarks Management
+  Future<bool> isBookmarked(int pageNumber) async {
+    final db = await database;
+    final maps = await db.query(
+      'bookmarks',
+      where: 'page_number = ?',
+      whereArgs: [pageNumber],
+    );
+    return maps.isNotEmpty;
+  }
+
+  Future<void> addBookmark(int pageNumber, String surahName, int juzNumber) async {
+    final db = await database;
+    await db.insert(
+      'bookmarks',
+      {
+        'page_number': pageNumber,
+        'surah_name': surahName,
+        'juz_number': juzNumber,
+        'created_at': DateTime.now().toIso8601String(),
+      },
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<void> removeBookmark(int pageNumber) async {
+    final db = await database;
+    await db.delete(
+      'bookmarks',
+      where: 'page_number = ?',
+      whereArgs: [pageNumber],
+    );
+  }
+
+  Future<List<Bookmark>> getAllBookmarks() async {
+    final db = await database;
+    final maps = await db.query('bookmarks', orderBy: 'page_number ASC');
+    return maps.map((e) => Bookmark.fromMap(e)).toList();
+  }
+
+  // 8. Last Read Management
+  Future<void> saveLastRead(int pageNumber, String surahName) async {
+    final db = await database;
+    await db.insert(
+      'last_read',
+      {
+        'id': 1,
+        'page_number': pageNumber,
+        'surah_name': surahName,
+        'updated_at': DateTime.now().toIso8601String(),
+      },
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  Future<Map<String, dynamic>?> getLastRead() async {
+    final db = await database;
+    final maps = await db.query('last_read', where: 'id = 1');
+    if (maps.isNotEmpty) {
+      return maps.first;
+    }
+    return null;
   }
 }
