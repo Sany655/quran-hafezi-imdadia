@@ -151,16 +151,20 @@ class QuranDbHelper {
     return results;
   }
 
-  // 6. Full-Text Search in Bengali
+  // 6. Bengali Search across translations
   Future<List<Map<String, dynamic>>> searchBengali(String query) async {
     final db = await database;
+    final clean = query.trim();
+    if (clean.isEmpty) return [];
+
     final results = await db.rawQuery('''
-      SELECT s.id as surah_id, s.name_bn, s.name_en, f.ayah_number, f.edition, f.text_bn
-      FROM search_translations_fts f
-      JOIN surahs s ON s.id = f.surah_id
-      WHERE search_translations_fts MATCH ?
+      SELECT s.id as surah_id, s.name_bn, s.name_en, t.ayah_number, t.edition, t.text_bn
+      FROM translations t
+      JOIN surahs s ON s.id = t.surah_id
+      WHERE t.text_bn LIKE ?
+      ORDER BY s.id ASC, t.ayah_number ASC
       LIMIT 100;
-    ''', [query]);
+    ''', ['%$clean%']);
     return results;
   }
 

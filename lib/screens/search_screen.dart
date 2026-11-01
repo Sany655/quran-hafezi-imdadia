@@ -19,7 +19,13 @@ class _SearchScreenState extends State<SearchScreen> {
 
   void _performSearch(String query) async {
     final clean = query.trim();
-    if (clean.isEmpty) return;
+    if (clean.isEmpty) {
+      setState(() {
+        _results = [];
+        _hasSearched = false;
+      });
+      return;
+    }
 
     setState(() {
       _isLoading = true;
@@ -28,16 +34,27 @@ class _SearchScreenState extends State<SearchScreen> {
 
     try {
       final res = await QuranDbHelper.instance.searchBengali(clean);
-      setState(() {
-        _results = res;
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _results = res;
+          _isLoading = false;
+        });
+      }
     } catch (e) {
-      setState(() {
-        _results = [];
-        _isLoading = false;
-      });
+      debugPrint("Search error: $e");
+      if (mounted) {
+        setState(() {
+          _results = [];
+          _isLoading = false;
+        });
+      }
     }
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -62,9 +79,18 @@ class _SearchScreenState extends State<SearchScreen> {
                     controller: _controller,
                     autofocus: true,
                     decoration: InputDecoration(
-                      hintText: 'শব্দ লিখুন (যেমন: ক্ষমা, সালাত, জান্নাত)...',
+                      hintText: 'শব্দ লিখুন (যেমন: সালাত, রোজা, জান্নাত)...',
                       hintStyle: GoogleFonts.notoSansBengali(fontSize: 14),
                       prefixIcon: const Icon(Icons.search, color: Color(0xFF0F5132)),
+                      suffixIcon: _controller.text.isNotEmpty
+                          ? IconButton(
+                              icon: const Icon(Icons.clear, size: 20),
+                              onPressed: () {
+                                _controller.clear();
+                                _performSearch('');
+                              },
+                            )
+                          : null,
                       filled: true,
                       fillColor: Colors.grey[100],
                       border: OutlineInputBorder(
@@ -72,6 +98,11 @@ class _SearchScreenState extends State<SearchScreen> {
                         borderSide: BorderSide.none,
                       ),
                     ),
+                    onChanged: (val) {
+                      if (val.trim().length >= 2) {
+                        _performSearch(val);
+                      }
+                    },
                     onSubmitted: _performSearch,
                   ),
                 ),
@@ -89,13 +120,40 @@ class _SearchScreenState extends State<SearchScreen> {
           else if (_hasSearched && _results.isEmpty)
             Expanded(
               child: Center(
-                child: Text(
-                  'কোন ফলাফল পাওয়া যায়নি',
-                  style: GoogleFonts.notoSansBengali(fontSize: 16, color: Colors.grey[600]),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.search_off, size: 56, color: Colors.grey[400]),
+                    const SizedBox(height: 12),
+                    Text(
+                      'কোন ফলাফল পাওয়া যায়নি',
+                      style: GoogleFonts.notoSansBengali(fontSize: 16, color: Colors.grey[600]),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      'বানান পরীক্ষা করুন অথবা অন্য কোনো শব্দ দিয়ে চেষ্টা করুন',
+                      style: GoogleFonts.notoSansBengali(fontSize: 13, color: Colors.grey[500]),
+                    ),
+                  ],
                 ),
               ),
             )
-          else
+          else ...[
+            if (_results.isNotEmpty)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    '${_results.length}টি ফলাফল পাওয়া গেছে',
+                    style: GoogleFonts.notoSansBengali(
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      color: const Color(0xFF0F5132),
+                    ),
+                  ),
+                ),
+              ),
             Expanded(
               child: ListView.separated(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -106,6 +164,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   final sid = item['surah_id'] as int;
                   final sname = item['name_bn'] as String;
                   final aid = item['ayah_number'] as int;
+                  final edition = item['edition'] as String;
                   final text = item['text_bn'] as String;
 
                   return ListTile(
@@ -120,9 +179,19 @@ class _SearchScreenState extends State<SearchScreen> {
                             color: const Color(0xFF0F5132),
                           ),
                         ),
-                        Text(
-                          'সূরা $sid',
-                          style: GoogleFonts.notoSansBengali(fontSize: 12, color: Colors.grey),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF0F5132).withOpacity(0.08),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: Text(
+                            edition == 'taisirul' ? 'তাইসীরুল' : 'যাকারিয়া',
+                            style: GoogleFonts.notoSansBengali(
+                              fontSize: 11,
+                              color: const Color(0xFF0F5132),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -141,6 +210,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 },
               ),
             ),
+          ],
         ],
       ),
     );
