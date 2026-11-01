@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_html/flutter_html.dart';
 import '../models/ayah.dart';
 import '../models/surah.dart';
 import '../database/quran_db_helper.dart';
@@ -96,36 +95,8 @@ class _StudySheetState extends State<StudySheet> {
                   Expanded(
                     child: TabBarView(
                       children: [
-                        // Ahsanul Bayaan
-                        SingleChildScrollView(
-                          controller: scrollController,
-                          padding: const EdgeInsets.all(16),
-                          child: Html(
-                            data: tafsirs['ahsanul_bayan'] ?? 'এই আয়াতের জন্য তাফসীর উপলব্ধ নয়।',
-                            style: {
-                              "body": Style(
-                                fontSize: FontSize(16),
-                                lineHeight: const LineHeight(1.6),
-                                fontFamily: GoogleFonts.notoSansBengali().fontFamily,
-                              ),
-                            },
-                          ),
-                        ),
-                        // Ibn Kathir
-                        SingleChildScrollView(
-                          controller: scrollController,
-                          padding: const EdgeInsets.all(16),
-                          child: Html(
-                            data: tafsirs['ibn_kathir'] ?? 'এই আয়াতের জন্য ইবনে কাসীর তাফসীর উপলব্ধ নয়।',
-                            style: {
-                              "body": Style(
-                                fontSize: FontSize(16),
-                                lineHeight: const LineHeight(1.6),
-                                fontFamily: GoogleFonts.notoSansBengali().fontFamily,
-                              ),
-                            },
-                          ),
-                        ),
+                        _buildTafsirContent(tafsirs['ahsanul_bayan'], scrollController),
+                        _buildTafsirContent(tafsirs['ibn_kathir'], scrollController),
                       ],
                     ),
                   ),
@@ -135,6 +106,41 @@ class _StudySheetState extends State<StudySheet> {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildTafsirContent(String? rawHtml, ScrollController scrollController) {
+    if (rawHtml == null || rawHtml.trim().isEmpty) {
+      return const Center(
+        child: Padding(
+          padding: EdgeInsets.all(32),
+          child: Text('এই আয়াতের জন্য তাফসীর উপলব্ধ নয়।'),
+        ),
+      );
+    }
+
+    final cleanText = rawHtml
+        .replaceAll(RegExp(r'<br\s*/?>', caseSensitive: false), '\n')
+        .replaceAll(RegExp(r'</p>', caseSensitive: false), '\n\n')
+        .replaceAll(RegExp(r'<[^>]*>'), '')
+        .replaceAll('&nbsp;', ' ')
+        .replaceAll('&quot;', '"')
+        .replaceAll('&apos;', "'")
+        .replaceAll('&amp;', '&')
+        .replaceAll(RegExp(r'\n{3,}'), '\n\n')
+        .trim();
+
+    return SingleChildScrollView(
+      controller: scrollController,
+      padding: const EdgeInsets.all(16),
+      child: SelectableText(
+        cleanText,
+        style: GoogleFonts.notoSansBengali(
+          fontSize: 15,
+          height: 1.8,
+          color: Colors.black87,
+        ),
+      ),
     );
   }
 
