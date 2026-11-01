@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="ইমদাদিয়া ১৫ লাইন হাফেজী কুরআন"
+        android:label="Quran - For huffaz"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
