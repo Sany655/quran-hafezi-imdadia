@@ -151,20 +151,127 @@ class QuranDbHelper {
     return results;
   }
 
-  // 6. Bengali Search across translations
+  // 6. Smart Multi-Lingual Search (Banglish, Banglarabi, English-Arabic, Bengali Synonyms)
+  static final Map<String, List<String>> _searchSynonyms = {
+    // Banglish & English to Bengali
+    'salat': ['সালাত', 'নামায', 'নামাজ'],
+    'salah': ['সালাত', 'নামায', 'নামাজ'],
+    'namaz': ['নামায', 'নামাজ', 'সালাত'],
+    'namaj': ['নামায', 'নামাজ', 'সালাত'],
+    'roza': ['রোজা', 'রোযা', 'সাওম', 'সিয়াম'],
+    'roja': ['রোজা', 'রোযা', 'সাওম', 'সিয়াম'],
+    'sawm': ['সাওম', 'সিয়াম', 'রোজা', 'রোযা'],
+    'siyam': ['সিয়াম', 'সাওম', 'রোজা', 'রোযা'],
+    'ramadan': ['রমযান', 'রমজান', 'সাওম', 'সিয়াম'],
+    'ramzan': ['রমযান', 'রমজান', 'সাওম', 'সিয়াম'],
+    'zakat': ['যাকাত', 'জাকাত'],
+    'jakat': ['যাকাত', 'জাকাত'],
+    'jannat': ['জান্নাত', 'জান্নাতুল', 'উদ্যান', 'বেহেশত'],
+    'jannah': ['জান্নাত', 'জান্নাতুল'],
+    'behesht': ['জান্নাত', 'বেহেশত'],
+    'heaven': ['জান্নাত'],
+    'paradise': ['জান্নাত'],
+    'jahannam': ['জাহান্নাম', 'জাহান্নামের', 'আগুন', 'দোযখ'],
+    'jahanam': ['জাহান্নাম', 'জাহান্নামের'],
+    'dojokh': ['জাহান্নাম', 'দোযখ'],
+    'hell': ['জাহান্নাম'],
+    'sabr': ['ধৈর্য', 'সবর'],
+    'sobor': ['ধৈর্য', 'সবর'],
+    'shirk': ['শিরক', 'শিরক্'],
+    'tawhid': ['তাওহীদ', 'তৌহিদ'],
+    'touhid': ['তাওহীদ', 'তৌহিদ'],
+    'iman': ['ঈমান', 'বিশ্বাস'],
+    'eeman': ['ঈমান', 'বিশ্বাস'],
+    'momin': ['মুমিন', 'ঈমানদার'],
+    'munafik': ['মুনাফিক', 'কপট'],
+    'munafiq': ['মুনাফিক', 'কপট'],
+    'kafir': ['কাফির', 'অবিশ্বাসী'],
+    'riba': ['সুদ', 'রিবা'],
+    'shud': ['সুদ', 'রিবা'],
+    'sud': ['সুদ', 'রিবা'],
+    'qurbani': ['কুরবানী', 'কোরবানী'],
+    'korbani': ['কুরবানী', 'কোরবানী'],
+    'hajj': ['হজ্জ', 'হজ'],
+    'haj': ['হজ্জ', 'হজ'],
+    'umrah': ['উমরাহ', 'উমরা'],
+    'omra': ['উমরাহ', 'উমরা'],
+    'dua': ['দুআ', 'দোয়া', 'প্রার্থনা'],
+    'doya': ['দুআ', 'দোয়া', 'প্রার্থনা'],
+    'zikr': ['যিকির', 'স্মরণ'],
+    'dhikr': ['যিকির', 'স্মরণ'],
+    'tawbah': ['তওবা', 'তাওবাহ', 'ক্ষমা'],
+    'touba': ['তওবা', 'তাওবাহ', 'ক্ষমা'],
+    'wudu': ['ওজু', 'উযূ', 'অযু'],
+    'wudhu': ['ওজু', 'উযূ', 'অযু'],
+    'oju': ['ওজু', 'উযূ', 'অযু'],
+    'quran': ['কুরআন', 'কোরআন', 'কিতাব'],
+    'koran': ['কুরআন', 'কোরআন', 'কিতাব'],
+    'bismillah': ['বিসমিল্লাহ', 'আল্লাহর নামে'],
+    'alhamdulillah': ['আলহামদুলিল্লাহ', 'সকল প্রশংসা'],
+    'subhanallah': ['সুবহানাল্লাহ', 'পবিত্র'],
+    'astagfirullah': ['ক্ষমা'],
+    'allah': ['আল্লাহ', 'আল্লাহর'],
+    'rasul': ['রাসূল', 'রাসুল', 'নবী'],
+    'prophet': ['নবী', 'রাসূল'],
+    'nabi': ['নবী', 'রাসূল'],
+    'feresta': ['ফেরেশতা', 'মালাইকা'],
+    'angel': ['ফেরেশতা', 'মালাইকা'],
+    'kursi': ['কুরসী', 'কুরসির'],
+    'ayatul kursi': ['কুরসী', 'কুরসির'],
+    'jihad': ['জিহাদ', 'সংগ্রাম'],
+    'qiyamah': ['কিয়ামত', 'কিয়ামাহ', 'হাশর'],
+    'hasor': ['হাশর', 'কিয়ামত'],
+
+    // Bengali to Synonyms (Banglarobi variants)
+    'নামাজ': ['নামায', 'সালাত'],
+    'নামায': ['নামাজ', 'সালাত'],
+    'সালাত': ['সালাত', 'নামায', 'নামাজ'],
+    'রোজা': ['রোজা', 'রোযা', 'সাওম', 'সিয়াম'],
+    'রোযা': ['রোজা', 'রোযা', 'সাওম', 'সিয়াম'],
+    'সাওম': ['সাওম', 'সিয়াম', 'রোজা', 'রোযা'],
+    'সিয়াম': ['সিয়াম', 'সাওম', 'রোজা', 'রোযা'],
+    'জাকাত': ['যাকাত', 'জাকাত'],
+    'যাকাত': ['যাকাত', 'জাকাত'],
+    'সুদ': ['সুদ', 'রিবা'],
+    'দোয়া': ['দোয়া', 'দুআ', 'প্রার্থনা'],
+    'দুআ': ['দুআ', 'দোয়া', 'প্রার্থনা'],
+    'সবর': ['সবর', 'ধৈর্য'],
+    'ধৈর্য': ['ধৈর্য', 'সবর'],
+    'বেহেশত': ['জান্নাত', 'বেহেশত'],
+    'দোযখ': ['জাহান্নাম', 'দোযখ'],
+    'ওজু': ['ওজু', 'উযূ', 'অযু'],
+    'অযু': ['ওজু', 'উযূ', 'অযু'],
+    'তওবা': ['তওবা', 'তাওবাহ', 'ক্ষমা'],
+    'কোরবানী': ['কুরবানী', 'কোরবানী'],
+    'কুরবানী': ['কুরবানী', 'কোরবানী'],
+  };
+
   Future<List<Map<String, dynamic>>> searchBengali(String query) async {
     final db = await database;
     final clean = query.trim();
     if (clean.isEmpty) return [];
 
+    // Query expansion
+    final lower = clean.toLowerCase();
+    List<String> terms = [clean];
+    if (_searchSynonyms.containsKey(lower)) {
+      terms.addAll(_searchSynonyms[lower]!);
+    } else if (_searchSynonyms.containsKey(clean)) {
+      terms.addAll(_searchSynonyms[clean]!);
+    }
+
+    final uniqueTerms = terms.toSet().toList();
+    final clauses = uniqueTerms.map((_) => 't.text_bn LIKE ?').join(' OR ');
+    final params = uniqueTerms.map((t) => '%$t%').toList();
+
     final results = await db.rawQuery('''
       SELECT s.id as surah_id, s.name_bn, s.name_en, t.ayah_number, t.edition, t.text_bn
       FROM translations t
       JOIN surahs s ON s.id = t.surah_id
-      WHERE t.text_bn LIKE ?
+      WHERE ($clauses)
       ORDER BY s.id ASC, t.ayah_number ASC
       LIMIT 100;
-    ''', ['%$clean%']);
+    ''', params);
     return results;
   }
 

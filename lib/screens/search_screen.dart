@@ -79,7 +79,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     controller: _controller,
                     autofocus: true,
                     decoration: InputDecoration(
-                      hintText: 'শব্দ লিখুন (যেমন: সালাত, রোজা, জান্নাত)...',
+                      hintText: 'সালাত / salat, রোজা / roza, jannat...',
                       hintStyle: GoogleFonts.notoSansBengali(fontSize: 14),
                       prefixIcon: const Icon(Icons.search, color: Color(0xFF0F5132)),
                       suffixIcon: _controller.text.isNotEmpty
