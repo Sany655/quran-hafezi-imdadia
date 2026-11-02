@@ -1,18 +1,18 @@
-name: Build, Release APK & Deploy Landing Page
+name: Build & Release Android APK (Manual or Tagged Only)
 
 on:
-  push:
-    branches: [ main, master ]
   workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Tag name for the release (e.g. v1.0.1 or latest)'
+        required: true
+        default: 'latest'
+  push:
+    tags:
+      - 'v*'
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
-
-concurrency:
-  group: 'release-and-pages'
-  cancel-in-progress: false
 
 jobs:
   test_and_analyze:
@@ -77,56 +77,33 @@ jobs:
           APK_NAME="Quran-Hafezi-Imdadia.apk"
           cp build/app/outputs/flutter-apk/app-release.apk "./${APK_NAME}"
           echo "apk_path=./${APK_NAME}" >> $GITHUB_OUTPUT
+          
+          TAG="${{ github.event.inputs.tag_name }}"
+          if [ -z "$TAG" ]; then
+            TAG="${{ github.ref_name }}"
+          fi
+          echo "release_tag=${TAG}" >> $GITHUB_OUTPUT
 
-      - name: Publish Rolling 'latest' GitHub Release
+      - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: latest
-          name: "আল-কুরআন হাফেজী (সর্বশেষ রিলিজ)"
+          tag_name: ${{ steps.prep.outputs.release_tag }}
+          name: "আল-কুরআন হাফেজী (${{ steps.prep.outputs.release_tag }})"
           body: |
-            ## আল-কুরআন হাফেজী (১৫ লাইন) - Latest Build
+            ## আল-কুরআন হাফেজী (১৫ লাইন) - ${{ steps.prep.outputs.release_tag }}
             
-            স্বয়ংক্রিয়ভাবে সংকলিত সর্বশেষ অ্যান্ড্রয়েড রিলিজ (Build #${{ github.run_number }}).
+            স্বয়ংক্রিয়ভাবে সংকলিত অ্যান্ড্রয়েড রিলিজ।
             
             ### ✨ অন্তর্ভুক্ত বৈশিষ্ট্যসমূহ:
             - **১৫ লাইনের ঐতিহ্যবাহী ইমদাদিয়া হাফেজী কোরআন (Imdadia 15-Line Mushaf)**
-            - **দ্বৈত বাংলা অনুবাদ**: তাইসীরুল কুরআন ও মাওলানা মুজিবুর রহমান
+            - **দ্বৈত বাংলা অনুবাদ**: তাইসীরুল কুরআন ও ড. আবু বকর মুহাম্মাদ যাকারিয়া
             - **শব্দে শব্দে অর্থ (Word-by-Word Bengali)** ও বিস্তারিত তাফসীর
-            - **১০০% দ্রুতগতির অফলাইন SQLite ডাটাবেজ** (ইন্টারনেট ছাড়াও অনুসন্ধানযোগ্য)
-            - **বাস্তবধর্মী পাতার শব্দ (Page Flip Sound)**
+            - **১০০% অফলাইন SQLite ডাটাবেজ** (কোনো ইন্টারনেট পারমিশন ছাড়াই সার্বক্ষণিক অনুসন্ধানযোগ্য)
             - **সম্পূর্ণ বিজ্ঞাপনহীন ও উন্মুক্ত কোড (Sadaqah Jariyah)**
             
             ---
             ### 📥 সরাসরি ডাউনলোড লিংক:
-            - [Quran-Hafezi-Imdadia.apk](https://github.com/Sany655/quran-hafezi-imdadia/releases/latest/download/Quran-Hafezi-Imdadia.apk)
+            - [Quran-Hafezi-Imdadia.apk](https://github.com/Sany655/quran-hafezi-imdadia/releases/download/${{ steps.prep.outputs.release_tag }}/Quran-Hafezi-Imdadia.apk)
           files: ${{ steps.prep.outputs.apk_path }}
           draft: false
           prerelease: false
-
-  deploy_landing_page:
-    name: Deploy Landing Page to GitHub Pages
-    needs: build_and_release_apk
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Synchronize landing to docs
-        run: |
-          mkdir -p docs
-          cp -r landing/* docs/
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './docs'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4

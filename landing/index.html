@@ -5,7 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>আল-কুরআন হাফেজী (১৫ লাইন) | Quran Hafezi Imdadia — Non-Profit Sadaqah Jariyah</title>
   <meta name="description" content="১৫ লাইন হাফেজী কোরআন শরীফ, বাংলা অনুবাদ, শব্দে শব্দে অর্থ ও তাফসীর সহ একটি অলাভজনক ও উন্মুক্ত প্ল্যাটফর্ম। আমাদের একমাত্র লক্ষ্য মহান আল্লাহর সন্তুষ্টি।">
-  <meta name="keywords" content="Quran, Hafezi Quran, 15 Line Quran, Imdadia Quran, Bangla Quran, Word by word, Tafsir, Non-profit, Open Source, Sadaqah Jariyah">
+  <meta name="keywords" content="Quran, Hafezi Quran, 15 Line Quran, Imdadia Quran, Bangla Quran, Word by word, Tafsir, Non-profit, Open Source, Sadaqah Jariyah, PWA">
+
+  <!-- PWA & Mobile Web App Meta -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#064e3b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Quran Huffaz">
+  <link rel="apple-touch-icon" href="assets/app_icon.png">
 
   <!-- Open Graph / Meta -->
   <meta property="og:title" content="আল-কুরআন হাফেজী (১৫ লাইন) | Quran Hafezi Imdadia">
@@ -154,8 +162,12 @@
         <a href="#authenticity" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition">সত্যতা ও সনদ</a>
       </nav>
 
-      <!-- Action Button -->
-      <div class="flex items-center gap-3">
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="reader.html" class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white font-bengali text-xs sm:text-sm font-semibold shadow-md transition transform hover:-translate-y-0.5 border border-emerald-600/50">
+          <span class="text-gold-400">📖</span>
+          <span>ওয়েবে পড়ুন (PWA)</span>
+        </a>
         <a href="#collaborate" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gold-600 hover:bg-gold-500 text-white font-bengali text-sm font-semibold shadow-md shadow-gold-600/20 transition transform hover:-translate-y-0.5">
           <span>খেদমতে যোগ দিন</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
@@ -206,14 +218,19 @@
 
         <!-- CTA Buttons -->
         <div class="mt-10 flex flex-wrap items-center justify-center gap-4 font-bengali">
-          <a href="#download" class="px-8 py-4 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-semibold text-lg shadow-xl shadow-emerald-800/25 transition transform hover:-translate-y-0.5 flex items-center gap-3">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-            <span>সরাসরি APK ডাউনলোড</span>
+          <a href="reader.html" class="px-8 py-4 rounded-xl bg-gold-600 hover:bg-gold-500 text-white font-semibold text-lg shadow-xl shadow-gold-700/25 transition transform hover:-translate-y-0.5 flex items-center gap-3">
+            <span class="text-xl">📖</span>
+            <span>ওয়েবে সরাসরি পড়ুন (PWA)</span>
           </a>
 
-          <a href="#preview" class="px-7 py-4 rounded-xl bg-white dark:bg-slate-800 border-2 border-emerald-600/40 hover:border-emerald-600 text-emerald-800 dark:text-emerald-300 font-semibold text-base hover:bg-emerald-50 dark:hover:bg-slate-700/60 shadow-md transition transform hover:-translate-y-0.5 flex items-center gap-2.5">
+          <a href="#download" class="px-7 py-4 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-semibold text-lg shadow-xl shadow-emerald-800/25 transition transform hover:-translate-y-0.5 flex items-center gap-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <span>অ্যান্ড্রয়েড APK ডাউনলোড</span>
+          </a>
+
+          <a href="#preview" class="px-6 py-4 rounded-xl bg-white dark:bg-slate-800 border-2 border-emerald-600/40 hover:border-emerald-600 text-emerald-800 dark:text-emerald-300 font-semibold text-base hover:bg-emerald-50 dark:hover:bg-slate-700/60 shadow-md transition transform hover:-translate-y-0.5 flex items-center gap-2">
             <svg class="w-5 h-5 text-gold-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
-            <span>লাইভ ডেমো দেখুন</span>
+            <span>লাইভ প্রিভিউ</span>
           </a>
 
           <a href="#collaborate" class="px-6 py-4 rounded-xl bg-stone-100 dark:bg-slate-800/80 hover:bg-stone-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-semibold text-base transition flex items-center gap-2">
@@ -372,6 +389,12 @@
             <div class="mt-2 text-center text-[11px] text-slate-400 flex items-center justify-center gap-1">
               <span>🔊</span> <span>বাস্তবধর্মী কাগজের পাতার শব্দসহ পৃষ্ঠা উল্টানোর অভিজ্ঞতা</span>
             </div>
+
+            <!-- Link to Full PWA Reader -->
+            <a href="reader.html" class="mt-4 flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white font-bengali text-xs sm:text-sm font-bold shadow-md transition">
+              <span>🚀 পূর্ণপর্দা ও পূর্ণাঙ্গ রিডারে পড়ুন (PWA Reader)</span>
+              <svg class="w-4 h-4 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
 
           </div>
         </div>
@@ -759,28 +782,45 @@
         </p>
       </div>
 
-      <div class="flex flex-wrap items-center justify-center gap-5 max-w-xl mx-auto">
+      <div class="grid sm:grid-cols-3 gap-5 max-w-4xl mx-auto">
         
-        <a id="apkDownloadBtn" href="https://github.com/Sany655/quran-hafezi-imdadia/releases/latest/download/Quran-Hafezi-Imdadia.apk" class="flex-1 min-w-[260px] p-4 rounded-2xl bg-emerald-700 hover:bg-emerald-600 text-white shadow-xl shadow-emerald-800/30 transition transform hover:-translate-y-0.5 flex items-center justify-center gap-3.5 group">
-          <div class="w-11 h-11 rounded-xl bg-emerald-800/80 flex items-center justify-center text-2xl group-hover:scale-110 transition">
+        <!-- Option 1: Web PWA App (iPhone / Web) -->
+        <a href="reader.html" class="p-5 rounded-2xl bg-gold-600 hover:bg-gold-500 text-white shadow-xl shadow-gold-700/20 transition transform hover:-translate-y-1 flex flex-col items-center text-center group">
+          <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition">
+            📱
+          </div>
+          <span class="text-[11px] text-gold-200 font-semibold uppercase">আইফোন, সাফারি ও কম্পিউটার</span>
+          <h3 class="text-lg font-bold text-white mt-1">ওয়েবে পড়ুন (PWA)</h3>
+          <p class="text-xs text-gold-100 mt-1">ইনস্টল ছাড়াই ব্রাউজারে পড়ুন অথবা "Add to Home Screen" করে নিন।</p>
+          <div class="mt-4 px-4 py-1.5 rounded-lg bg-white text-gold-800 text-xs font-bold shadow">ওয়েব রিডার চালু করুন →</div>
+        </a>
+
+        <!-- Option 2: Android APK -->
+        <a id="apkDownloadBtn" href="https://github.com/Sany655/quran-hafezi-imdadia/releases/latest/download/Quran-Hafezi-Imdadia.apk" class="p-5 rounded-2xl bg-emerald-700 hover:bg-emerald-600 text-white shadow-xl shadow-emerald-800/30 transition transform hover:-translate-y-1 flex flex-col items-center text-center group">
+          <div class="w-12 h-12 rounded-xl bg-emerald-800/80 flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition">
             🤖
           </div>
-          <div class="text-left">
-            <div class="flex items-center gap-1.5">
-              <span class="text-[11px] text-emerald-200">Android APK রিলিজ</span>
-              <span id="apkVersionBadge" class="text-[10px] px-1.5 py-0.2 rounded bg-gold-500 text-slate-950 font-bold">Latest</span>
-              <span id="apkSizeBadge" class="text-[10px] text-emerald-300"></span>
-            </div>
-            <div id="apkDownloadText" class="text-base font-bold">সরাসরি ডাউনলোড করুন</div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-[11px] text-emerald-200">অ্যান্ড্রয়েড ফোন ও ট্যাব</span>
+            <span id="apkVersionBadge" class="text-[10px] px-1.5 py-0.2 rounded bg-gold-500 text-slate-950 font-bold">Latest</span>
+          </div>
+          <h3 id="apkDownloadText" class="text-lg font-bold text-white mt-1">অ্যান্ড্রয়েড APK</h3>
+          <p class="text-xs text-emerald-100 mt-1">পূর্ণাঙ্গ ৬০ MB অফলাইন SQLite ডাটাবেজ সহ সরাসরি ডাউনলোড।</p>
+          <div class="mt-4 px-4 py-1.5 rounded-lg bg-emerald-900 text-emerald-100 text-xs font-bold shadow flex items-center gap-1">
+            <span>ডাউনলোড APK</span>
+            <span id="apkSizeBadge" class="text-[10px] text-gold-300"></span>
           </div>
         </a>
 
-        <a href="https://github.com/Sany655/quran-hafezi-imdadia" target="_blank" class="flex-1 min-w-[240px] p-4 rounded-2xl bg-white dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-700 hover:border-emerald-500 text-slate-800 dark:text-slate-200 shadow-md transition transform hover:-translate-y-0.5 flex items-center justify-center gap-3">
-          <svg class="w-6 h-6 fill-current text-slate-700 dark:text-slate-300" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          <div class="text-left">
-            <div class="text-[11px] text-slate-400">উৎস কোড (Source Code)</div>
-            <div class="text-base font-bold">GitHub Repository</div>
+        <!-- Option 3: GitHub Open Source -->
+        <a href="https://github.com/Sany655/quran-hafezi-imdadia" target="_blank" class="p-5 rounded-2xl bg-white dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-700 hover:border-emerald-500 text-slate-800 dark:text-slate-200 shadow-md transition transform hover:-translate-y-1 flex flex-col items-center text-center group">
+          <div class="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition text-slate-700 dark:text-slate-300">
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
           </div>
+          <span class="text-[11px] text-slate-400 font-semibold uppercase">উন্মুক্ত সাদাকায়ে জারিয়া</span>
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">সোর্স কোড</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Flutter ও Web কোডবেস সরাসরি গিটহাবে দেখুন ও অবদান রাখুন।</p>
+          <div class="mt-4 px-4 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold shadow">GitHub দেখুন →</div>
         </a>
 
       </div>
@@ -860,13 +900,9 @@
       }
     });
 
-    // Page Flip Previewer Logic
-    const samplePages = [
-      { num: 1, img: 'assets/page_001.jpg', surah: 'সূরা আল-ফাতিহা (পৃষ্ঠা ১)', para: 'পারা ১ • ১৫ লাইন' },
-      { num: 2, img: 'assets/page_002.jpg', surah: 'সূরা আল-বাকারাহ (পৃষ্ঠা ২)', para: 'পারা ১ • ১৫ লাইন' },
-      { num: 3, img: 'assets/page_003.jpg', surah: 'সূরা আল-বাকারাহ (পৃষ্ঠা ৩)', para: 'পারা ১ • ১৫ লাইন' }
-    ];
-    let currentPageIndex = 0;
+    // Full 612-Page Previewer Logic with Dynamic Metadata
+    let currentPreviewPage = 1;
+    let previewPageMap = {};
 
     const mushafPageImg = document.getElementById('mushafPageImg');
     const pageTurnFlash = document.getElementById('pageTurnFlash');
@@ -880,44 +916,67 @@
     function playFlipSound() {
       try {
         flipAudio.currentTime = 0;
-        flipAudio.play().catch(e => console.log('Audio autoplay prevented'));
+        flipAudio.play().catch(() => {});
       } catch (err) {}
     }
 
-    function renderPage(index) {
-      const page = samplePages[index];
+    function renderPreviewPage(num) {
+      if (num < 1) num = 1;
+      if (num > 612) num = 612;
+      currentPreviewPage = num;
       playFlipSound();
-      
-      // Page flash animation
+
+      const pad = String(num).padStart(3, '0');
+      const targetSrc = `pages/page_${pad}.jpg`;
+      const fallbackSrc = `assets/page_${pad}.jpg`;
+
+      const info = previewPageMap[num] || { sn: 'আল-ফাতিহা', sa: 'الفاتحة', jn: 'পারা ১' };
+
       pageTurnFlash.style.opacity = '0.5';
       mushafPageImg.style.opacity = '0.4';
-      
-      setTimeout(() => {
-        mushafPageImg.src = page.img;
-        pageTitleDisplay.textContent = page.surah;
-        pageParaDisplay.textContent = page.para;
-        pageNumberDisplay.textContent = page.num;
+
+      const imgTest = new Image();
+      imgTest.onload = () => {
+        mushafPageImg.src = targetSrc;
+        pageTitleDisplay.textContent = `সূরা ${info.sn} (পৃষ্ঠা ${num})`;
+        pageParaDisplay.textContent = `${info.jn} • ১৫ লাইন`;
+        pageNumberDisplay.textContent = num;
         mushafPageImg.style.opacity = '1';
         pageTurnFlash.style.opacity = '0';
-      }, 150);
+      };
+      imgTest.onerror = () => {
+        mushafPageImg.src = fallbackSrc;
+        pageTitleDisplay.textContent = `সূরা ${info.sn} (পৃষ্ঠা ${num})`;
+        pageParaDisplay.textContent = `${info.jn} • ১৫ লাইন`;
+        pageNumberDisplay.textContent = num;
+        mushafPageImg.style.opacity = '1';
+        pageTurnFlash.style.opacity = '0';
+      };
+      imgTest.src = targetSrc;
 
-      prevPageBtn.disabled = (index === 0);
-      prevPageBtn.style.opacity = (index === 0) ? '0.5' : '1';
-      nextPageBtn.disabled = (index === samplePages.length - 1);
-      nextPageBtn.style.opacity = (index === samplePages.length - 1) ? '0.5' : '1';
+      prevPageBtn.disabled = (num === 1);
+      prevPageBtn.style.opacity = (num === 1) ? '0.5' : '1';
+      nextPageBtn.disabled = (num === 612);
+      nextPageBtn.style.opacity = (num === 612) ? '0.5' : '1';
     }
 
+    fetch('data/page_map.json')
+      .then(res => res.json())
+      .then(data => {
+        previewPageMap = data;
+        renderPreviewPage(1);
+      })
+      .catch(() => renderPreviewPage(1));
+
     prevPageBtn.addEventListener('click', () => {
-      if (currentPageIndex > 0) {
-        currentPageIndex--;
-        renderPage(currentPageIndex);
+      if (currentPreviewPage > 1) {
+        renderPreviewPage(currentPreviewPage - 1);
       }
     });
 
     nextPageBtn.addEventListener('click', () => {
-      if (currentPageIndex < samplePages.length - 1) {
-        currentPageIndex++;
-        renderPage(currentPageIndex);
+      if (currentPreviewPage < 612) {
+        renderPreviewPage(currentPreviewPage + 1);
       }
     });
 
@@ -981,6 +1040,13 @@
       }
     }
     updateLatestReleaseInfo();
+
+    // Register PWA Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(() => {});
+      });
+    }
   </script>
 
 </body>

@@ -41,6 +41,16 @@ Every line of code, every proofread word, every UI enhancement, and every share 
 
 ---
 
+## 🌐 Web App & PWA Reader (আইফোন ও যেকোনো ব্রাউজারে)
+
+আপনার ডিভাইসে কোনো অ্যাপ ইনস্টল না করেও সরাসরি ব্রাউজারে পূর্ণাঙ্গ ১৫ লাইনের হাফেজী কুরআন পড়তে পারবেন। বিশেষ করে **iPhone / iOS / Safari** ব্যবহারকারীদের জন্য এটি একটি পূর্ণাঙ্গ **Progressive Web App (PWA)**:
+
+* 📖 **লাইভ ওয়েব রিডার**: [https://sany655.github.io/quran-hafezi-imdadia/reader.html](https://sany655.github.io/quran-hafezi-imdadia/reader.html)
+* 🌐 **প্রজেক্ট ল্যান্ডিং পেজ**: [https://sany655.github.io/quran-hafezi-imdadia/](https://sany655.github.io/quran-hafezi-imdadia/)
+* 📲 **আইফোনে অ্যাপ হিসেবে সেভ করার নিয়ম**: Safari ব্রাউজারে লিংকটি খুলে নিচে Share (শেয়ার) বাটনে চাপ দিন এবং **"Add to Home Screen"** নির্বাচন করুন। এটি আপনার ফোনে সম্পূর্ণ হোম স্ক্রিন অ্যাপ হিসেবে যুক্ত হবে এবং অফলাইনে কাজ করবে।
+
+---
+
 ## 🌐 Collaborative Landing Page
 
 We have created an interactive, bilingual (Bangla & English) landing page for this project.

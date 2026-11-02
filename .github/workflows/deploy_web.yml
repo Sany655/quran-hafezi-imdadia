@@ -1,0 +1,55 @@
+name: Deploy Web App to GitHub Pages
+
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'github-pages'
+  cancel-in-progress: true
+
+jobs:
+  deploy_web:
+    name: Build & Deploy Web App
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Generate Fresh Web Metadata
+        run: python scripts/generate_web_data.py
+
+      - name: Prepare Web Distribution Bundle
+        run: |
+          mkdir -p docs/pages
+          # Copy all landing pages and web assets
+          cp -r landing/* docs/
+          # Copy authentic 612 Imdadia pages to docs/pages
+          cp -r assets/pages/* docs/pages/
+          echo "Web bundle prepared with $(ls -1 docs/pages | wc -l) pages"
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './docs'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

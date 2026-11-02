@@ -1,0 +1,212 @@
+[
+  {
+    "id": 1,
+    "name_ar": "الم",
+    "name_en": "Alif-Lam-Meem",
+    "name_bn": "আলিফ লাম মীম",
+    "start_page": 2
+  },
+  {
+    "id": 2,
+    "name_ar": "سيقول",
+    "name_en": "Sayaqool",
+    "name_bn": "সায়াকুলু",
+    "start_page": 23
+  },
+  {
+    "id": 3,
+    "name_ar": "تلك الرسل",
+    "name_en": "Tilka-r-Rusul",
+    "name_bn": "তিলকার রুসুল",
+    "start_page": 43
+  },
+  {
+    "id": 4,
+    "name_ar": "لن تنالوا",
+    "name_en": "Lan Tanaalu",
+    "name_bn": "লান তানালূ",
+    "start_page": 63
+  },
+  {
+    "id": 5,
+    "name_ar": "والمحصنات",
+    "name_en": "Wal-Muhsanat",
+    "name_bn": "ওয়াল মুহসানাত",
+    "start_page": 83
+  },
+  {
+    "id": 6,
+    "name_ar": "لا يحب الله",
+    "name_en": "La Yuhibbullah",
+    "name_bn": "লা ইউহিব্বুল্লাহ",
+    "start_page": 103
+  },
+  {
+    "id": 7,
+    "name_ar": "واذا سمعوا",
+    "name_en": "Wa Iza Sami'u",
+    "name_bn": "ওয়া ইযা সামিউ",
+    "start_page": 123
+  },
+  {
+    "id": 8,
+    "name_ar": "ولو اننا",
+    "name_en": "Wa Law Annana",
+    "name_bn": "ওয়া লাও আন্নানা",
+    "start_page": 143
+  },
+  {
+    "id": 9,
+    "name_ar": "قال الملا",
+    "name_en": "Qalal Mala'u",
+    "name_bn": "ক্বলাল মালাউ",
+    "start_page": 163
+  },
+  {
+    "id": 10,
+    "name_ar": "واعلموا",
+    "name_en": "Wa'lamu",
+    "name_bn": "ওয়ালামূ",
+    "start_page": 183
+  },
+  {
+    "id": 11,
+    "name_ar": "يعتذرون",
+    "name_en": "Ya'tazirun",
+    "name_bn": "ইয়াতাযিরূন",
+    "start_page": 203
+  },
+  {
+    "id": 12,
+    "name_ar": "وما من دابة",
+    "name_en": "Wa Ma Min Dabbah",
+    "name_bn": "ওয়া মা মিন দাব্বাহ",
+    "start_page": 223
+  },
+  {
+    "id": 13,
+    "name_ar": "وما ابرئ",
+    "name_en": "Wa Ma Ubri'u",
+    "name_bn": "ওয়া মা উবাররিউ",
+    "start_page": 243
+  },
+  {
+    "id": 14,
+    "name_ar": "ربما",
+    "name_en": "Rubama",
+    "name_bn": "রুবামা",
+    "start_page": 263
+  },
+  {
+    "id": 15,
+    "name_ar": "سبحان الذي",
+    "name_en": "Subhanallazi",
+    "name_bn": "সুবহানাল্লাযী",
+    "start_page": 283
+  },
+  {
+    "id": 16,
+    "name_ar": "قال الم",
+    "name_en": "Qala Alam",
+    "name_bn": "ক্বলা আলাম",
+    "start_page": 303
+  },
+  {
+    "id": 17,
+    "name_ar": "اقترب",
+    "name_en": "Iqtaraba",
+    "name_bn": "ইক্বতারা বা",
+    "start_page": 323
+  },
+  {
+    "id": 18,
+    "name_ar": "قد افلح",
+    "name_en": "Qad Aflaha",
+    "name_bn": "ক্বাদ আফলাহা",
+    "start_page": 343
+  },
+  {
+    "id": 19,
+    "name_ar": "وقال الذين",
+    "name_en": "Wa Qalallazina",
+    "name_bn": "ওয়া ক্বালাল্লাযীনা",
+    "start_page": 363
+  },
+  {
+    "id": 20,
+    "name_ar": "امن خلق",
+    "name_en": "Amman Khalaqa",
+    "name_bn": "আম্মান খালাক্বা",
+    "start_page": 383
+  },
+  {
+    "id": 21,
+    "name_ar": "اتل ما اوحي",
+    "name_en": "Utlu Ma Oohiya",
+    "name_bn": "উতলু মা উহিয়া",
+    "start_page": 403
+  },
+  {
+    "id": 22,
+    "name_ar": "ومن يقنت",
+    "name_en": "Wa Man Yaqnut",
+    "name_bn": "ওয়া মান ইয়াক্বনুত",
+    "start_page": 423
+  },
+  {
+    "id": 23,
+    "name_ar": "وما لي",
+    "name_en": "Wa Mali",
+    "name_bn": "ওয়া মা লিয়া",
+    "start_page": 443
+  },
+  {
+    "id": 24,
+    "name_ar": "فمن اظلم",
+    "name_en": "Faman Azlamu",
+    "name_bn": "ফামান আযলামু",
+    "start_page": 463
+  },
+  {
+    "id": 25,
+    "name_ar": "اليه يرد",
+    "name_en": "Ilayhi Yuraddu",
+    "name_bn": "ইলাইহি ইউরাদ্দু",
+    "start_page": 483
+  },
+  {
+    "id": 26,
+    "name_ar": "حم",
+    "name_en": "Ha-Meem",
+    "name_bn": "হা-মীম",
+    "start_page": 503
+  },
+  {
+    "id": 27,
+    "name_ar": "قال فما خطبكم",
+    "name_en": "Qala Fama Khatbukum",
+    "name_bn": "ক্বলা ফামা খাতবুকুম",
+    "start_page": 523
+  },
+  {
+    "id": 28,
+    "name_ar": "قد سمع الله",
+    "name_en": "Qad Sami'allah",
+    "name_bn": "ক্বাদ সামিয়াল্লাহ",
+    "start_page": 543
+  },
+  {
+    "id": 29,
+    "name_ar": "تبارك الذي",
+    "name_en": "Tabarakallazi",
+    "name_bn": "তাবারাকাল্লাযী",
+    "start_page": 563
+  },
+  {
+    "id": 30,
+    "name_ar": "عم",
+    "name_en": "Amma",
+    "name_bn": "আম্মা",
+    "start_page": 587
+  }
+]

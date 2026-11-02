@@ -35,3 +35,7 @@ quran - word by word al quran/
 *.swp
 .DS_Store
 Thumbs.db
+
+# Web build pages cache
+docs/pages/
+landing/pages/

@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="bn" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes, viewport-fit=cover">
+  <title>কুরআন মাজীদ (১৫ লাইন হাফেজী) | Quran - For huffaz</title>
+  <meta name="description" content="১৫ লাইনের খাঁটি ইমদাদিয়া হাফেজী কোরআন শরীফ। বাংলা অনুবাদ ও শব্দার্থ সহ বিজ্ঞাপনমুক্ত সাদাকায়ে জারিয়া ওয়েব অ্যাপ।">
+  
+  <!-- PWA & Mobile Web App Meta -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#064e3b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Quran Huffaz">
+  <link rel="apple-touch-icon" href="assets/app_icon.png">
+  <link rel="icon" type="image/png" href="assets/app_icon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Hind+Siliguri:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            emerald: {
+              50: '#ecfdf5', 100: '#d1fae5', 200: '#a7f3d0', 300: '#6ee7b7',
+              400: '#34d399', 500: '#10b981', 600: '#059669', 700: '#047857',
+              800: '#065f46', 900: '#064e3b', 950: '#022c22',
+            },
+            gold: {
+              400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309'
+            },
+            parchment: {
+              light: '#fdfbf7',
+              paper: '#f6f1e7',
+              dark: '#0f1719',
+              card: '#162327'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '"Hind Siliguri"', 'sans-serif'],
+            bengali: ['"Hind Siliguri"', 'sans-serif'],
+            arabic: ['"Amiri"', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Prevent pull-to-refresh on mobile */
+    html, body {
+      overscroll-behavior-y: contain;
+      touch-action: pan-y;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    .arabic-text {
+      font-family: 'Amiri', serif;
+      direction: rtl;
+    }
+    .mushaf-shadow {
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.08);
+    }
+    .ribbon-glow {
+      filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.6));
+    }
+    /* Hide scrollbars but keep functionality */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="h-full bg-parchment-paper dark:bg-parchment-dark text-slate-800 dark:text-slate-100 font-sans flex flex-col overflow-hidden transition-colors duration-200">
+
+  <!-- Audio flip element -->
+  <audio id="flipAudio" src="assets/flipsound.mp3" preload="auto"></audio>
+
+  <!-- Top App Bar -->
+  <header id="topAppBar" class="flex-none bg-emerald-900/95 dark:bg-slate-950/95 text-white backdrop-blur border-b border-emerald-800/80 px-3 sm:px-6 py-2.5 flex items-center justify-between z-30 transition-transform duration-300">
+    
+    <!-- Left: Back & Index -->
+    <div class="flex items-center gap-1.5 sm:gap-3">
+      <a href="index.html" class="p-2 rounded-xl hover:bg-emerald-800 dark:hover:bg-slate-800 transition text-emerald-100" title="মূল পেজে ফিরে যান">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+      </a>
+
+      <button id="openIndexBtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-800/80 hover:bg-emerald-700 dark:bg-slate-800 text-xs sm:text-sm font-bengali font-semibold border border-emerald-700/60 transition shadow-sm">
+        <svg class="w-4 h-4 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/></svg>
+        <span>সূচীপত্র</span>
+      </button>
+    </div>
+
+    <!-- Center: Surah & Juz Info -->
+    <div class="text-center font-bengali cursor-pointer px-2" id="headerInfoClick" title="পৃষ্ঠা পরিবর্তনের জন্য ক্লিক করুন">
+      <div class="flex items-center justify-center gap-2">
+        <h1 id="headerSurahTitle" class="text-sm sm:text-base font-bold text-white tracking-wide">১. আল-ফাতিহা</h1>
+        <span id="headerSurahArabic" class="arabic-text text-sm sm:text-base text-gold-300 font-bold hidden sm:inline">الفاتحة</span>
+      </div>
+      <div class="flex items-center justify-center gap-2 text-[11px] sm:text-xs text-emerald-200/90">
+        <span id="headerJuzTitle">পারা ১</span>
+        <span>•</span>
+        <span id="headerPageBadge" class="bg-emerald-800/90 dark:bg-slate-800 px-1.5 py-0.5 rounded font-mono text-gold-300 font-bold">পৃষ্ঠা ১</span>
+      </div>
+    </div>
+
+    <!-- Right: Study, Bookmark, Theme & Fullscreen -->
+    <div class="flex items-center gap-1 sm:gap-2">
+      <!-- Study Sheet Button -->
+      <button id="openStudyBtn" class="p-2 rounded-xl hover:bg-emerald-800 dark:hover:bg-slate-800 text-emerald-100 transition" title="অনুবাদ ও তাফসীর দেখুন">
+        <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+      </button>
+
+      <!-- Bookmark Ribbon Button -->
+      <button id="bookmarkBtn" class="p-2 rounded-xl hover:bg-emerald-800 dark:hover:bg-slate-800 transition" title="বুকমার্ক করুন">
+        <svg id="bookmarkIcon" class="w-5 h-5 text-emerald-300 transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/>
+        </svg>
+      </button>
+
+      <!-- Dark / Parchment / Light Theme Toggle -->
+      <button id="themeToggleBtn" class="p-2 rounded-xl hover:bg-emerald-800 dark:hover:bg-slate-800 text-emerald-100 transition" title="থিম পরিবর্তন">
+        <span id="themeToggleIcon" class="text-base">🌙</span>
+      </button>
+
+      <!-- Fullscreen Toggle -->
+      <button id="fullscreenBtn" class="p-2 rounded-xl hover:bg-emerald-800 dark:hover:bg-slate-800 text-emerald-100 transition hidden sm:inline-flex" title="পূর্ণপর্দা">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+      </button>
+    </div>
+
+  </header>
+
+  <!-- iOS PWA Add to Home Screen Hint (Only shown once on mobile Safari) -->
+  <div id="iosPwaBanner" class="hidden bg-gold-500 text-emerald-950 text-xs px-4 py-2 flex items-center justify-between font-bengali shadow-md">
+    <div class="flex items-center gap-2">
+      <span class="text-base">📲</span>
+      <span><strong>আইফোন ব্যবহারকারী:</strong> Safari-তে Share বাটনে চাপ দিয়ে <strong>Add to Home Screen</strong> বেছে নিন।</span>
+    </div>
+    <button id="closeIosBannerBtn" class="text-emerald-950 font-bold px-2 py-0.5 rounded hover:bg-gold-600/30">✕</button>
+  </div>
+
+  <!-- Main Mushaf Viewer Viewport -->
+  <main id="readerViewport" class="flex-1 relative overflow-hidden flex items-center justify-center p-1 sm:p-4 select-none touch-pan-y">
+    
+    <!-- Active Bookmark Golden Ribbon Marker (Top Right) -->
+    <div id="goldenRibbon" class="hidden absolute top-0 right-4 sm:right-10 z-20 pointer-events-none ribbon-glow">
+      <svg class="w-8 h-12 text-gold-500 fill-current" viewBox="0 0 24 36">
+        <path d="M0 0h24v32l-12-6-12 6z"/>
+      </svg>
+    </div>
+
+    <!-- Zoom Container & Page Image -->
+    <div id="pageTransformContainer" class="relative w-full h-full flex items-center justify-center transition-transform duration-100 origin-center">
+      
+      <!-- Loading Spinner Placeholder -->
+      <div id="pageLoadingSpinner" class="absolute inset-0 flex flex-col items-center justify-center bg-stone-200/50 dark:bg-stone-900/50 backdrop-blur-sm z-10 transition-opacity duration-200">
+        <div class="w-10 h-10 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin"></div>
+        <p class="mt-3 text-xs font-bengali text-slate-600 dark:text-slate-300 font-semibold">পাতা লোড হচ্ছে...</p>
+      </div>
+
+      <!-- Scanned 15-Line Hafezi Page Scan Image -->
+      <img id="mushafImage" 
+           src="assets/page_001.jpg" 
+           alt="15-Line Hafezi Mushaf Page" 
+           class="max-w-full max-h-full object-contain rounded-md mushaf-shadow bg-amber-50/10 cursor-grab active:cursor-grabbing transition-opacity duration-200 opacity-0"
+           draggable="false">
+
+      <!-- Page Flip Animation Flash Effect -->
+      <div id="flipFlash" class="absolute inset-0 bg-white/40 dark:bg-black/30 opacity-0 pointer-events-none transition-opacity duration-150"></div>
+    </div>
+
+    <!-- Touch Navigation Left & Right Overlays (Hidden on Desktop, accessible on touch) -->
+    <button id="navLeftBtn" class="absolute left-1 sm:left-4 top-1/2 -translate-y-1/2 w-10 sm:w-12 h-14 sm:h-20 rounded-xl bg-black/20 hover:bg-black/40 text-white backdrop-blur flex items-center justify-center opacity-60 hover:opacity-100 transition z-20" aria-label="পূর্ববর্তী পাতা">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
+    </button>
+
+    <button id="navRightBtn" class="absolute right-1 sm:right-4 top-1/2 -translate-y-1/2 w-10 sm:w-12 h-14 sm:h-20 rounded-xl bg-black/20 hover:bg-black/40 text-white backdrop-blur flex items-center justify-center opacity-60 hover:opacity-100 transition z-20" aria-label="পরবর্তী পাতা">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+    </button>
+
+  </main>
+
+  <!-- Bottom Navigation & Page Slider Controls -->
+  <footer id="bottomControls" class="flex-none bg-stone-100 dark:bg-slate-900 border-t border-stone-300 dark:border-slate-800 px-3 sm:px-6 py-2.5 z-30 transition-transform duration-300">
+    <div class="max-w-3xl mx-auto flex flex-col gap-2 font-bengali">
+      
+      <!-- Scrubber Slider -->
+      <div class="flex items-center gap-3">
+        <span class="text-xs text-slate-500 font-mono w-7 text-right">১</span>
+        <input type="range" id="pageSlider" min="1" max="612" value="1" 
+               class="flex-1 h-2 bg-stone-300 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-emerald-600">
+        <span class="text-xs text-slate-500 font-mono w-10">৬১২</span>
+      </div>
+
+      <!-- Action Buttons Row -->
+      <div class="flex items-center justify-between text-xs sm:text-sm">
+        
+        <!-- Prev Button -->
+        <button id="footerPrevBtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-stone-300 dark:border-slate-700 hover:bg-emerald-50 dark:hover:bg-slate-700 font-semibold shadow-sm transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          <span class="hidden sm:inline">পূর্ববর্তী পাতা</span>
+        </button>
+
+        <!-- Jump to Page Button / Display -->
+        <button id="jumpDialogTriggerBtn" class="flex items-center gap-1 px-4 py-1.5 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-semibold shadow-md transition transform hover:scale-105">
+          <span>পৃষ্ঠা:</span>
+          <span id="footerPageNumber" class="font-mono font-bold text-gold-300 text-sm">১</span>
+          <span class="text-xs text-emerald-200">/ ৬১২</span>
+          <svg class="w-3.5 h-3.5 ml-1 opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+        </button>
+
+        <!-- Next Button -->
+        <button id="footerNextBtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white font-semibold shadow-sm transition">
+          <span class="hidden sm:inline">পরবর্তী পাতা</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </button>
+
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==================== MODALS & DRAWERS ==================== -->
+
+  <!-- 1. Index Drawer (সূরা ও পারা সূচীপত্র) -->
+  <div id="indexDrawerBackdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300">
+    <div id="indexDrawerContent" class="absolute inset-y-0 left-0 max-w-md w-full bg-white dark:bg-slate-900 shadow-2xl flex flex-col transform -translate-x-full transition-transform duration-300 font-bengali">
+      
+      <!-- Drawer Header -->
+      <div class="p-4 bg-emerald-900 text-white flex items-center justify-between">
+        <div class="flex items-center gap-2.5">
+          <img src="assets/app_icon.png" class="w-8 h-8 rounded-lg shadow" alt="Icon">
+          <h2 class="font-bold text-lg">কুরআন সূচীপত্র</h2>
+        </div>
+        <button id="closeIndexBtn" class="p-2 rounded-lg hover:bg-emerald-800 text-emerald-200">✕</button>
+      </div>
+
+      <!-- Resume Reading Card -->
+      <div id="resumeReadingCard" class="m-3 p-3.5 rounded-2xl bg-gradient-to-r from-emerald-800 to-emerald-950 text-white shadow-md flex items-center justify-between cursor-pointer hover:shadow-lg transition">
+        <div>
+          <span class="text-[11px] text-gold-300 font-semibold uppercase tracking-wider">সর্বশেষ পঠিত পাতা</span>
+          <h3 id="resumeSurahText" class="text-sm font-bold text-white mt-0.5">সূরা ১: আল-ফাতিহা</h3>
+          <span id="resumePageText" class="text-xs text-emerald-200">পৃষ্ঠা ১ এ ছিলেন</span>
+        </div>
+        <button class="px-3 py-1.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-emerald-950 font-bold text-xs shadow">
+          চালিয়ে যান →
+        </button>
+      </div>
+
+      <!-- Search Bar -->
+      <div class="px-3 pb-2">
+        <div class="relative">
+          <input type="text" id="indexSearchInput" placeholder="সূরা বা পারার নাম খুঁজুন..." 
+                 class="w-full pl-9 pr-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-sm border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-slate-800 dark:text-slate-100">
+          <svg class="w-4 h-4 text-slate-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </div>
+      </div>
+
+      <!-- Tabs Header -->
+      <div class="flex border-b border-slate-200 dark:border-slate-800 px-3 text-sm font-semibold text-slate-500">
+        <button id="tabSurahsBtn" class="flex-1 py-2.5 text-center border-b-2 border-emerald-600 text-emerald-700 dark:text-emerald-400">
+          সূরা তালিকা (১১৪)
+        </button>
+        <button id="tabJuzBtn" class="flex-1 py-2.5 text-center border-b-2 border-transparent hover:text-slate-700 dark:hover:text-slate-300">
+          পারা তালিকা (৩০)
+        </button>
+        <button id="tabBookmarksBtn" class="flex-1 py-2.5 text-center border-b-2 border-transparent hover:text-slate-700 dark:hover:text-slate-300">
+          বুকমার্কসমূহ
+        </button>
+      </div>
+
+      <!-- Tab Content Area -->
+      <div class="flex-1 overflow-y-auto no-scrollbar p-3 space-y-2" id="indexListContainer">
+        <!-- Injected via JavaScript -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2. Study Sheet Modal (বাংলা অনুবাদ ও তাফসীর) -->
+  <div id="studyModalBackdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300 flex items-end sm:items-center justify-center p-0 sm:p-4 font-bengali">
+    <div id="studyModalContent" class="w-full max-w-2xl bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col max-h-[85vh] sm:max-h-[80vh] overflow-hidden transform translate-y-full sm:translate-y-0 transition-transform duration-300">
+      
+      <!-- Modal Header -->
+      <div class="p-4 bg-emerald-900 text-white flex items-center justify-between">
+        <div>
+          <span class="text-xs text-gold-300 font-semibold" id="studyModalSubTitle">বাংলা অনুবাদ</span>
+          <h2 class="font-bold text-lg text-white" id="studyModalTitle">সূরা আল-ফাতিহা</h2>
+        </div>
+        <button id="closeStudyBtn" class="p-2 rounded-lg hover:bg-emerald-800 text-emerald-200">✕</button>
+      </div>
+
+      <!-- Ayahs Translation List Container -->
+      <div id="studyAyahsContainer" class="flex-1 overflow-y-auto p-4 space-y-4">
+        <!-- Injected via JavaScript -->
+        <div class="text-center py-10">
+          <div class="w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <p class="text-xs text-slate-500 mt-2">অনুবাদ লোড হচ্ছে...</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 3. Jump to Page Dialog -->
+  <div id="jumpDialogBackdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4 font-bengali">
+    <div class="w-full max-w-xs bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-5 border border-slate-200 dark:border-slate-700">
+      <h3 class="font-bold text-base text-slate-900 dark:text-white mb-1">পৃষ্ঠা নম্বরে যান</h3>
+      <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">১ থেকে ৬১২ এর মধ্যে যেকোনো নম্বর লিখুন:</p>
+      
+      <input type="number" id="jumpPageInput" min="1" max="612" 
+             class="w-full px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-slate-50 dark:bg-slate-900 text-center font-mono font-bold text-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 mb-4">
+
+      <div class="flex items-center gap-2">
+        <button id="cancelJumpBtn" class="flex-1 py-2 rounded-xl border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 font-semibold text-xs hover:bg-slate-100 dark:hover:bg-slate-700">
+          বাতিল
+        </button>
+        <button id="confirmJumpBtn" class="flex-1 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-semibold text-xs shadow-md">
+          পৃষ্ঠায় যান
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== READER LOGIC ==================== -->
+  <script>
+    // State
+    let currentPage = 1;
+    let totalPages = 612;
+    let surahsData = [];
+    let juzData = [];
+    let pageMap = {};
+    let bookmarks = JSON.parse(localStorage.getItem('quran_bookmarks') || '[]');
+    let currentTabIndex = 'surahs';
+
+    // DOM Elements
+    const mushafImage = document.getElementById('mushafImage');
+    const pageLoadingSpinner = document.getElementById('pageLoadingSpinner');
+    const flipFlash = document.getElementById('flipFlash');
+    const flipAudio = document.getElementById('flipAudio');
+    const goldenRibbon = document.getElementById('goldenRibbon');
+    const bookmarkIcon = document.getElementById('bookmarkIcon');
+    const headerSurahTitle = document.getElementById('headerSurahTitle');
+    const headerSurahArabic = document.getElementById('headerSurahArabic');
+    const headerJuzTitle = document.getElementById('headerJuzTitle');
+    const headerPageBadge = document.getElementById('headerPageBadge');
+    const footerPageNumber = document.getElementById('footerPageNumber');
+    const pageSlider = document.getElementById('pageSlider');
+    const footerPrevBtn = document.getElementById('footerPrevBtn');
+    const footerNextBtn = document.getElementById('footerNextBtn');
+    const navLeftBtn = document.getElementById('navLeftBtn');
+    const navRightBtn = document.getElementById('navRightBtn');
+
+    // Init Theme
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const themeToggleIcon = document.getElementById('themeToggleIcon');
+    function applyTheme(theme) {
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+        themeToggleIcon.textContent = '☀️';
+      } else {
+        document.documentElement.classList.remove('dark');
+        themeToggleIcon.textContent = '🌙';
+      }
+      localStorage.setItem('quran_theme', theme);
+    }
+    const savedTheme = localStorage.getItem('quran_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    applyTheme(savedTheme);
+    themeToggleBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.classList.contains('dark');
+      applyTheme(isDark ? 'light' : 'dark');
+    });
+
+    // PWA Service Worker Registration
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').catch(err => console.log('SW failed', err));
+      });
+    }
+
+    // iOS Banner Detection
+    const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+    if (isIos && !isStandalone && !localStorage.getItem('ios_banner_dismissed')) {
+      document.getElementById('iosPwaBanner').classList.remove('hidden');
+    }
+    document.getElementById('closeIosBannerBtn').addEventListener('click', () => {
+      document.getElementById('iosPwaBanner').classList.add('hidden');
+      localStorage.setItem('ios_banner_dismissed', 'true');
+    });
+
+    // Load Metadata
+    async function loadMetadata() {
+      try {
+        const [sRes, jRes, pRes] = await Promise.all([
+          fetch('data/surahs.json'),
+          fetch('data/juz.json'),
+          fetch('data/page_map.json')
+        ]);
+        surahsData = await sRes.json();
+        juzData = await jRes.json();
+        pageMap = await pRes.json();
+      } catch (err) {
+        console.log('Error fetching metadata, using fallbacks', err);
+      }
+
+      // Check URL query or hash for page
+      const urlParams = new URLSearchParams(window.location.search);
+      const urlPage = parseInt(urlParams.get('page')) || parseInt(window.location.hash.replace('#page=', ''));
+      if (urlPage && urlPage >= 1 && urlPage <= 612) {
+        currentPage = urlPage;
+      } else {
+        // Last read page fallback
+        const lastRead = parseInt(localStorage.getItem('quran_last_read_page') || '1');
+        if (lastRead >= 1 && lastRead <= 612) currentPage = lastRead;
+      }
+
+      renderPage(currentPage, false);
+      updateResumeReadingBanner();
+    }
+
+    function playSound() {
+      try {
+        flipAudio.currentTime = 0;
+        flipAudio.play().catch(() => {});
+      } catch (e) {}
+    }
+
+    // Render Page
+    function renderPage(pageNum, withAudio = true) {
+      if (pageNum < 1) pageNum = 1;
+      if (pageNum > totalPages) pageNum = totalPages;
+      currentPage = pageNum;
+
+      if (withAudio) playSound();
+
+      // Update Slider & Number Display
+      pageSlider.value = currentPage;
+      footerPageNumber.textContent = currentPage;
+      headerPageBadge.textContent = `পৃষ্ঠা ${currentPage}`;
+
+      // Update Surah & Juz title from map
+      const info = pageMap[currentPage] || {
+        sn: 'আল-ফাতিহা', sa: 'الفاتحة', jn: 'পারা ১', s: 1
+      };
+      headerSurahTitle.textContent = `${info.s}. ${info.sn}`;
+      headerSurahArabic.textContent = info.sa;
+      headerJuzTitle.textContent = `${info.jn} • ${info.ja || ''}`;
+
+      // Update Bookmark ribbon
+      const isBookmarked = bookmarks.includes(currentPage);
+      if (isBookmarked) {
+        goldenRibbon.classList.remove('hidden');
+        bookmarkIcon.classList.add('text-gold-400', 'fill-current');
+        bookmarkIcon.classList.remove('text-emerald-300');
+      } else {
+        goldenRibbon.classList.add('hidden');
+        bookmarkIcon.classList.remove('text-gold-400', 'fill-current');
+        bookmarkIcon.classList.add('text-emerald-300');
+      }
+
+      // Save Last Read
+      localStorage.setItem('quran_last_read_page', currentPage);
+      localStorage.setItem('quran_last_read_surah', info.sn);
+
+      // Flash & Image Loading
+      flipFlash.style.opacity = '0.5';
+      pageLoadingSpinner.style.opacity = '1';
+      mushafImage.style.opacity = '0.3';
+
+      const pad = String(currentPage).padStart(3, '0');
+      const targetSrc = `pages/page_${pad}.jpg`;
+      const fallbackSrc = `assets/page_${pad}.jpg`;
+
+      const newImg = new Image();
+      newImg.onload = () => {
+        mushafImage.src = targetSrc;
+        pageLoadingSpinner.style.opacity = '0';
+        mushafImage.style.opacity = '1';
+        flipFlash.style.opacity = '0';
+      };
+      newImg.onerror = () => {
+        mushafImage.src = fallbackSrc;
+        pageLoadingSpinner.style.opacity = '0';
+        mushafImage.style.opacity = '1';
+        flipFlash.style.opacity = '0';
+      };
+      newImg.src = targetSrc;
+
+      // Update Hash without scrolling
+      history.replaceState(null, '', `#page=${currentPage}`);
+
+      // Disable/enable buttons
+      footerPrevBtn.disabled = (currentPage === 1);
+      footerPrevBtn.style.opacity = (currentPage === 1) ? '0.4' : '1';
+      navLeftBtn.style.display = (currentPage === 1) ? 'none' : 'flex';
+
+      footerNextBtn.disabled = (currentPage === totalPages);
+      footerNextBtn.style.opacity = (currentPage === totalPages) ? '0.4' : '1';
+      navRightBtn.style.display = (currentPage === totalPages) ? 'none' : 'flex';
+    }
+
+    // Paging Controls
+    // In Quran (RTL format):
+    // Next page is advance (pageNum + 1)
+    // Prev page is back (pageNum - 1)
+    function goNext() {
+      if (currentPage < totalPages) renderPage(currentPage + 1, true);
+    }
+    function goPrev() {
+      if (currentPage > 1) renderPage(currentPage - 1, true);
+    }
+
+    footerNextBtn.addEventListener('click', goNext);
+    footerPrevBtn.addEventListener('click', goPrev);
+    navRightBtn.addEventListener('click', goNext);
+    navLeftBtn.addEventListener('click', goPrev);
+
+    // Slider
+    pageSlider.addEventListener('input', (e) => {
+      renderPage(parseInt(e.target.value), false);
+    });
+
+    // Bookmark Toggle
+    document.getElementById('bookmarkBtn').addEventListener('click', () => {
+      const idx = bookmarks.indexOf(currentPage);
+      if (idx > -1) {
+        bookmarks.splice(idx, 1);
+      } else {
+        bookmarks.push(currentPage);
+        bookmarks.sort((a,b) => a - b);
+      }
+      localStorage.setItem('quran_bookmarks', JSON.stringify(bookmarks));
+      renderPage(currentPage, false);
+      if (currentTabIndex === 'bookmarks') renderBookmarksTab();
+    });
+
+    // Touch Swipe Navigation (RTL Quranic Swipe)
+    let touchStartX = 0;
+    let touchStartY = 0;
+    const viewport = document.getElementById('readerViewport');
+
+    viewport.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    viewport.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].screenX;
+      const touchEndY = e.changedTouches[0].screenY;
+      const diffX = touchEndX - touchStartX;
+      const diffY = touchEndY - touchStartY;
+
+      // Ensure horizontal swipe
+      if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
+        if (diffX < 0) {
+          // Swipe left -> advance to next page
+          goNext();
+        } else {
+          // Swipe right -> return to previous page
+          goPrev();
+        }
+      }
+    }, { passive: true });
+
+    // Keyboard Navigation
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') goNext();
+      else if (e.key === 'ArrowRight') goPrev();
+      else if (e.key === 'f') toggleFullscreen();
+    });
+
+    // Fullscreen Toggle
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+    document.getElementById('fullscreenBtn').addEventListener('click', toggleFullscreen);
+
+    // Jump Dialog
+    const jumpDialogBackdrop = document.getElementById('jumpDialogBackdrop');
+    const jumpPageInput = document.getElementById('jumpPageInput');
+    const jumpDialogTriggerBtn = document.getElementById('jumpDialogTriggerBtn');
+    const confirmJumpBtn = document.getElementById('confirmJumpBtn');
+    const cancelJumpBtn = document.getElementById('cancelJumpBtn');
+
+    function openJumpDialog() {
+      jumpPageInput.value = currentPage;
+      jumpDialogBackdrop.classList.remove('hidden');
+      jumpDialogBackdrop.classList.add('flex');
+      jumpPageInput.focus();
+    }
+    function closeJumpDialog() {
+      jumpDialogBackdrop.classList.add('hidden');
+      jumpDialogBackdrop.classList.remove('flex');
+    }
+    jumpDialogTriggerBtn.addEventListener('click', openJumpDialog);
+    document.getElementById('headerInfoClick').addEventListener('click', openJumpDialog);
+    cancelJumpBtn.addEventListener('click', closeJumpDialog);
+    confirmJumpBtn.addEventListener('click', () => {
+      const val = parseInt(jumpPageInput.value);
+      if (val >= 1 && val <= 612) {
+        renderPage(val, true);
+        closeJumpDialog();
+      }
+    });
+
+    // Index Drawer Logic
+    const indexDrawerBackdrop = document.getElementById('indexDrawerBackdrop');
+    const indexDrawerContent = document.getElementById('indexDrawerContent');
+    const openIndexBtn = document.getElementById('openIndexBtn');
+    const closeIndexBtn = document.getElementById('closeIndexBtn');
+    const indexListContainer = document.getElementById('indexListContainer');
+    const indexSearchInput = document.getElementById('indexSearchInput');
+    const tabSurahsBtn = document.getElementById('tabSurahsBtn');
+    const tabJuzBtn = document.getElementById('tabJuzBtn');
+    const tabBookmarksBtn = document.getElementById('tabBookmarksBtn');
+
+    function openIndexDrawer() {
+      indexDrawerBackdrop.classList.remove('hidden');
+      setTimeout(() => {
+        indexDrawerBackdrop.classList.remove('opacity-0');
+        indexDrawerContent.classList.remove('-translate-x-full');
+      }, 10);
+      switchIndexTab('surahs');
+      updateResumeReadingBanner();
+    }
+
+    function closeIndexDrawer() {
+      indexDrawerBackdrop.classList.add('opacity-0');
+      indexDrawerContent.classList.add('-translate-x-full');
+      setTimeout(() => {
+        indexDrawerBackdrop.classList.add('hidden');
+      }, 300);
+    }
+
+    openIndexBtn.addEventListener('click', openIndexDrawer);
+    closeIndexBtn.addEventListener('click', closeIndexDrawer);
+    indexDrawerBackdrop.addEventListener('click', (e) => {
+      if (e.target === indexDrawerBackdrop) closeIndexDrawer();
+    });
+
+    function updateResumeReadingBanner() {
+      const lastPage = parseInt(localStorage.getItem('quran_last_read_page') || '1');
+      const lastSurah = localStorage.getItem('quran_last_read_surah') || 'সূরা আল-ফাতিহা';
+      document.getElementById('resumeSurahText').textContent = lastSurah;
+      document.getElementById('resumePageText').textContent = `পৃষ্ঠা ${lastPage} এ ছিলেন`;
+      document.getElementById('resumeReadingCard').onclick = () => {
+        renderPage(lastPage, true);
+        closeIndexDrawer();
+      };
+    }
+
+    function switchIndexTab(tab) {
+      currentTabIndex = tab;
+      [tabSurahsBtn, tabJuzBtn, tabBookmarksBtn].forEach(b => {
+        b.classList.remove('border-emerald-600', 'text-emerald-700', 'dark:text-emerald-400');
+        b.classList.add('border-transparent');
+      });
+
+      if (tab === 'surahs') {
+        tabSurahsBtn.classList.add('border-emerald-600', 'text-emerald-700', 'dark:text-emerald-400');
+        renderSurahsTab(indexSearchInput.value);
+      } else if (tab === 'juz') {
+        tabJuzBtn.classList.add('border-emerald-600', 'text-emerald-700', 'dark:text-emerald-400');
+        renderJuzTab(indexSearchInput.value);
+      } else {
+        tabBookmarksBtn.classList.add('border-emerald-600', 'text-emerald-700', 'dark:text-emerald-400');
+        renderBookmarksTab();
+      }
+    }
+
+    tabSurahsBtn.addEventListener('click', () => switchIndexTab('surahs'));
+    tabJuzBtn.addEventListener('click', () => switchIndexTab('juz'));
+    tabBookmarksBtn.addEventListener('click', () => switchIndexTab('bookmarks'));
+    indexSearchInput.addEventListener('input', (e) => {
+      if (currentTabIndex === 'surahs') renderSurahsTab(e.target.value);
+      else if (currentTabIndex === 'juz') renderJuzTab(e.target.value);
+    });
+
+    function renderSurahsTab(filter = '') {
+      const q = filter.trim().toLowerCase();
+      const filtered = surahsData.filter(s => 
+        s.name_bn.toLowerCase().includes(q) || 
+        s.name_en.toLowerCase().includes(q) || 
+        s.name_ar.includes(q) || 
+        String(s.id).includes(q)
+      );
+
+      indexListContainer.innerHTML = filtered.map(s => `
+        <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 hover:bg-emerald-50 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 flex items-center justify-between cursor-pointer transition"
+             onclick="selectSurah(${s.start_page})">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-lg bg-emerald-700 text-white flex items-center justify-center font-bold text-xs">${s.id}</span>
+            <div>
+              <div class="font-bold text-sm text-slate-800 dark:text-slate-100">${s.name_bn}</div>
+              <div class="text-[11px] text-slate-500 dark:text-slate-400">${s.meaning_bn} • ${s.revelation_type} • ${s.total_ayahs} আয়াত</div>
+            </div>
+          </div>
+          <div class="text-right">
+            <div class="arabic-text text-base font-bold text-emerald-800 dark:text-emerald-300">${s.name_ar}</div>
+            <div class="text-[11px] text-slate-400 font-mono">পৃষ্ঠা ${s.start_page}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderJuzTab(filter = '') {
+      const q = filter.trim().toLowerCase();
+      const filtered = juzData.filter(j => 
+        j.name_bn.toLowerCase().includes(q) || 
+        j.name_en.toLowerCase().includes(q) || 
+        j.name_ar.includes(q) || 
+        String(j.id).includes(q)
+      );
+
+      indexListContainer.innerHTML = filtered.map(j => `
+        <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/80 hover:bg-emerald-50 dark:hover:bg-slate-700/80 border border-slate-200 dark:border-slate-700 flex items-center justify-between cursor-pointer transition"
+             onclick="selectSurah(${j.start_page})">
+          <div class="flex items-center gap-3">
+            <span class="w-8 h-8 rounded-lg bg-gold-600 text-white flex items-center justify-center font-bold text-xs">${j.id}</span>
+            <div>
+              <div class="font-bold text-sm text-slate-800 dark:text-slate-100">পারা ${j.id}: ${j.name_bn}</div>
+              <div class="text-[11px] text-slate-500 dark:text-slate-400">${j.name_en}</div>
+            </div>
+          </div>
+          <div class="text-right">
+            <div class="arabic-text text-base font-bold text-gold-600 dark:text-gold-400">${j.name_ar}</div>
+            <div class="text-[11px] text-slate-400 font-mono">পৃষ্ঠা ${j.start_page}</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderBookmarksTab() {
+      if (bookmarks.length === 0) {
+        indexListContainer.innerHTML = `
+          <div class="text-center py-12 text-slate-400">
+            <svg class="w-12 h-12 mx-auto mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
+            <p class="text-sm font-semibold">কোন বুকমার্ক সংরক্ষিত নেই</p>
+            <p class="text-xs mt-1">পড়ার সময় উপরে রিবন আইকনে ট্যাপ করে বুকমার্ক করুন।</p>
+          </div>
+        `;
+        return;
+      }
+
+      indexListContainer.innerHTML = bookmarks.map(p => {
+        const info = pageMap[p] || { sn: 'সূরা', jn: 'পারা' };
+        return `
+          <div class="p-3 rounded-xl bg-gold-50/50 dark:bg-slate-800/80 border border-gold-300/40 dark:border-slate-700 flex items-center justify-between transition">
+            <div class="cursor-pointer flex-1" onclick="selectSurah(${p})">
+              <span class="text-xs font-bold text-gold-700 dark:text-gold-400">পৃষ্ঠা ${p}</span>
+              <div class="font-bold text-sm text-slate-800 dark:text-slate-100">${info.sn}</div>
+              <div class="text-[11px] text-slate-500">${info.jn}</div>
+            </div>
+            <button class="p-2 text-red-500 hover:text-red-700 text-xs" onclick="removeBookmark(${p})">
+              মুছুন
+            </button>
+          </div>
+        `;
+      }).join('');
+    }
+
+    window.selectSurah = function(page) {
+      renderPage(page, true);
+      closeIndexDrawer();
+    };
+
+    window.removeBookmark = function(page) {
+      const idx = bookmarks.indexOf(page);
+      if (idx > -1) {
+        bookmarks.splice(idx, 1);
+        localStorage.setItem('quran_bookmarks', JSON.stringify(bookmarks));
+        renderBookmarksTab();
+        renderPage(currentPage, false);
+      }
+    };
+
+    // Study Sheet Modal Logic
+    const studyModalBackdrop = document.getElementById('studyModalBackdrop');
+    const studyModalContent = document.getElementById('studyModalContent');
+    const openStudyBtn = document.getElementById('openStudyBtn');
+    const closeStudyBtn = document.getElementById('closeStudyBtn');
+    const studyModalTitle = document.getElementById('studyModalTitle');
+    const studyAyahsContainer = document.getElementById('studyAyahsContainer');
+
+    async function openStudySheet() {
+      const info = pageMap[currentPage] || { s: 1, sn: 'আল-ফাতিহা' };
+      studyModalTitle.textContent = `${info.s}. ${info.sn} (বাংলা অনুবাদ)`;
+      studyAyahsContainer.innerHTML = `
+        <div class="text-center py-10">
+          <div class="w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <p class="text-xs text-slate-500 mt-2">অনুবাদ লোড হচ্ছে...</p>
+        </div>
+      `;
+
+      studyModalBackdrop.classList.remove('hidden');
+      setTimeout(() => {
+        studyModalBackdrop.classList.remove('opacity-0');
+        studyModalContent.classList.remove('translate-y-full');
+      }, 10);
+
+      try {
+        const res = await fetch(`data/surahs/${info.s}.json`);
+        if (!res.ok) throw new Error('Failed');
+        const data = await res.json();
+
+        studyAyahsContainer.innerHTML = data.ayahs.map(a => `
+          <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+            <div class="flex items-center justify-between mb-2">
+              <span class="w-6 h-6 rounded-full bg-emerald-700 text-white text-xs font-bold flex items-center justify-center font-mono">${a.a}</span>
+              <span class="text-xs text-gold-600 dark:text-gold-400 font-semibold">আয়াত ${a.a}</span>
+            </div>
+            <div class="arabic-text text-xl sm:text-2xl font-bold text-slate-900 dark:text-emerald-200 text-right leading-loose mb-3">
+              ${a.ar}
+            </div>
+            <div class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-bengali">
+              <strong>তাইসীরুল কুরআন:</strong> ${a.bn_t || 'অনুবাদ সংরক্ষিত হচ্ছে'}
+            </div>
+            ${a.bn_z ? `
+              <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-bengali mt-2 pt-2 border-t border-slate-200 dark:border-slate-700">
+                <strong>ড. আবু বকর যাকারিয়া:</strong> ${a.bn_z}
+              </div>
+            ` : ''}
+          </div>
+        `).join('');
+      } catch (e) {
+        studyAyahsContainer.innerHTML = `
+          <div class="text-center py-8 text-slate-500">
+            <p>অনুবাদ ফাইল পাওয়া যায়নি।</p>
+          </div>
+        `;
+      }
+    }
+
+    function closeStudySheet() {
+      studyModalBackdrop.classList.add('opacity-0');
+      studyModalContent.classList.add('translate-y-full');
+      setTimeout(() => {
+        studyModalBackdrop.classList.add('hidden');
+      }, 300);
+    }
+
+    openStudyBtn.addEventListener('click', openStudySheet);
+    closeStudyBtn.addEventListener('click', closeStudySheet);
+    studyModalBackdrop.addEventListener('click', (e) => {
+      if (e.target === studyModalBackdrop) closeStudySheet();
+    });
+
+    // Start
+    loadMetadata();
+  </script>
+</body>
+</html>
