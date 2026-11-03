@@ -1,4 +1,4 @@
-const CACHE_NAME = 'quran-huffaz-v4';
+const CACHE_NAME = 'quran-huffaz-v5';
 const CORE_ASSETS = [
   './',
   './index.html',
@@ -37,7 +37,7 @@ self.addEventListener('fetch', (event) => {
   if (
     url.pathname.includes('/pages/page_') || 
     url.pathname.includes('/data/surahs/') || 
-    url.pathname.includes('/data/tafsir/')
+    url.pathname.includes('/data/tafsir/') || url.pathname.includes('/data/search_index.json')
   ) {
     event.respondWith(
       caches.open(CACHE_NAME).then((cache) => {

@@ -189,5 +189,39 @@ for p in range(2, 612):
         with open(os.path.join(folder, f'{p}.json'), 'w', encoding='utf-8') as f:
             json.dump(page_data, f, ensure_ascii=False)
 
-print('All web data generated successfully with synced page-verse mapping and Tafsir!')
+# 7. Generate Search Index
+print('Generating global search index...')
+import re
+def remove_tashkeel(text):
+    text = re.sub(r'[\u064B-\u065F\u0670\u06D6-\u06ED\u0610-\u061A\u08D4-\u08E1\u08E3-\u08FF]', '', text)
+    text = re.sub(r'[إأآٱ]', 'ا', text)
+    text = re.sub(r'[يى]', 'ي', text)
+    text = re.sub(r'ة', 'ه', text)
+    text = re.sub(r'ـ', '', text)
+    return text.strip()
+
+search_index = []
+for sid in range(1, 115):
+    path = f'landing/data/surahs/{sid}.json'
+    if os.path.exists(path):
+        with open(path, 'r', encoding='utf-8') as f:
+            s_data = json.load(f)
+        for ayah in s_data.get('ayahs', []):
+            search_index.append({
+                's': sid,
+                'sn': s_data['name_bn'],
+                'sna': s_data.get('name_ar', ''),
+                'a': ayah['a'],
+                'p': ayah['p'],
+                'ar': ayah.get('ar', ''),
+                'arc': remove_tashkeel(ayah.get('ar', '')),
+                'bnt': ayah.get('bn_t', ''),
+                'bnz': ayah.get('bn_z', '')
+            })
+
+for folder in ['landing/data', 'docs/data']:
+    with open(os.path.join(folder, 'search_index.json'), 'w', encoding='utf-8') as f:
+        json.dump(search_index, f, ensure_ascii=False, separators=(',', ':'))
+
+print('All web data generated successfully with synced page-verse mapping, Tafsir, and Search Index!')
 con.close()

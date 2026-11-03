@@ -313,6 +313,84 @@
     </div>
   </div>
 
+
+  <!-- 5. Quran Global Search Modal (আরবি ও বাংলা অনুসন্ধান) -->
+  <div id="searchModalBackdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300 flex items-end sm:items-center justify-center p-0 sm:p-4 font-bengali">
+    <div id="searchModalContent" class="w-full max-w-3xl bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col max-h-[92vh] sm:max-h-[85vh] overflow-hidden transform translate-y-full sm:translate-y-0 transition-transform duration-300">
+      
+      <!-- Modal Header -->
+      <div class="p-4 bg-emerald-900 text-white flex items-center justify-between border-b border-emerald-800 shrink-0">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-emerald-800/80 flex items-center justify-center text-gold-300 text-lg">
+            🔍
+          </div>
+          <div>
+            <h2 class="font-bold text-base sm:text-lg text-white">কুরআন অনুসন্ধান</h2>
+            <p class="text-xs text-emerald-200/90 font-medium">আরবি (হরকতসহ বা ছাড়া), বাংলা অনুবাদ ও ব্যাংলিশে খুঁজুন</p>
+          </div>
+        </div>
+        <button id="closeSearchBtn" class="p-2 rounded-lg hover:bg-emerald-800 text-emerald-200 transition">✕</button>
+      </div>
+
+      <!-- Search Input & Filter Area -->
+      <div class="p-3 sm:p-4 bg-slate-50 dark:bg-slate-950/70 border-b border-slate-200 dark:border-slate-800 space-y-2.5 shrink-0">
+        <div class="relative">
+          <input type="text" id="globalSearchInput" 
+                 placeholder="আরবি (যেমন: الرحمن বা الرحمٰن) / বাংলা (যেমন: সালাত, জান্নাত, রোজা) / salat, roza..." 
+                 class="w-full pl-10 pr-10 py-3 rounded-2xl bg-white dark:bg-slate-800 text-sm sm:text-base border border-slate-300 dark:border-slate-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-slate-800 dark:text-slate-100 shadow-sm"
+                 autofocus>
+          <svg class="w-5 h-5 text-slate-400 absolute left-3.5 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <button id="clearSearchBtn" class="hidden absolute right-3 top-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-1 rounded-full text-sm">
+            ✕
+          </button>
+        </div>
+
+        <!-- Scope Switcher Chips & Count -->
+        <div class="flex items-center justify-between gap-2 flex-wrap">
+          <div class="flex items-center gap-1.5 text-xs">
+            <button data-scope="all" class="search-scope-btn px-3 py-1 rounded-xl font-semibold bg-emerald-600 text-white shadow-xs transition">
+              সকল আয়াত
+            </button>
+            <button data-scope="arabic" class="search-scope-btn px-3 py-1 rounded-xl font-semibold bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 transition">
+              শুধু আরবি
+            </button>
+            <button data-scope="bengali" class="search-scope-btn px-3 py-1 rounded-xl font-semibold bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 transition">
+              শুধু বাংলা
+            </button>
+          </div>
+          <span id="searchResultsCount" class="text-xs text-slate-500 dark:text-slate-400 font-medium font-mono"></span>
+        </div>
+
+        <!-- Popular Suggested Tags -->
+        <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar text-[11px] pt-0.5">
+          <span class="text-slate-400 shrink-0">পরামর্শ:</span>
+          <button class="quick-search-tag px-2.5 py-0.5 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 shrink-0 hover:bg-emerald-200" data-tag="সালাত">সালাত / নামাজ</button>
+          <button class="quick-search-tag px-2.5 py-0.5 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 shrink-0 hover:bg-emerald-200" data-tag="রোজা">রোজা / সিয়াম</button>
+          <button class="quick-search-tag px-2.5 py-0.5 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 shrink-0 hover:bg-emerald-200" data-tag="জান্নাত">জান্নাত</button>
+          <button class="quick-search-tag px-2.5 py-0.5 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 shrink-0 hover:bg-emerald-200" data-tag="জাহান্নাম">জাহান্নাম</button>
+          <button class="quick-search-tag px-2.5 py-0.5 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 shrink-0 hover:bg-emerald-200 font-arabic" data-tag="الرحمن">الرحمن</button>
+          <button class="quick-search-tag px-2.5 py-0.5 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 shrink-0 hover:bg-emerald-200" data-tag="তাওবা">তাওবা</button>
+          <button class="quick-search-tag px-2.5 py-0.5 rounded-lg bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 shrink-0 hover:bg-emerald-200" data-tag="ধৈর্য">সবর / ধৈর্য</button>
+        </div>
+      </div>
+
+      <!-- Results Container -->
+      <div id="searchResultsContainer" class="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 no-scrollbar">
+        <!-- Default State -->
+        <div class="text-center py-12 px-4 space-y-3">
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-50 dark:bg-slate-800 flex items-center justify-center text-3xl text-emerald-600 dark:text-emerald-400">
+            🔍
+          </div>
+          <h3 class="font-bold text-base text-slate-800 dark:text-slate-200">কুরআনের যেকোনো আয়াত অনুসন্ধান করুন</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto leading-relaxed">
+            আরবি হরকত দিয়ে (যেমন: <span class="font-arabic font-bold text-emerald-700 dark:text-emerald-400">الرَّحۡمٰنِ</span>) বা হরকত ছাড়া (যেমন: <span class="font-arabic font-bold text-emerald-700 dark:text-emerald-400">الرحمن</span>), বাংলা অনুবাদ কিংবা রোমান ব্যাংলিশে (যেমন: <span class="font-mono text-emerald-700 dark:text-emerald-400">salat, namaz, roza</span>) লিখুন।
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -386,6 +464,12 @@
       <button id="openIndexBtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-800/80 hover:bg-emerald-700 dark:bg-slate-800 text-xs sm:text-sm font-bengali font-semibold border border-emerald-700/60 transition shadow-sm">
         <svg class="w-4 h-4 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/></svg>
         <span>সূচীপত্র</span>
+      </button>
+
+      <!-- Global Search Button -->
+      <button id="openSearchBtn" class="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-xl bg-emerald-800/80 hover:bg-emerald-700 dark:bg-slate-800 text-xs sm:text-sm font-bengali font-semibold border border-emerald-700/60 transition shadow-sm" title="কুরআন অনুসন্ধান (আরবি ও বাংলা)">
+        <svg class="w-4 h-4 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <span class="hidden sm:inline">অনুসন্ধান</span>
       </button>
     </div>
 
@@ -2231,6 +2315,295 @@
 
     // Initialize planner state on load
     loadPlannerData();
+
+
+
+    // ==========================================
+    // GLOBAL QURAN SEARCH ENGINE (ARABIC & BENGALI)
+    // ==========================================
+    let searchIndexData = null;
+    let isSearchIndexLoading = false;
+    let currentSearchScope = 'all'; // 'all' | 'arabic' | 'bengali'
+    let searchDebounceTimer = null;
+
+    const SEARCH_SYNONYMS = {
+      'salat': ['সালাত', 'নামাজ', 'নামায'],
+      'salah': ['সালাত', 'নামাজ'],
+      'namaz': ['নামাজ', 'সালাত', 'নামায'],
+      'namaj': ['নামাজ', 'সালাত'],
+      'roza': ['রোজা', 'রোযা', 'সিয়াম', 'সিয়াম'],
+      'roja': ['রোজা', 'সিয়াম'],
+      'sawm': ['সওম', 'সাওম', 'রোজা', 'সিয়াম'],
+      'siyam': ['সিয়াম', 'রোজা'],
+      'ramadan': ['রমাদান', 'রমজান'],
+      'ramzan': ['রমজান', 'রমাদান'],
+      'zakat': ['যাকাত', 'জাকাত'],
+      'jakat': ['যাকাত', 'জাকাত'],
+      'jannat': ['জান্নাত', 'জান্নাতুল', 'বেহেশত'],
+      'jannah': ['জান্নাত'],
+      'jahannam': ['জাহান্নাম', 'জাহান্নামের', 'দোযখ', 'আগুন'],
+      'jahanam': ['জাহান্নাম'],
+      'tawbah': ['তাওবা', 'তওবা'],
+      'touba': ['তাওবা', 'তওবা'],
+      'iman': ['ঈমান', 'ইমান'],
+      'eeman': ['ঈমান'],
+      'sabr': ['সবর', 'ধৈর্য'],
+      'shobor': ['সবর', 'ধৈর্য'],
+      'quran': ['কুরআন', 'কোরআন', 'কিতাব'],
+      'kitab': ['কিতাব', 'কুরআন'],
+      'dua': ['দোয়া', 'দুয়া', 'প্রার্থনা'],
+      'doya': ['দোয়া', 'দুয়া']
+    };
+
+    function normalizeArabic(text) {
+      if (!text) return '';
+      return text
+        .replace(/[\u064B-\u065F\u0670\u06D6-\u06ED\u0610-\u061A\u08D4-\u08E1\u08E3-\u08FF]/g, '')
+        .replace(/[إأآٱ]/g, 'ا')
+        .replace(/[يى]/g, 'ي')
+        .replace(/ة/g, 'ه')
+        .replace(/ـ/g, '')
+        .trim();
+    }
+
+    async function ensureSearchIndexLoaded() {
+      if (searchIndexData) return searchIndexData;
+      if (isSearchIndexLoading) return null;
+
+      isSearchIndexLoading = true;
+      try {
+        const res = await fetch('data/search_index.json');
+        if (res.ok) {
+          searchIndexData = await res.json();
+        }
+      } catch (err) {
+        console.error('Failed to load search index:', err);
+      } finally {
+        isSearchIndexLoading = false;
+      }
+      return searchIndexData;
+    }
+
+    const openSearchBtn = document.getElementById('openSearchBtn');
+    const closeSearchBtn = document.getElementById('closeSearchBtn');
+    const searchModalBackdrop = document.getElementById('searchModalBackdrop');
+    const searchModalContent = document.getElementById('searchModalContent');
+    const globalSearchInput = document.getElementById('globalSearchInput');
+    const clearSearchBtn = document.getElementById('clearSearchBtn');
+    const searchResultsCount = document.getElementById('searchResultsCount');
+    const searchResultsContainer = document.getElementById('searchResultsContainer');
+
+    function openSearchSheet() {
+      searchModalBackdrop.classList.remove('hidden');
+      setTimeout(() => {
+        searchModalBackdrop.classList.remove('opacity-0');
+        searchModalContent.classList.remove('translate-y-full');
+        globalSearchInput.focus();
+      }, 10);
+
+      // Preload search index in background
+      ensureSearchIndexLoaded();
+    }
+
+    function closeSearchSheet() {
+      searchModalBackdrop.classList.add('opacity-0');
+      searchModalContent.classList.add('translate-y-full');
+      setTimeout(() => {
+        searchModalBackdrop.classList.add('hidden');
+      }, 300);
+    }
+
+    if (openSearchBtn) openSearchBtn.addEventListener('click', openSearchSheet);
+    if (closeSearchBtn) closeSearchBtn.addEventListener('click', closeSearchSheet);
+    if (searchModalBackdrop) {
+      searchModalBackdrop.addEventListener('click', (e) => {
+        if (e.target === searchModalBackdrop) closeSearchSheet();
+      });
+    }
+
+    if (clearSearchBtn) {
+      clearSearchBtn.addEventListener('click', () => {
+        globalSearchInput.value = '';
+        clearSearchBtn.classList.add('hidden');
+        renderEmptySearchState();
+      });
+    }
+
+    // Quick tag clicks
+    document.querySelectorAll('.quick-search-tag').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tag = btn.getAttribute('data-tag');
+        if (tag) {
+          globalSearchInput.value = tag;
+          clearSearchBtn.classList.remove('hidden');
+          triggerSearch(tag);
+        }
+      });
+    });
+
+    // Scope switcher buttons
+    document.querySelectorAll('.search-scope-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentSearchScope = btn.getAttribute('data-scope') || 'all';
+        document.querySelectorAll('.search-scope-btn').forEach(b => {
+          b.className = 'search-scope-btn px-3 py-1 rounded-xl font-semibold bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-300 transition';
+        });
+        btn.className = 'search-scope-btn px-3 py-1 rounded-xl font-semibold bg-emerald-600 text-white shadow-xs transition';
+
+        if (globalSearchInput.value.trim()) {
+          triggerSearch(globalSearchInput.value.trim());
+        }
+      });
+    });
+
+    if (globalSearchInput) {
+      globalSearchInput.addEventListener('input', (e) => {
+        const val = e.target.value.trim();
+        if (val) {
+          clearSearchBtn.classList.remove('hidden');
+        } else {
+          clearSearchBtn.classList.add('hidden');
+        }
+
+        clearTimeout(searchDebounceTimer);
+        searchDebounceTimer = setTimeout(() => {
+          triggerSearch(val);
+        }, 180);
+      });
+    }
+
+    function renderEmptySearchState() {
+      searchResultsCount.textContent = '';
+      searchResultsContainer.innerHTML = `
+        <div class="text-center py-12 px-4 space-y-3">
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-emerald-50 dark:bg-slate-800 flex items-center justify-center text-3xl text-emerald-600 dark:text-emerald-400">
+            🔍
+          </div>
+          <h3 class="font-bold text-base text-slate-800 dark:text-slate-200">কুরআনের যেকোনো আয়াত অনুসন্ধান করুন</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto leading-relaxed">
+            আরবি হরকত দিয়ে (যেমন: <span class="font-arabic font-bold text-emerald-700 dark:text-emerald-400">الرَّحۡمٰنِ</span>) বা হরকত ছাড়া (যেমন: <span class="font-arabic font-bold text-emerald-700 dark:text-emerald-400">الرحمن</span>), বাংলা অনুবাদ কিংবা রোমান ব্যাংলিশে লিখুন।
+          </p>
+        </div>
+      `;
+    }
+
+    async function triggerSearch(query) {
+      const q = query.trim();
+      if (!q) {
+        renderEmptySearchState();
+        return;
+      }
+
+      searchResultsContainer.innerHTML = `
+        <div class="text-center py-12">
+          <div class="w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto mb-3"></div>
+          <p class="text-xs text-slate-500">অনুসন্ধান করা হচ্ছে...</p>
+        </div>
+      `;
+
+      const data = await ensureSearchIndexLoaded();
+      if (!data) {
+        searchResultsContainer.innerHTML = `
+          <div class="text-center py-10 text-rose-500 text-xs">
+            সার্চ ইনডেক্স লোড করা সম্ভব হয়নি। ইন্টারনেট সংযোগ পরীক্ষা করুন।
+          </div>
+        `;
+        return;
+      }
+
+      const isArabic = /[\u0600-\u06FF]/.test(q);
+      let results = [];
+
+      if (isArabic || currentSearchScope === 'arabic') {
+        const normQ = normalizeArabic(q);
+        results = data.filter(item => {
+          return item.arc.includes(normQ) || item.ar.includes(q);
+        });
+      } else {
+        const lower = q.toLowerCase();
+        let terms = [q];
+        if (SEARCH_SYNONYMS[lower]) {
+          terms = terms.concat(SEARCH_SYNONYMS[lower]);
+        }
+
+        results = data.filter(item => {
+          const matchBnT = item.bnt && terms.some(t => item.bnt.includes(t));
+          const matchBnZ = item.bnz && terms.some(t => item.bnz.includes(t));
+          return matchBnT || matchBnZ;
+        });
+      }
+
+      searchResultsCount.textContent = `মোট ${toBnNum(results.length)}টি ফলাফল`;
+
+      if (results.length === 0) {
+        searchResultsContainer.innerHTML = `
+          <div class="text-center py-12 px-4 space-y-2">
+            <div class="text-3xl text-slate-400 mb-2">🍃</div>
+            <h4 class="font-bold text-sm text-slate-800 dark:text-slate-200">কোনো ফলাফল পাওয়া যায়নি</h4>
+            <p class="text-xs text-slate-500 max-w-sm mx-auto">
+              অনুগ্রহ করে বানানের সঠিকতা যাচাই করুন অথবা সমার্থক অন্য কোনো শব্দ দিয়ে চেষ্টা করুন।
+            </p>
+          </div>
+        `;
+        return;
+      }
+
+      // Render top results (up to 100)
+      const displayResults = results.slice(0, 100);
+      searchResultsContainer.innerHTML = displayResults.map(item => {
+        return `
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 hover:border-emerald-500 shadow-xs transition space-y-2.5">
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-700/60">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-emerald-700 dark:text-emerald-400">${item.s}. ${item.sn}</span>
+                <span class="text-xs text-slate-400">•</span>
+                <span class="text-xs text-gold-600 dark:text-gold-400 font-semibold font-mono">আয়াত ${toBnNum(item.a)}</span>
+              </div>
+              <span class="text-[11px] bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-bold px-2.5 py-0.5 rounded-full font-mono">
+                পৃষ্ঠা ${toBnNum(item.p)}
+              </span>
+            </div>
+
+            <div class="arabic-text text-xl sm:text-2xl font-bold text-slate-900 dark:text-emerald-200 text-right leading-loose">
+              ${item.ar}
+            </div>
+
+            <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-bengali">
+              ${item.bnt || 'অনুবাদ সংরক্ষিত হচ্ছে'}
+            </p>
+
+            <div class="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-700/60">
+              <div class="flex items-center gap-2">
+                <button onclick="jumpToPageFromSearch(${item.p})" class="px-3 py-1.5 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-semibold shadow-xs transition flex items-center gap-1.5">
+                  <span>📖</span>
+                  <span>পৃষ্ঠা ${toBnNum(item.p)}-এ যান</span>
+                </button>
+                <button onclick="openStudyFromSearch(${item.p})" class="px-3 py-1.5 rounded-xl bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-200 text-xs font-semibold transition flex items-center gap-1.5">
+                  <span>🔍</span>
+                  <span>অনুবাদ ও তাফসীর</span>
+                </button>
+              </div>
+              <button onclick="shareVerse('${item.sn}', ${item.a}, ${item.p}, '${encodeURIComponent(JSON.stringify(item.ar))}', '${encodeURIComponent(JSON.stringify(item.bnt || ''))}')" class="p-1.5 rounded-xl text-slate-500 hover:text-emerald-600 hover:bg-slate-100 dark:hover:bg-slate-700 transition" title="শেয়ার করুন">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    window.jumpToPageFromSearch = function(pageNum) {
+      closeSearchSheet();
+      renderPage(parseInt(pageNum, 10));
+    };
+
+    window.openStudyFromSearch = function(pageNum) {
+      closeSearchSheet();
+      renderPage(parseInt(pageNum, 10));
+      setTimeout(() => {
+        openStudySheet();
+      }, 350);
+    };
 
 
     // Start
