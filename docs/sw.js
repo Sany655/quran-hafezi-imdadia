@@ -1,10 +1,10 @@
-const CACHE_NAME = 'quran-huffaz-v1';
+const CACHE_NAME = 'quran-huffaz-v2';
 const CORE_ASSETS = [
   './',
   './index.html',
+  './reader.html',
   './manifest.json',
   './assets/app_icon.png',
-  './assets/flipsound.mp3',
   './data/surahs.json',
   './data/juz.json',
   './data/page_map.json'
@@ -29,10 +29,16 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
+  if (event.request.method !== 'GET') return;
   const url = new URL(event.request.url);
+  if (!url.protocol.startsWith('http')) return;
 
-  // If fetching page images, use cache-first strategy with runtime caching
-  if (url.pathname.includes('/pages/page_') || url.pathname.includes('/data/surahs/')) {
+  // 1. Heavy page images and per-page verse / tafsir data: Cache-First strategy
+  if (
+    url.pathname.includes('/pages/page_') || 
+    url.pathname.includes('/data/surahs/') || 
+    url.pathname.includes('/data/tafsir/')
+  ) {
     event.respondWith(
       caches.open(CACHE_NAME).then((cache) => {
         return cache.match(event.request).then((cachedResponse) => {
@@ -42,19 +48,30 @@ self.addEventListener('fetch', (event) => {
               cache.put(event.request, networkResponse.clone());
             }
             return networkResponse;
-          }).catch(() => cachedResponse);
+          });
         });
       })
     );
     return;
   }
 
-  // Default network-first or cache fallback for core assets
+  // 2. HTML navigation and core app assets: Network-First strategy with Cache fallback
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      return response || fetch(event.request).then((networkResponse) => {
+    fetch(event.request)
+      .then((networkResponse) => {
+        if (networkResponse && networkResponse.status === 200) {
+          const responseClone = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, responseClone));
+        }
         return networkResponse;
-      }).catch(() => response);
-    })
+      })
+      .catch(() => {
+        return caches.match(event.request).then((cached) => {
+          if (cached) return cached;
+          if (event.request.mode === 'navigate') {
+            return caches.match('./reader.html') || caches.match('./index.html');
+          }
+        });
+      })
   );
 });
