@@ -20,6 +20,7 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
   bool _isUiVisible = true;
   bool _isBookmarked = false;
   List<Surah> _surahs = [];
+  Map<int, Map<String, dynamic>> _pagesInfo = {};
 
   @override
   void initState() {
@@ -33,10 +34,13 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
 
   void _loadSurahs() async {
     final list = await QuranDbHelper.instance.getAllSurahs();
+    final pMap = await QuranDbHelper.instance.getAllPagesInfo();
     if (mounted) {
       setState(() {
         _surahs = list;
+        _pagesInfo = pMap;
       });
+      _saveCurrentLastRead();
     }
   }
 
@@ -57,6 +61,12 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
 
   Surah? _getCurrentSurah(int page) {
     if (_surahs.isEmpty) return null;
+    final info = _pagesInfo[page];
+    if (info != null && info['start_surah_id'] != null) {
+      final startSurahId = info['start_surah_id'] as int;
+      final found = _surahs.where((s) => s.id == startSurahId);
+      if (found.isNotEmpty) return found.first;
+    }
     Surah current = _surahs.first;
     for (var s in _surahs) {
       if (page >= s.startPage) {
@@ -101,6 +111,11 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
     final surah = _getCurrentSurah(_currentPage);
     if (surah == null) return;
 
+    final info = _pagesInfo[_currentPage];
+    final int initialAyah = (info != null && info['start_ayah_number'] != null)
+        ? (info['start_ayah_number'] as int)
+        : 1;
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -110,7 +125,10 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
           initialChildSize: 0.65,
           maxChildSize: 0.95,
           minChildSize: 0.35,
-          builder: (_, __) => StudySheet(surah: surah),
+          builder: (_, __) => StudySheet(
+            surah: surah,
+            initialAyahNumber: initialAyah,
+          ),
         );
       },
     );

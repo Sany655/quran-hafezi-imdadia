@@ -799,8 +799,9 @@
     const studyAyahsContainer = document.getElementById('studyAyahsContainer');
 
     async function openStudySheet() {
-      const info = pageMap[currentPage] || { s: 1, sn: 'আল-ফাতিহা' };
-      studyModalTitle.textContent = `${info.s}. ${info.sn} (বাংলা অনুবাদ)`;
+      const info = pageMap[currentPage] || { s: 1, sn: 'আল-ফাতিহা', start_ayah: 1, verses: [] };
+      const startAyah = info.start_ayah || 1;
+      studyModalTitle.textContent = `${info.s}. ${info.sn} (পৃষ্ঠা ${currentPage} • আয়াত ${startAyah} থেকে শুরু)`;
       studyAyahsContainer.innerHTML = `
         <div class="text-center py-10">
           <div class="w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
@@ -819,11 +820,19 @@
         if (!res.ok) throw new Error('Failed');
         const data = await res.json();
 
-        studyAyahsContainer.innerHTML = data.ayahs.map(a => `
-          <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
+        const pageVerses = info.verses || [];
+
+        studyAyahsContainer.innerHTML = data.ayahs.map(a => {
+          const isThisPage = pageVerses.includes(`${info.s}:${a.a}`);
+          const isFirstVerse = (a.a === startAyah);
+          return `
+          <div id="study-ayah-${a.a}" class="p-3.5 rounded-2xl transition duration-200 ${isFirstVerse ? 'ring-2 ring-emerald-600 bg-emerald-50/60 dark:bg-emerald-950/40' : isThisPage ? 'bg-slate-50 dark:bg-slate-800/90 border border-emerald-300/40 dark:border-emerald-700/40' : 'bg-slate-50/70 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 opacity-80'}">
             <div class="flex items-center justify-between mb-2">
-              <span class="w-6 h-6 rounded-full bg-emerald-700 text-white text-xs font-bold flex items-center justify-center font-mono">${a.a}</span>
-              <span class="text-xs text-gold-600 dark:text-gold-400 font-semibold">আয়াত ${a.a}</span>
+              <div class="flex items-center gap-2">
+                <span class="w-6 h-6 rounded-full bg-emerald-700 text-white text-xs font-bold flex items-center justify-center font-mono">${a.a}</span>
+                <span class="text-xs text-gold-600 dark:text-gold-400 font-semibold">আয়াত ${a.a}</span>
+              </div>
+              ${isFirstVerse ? `<span class="text-[10px] bg-emerald-700 text-white px-2 py-0.5 rounded-full font-bold">পৃষ্ঠার প্রথম আয়াত</span>` : isThisPage ? `<span class="text-[10px] bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 px-2 py-0.5 rounded-full">পৃষ্ঠা ${currentPage}</span>` : ''}
             </div>
             <div class="arabic-text text-xl sm:text-2xl font-bold text-slate-900 dark:text-emerald-200 text-right leading-loose mb-3">
               ${a.ar}
@@ -837,7 +846,17 @@
               </div>
             ` : ''}
           </div>
-        `).join('');
+        `;
+        }).join('');
+
+        // Smooth scroll to the first verse of the page
+        setTimeout(() => {
+          const targetEl = document.getElementById(`study-ayah-${startAyah}`);
+          if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 200);
+
       } catch (e) {
         studyAyahsContainer.innerHTML = `
           <div class="text-center py-8 text-slate-500">

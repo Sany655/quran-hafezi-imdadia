@@ -25,8 +25,25 @@ class QuranDbHelper {
     final path = join(dbPath, filePath);
 
     final exists = await databaseExists(path);
+    bool needsCopy = !exists;
 
-    if (!exists) {
+    if (exists) {
+      try {
+        final checkDb = await openDatabase(path, readOnly: true);
+        final pageCols = await checkDb.rawQuery("PRAGMA table_info(pages)");
+        final hasStartSurah = pageCols.any((c) => c['name'] == 'start_surah_id');
+        final tafsirCountRes = await checkDb.rawQuery("SELECT COUNT(*) as cnt FROM tafsirs WHERE tafsir_id = 164");
+        final ikCount = Sqflite.firstIntValue(tafsirCountRes) ?? 0;
+        await checkDb.close();
+        if (!hasStartSurah || ikCount < 6000) {
+          needsCopy = true;
+        }
+      } catch (_) {
+        needsCopy = true;
+      }
+    }
+
+    if (needsCopy) {
       try {
         await Directory(dirname(path)).create(recursive: true);
       } catch (_) {}
@@ -81,6 +98,31 @@ class QuranDbHelper {
     final maps = await db.query('surahs', where: 'id = ?', whereArgs: [surahId]);
     if (maps.isNotEmpty) {
       return Surah.fromMap(maps.first);
+    }
+    return null;
+  }
+
+  // 3b. Fetch all Page Mappings
+  Future<Map<int, Map<String, dynamic>>> getAllPagesInfo() async {
+    final db = await database;
+    final maps = await db.query('pages');
+    Map<int, Map<String, dynamic>> result = {};
+    for (var m in maps) {
+      final p = m['page_number'] as int;
+      result[p] = m;
+    }
+    return result;
+  }
+
+  Future<Map<String, dynamic>?> getPageInfo(int pageNumber) async {
+    final db = await database;
+    final maps = await db.query(
+      'pages',
+      where: 'page_number = ?',
+      whereArgs: [pageNumber],
+    );
+    if (maps.isNotEmpty) {
+      return maps.first;
     }
     return null;
   }

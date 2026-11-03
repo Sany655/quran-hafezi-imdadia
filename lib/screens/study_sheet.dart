@@ -20,13 +20,21 @@ class StudySheet extends StatefulWidget {
 
 class _StudySheetState extends State<StudySheet> {
   late Future<List<Ayah>> _ayahsFuture;
+  final ScrollController _scrollController = ScrollController();
   bool _showWordByWord = true;
   String _selectedTranslation = 'taisirul'; // 'taisirul' or 'zakaria'
+  bool _hasScrolledToInitial = false;
 
   @override
   void initState() {
     super.initState();
     _ayahsFuture = QuranDbHelper.instance.getAyahsForSurah(widget.surah.id);
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   void _showTafsirModal(BuildContext context, Ayah ayah) async {
@@ -181,7 +189,9 @@ class _StudySheetState extends State<StudySheet> {
                       ),
                     ),
                     Text(
-                      '${widget.surah.nameEn} • ${widget.surah.totalAyahs} আয়াত • ${widget.surah.revelationType}',
+                      widget.initialAyahNumber > 1
+                          ? '${widget.surah.nameEn} • আয়াত ${widget.initialAyahNumber} থেকে শুরু • ${widget.surah.revelationType}'
+                          : '${widget.surah.nameEn} • ${widget.surah.totalAyahs} আয়াত • ${widget.surah.revelationType}',
                       style: GoogleFonts.notoSansBengali(
                         fontSize: 12,
                         color: Colors.grey[600],
@@ -226,34 +236,89 @@ class _StudySheetState extends State<StudySheet> {
                 }
 
                 final ayahs = snapshot.data!;
+
+                if (!_hasScrolledToInitial && widget.initialAyahNumber > 1) {
+                  _hasScrolledToInitial = true;
+                  final targetIndex = ayahs.indexWhere((a) => a.ayahNumber == widget.initialAyahNumber);
+                  if (targetIndex > 0) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      if (_scrollController.hasClients) {
+                        final targetOffset = (targetIndex * 250.0).clamp(0.0, _scrollController.position.maxScrollExtent);
+                        _scrollController.animateTo(
+                          targetOffset,
+                          duration: const Duration(milliseconds: 350),
+                          curve: Curves.easeInOut,
+                        );
+                      }
+                    });
+                  }
+                }
+
                 return ListView.separated(
+                  controller: _scrollController,
                   padding: const EdgeInsets.all(16),
                   itemCount: ayahs.length,
                   separatorBuilder: (_, __) => const Divider(height: 24),
                   itemBuilder: (context, index) {
                     final ayah = ayahs[index];
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        // Ayah number badge & actions
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                              decoration: BoxDecoration(
-                                color: const Color(0xFF0F5132).withOpacity(0.1),
-                                borderRadius: BorderRadius.circular(12),
+                    final isInitial = ayah.ayahNumber == widget.initialAyahNumber;
+
+                    return Container(
+                      padding: isInitial ? const EdgeInsets.all(8) : EdgeInsets.zero,
+                      decoration: isInitial
+                          ? BoxDecoration(
+                              color: const Color(0xFF0F5132).withOpacity(0.04),
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: const Color(0xFF0F5132).withOpacity(0.2),
+                                width: 1.5,
                               ),
-                              child: Text(
-                                'আয়াত ${ayah.ayahNumber}',
-                                style: GoogleFonts.notoSansBengali(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: const Color(0xFF0F5132),
-                                ),
+                            )
+                          : null,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          // Ayah number badge & actions
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF0F5132).withOpacity(0.1),
+                                      borderRadius: BorderRadius.circular(12),
+                                    ),
+                                    child: Text(
+                                      'আয়াত ${ayah.ayahNumber}',
+                                      style: GoogleFonts.notoSansBengali(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                        color: const Color(0xFF0F5132),
+                                      ),
+                                    ),
+                                  ),
+                                  if (isInitial && widget.initialAyahNumber > 1) ...[
+                                    const SizedBox(width: 8),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFF0F5132),
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: Text(
+                                        'পৃষ্ঠার শুরু',
+                                        style: GoogleFonts.notoSansBengali(
+                                          fontSize: 10,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ],
                               ),
-                            ),
                             TextButton.icon(
                               icon: const Icon(Icons.menu_book, size: 16, color: Color(0xFF0F5132)),
                               label: Text(
