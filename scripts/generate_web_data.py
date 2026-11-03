@@ -151,5 +151,31 @@ for s in surahs:
         with open(os.path.join(folder, f'{sid}.json'), 'w', encoding='utf-8') as f:
             json.dump(surah_payload, f, ensure_ascii=False)
 
-print('All web data generated successfully with synced page-verse mapping!')
+# 6. Generate per-page Tafsir JSON for Study Sheet
+print('Generating per-page Tafsir data...')
+for folder in ['landing/data/tafsir', 'docs/data/tafsir']:
+    os.makedirs(folder, exist_ok=True)
+
+all_tafsirs = cur.execute('SELECT surah_id, ayah_number, tafsir_id, text_bn FROM tafsirs').fetchall()
+tafsir_cache = {}
+for s_id, a_num, t_id, txt in all_tafsirs:
+    tafsir_cache[(s_id, a_num, t_id)] = txt or ''
+
+for p in range(2, 612):
+    p_info = page_map.get(p, {})
+    verses = p_info.get('verses', [])
+    page_data = {}
+    for vk in verses:
+        s_id, a_num = map(int, vk.split(':'))
+        page_data[vk] = {
+            's': s_id,
+            'a': a_num,
+            'ik': tafsir_cache.get((s_id, a_num, 164), ''),
+            'ab': tafsir_cache.get((s_id, a_num, 165), '')
+        }
+    for folder in ['landing/data/tafsir', 'docs/data/tafsir']:
+        with open(os.path.join(folder, f'{p}.json'), 'w', encoding='utf-8') as f:
+            json.dump(page_data, f, ensure_ascii=False)
+
+print('All web data generated successfully with synced page-verse mapping and Tafsir!')
 con.close()

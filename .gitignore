@@ -39,3 +39,5 @@ Thumbs.db
 # Web build pages cache
 docs/pages/
 landing/pages/
+docs/data/tafsir/
+landing/data/tafsir/
