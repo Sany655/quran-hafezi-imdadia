@@ -293,12 +293,22 @@
     <div id="studyModalContent" class="w-full max-w-2xl bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col max-h-[85vh] sm:max-h-[80vh] overflow-hidden transform translate-y-full sm:translate-y-0 transition-transform duration-300">
       
       <!-- Modal Header -->
-      <div class="p-4 bg-emerald-900 text-white flex items-center justify-between">
+      <div class="p-4 bg-emerald-900 text-white flex items-center justify-between border-b border-emerald-800">
         <div>
           <span class="text-xs text-gold-300 font-semibold" id="studyModalSubTitle">বাংলা অনুবাদ</span>
-          <h2 class="font-bold text-lg text-white" id="studyModalTitle">সূরা আল-ফাতিহা</h2>
+          <h2 class="font-bold text-base sm:text-lg text-white" id="studyModalTitle">সূরা আল-ফাতিহা</h2>
         </div>
         <button id="closeStudyBtn" class="p-2 rounded-lg hover:bg-emerald-800 text-emerald-200">✕</button>
+      </div>
+
+      <!-- Scope Switcher: Current Page Verses vs Entire Surah -->
+      <div class="px-4 py-2 bg-emerald-950/80 border-b border-emerald-800/60 flex items-center gap-2">
+        <button id="studyTabScopePage" class="flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold bg-emerald-600 text-white shadow-sm transition">
+          পৃষ্ঠার আয়াতসমূহ
+        </button>
+        <button id="studyTabScopeSurah" class="flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 transition">
+          সম্পূর্ণ সূরা
+        </button>
       </div>
 
       <!-- Ayahs Translation List Container -->
@@ -797,10 +807,69 @@
     const closeStudyBtn = document.getElementById('closeStudyBtn');
     const studyModalTitle = document.getElementById('studyModalTitle');
     const studyAyahsContainer = document.getElementById('studyAyahsContainer');
+    const studyTabScopePage = document.getElementById('studyTabScopePage');
+    const studyTabScopeSurah = document.getElementById('studyTabScopeSurah');
 
-    async function openStudySheet() {
-      const info = pageMap[currentPage] || { s: 1, sn: 'আল-ফাতিহা' };
-      studyModalTitle.textContent = `${info.s}. ${info.sn} (বাংলা অনুবাদ)`;
+    let studyCurrentScope = 'page'; // 'page' or 'surah'
+    const surahDataCache = {};
+
+    async function fetchSurah(sId) {
+      if (surahDataCache[sId]) return surahDataCache[sId];
+      const res = await fetch(`data/surahs/${sId}.json`);
+      if (!res.ok) throw new Error('Surah fetch failed: ' + sId);
+      const data = await res.json();
+      surahDataCache[sId] = data;
+      return data;
+    }
+
+    function renderAyahCard(a, surahName, isFirstVerse, isPageVerse) {
+      return `
+        <div id="study-ayah-${a.a}" class="p-3.5 rounded-2xl transition duration-200 ${
+          isFirstVerse
+            ? 'ring-2 ring-emerald-600 bg-emerald-50/60 dark:bg-emerald-950/40'
+            : isPageVerse
+            ? 'bg-slate-50 dark:bg-slate-800/90 border border-emerald-300/40 dark:border-emerald-700/40'
+            : 'bg-slate-50/70 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 opacity-80'
+        }">
+          <div class="flex items-center justify-between mb-2">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-emerald-700 text-white text-xs font-bold flex items-center justify-center font-mono">${a.a}</span>
+              <span class="text-xs text-gold-600 dark:text-gold-400 font-semibold">${surahName ? `${surahName} • ` : ''}আয়াত ${a.a}</span>
+            </div>
+            ${isFirstVerse ? `<span class="text-[10px] bg-emerald-700 text-white px-2 py-0.5 rounded-full font-bold">পৃষ্ঠার শুরু</span>` : isPageVerse ? `<span class="text-[10px] bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 px-2 py-0.5 rounded-full">পৃষ্ঠা ${currentPage}</span>` : ''}
+          </div>
+          <div class="arabic-text text-xl sm:text-2xl font-bold text-slate-900 dark:text-emerald-200 text-right leading-loose mb-3">
+            ${a.ar}
+          </div>
+          <div class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-bengali">
+            <strong>তাইসীরুল কুরআন:</strong> ${a.bn_t || 'অনুবাদ সংরক্ষিত হচ্ছে'}
+          </div>
+          ${a.bn_z ? `
+            <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-bengali mt-2 pt-2 border-t border-slate-200 dark:border-slate-700">
+              <strong>ড. আবু বকর যাকারিয়া:</strong> ${a.bn_z}
+            </div>
+          ` : ''}
+        </div>
+      `;
+    }
+
+    async function renderStudyContent() {
+      const info = pageMap[currentPage] || { s: 1, sn: 'আল-ফাতিহা', start_ayah: 1, verses: [] };
+      const startAyah = info.start_ayah || 1;
+      const endAyah = info.end_ayah || startAyah;
+      const pageVerses = info.verses || [];
+
+      // Update tabs UI
+      if (studyCurrentScope === 'page') {
+        studyTabScopePage.className = 'flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold bg-emerald-600 text-white shadow-sm transition';
+        studyTabScopeSurah.className = 'flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 transition';
+        studyModalTitle.textContent = `${info.sn} (পৃষ্ঠা ${currentPage} • আয়াত ${startAyah}–${endAyah})`;
+      } else {
+        studyTabScopePage.className = 'flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 transition';
+        studyTabScopeSurah.className = 'flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold bg-emerald-600 text-white shadow-sm transition';
+        studyModalTitle.textContent = `${info.s}. ${info.sn} (সম্পূর্ণ সূরা • ${startAyah}নং আয়াত চিহ্নিত)`;
+      }
+
       studyAyahsContainer.innerHTML = `
         <div class="text-center py-10">
           <div class="w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
@@ -808,43 +877,93 @@
         </div>
       `;
 
-      studyModalBackdrop.classList.remove('hidden');
-      setTimeout(() => {
-        studyModalBackdrop.classList.remove('opacity-0');
-        studyModalContent.classList.remove('translate-y-full');
-      }, 10);
-
       try {
-        const res = await fetch(`data/surahs/${info.s}.json`);
-        if (!res.ok) throw new Error('Failed');
-        const data = await res.json();
+        if (studyCurrentScope === 'page') {
+          // Identify all unique surahs on this page
+          const surahIds = [...new Set(pageVerses.map(v => parseInt(v.split(':')[0])))];
+          if (surahIds.length === 0) surahIds.push(info.s);
 
-        studyAyahsContainer.innerHTML = data.ayahs.map(a => `
-          <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
-            <div class="flex items-center justify-between mb-2">
-              <span class="w-6 h-6 rounded-full bg-emerald-700 text-white text-xs font-bold flex items-center justify-center font-mono">${a.a}</span>
-              <span class="text-xs text-gold-600 dark:text-gold-400 font-semibold">আয়াত ${a.a}</span>
-            </div>
-            <div class="arabic-text text-xl sm:text-2xl font-bold text-slate-900 dark:text-emerald-200 text-right leading-loose mb-3">
-              ${a.ar}
-            </div>
-            <div class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-bengali">
-              <strong>তাইসীরুল কুরআন:</strong> ${a.bn_t || 'অনুবাদ সংরক্ষিত হচ্ছে'}
-            </div>
-            ${a.bn_z ? `
-              <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-bengali mt-2 pt-2 border-t border-slate-200 dark:border-slate-700">
-                <strong>ড. আবু বকর যাকারিয়া:</strong> ${a.bn_z}
-              </div>
-            ` : ''}
-          </div>
-        `).join('');
+          const surahsData = await Promise.all(surahIds.map(id => fetchSurah(id)));
+          const surahMap = {};
+          surahsData.forEach(s => { surahMap[s.id] = s; });
+
+          let cardsHtml = '';
+          for (const sId of surahIds) {
+            const sData = surahMap[sId];
+            if (!sData) continue;
+            // Ayahs belonging to this page
+            const ayahsOnPage = sData.ayahs.filter(a => pageVerses.includes(`${sId}:${a.a}`));
+            if (ayahsOnPage.length === 0) continue;
+
+            if (surahIds.length > 1) {
+              cardsHtml += `
+                <div class="sticky top-0 z-10 bg-emerald-800 text-white text-xs font-bold py-1.5 px-3 rounded-xl shadow my-2 flex items-center justify-between">
+                  <span>${sData.id}. ${sData.name_bn}</span>
+                  <span class="text-gold-300 font-arabic">${sData.name_ar}</span>
+                </div>
+              `;
+            }
+
+            cardsHtml += ayahsOnPage.map(a => {
+              const isFirst = (sId === info.s && a.a === startAyah);
+              return renderAyahCard(a, surahIds.length > 1 ? sData.name_bn : '', isFirst, true);
+            }).join('');
+          }
+
+          studyAyahsContainer.innerHTML = cardsHtml;
+          studyAyahsContainer.scrollTop = 0;
+        } else {
+          // Full Surah
+          const data = await fetchSurah(info.s);
+          studyAyahsContainer.innerHTML = data.ayahs.map(a => {
+            const isThisPage = pageVerses.includes(`${info.s}:${a.a}`);
+            const isFirst = (a.a === startAyah);
+            return renderAyahCard(a, '', isFirst, isThisPage);
+          }).join('');
+
+          setTimeout(() => {
+            const targetEl = document.getElementById(`study-ayah-${startAyah}`);
+            if (targetEl) {
+              targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }, 150);
+        }
       } catch (e) {
+        console.error(e);
         studyAyahsContainer.innerHTML = `
           <div class="text-center py-8 text-slate-500">
             <p>অনুবাদ ফাইল পাওয়া যায়নি।</p>
           </div>
         `;
       }
+    }
+
+    async function openStudySheet() {
+      studyCurrentScope = 'page';
+      studyModalBackdrop.classList.remove('hidden');
+      setTimeout(() => {
+        studyModalBackdrop.classList.remove('opacity-0');
+        studyModalContent.classList.remove('translate-y-full');
+      }, 10);
+      renderStudyContent();
+    }
+
+    if (studyTabScopePage) {
+      studyTabScopePage.addEventListener('click', () => {
+        if (studyCurrentScope !== 'page') {
+          studyCurrentScope = 'page';
+          renderStudyContent();
+        }
+      });
+    }
+
+    if (studyTabScopeSurah) {
+      studyTabScopeSurah.addEventListener('click', () => {
+        if (studyCurrentScope !== 'surah') {
+          studyCurrentScope = 'surah';
+          renderStudyContent();
+        }
+      });
     }
 
     function closeStudySheet() {
