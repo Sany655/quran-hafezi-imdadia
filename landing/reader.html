@@ -1480,7 +1480,7 @@
         const bnText = JSON.parse(decodeURIComponent(encBn));
         const text = `﴿ ${arText} ﴾\n\n` +
                      `বাংলা অর্থ (তাইসীরুল কুরআন):\n"${bnText}"\n\n` +
-                     `— সূরা ${surahName} (আয়াত ${toBnNum(ayahNum)}), পৃষ্ঠা ${toBnNum(pageNum)}\n` +
+                     `[সূরা ${surahName}, আয়াত ${toBnNum(ayahNum)}, পৃষ্ঠা ${toBnNum(pageNum)}]\n` +
                      `আল-কুরআন (১৫ লাইন হাফেজী)`;
         executeOfflineShare({
           title: `সূরা ${surahName} - আয়াত ${toBnNum(ayahNum)}`,
@@ -1497,7 +1497,7 @@
         const tafsirContent = JSON.parse(decodeURIComponent(encTafsir));
         const text = `﴿ ${arText} ﴾\n\n` +
                      `📖 ${tafsirLabel}:\n${tafsirContent}\n\n` +
-                     `— সূরা ${surahName} (আয়াত ${toBnNum(ayahNum)}), পৃষ্ঠা ${toBnNum(pageNum)}\n` +
+                     `[সূরা ${surahName}, আয়াত ${toBnNum(ayahNum)}, পৃষ্ঠা ${toBnNum(pageNum)}]\n` +
                      `আল-কুরআন (১৫ লাইন হাফেজী)`;
         executeOfflineShare({
           title: `${tafsirLabel} - সূরা ${surahName} আয়াত ${toBnNum(ayahNum)}`,

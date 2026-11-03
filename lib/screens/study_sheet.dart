@@ -332,7 +332,7 @@ class _StudySheetState extends State<StudySheet> {
                                         : (ayah.translationTaisirul ?? '');
                                     final text = '﴿ ' + ayah.textIndopak + ' ﴾\n\n' +
                                         'বাংলা অর্থ:\n"' + bnText + '"\n\n' +
-                                        '— সূরা ' + widget.surah.nameBengali + ' (আয়াত ' + ayah.ayahNumber.toString() + ')\n' +
+                                        '[সূরা ' + widget.surah.nameBengali + ', আয়াত ' + ayah.ayahNumber.toString() + ']\n' +
                                         'আল-কুরআন (১৫ লাইন হাফেজী)';
                                     Share.share(text);
                                   },
@@ -427,7 +427,7 @@ class _StudySheetState extends State<StudySheet> {
                               ),
                               const SizedBox(height: 6),
                               Text(
-                                _selectedTranslation == 'taisirul' ? '— তাইসীরুল কুরআন' : '— ড. আবু বকর যাকারিয়া',
+                                _selectedTranslation == 'taisirul' ? '(তাইসীরুল কুরআন)' : '(ড. আবু বকর যাকারিয়া)',
                                 style: GoogleFonts.notoSansBengali(
                                   fontSize: 11,
                                   color: Colors.grey[600],
