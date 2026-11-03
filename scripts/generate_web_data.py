@@ -1,8 +1,22 @@
 import sqlite3
 import json
 import os
+import sys
 
-con = sqlite3.connect('data/quran_imdadia.db')
+db_path = 'data/quran_imdadia.db'
+if not os.path.exists(db_path):
+    print(f'Error: Database file not found at {db_path}')
+    sys.exit(1)
+
+with open(db_path, 'rb') as f:
+    header = f.read(16)
+
+if not header.startswith(b'SQLite format 3'):
+    print(f'Notice: {db_path} is an LFS pointer text file (not checked out with Git LFS).')
+    print('Static web data is already up-to-date in repository. Skipping generation safely.')
+    sys.exit(0)
+
+con = sqlite3.connect(db_path)
 cur = con.cursor()
 
 # 1. Surahs
