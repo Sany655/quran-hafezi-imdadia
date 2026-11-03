@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes, viewport-fit=cover">
-  <title>কুরআন মাজীদ (১৫ লাইন হাফেজী) | Quran - For huffaz</title>
+  <title>আল-কুরআন</title>
   <meta name="description" content="১৫ লাইনের খাঁটি ইমদাদিয়া হাফেজী কোরআন শরীফ। বাংলা অনুবাদ ও শব্দার্থ সহ বিজ্ঞাপনমুক্ত সাদাকায়ে জারিয়া ওয়েব অ্যাপ।">
   
   <!-- PWA & Mobile Web App Meta -->
@@ -11,7 +11,7 @@
   <meta name="theme-color" content="#064e3b">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Quran Huffaz">
+  <meta name="apple-mobile-web-app-title" content="আল-কুরআন">
   <link rel="apple-touch-icon" href="assets/app_icon.png">
   <link rel="icon" type="image/png" href="assets/app_icon.png">
 
@@ -1275,7 +1275,7 @@
             </div>
             <div class="flex items-center gap-1.5">
               ${isFirstVerse ? `<span class="text-[10px] bg-emerald-700 text-white px-2 py-0.5 rounded-full font-bold">পৃষ্ঠার শুরু</span>` : isPageVerse ? `<span class="text-[10px] bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 px-2 py-0.5 rounded-full">পৃষ্ঠা ${currentPage}</span>` : ''}
-              <button onclick="shareVerse('${surahName || (pageMap[currentPage] && pageMap[currentPage].sn) || "কুরআন মাজীদ"}', ${a.a}, ${currentPage}, ${encodeURIComponent(JSON.stringify(a.ar))}, ${encodeURIComponent(JSON.stringify(a.bn_t || ''))})" class="p-1 rounded-lg text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-slate-700 transition" title="আয়াত শেয়ার করুন">
+              <button onclick="shareVerse('${surahName || (pageMap[currentPage] && pageMap[currentPage].sn) || "আল-কুরআন"}', ${a.a}, ${currentPage}, ${encodeURIComponent(JSON.stringify(a.ar))}, ${encodeURIComponent(JSON.stringify(a.bn_t || ''))})" class="p-1 rounded-lg text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-slate-700 transition" title="আয়াত শেয়ার করুন">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
               </button>
             </div>
@@ -1308,7 +1308,7 @@
               <span class="text-[10px] sm:text-xs bg-emerald-800 text-emerald-100 px-2.5 py-0.5 rounded-full font-medium">
                 ${tafsirLabel}
               </span>
-              <button onclick="shareTafsir('${surahName || (pageMap[currentPage] && pageMap[currentPage].sn) || "কুরআন মাজীদ"}', ${a}, ${currentPage}, ${encodeURIComponent(JSON.stringify(textAr))}, '${tafsirLabel}', ${encodeURIComponent(JSON.stringify(tafsirText || ''))})" class="p-1 rounded-lg text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-slate-700 transition" title="তাফসীর শেয়ার করুন">
+              <button onclick="shareTafsir('${surahName || (pageMap[currentPage] && pageMap[currentPage].sn) || "আল-কুরআন"}', ${a}, ${currentPage}, ${encodeURIComponent(JSON.stringify(textAr))}, '${tafsirLabel}', ${encodeURIComponent(JSON.stringify(tafsirText || ''))})" class="p-1 rounded-lg text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-slate-700 transition" title="তাফসীর শেয়ার করুন">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
               </button>
             </div>
@@ -1545,14 +1545,14 @@
     const sharePageBtn = document.getElementById('sharePageBtn');
     if (sharePageBtn) {
       sharePageBtn.addEventListener('click', () => {
-        const info = pageMap[currentPage] || { sn: 'কুরআন মাজীদ', j: 1 };
-        const text = `📖 কুরআন মাজীদ (১৫ লাইন হাফেজী)\n` +
+        const info = pageMap[currentPage] || { sn: 'আল-কুরআন', j: 1 };
+        const text = `📖 আল-কুরআন\n` +
                      `• পৃষ্ঠা: ${toBnNum(currentPage)}\n` +
                      `• পারা: ${toBnNum(info.j || 1)}\n` +
                      `• সূরা: ${info.sn || ''}\n\n` +
                      `https://sany655.github.io/quran-hafezi-imdadia/reader.html#${currentPage}`;
         executeOfflineShare({
-          title: `কুরআন মাজীদ - পৃষ্ঠা ${toBnNum(currentPage)}`,
+          title: `আল-কুরআন - পৃষ্ঠা ${toBnNum(currentPage)}`,
           text: text
         });
       });
@@ -1565,7 +1565,7 @@
         const text = `﴿ ${arText} ﴾\n\n` +
                      `বাংলা অর্থ (তাইসীরুল কুরআন):\n"${bnText}"\n\n` +
                      `[সূরা ${surahName}, আয়াত ${toBnNum(ayahNum)}, পৃষ্ঠা ${toBnNum(pageNum)}]\n` +
-                     `আল-কুরআন (১৫ লাইন হাফেজী)`;
+                     `আল-কুরআন`;
         executeOfflineShare({
           title: `সূরা ${surahName} - আয়াত ${toBnNum(ayahNum)}`,
           text: text
@@ -1582,7 +1582,7 @@
         const text = `﴿ ${arText} ﴾\n\n` +
                      `📖 ${tafsirLabel}:\n${tafsirContent}\n\n` +
                      `[সূরা ${surahName}, আয়াত ${toBnNum(ayahNum)}, পৃষ্ঠা ${toBnNum(pageNum)}]\n` +
-                     `আল-কুরআন (১৫ লাইন হাফেজী)`;
+                     `আল-কুরআন`;
         executeOfflineShare({
           title: `${tafsirLabel} - সূরা ${surahName} আয়াত ${toBnNum(ayahNum)}`,
           text: text

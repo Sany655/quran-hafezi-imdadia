@@ -1,6 +1,6 @@
 {
-  "name": "Quran - For huffaz (১৫ লাইন হাফেজী কুরআন)",
-  "short_name": "Quran Huffaz",
+  "name": "আল-কুরআন",
+  "short_name": "আল-কুরআন",
   "description": "১৫ লাইন হাফেজী কোরআন শরীফ (ইমদাদিয়া লাইব্রেরী প্রিন্ট), বাংলা অনুবাদ ও শব্দার্থ সহ বিজ্ঞাপনমুক্ত সাদাকায়ে জারিয়া অ্যাপ।",
   "start_url": "./index.html",
   "scope": "./",
@@ -8,7 +8,11 @@
   "background_color": "#fdfbf7",
   "theme_color": "#064e3b",
   "orientation": "portrait-primary",
-  "categories": ["books", "education", "lifestyle"],
+  "categories": [
+    "books",
+    "education",
+    "lifestyle"
+  ],
   "icons": [
     {
       "src": "assets/app_icon.png",

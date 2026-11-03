@@ -344,11 +344,11 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
                     final s = _getCurrentSurah(_currentPage);
                     final sname = s?.nameBn ?? 'সূরা';
                     final juzNum = _getCurrentJuz(_currentPage);
-                    final text = '📖 কুরআন মাজীদ (১৫ লাইন হাফেজী)\n'
+                    final text = '📖 আল-কুরআন\n'
                         '• পৃষ্ঠা: ' + _currentPage.toString() + '\n'
                         '• পারা: ' + juzNum.toString() + '\n'
                         '• সূরা: ' + sname + '\n\n'
-                        'আল-কুরআন (১৫ লাইন হাফেজী)';
+                        'আল-কুরআন';
                     Share.share(text);
                   },
                 ),

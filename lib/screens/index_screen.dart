@@ -146,7 +146,7 @@ class _IndexScreenState extends State<IndexScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'Quran - For huffaz',
+            'আল-কুরআন',
             style: GoogleFonts.notoSansBengali(fontWeight: FontWeight.bold, fontSize: 18),
           ),
           backgroundColor: const Color(0xFF0F5132),

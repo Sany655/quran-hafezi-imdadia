@@ -13,7 +13,7 @@ class QuranApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Quran - For huffaz',
+      title: 'আল-কুরআন',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,

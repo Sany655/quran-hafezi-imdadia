@@ -333,7 +333,7 @@ class _StudySheetState extends State<StudySheet> {
                                     final text = '﴿ ' + ayah.textIndopak + ' ﴾\n\n' +
                                         'বাংলা অর্থ:\n"' + bnText + '"\n\n' +
                                         '[সূরা ' + widget.surah.nameBengali + ', আয়াত ' + ayah.ayahNumber.toString() + ']\n' +
-                                        'আল-কুরআন (১৫ লাইন হাফেজী)';
+                                        'আল-কুরআন';
                                     Share.share(text);
                                   },
                                 ),
