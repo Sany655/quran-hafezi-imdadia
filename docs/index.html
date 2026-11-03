@@ -107,9 +107,6 @@
 </head>
 <body class="bg-parchment-light dark:bg-parchment-dark text-slate-800 dark:text-slate-100 font-sans antialiased selection:bg-emerald-500 selection:text-white transition-colors duration-300">
 
-  <!-- Audio element for page flips -->
-  <audio id="flipAudio" src="assets/flipsound.mp3" preload="auto"></audio>
-
   <!-- Islamic Geometric Ambient Header Strip -->
   <div class="h-2 w-full bg-gradient-to-r from-emerald-800 via-gold-500 to-emerald-800"></div>
 
@@ -908,20 +905,13 @@
     const pageNumberDisplay = document.getElementById('pageNumberDisplay');
     const prevPageBtn = document.getElementById('prevPageBtn');
     const nextPageBtn = document.getElementById('nextPageBtn');
-    const flipAudio = document.getElementById('flipAudio');
 
-    function playFlipSound() {
-      try {
-        flipAudio.currentTime = 0;
-        flipAudio.play().catch(() => {});
-      } catch (err) {}
-    }
+    function playFlipSound() {}
 
     function renderPreviewPage(num) {
       if (num < 1) num = 1;
       if (num > 612) num = 612;
       currentPreviewPage = num;
-      playFlipSound();
 
       const pad = String(num).padStart(3, '0');
       const targetSrc = `pages/page_${pad}.jpg`;

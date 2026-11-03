@@ -83,9 +83,6 @@
 </head>
 <body class="h-full bg-parchment-paper dark:bg-parchment-dark text-slate-800 dark:text-slate-100 font-sans flex flex-col overflow-hidden transition-colors duration-200">
 
-  <!-- Audio flip element -->
-  <audio id="flipAudio" src="assets/flipsound.mp3" preload="auto"></audio>
-
   <!-- Top App Bar -->
   <header id="topAppBar" class="flex-none bg-emerald-900/95 dark:bg-slate-950/95 text-white backdrop-blur border-b border-emerald-800/80 px-3 sm:px-6 py-2.5 flex items-center justify-between z-30 transition-transform duration-300">
     
@@ -377,7 +374,6 @@
     const mushafImage = document.getElementById('mushafImage');
     const pageLoadingSpinner = document.getElementById('pageLoadingSpinner');
     const flipFlash = document.getElementById('flipFlash');
-    const flipAudio = document.getElementById('flipAudio');
     const goldenRibbon = document.getElementById('goldenRibbon');
     const bookmarkIcon = document.getElementById('bookmarkIcon');
     const headerSurahTitle = document.getElementById('headerSurahTitle');
@@ -459,12 +455,7 @@
       updateResumeReadingBanner();
     }
 
-    function playSound() {
-      try {
-        flipAudio.currentTime = 0;
-        flipAudio.play().catch(() => {});
-      } catch (e) {}
-    }
+    function playSound() {}
 
     // Render Page
     function renderPage(pageNum, withAudio = true) {
@@ -472,7 +463,6 @@
       if (pageNum > totalPages) pageNum = totalPages;
       currentPage = pageNum;
 
-      if (withAudio) playSound();
 
       // Update Slider & Number Display
       pageSlider.value = currentPage;
