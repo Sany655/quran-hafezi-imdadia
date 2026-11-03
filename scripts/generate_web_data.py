@@ -125,6 +125,17 @@ for s in surahs:
     ).fetchall()
     trans_zakaria_map = {r[0]: r[1] for r in trans_zakaria_rows}
 
+    # Word-by-word data
+    wbw_rows = cur.execute(
+        "SELECT ayah_number, position, text_arabic, meaning_bn FROM words_wbw WHERE surah_id = ? ORDER BY ayah_number ASC, position ASC",
+        (sid,)
+    ).fetchall()
+    wbw_map = {}
+    for an, pos, ar_w, bn_w in wbw_rows:
+        if an not in wbw_map:
+            wbw_map[an] = []
+        wbw_map[an].append({'w': ar_w, 'm': bn_w or ''})
+
     ayahs_data = []
     for an, text_ar, p_num in ayah_rows:
         ayahs_data.append({
@@ -132,7 +143,8 @@ for s in surahs:
             'p': p_num,
             'ar': text_ar,
             'bn_t': trans_map.get(an, ''),
-            'bn_z': trans_zakaria_map.get(an, '')
+            'bn_z': trans_zakaria_map.get(an, ''),
+            'words': wbw_map.get(an, [])
         })
 
     surah_payload = {

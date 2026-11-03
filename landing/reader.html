@@ -301,13 +301,19 @@
         <button id="closeStudyBtn" class="p-2 rounded-lg hover:bg-emerald-800 text-emerald-200">✕</button>
       </div>
 
-      <!-- Scope Switcher: Tarjuma vs Tafsir -->
-      <div class="px-4 py-2 bg-emerald-950/80 border-b border-emerald-800/60 flex items-center gap-2">
-        <button id="studyTabScopeTarjuma" class="flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold bg-emerald-600 text-white shadow-sm transition">
-          পৃষ্ঠার অনুবাদ
-        </button>
-        <button id="studyTabScopeTafsir" class="flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 transition">
-          তাফসীর
+      <!-- Scope Switcher: Tarjuma vs Tafsir + WBW Toggle -->
+      <div class="px-4 py-2 bg-emerald-950/80 border-b border-emerald-800/60 flex items-center justify-between gap-2">
+        <div class="flex items-center gap-2 flex-1">
+          <button id="studyTabScopeTarjuma" class="flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold bg-emerald-600 text-white shadow-sm transition">
+            পৃষ্ঠার অনুবাদ
+          </button>
+          <button id="studyTabScopeTafsir" class="flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 transition">
+            তাফসীর
+          </button>
+        </div>
+        <button id="toggleWbwBtn" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-emerald-900/90 hover:bg-emerald-800 text-gold-300 border border-emerald-700/60 transition shrink-0" title="শব্দে শব্দে অনুবাদ চালু বা বন্ধ করুন">
+          <span>শব্দার্থ</span>
+          <span id="wbwBadge" class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-600 text-white font-mono">চালু</span>
         </button>
       </div>
 
@@ -825,11 +831,27 @@
     const tafsirSourceBar = document.getElementById('tafsirSourceBar');
     const tafsirBtnAB = document.getElementById('tafsirBtnAB');
     const tafsirBtnIK = document.getElementById('tafsirBtnIK');
+    const toggleWbwBtn = document.getElementById('toggleWbwBtn');
+    const wbwBadge = document.getElementById('wbwBadge');
 
     let studyCurrentScope = 'tarjuma'; // 'tarjuma' or 'tafsir'
     let selectedTafsirSource = 'ab'; // 'ab' (Ahsanul Bayaan) or 'ik' (Ibn Kathir)
+    let showWordByWord = (localStorage.getItem('quran_show_wbw') !== 'false'); // default true
     const surahDataCache = {};
     const pageTafsirCache = {};
+
+    function updateWbwButtonUI() {
+      if (toggleWbwBtn && wbwBadge) {
+        if (showWordByWord) {
+          wbwBadge.textContent = 'চালু';
+          wbwBadge.className = 'text-[10px] px-1.5 py-0.5 rounded bg-emerald-600 text-white font-mono';
+        } else {
+          wbwBadge.textContent = 'বন্ধ';
+          wbwBadge.className = 'text-[10px] px-1.5 py-0.5 rounded bg-slate-700 text-slate-300 font-mono';
+        }
+        toggleWbwBtn.style.display = (studyCurrentScope === 'tarjuma') ? 'flex' : 'none';
+      }
+    }
 
     async function fetchSurah(sId) {
       if (surahDataCache[sId]) return surahDataCache[sId];
@@ -850,6 +872,17 @@
     }
 
     function renderAyahCard(a, surahName, isFirstVerse, isPageVerse) {
+      const wordsHtml = (showWordByWord && a.words && a.words.length > 0) ? `
+        <div class="flex flex-wrap flex-row-reverse justify-start gap-1.5 sm:gap-2 my-3 p-2.5 sm:p-3 bg-emerald-50/70 dark:bg-emerald-950/40 rounded-xl border border-emerald-200/60 dark:border-emerald-800/60">
+          ${a.words.map(w => `
+            <div class="flex flex-col items-center justify-center px-2 py-1.5 bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 shadow-xs min-w-[48px]">
+              <span class="arabic-text text-base sm:text-lg font-bold text-emerald-950 dark:text-emerald-200 leading-tight mb-0.5">${w.w}</span>
+              <span class="text-[10px] sm:text-[11px] text-slate-600 dark:text-slate-300 font-bengali text-center leading-tight whitespace-nowrap">${w.m}</span>
+            </div>
+          `).join('')}
+        </div>
+      ` : '';
+
       return `
         <div id="study-ayah-${a.a}" class="p-3.5 rounded-2xl transition duration-200 ${
           isFirstVerse
@@ -865,10 +898,11 @@
             </div>
             ${isFirstVerse ? `<span class="text-[10px] bg-emerald-700 text-white px-2 py-0.5 rounded-full font-bold">পৃষ্ঠার শুরু</span>` : isPageVerse ? `<span class="text-[10px] bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 px-2 py-0.5 rounded-full">পৃষ্ঠা ${currentPage}</span>` : ''}
           </div>
-          <div class="arabic-text text-xl sm:text-2xl font-bold text-slate-900 dark:text-emerald-200 text-right leading-loose mb-3">
+          <div class="arabic-text text-xl sm:text-2xl font-bold text-slate-900 dark:text-emerald-200 text-right leading-loose mb-2">
             ${a.ar}
           </div>
-          <div class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-bengali">
+          ${wordsHtml}
+          <div class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-bengali mt-2">
             <strong>তাইসীরুল কুরআন:</strong> ${a.bn_t || 'অনুবাদ সংরক্ষিত হচ্ছে'}
           </div>
           ${a.bn_z ? `
@@ -910,6 +944,8 @@
       const endAyah = info.end_ayah || startAyah;
       const pageVerses = info.verses || [];
 
+      updateWbwButtonUI();
+
       // Update tabs UI
       if (studyCurrentScope === 'tarjuma') {
         studyTabScopeTarjuma.className = 'flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold bg-emerald-600 text-white shadow-sm transition';
@@ -936,7 +972,7 @@
       studyAyahsContainer.innerHTML = `
         <div class="text-center py-10">
           <div class="w-8 h-8 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin mx-auto"></div>
-          <p class="text-xs text-slate-500 mt-2">${studyCurrentScope === 'tarjuma' ? 'অনুবাদ লোড হচ্ছে...' : 'তাফসীর লোড হচ্ছে...'}</p>
+          <p class="text-xs text-slate-500 mt-2">${studyCurrentScope === 'tarjuma' ? 'অনুবাদ ও শব্দার্থ লোড হচ্ছে...' : 'তাফসীর লোড হচ্ছে...'}</p>
         </div>
       `;
 
@@ -1023,6 +1059,15 @@
         studyModalContent.classList.remove('translate-y-full');
       }, 10);
       renderStudyContent();
+    }
+
+    if (toggleWbwBtn) {
+      toggleWbwBtn.addEventListener('click', () => {
+        showWordByWord = !showWordByWord;
+        localStorage.setItem('quran_show_wbw', showWordByWord);
+        updateWbwButtonUI();
+        renderStudyContent();
+      });
     }
 
     if (studyTabScopeTarjuma) {
