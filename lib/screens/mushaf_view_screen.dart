@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:share_plus/share_plus.dart';
 import '../database/quran_db_helper.dart';
 import '../models/surah.dart';
 import 'study_sheet.dart';
@@ -335,6 +336,21 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
                   ),
                   tooltip: _isBookmarked ? 'বুকমার্ক সরানো' : 'বুকমার্ক করা',
                   onPressed: _promptBookmarkDialog,
+                ),
+                IconButton(
+                  icon: const Icon(Icons.share),
+                  tooltip: 'পৃষ্ঠা শেয়ার করুন',
+                  onPressed: () {
+                    final s = _getCurrentSurah(_currentPage);
+                    final sname = s?.nameBn ?? 'সূরা';
+                    final juzNum = _getCurrentJuz(_currentPage);
+                    final text = '📖 কুরআন মাজীদ (১৫ লাইন হাফেজী)\n'
+                        '• পৃষ্ঠা: ' + _currentPage.toString() + '\n'
+                        '• পারা: ' + juzNum.toString() + '\n'
+                        '• সূরা: ' + sname + '\n\n'
+                        'আল-কুরআন (১৫ লাইন হাফেজী)';
+                    Share.share(text);
+                  },
                 ),
                 IconButton(
                   icon: const Icon(Icons.search),

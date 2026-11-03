@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:share_plus/share_plus.dart';
 import '../models/ayah.dart';
 import '../models/surah.dart';
 import '../database/quran_db_helper.dart';
@@ -319,17 +320,36 @@ class _StudySheetState extends State<StudySheet> {
                                   ],
                                 ],
                               ),
-                            TextButton.icon(
-                              icon: const Icon(Icons.menu_book, size: 16, color: Color(0xFF0F5132)),
-                              label: Text(
-                                'তাফসীর',
-                                style: GoogleFonts.notoSansBengali(
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.bold,
-                                  color: const Color(0xFF0F5132),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.share, size: 18, color: Color(0xFF0F5132)),
+                                  tooltip: 'আয়াত শেয়ার করুন',
+                                  onPressed: () {
+                                    final bnText = _selectedTranslation == 'zakaria'
+                                        ? (ayah.translationZakaria ?? ayah.translationTaisirul ?? '')
+                                        : (ayah.translationTaisirul ?? '');
+                                    final text = '﴿ ' + ayah.textIndopak + ' ﴾\n\n' +
+                                        'বাংলা অর্থ:\n"' + bnText + '"\n\n' +
+                                        '— সূরা ' + widget.surah.nameBengali + ' (আয়াত ' + ayah.ayahNumber.toString() + ')\n' +
+                                        'আল-কুরআন (১৫ লাইন হাফেজী)';
+                                    Share.share(text);
+                                  },
                                 ),
-                              ),
-                              onPressed: () => _showTafsirModal(context, ayah),
+                                TextButton.icon(
+                                  icon: const Icon(Icons.menu_book, size: 16, color: Color(0xFF0F5132)),
+                                  label: Text(
+                                    'তাফসীর',
+                                    style: GoogleFonts.notoSansBengali(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: const Color(0xFF0F5132),
+                                    ),
+                                  ),
+                                  onPressed: () => _showTafsirModal(context, ayah),
+                                ),
+                              ],
                             ),
                           ],
                         ),
