@@ -123,13 +123,16 @@ Integrity of Quranic text is paramount. For detailed records of dataset origin, 
 
 ---
 
-## 🤲 Du'a (দোয়া)
+## 🤲 Du'a & Acknowledgments (দোয়া ও কৃতজ্ঞতা)
 
 <p align="center">
   <b style="font-size: 1.5rem; color: #059669;">رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ</b><br>
   <i>“Our Lord, accept this from us. Indeed You are the Hearing, the Knowing.”</i><br>
   <b>[Surah Al-Baqarah 2:127]</b>
 </p>
+
+### Special Acknowledgments & Community Du'a
+We extend our heartfelt gratitude and prayers to all pioneering Islamic scholars, calligraphers, the Tanzil Project, Quran.com, and dedicated open-source Muslim developers whose foundational preservation efforts made this digital Sadaqah Jariyah possible. May Allah Subhanahoo wa Ta'ala accept all their endeavors and grant them the highest reward in this world and the Akhirah. আমীন।
 
 ---
 
