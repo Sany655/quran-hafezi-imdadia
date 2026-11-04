@@ -4,7 +4,34 @@ import 'package:path_provider/path_provider.dart';
 import '../models/planner_model.dart';
 import '../utils/tri_calendar_helper.dart';
 
+class KhatamStats {
+  final int totalPagesRead;
+  final int totalQuranPages;
+  final double percent;
+  final int remainingPages;
+  final double remainingParas;
+  final int completedDays;
+  final int targetDays;
+  final int dailyRequiredPages;
+  final bool isCompleted;
+
+  KhatamStats({
+    required this.totalPagesRead,
+    this.totalQuranPages = 612,
+    required this.percent,
+    required this.remainingPages,
+    required this.remainingParas,
+    required this.completedDays,
+    required this.targetDays,
+    required this.dailyRequiredPages,
+    required this.isCompleted,
+  });
+}
+
 class PlannerService {
+  static const int totalQuranPages = 612;
+  static const int pagesPerPara = 20;
+
   static final PlannerService instance = PlannerService._internal();
   PlannerService._internal();
 
@@ -137,6 +164,52 @@ class PlannerService {
     return all;
   }
 
+  KhatamStats calculateKhatamStats(PlannerModel model) {
+    int totalPages = 0;
+    int completedDaysCount = 0;
+
+    model.logs.forEach((dateKey, dayLog) {
+      final pPages = (dayLog.totalDayPages > 0)
+          ? dayLog.totalDayPages
+          : (dayLog.parasRead * pagesPerPara) + dayLog.pagesRead;
+
+      final actualPages = (pPages > 0)
+          ? pPages
+          : ((dayLog.status == 'completed' && dayLog.pagesCount > 0) ? dayLog.pagesCount : 0);
+
+      if (actualPages > 0) {
+        totalPages += actualPages;
+      }
+
+      if (dayLog.status == 'completed' || actualPages > 0) {
+        completedDaysCount++;
+      }
+    });
+
+    final targetDays = model.targetDays > 0 ? model.targetDays : 30;
+    final clampedRead = totalPages.clamp(0, totalQuranPages);
+    final percent = (totalPages >= totalQuranPages)
+        ? 100.0
+        : (clampedRead / totalQuranPages) * 100.0;
+    final remainingPages = (totalQuranPages - clampedRead).clamp(0, totalQuranPages);
+    final remainingParas = remainingPages / pagesPerPara.toDouble();
+    final daysLeft = (targetDays - completedDaysCount).clamp(1, targetDays);
+    final dailyRequired = (remainingPages > 0) ? (remainingPages / daysLeft).ceil() : 0;
+    final isCompleted = totalPages >= totalQuranPages;
+
+    return KhatamStats(
+      totalPagesRead: totalPages,
+      totalQuranPages: totalQuranPages,
+      percent: percent,
+      remainingPages: remainingPages,
+      remainingParas: remainingParas,
+      completedDays: completedDaysCount,
+      targetDays: targetDays,
+      dailyRequiredPages: dailyRequired,
+      isCompleted: isCompleted,
+    );
+  }
+
   Future<void> generatePlan({
     required String mode,
     required int targetDays,
@@ -144,104 +217,64 @@ class PlannerService {
     required DateTime startDate,
   }) async {
     final model = await getPlannerData();
-    model.targetDays = targetDays;
+    final validTargetDays = targetDays > 0 ? targetDays : 30;
+    final validStartPara = (startPara >= 1 && startPara <= 30) ? startPara : 1;
+    model.targetDays = validTargetDays;
 
-    if (mode == 'general') {
-      int currPara = startPara;
-      DateTime d = DateTime(startDate.year, startDate.month, startDate.day);
+    final startPageOffset = (validStartPara - 1) * pagesPerPara;
+    DateTime d = DateTime(startDate.year, startDate.month, startDate.day);
 
-      for (int i = 0; i < targetDays; i++) {
-        final dKey = TriCalendarHelper.formatDateKey(d);
-        if (!model.logs.containsKey(dKey)) {
-          model.logs[dKey] = DayLog();
-        }
+    for (int i = 0; i < validTargetDays; i++) {
+      final dKey = TriCalendarHelper.formatDateKey(d);
+      if (!model.logs.containsKey(dKey)) {
+        model.logs[dKey] = DayLog();
+      }
 
-        String planText = '';
-        int pCount = 20;
-        if (targetDays == 30) {
-          final p1 = ((currPara - 1) % 30) + 1;
-          planText = 'পারা ${TriCalendarHelper.toBnNum(p1)} (প্রতিদিন ১ পারা)';
-          pCount = 20;
-          currPara += 1;
-        } else if (targetDays == 60) {
-          final p1 = (((i ~/ 2) + startPara - 1) % 30) + 1;
-          final part = (i % 2 == 0) ? '১ম অর্ধেক (১০ পৃষ্ঠা)' : '২য় অর্ধেক (১০ পৃষ্ঠা)';
-          planText = 'পারা ${TriCalendarHelper.toBnNum(p1)} ($part)';
-          pCount = 10;
-        } else if (targetDays == 90) {
-          final pg1 = ((i * 7) % 612) + 1;
-          final pg2 = (pg1 + 6 > 612) ? 612 : pg1 + 6;
-          planText = 'পৃষ্ঠা ${TriCalendarHelper.toBnNum(pg1)} থেকে ${TriCalendarHelper.toBnNum(pg2)}';
-          pCount = 7;
-        } else if (targetDays == 120) {
-          final pg1 = ((i * 5) % 612) + 1;
-          final pg2 = (pg1 + 4 > 612) ? 612 : pg1 + 4;
-          planText = 'পৃষ্ঠা ${TriCalendarHelper.toBnNum(pg1)} থেকে ${TriCalendarHelper.toBnNum(pg2)}';
-          pCount = 5;
-        } else if (targetDays == 365) {
-          final pg1 = (i * 1.67).floor() + 1;
-          final pg2 = (((i + 1) * 1.67).floor() > 612) ? 612 : ((i + 1) * 1.67).floor();
-          planText = (pg1 == pg2)
-              ? 'পৃষ্ঠা ${TriCalendarHelper.toBnNum(pg1)}'
-              : 'পৃষ্ঠা ${TriCalendarHelper.toBnNum(pg1)} - ${TriCalendarHelper.toBnNum(pg2)}';
-          pCount = 2;
-        } else {
-          final p1 = ((currPara - 1) % 30) + 1;
-          planText = 'পারা ${TriCalendarHelper.toBnNum(p1)}';
-          pCount = 20;
-          currPara += 1;
-        }
+      final rawP1 = ((i * totalQuranPages) ~/ validTargetDays);
+      final rawP2 = (((i + 1) * totalQuranPages) ~/ validTargetDays);
 
+      final p1 = ((rawP1 + startPageOffset) % totalQuranPages) + 1;
+      var p2 = ((rawP2 + startPageOffset - 1) % totalQuranPages) + 1;
+      if (rawP2 - rawP1 == 0) p2 = p1;
+
+      final startParaNum = ((p1 - 1) ~/ pagesPerPara) + 1;
+      final endParaNum = ((p2 - 1) ~/ pagesPerPara) + 1;
+
+      String planText;
+      if (p1 == p2) {
+        planText = 'পৃষ্ঠা ${TriCalendarHelper.toBnNum(p1)} (পারা ${TriCalendarHelper.toBnNum(startParaNum)})';
+      } else if (startParaNum == endParaNum) {
+        planText = 'পৃষ্ঠা ${TriCalendarHelper.toBnNum(p1)} থেকে ${TriCalendarHelper.toBnNum(p2)} (পারা ${TriCalendarHelper.toBnNum(startParaNum)})';
+      } else {
+        planText = 'পৃষ্ঠা ${TriCalendarHelper.toBnNum(p1)} থেকে ${TriCalendarHelper.toBnNum(p2)} (পারা ${TriCalendarHelper.toBnNum(startParaNum)} - ${TriCalendarHelper.toBnNum(endParaNum)})';
+      }
+
+      final dayPages = (rawP2 - rawP1 > 0) ? (rawP2 - rawP1) : 1;
+
+      if (mode == 'general') {
         model.logs[dKey]!.generalTilawat = planText;
         model.logs[dKey]!.dourPara = planText;
-        model.logs[dKey]!.pagesCount = pCount;
+        model.logs[dKey]!.pagesCount = dayPages;
         model.logs[dKey]!.status ??= 'pending';
-
-        d = d.add(const Duration(days: 1));
-      }
-    } else {
-      // Hafiz and Student Dour cycle
-      int currPara = startPara;
-      DateTime d = DateTime(startDate.year, startDate.month, startDate.day);
-
-      for (int i = 0; i < targetDays; i++) {
-        final dKey = TriCalendarHelper.formatDateKey(d);
-        if (!model.logs.containsKey(dKey)) {
-          model.logs[dKey] = DayLog();
-        }
-
-        String paraText = '';
-        if (targetDays == 7) {
-          final p1 = ((currPara - 1) % 30) + 1;
-          final p4 = ((currPara + 3) % 30) + 1;
-          paraText = 'পারা ${TriCalendarHelper.toBnNum(p1)} থেকে ${TriCalendarHelper.toBnNum(p4)} (৪-৫ পারা)';
-          currPara += 4;
-        } else if (targetDays == 10) {
-          final p1 = ((currPara - 1) % 30) + 1;
-          final p2 = (currPara % 30) + 1;
-          final p3 = ((currPara + 1) % 30) + 1;
-          paraText = 'পারা ${TriCalendarHelper.toBnNum(p1)}, ${TriCalendarHelper.toBnNum(p2)} ও ${TriCalendarHelper.toBnNum(p3)}';
-          currPara += 3;
-        } else if (targetDays == 15) {
-          final p1 = ((currPara - 1) % 30) + 1;
-          final p2 = (currPara % 30) + 1;
-          paraText = 'পারা ${TriCalendarHelper.toBnNum(p1)} ও ${TriCalendarHelper.toBnNum(p2)}';
-          currPara += 2;
-        } else if (targetDays == 20) {
-          final p1 = ((currPara - 1) % 30) + 1;
-          paraText = (i % 2 == 0) ? 'পারা ${TriCalendarHelper.toBnNum(p1)} (১ম অংশ)' : 'পারা ${TriCalendarHelper.toBnNum(p1)} (২য় অংশ)';
-          if (i % 2 == 1) currPara += 1;
+      } else if (mode == 'hafiz') {
+        final pStartPara = (((i * 30) ~/ validTargetDays) + validStartPara - 1) % 30 + 1;
+        final pEndPara = ((((i + 1) * 30) ~/ validTargetDays) + validStartPara - 1) % 30 + 1;
+        String dourText;
+        if (pStartPara == pEndPara) {
+          dourText = 'পারা ${TriCalendarHelper.toBnNum(pStartPara)}';
         } else {
-          final p1 = ((currPara - 1) % 30) + 1;
-          paraText = 'পারা ${TriCalendarHelper.toBnNum(p1)}';
-          currPara += 1;
+          dourText = 'পারা ${TriCalendarHelper.toBnNum(pStartPara)} থেকে ${TriCalendarHelper.toBnNum(pEndPara)}';
         }
-
-        model.logs[dKey]!.dourPara = paraText;
+        model.logs[dKey]!.dourPara = dourText;
+        model.logs[dKey]!.pagesCount = dayPages;
         model.logs[dKey]!.status ??= 'pending';
-
-        d = d.add(const Duration(days: 1));
+      } else {
+        model.logs[dKey]!.sabak = planText;
+        model.logs[dKey]!.pagesCount = dayPages;
+        model.logs[dKey]!.status ??= 'pending';
       }
+
+      d = d.add(const Duration(days: 1));
     }
 
     await savePlannerData(model);

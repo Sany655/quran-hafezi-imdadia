@@ -5,6 +5,7 @@ import 'package:quran_hafezi_imdadia/models/ayah.dart';
 import 'package:quran_hafezi_imdadia/models/word_wbw.dart';
 import 'package:quran_hafezi_imdadia/models/bookmark.dart';
 import 'package:quran_hafezi_imdadia/models/planner_model.dart';
+import 'package:quran_hafezi_imdadia/services/planner_service.dart';
 import 'package:quran_hafezi_imdadia/utils/tri_calendar_helper.dart';
 
 void main() {
@@ -94,6 +95,52 @@ void main() {
       expect(restored.logs[dKey]?.status, 'completed');
       expect(restored.logs[dKey]?.notes.length, 1);
       expect(restored.logs[dKey]?.notes.first.text, 'তিলাওয়াত নোট');
+    });
+
+    test('Integer-based tilawat tracking and KhatamStats calculation work accurately', () {
+      final model = PlannerModel(profileMode: 'general', hijriOffset: 0, targetDays: 5);
+
+      // Day 1: 10 paras (200 pages)
+      model.logs['2026-11-01'] = DayLog(
+        parasRead: 10,
+        pagesRead: 0,
+        status: 'completed',
+      );
+      expect(model.logs['2026-11-01']!.totalDayPages, 200);
+
+      // Day 2: 0 paras, 5 pages
+      model.logs['2026-11-02'] = DayLog(
+        parasRead: 0,
+        pagesRead: 5,
+        status: 'completed',
+      );
+      expect(model.logs['2026-11-02']!.totalDayPages, 5);
+
+      // Verify serialization of integer fields
+      final map = model.toMap();
+      final restored = PlannerModel.fromMap(map);
+      expect(restored.logs['2026-11-01']?.parasRead, 10);
+      expect(restored.logs['2026-11-01']?.pagesRead, 0);
+      expect(restored.logs['2026-11-01']?.totalDayPages, 200);
+
+      expect(restored.logs['2026-11-02']?.parasRead, 0);
+      expect(restored.logs['2026-11-02']?.pagesRead, 5);
+      expect(restored.logs['2026-11-02']?.totalDayPages, 5);
+
+      // Calculate KhatamStats
+      final stats = PlannerService.instance.calculateKhatamStats(restored);
+      expect(stats.totalPagesRead, 205);
+      expect(stats.totalQuranPages, 612);
+      expect(stats.remainingPages, 407);
+      expect(stats.completedDays, 2);
+      expect(stats.targetDays, 5);
+      expect(stats.isCompleted, false);
+
+      // (205 / 612) * 100 = ~33.496%
+      expect(stats.percent, closeTo(33.496, 0.01));
+
+      // daysLeft = 5 - 2 = 3. dailyRequired = ceil(407 / 3) = 136 pages/day
+      expect(stats.dailyRequiredPages, 136);
     });
 
     test('Ayah and WordWbw relationships should attach properly', () {

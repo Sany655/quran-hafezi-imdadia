@@ -25,18 +25,27 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
 
   DateTime _selectedDate = DateTime.now();
 
-  // Inputs
+  // Integer trackers for Today's Focus
+  int _currentParasRead = 0;
+  int _currentPagesRead = 0;
+  final TextEditingController _parasController = TextEditingController(text: '0');
+  final TextEditingController _pagesController = TextEditingController(text: '0');
+
+  // Text inputs
   final TextEditingController _generalTilawatController = TextEditingController();
   final TextEditingController _hafizDourController = TextEditingController();
   final TextEditingController _studentSabakController = TextEditingController();
   final TextEditingController _studentSabkiController = TextEditingController();
   final TextEditingController _studentDourController = TextEditingController();
 
+  // Diary / Notes inputs
   final TextEditingController _notePageController = TextEditingController();
   final TextEditingController _noteTextController = TextEditingController();
 
+  // Roadmap inputs
   int _cycleTargetDays = 30;
   int _cycleStartPara = 1;
+  final TextEditingController _targetDaysController = TextEditingController(text: '30');
   String? _cycleSummary;
 
   @override
@@ -49,6 +58,8 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
   @override
   void dispose() {
     _tabController.dispose();
+    _parasController.dispose();
+    _pagesController.dispose();
     _generalTilawatController.dispose();
     _hafizDourController.dispose();
     _studentSabakController.dispose();
@@ -56,6 +67,7 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
     _studentDourController.dispose();
     _notePageController.dispose();
     _noteTextController.dispose();
+    _targetDaysController.dispose();
     super.dispose();
   }
 
@@ -65,6 +77,8 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
       setState(() {
         _plannerModel = model;
         _isLoading = false;
+        _cycleTargetDays = model.targetDays > 0 ? model.targetDays : 30;
+        _targetDaysController.text = _cycleTargetDays.toString();
         _updateSelectedDateControllers();
       });
     }
@@ -74,6 +88,12 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
     if (_plannerModel == null) return;
     final dateKey = TriCalendarHelper.formatDateKey(_selectedDate);
     final log = _plannerModel!.logs[dateKey] ?? DayLog();
+
+    _currentParasRead = log.parasRead.clamp(0, 30);
+    _currentPagesRead = log.pagesRead.clamp(0, 612);
+
+    _parasController.text = _currentParasRead.toString();
+    _pagesController.text = _currentPagesRead.toString();
 
     _generalTilawatController.text = log.generalTilawat ?? log.dourPara ?? '';
     _hafizDourController.text = log.dourPara ?? '';
@@ -89,6 +109,35 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
     });
   }
 
+  void _setParas(int value) {
+    final clamped = value.clamp(0, 30);
+    setState(() {
+      _currentParasRead = clamped;
+      _parasController.text = clamped.toString();
+    });
+  }
+
+  void _setPages(int value) {
+    final clamped = value.clamp(0, 612);
+    setState(() {
+      _currentPagesRead = clamped;
+      _pagesController.text = clamped.toString();
+    });
+  }
+
+  void _adjustParas(int delta) {
+    _setParas(_currentParasRead + delta);
+  }
+
+  void _adjustPages(int delta) {
+    _setPages(_currentPagesRead + delta);
+  }
+
+  void _resetTodayCounters() {
+    _setParas(0);
+    _setPages(0);
+  }
+
   void _toggleCurrentDayStatus() async {
     if (_plannerModel == null) return;
     final dateKey = TriCalendarHelper.formatDateKey(_selectedDate);
@@ -97,7 +146,7 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
     final newStatus = (currentStatus == 'completed') ? 'pending' : 'completed';
     log.status = newStatus;
     await PlannerService.instance.saveDayLog(dateKey, log);
-    setState(() {});
+    await _loadData();
     _showSnack(
       newStatus == 'completed'
           ? 'আলহামদুলিল্লাহ! পড়া সম্পন্ন চিহ্নিত করা হয়েছে।'
@@ -105,36 +154,34 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
     );
   }
 
-  void _saveGeneralTilawat() async {
+  void _saveDayReading() async {
     final dateKey = TriCalendarHelper.formatDateKey(_selectedDate);
     final log = _plannerModel!.logs[dateKey] ?? DayLog();
-    log.generalTilawat = _generalTilawatController.text.trim();
-    log.status ??= 'completed';
-    await PlannerService.instance.saveDayLog(dateKey, log);
-    setState(() {});
-    _showSnack('তিলাওয়াত সংরক্ষিত হয়েছে!');
-  }
 
-  void _saveHafizDour() async {
-    final dateKey = TriCalendarHelper.formatDateKey(_selectedDate);
-    final log = _plannerModel!.logs[dateKey] ?? DayLog();
-    log.dourPara = _hafizDourController.text.trim();
-    log.status ??= 'completed';
-    await PlannerService.instance.saveDayLog(dateKey, log);
-    setState(() {});
-    _showSnack('আজকের দাওর সংরক্ষিত হয়েছে!');
-  }
+    final totalPages = (_currentParasRead * PlannerService.pagesPerPara) + _currentPagesRead;
 
-  void _saveStudentRoutine() async {
-    final dateKey = TriCalendarHelper.formatDateKey(_selectedDate);
-    final log = _plannerModel!.logs[dateKey] ?? DayLog();
-    log.sabak = _studentSabakController.text.trim();
-    log.sabki = _studentSabkiController.text.trim();
-    log.studentDour = _studentDourController.text.trim();
-    log.status ??= 'completed';
+    log.parasRead = _currentParasRead;
+    log.pagesRead = _currentPagesRead;
+    log.totalDayPages = totalPages;
+
+    if (totalPages > 0) {
+      log.status = 'completed';
+    }
+
+    final mode = _plannerModel?.profileMode ?? 'general';
+    if (mode == 'general') {
+      log.generalTilawat = _generalTilawatController.text.trim();
+    } else if (mode == 'hafiz') {
+      log.dourPara = _hafizDourController.text.trim();
+    } else {
+      log.sabak = _studentSabakController.text.trim();
+      log.sabki = _studentSabkiController.text.trim();
+      log.studentDour = _studentDourController.text.trim();
+    }
+
     await PlannerService.instance.saveDayLog(dateKey, log);
-    setState(() {});
-    _showSnack('শিক্ষার্থী রুটিন সংরক্ষিত হয়েছে!');
+    await _loadData();
+    _showSnack('আজকের তিলাওয়াত হিসেব সংরক্ষিত হয়েছে!');
   }
 
   void _addNote() async {
@@ -161,18 +208,30 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
     _showSnack('নোট মুছে ফেলা হয়েছে');
   }
 
+  void _setTargetDays(int days) {
+    final validDays = days.clamp(1, 1000);
+    setState(() {
+      _cycleTargetDays = validDays;
+      _targetDaysController.text = validDays.toString();
+    });
+  }
+
   void _generateCycle() async {
     final mode = _plannerModel?.profileMode ?? 'general';
+    final targetDays = int.tryParse(_targetDaysController.text.trim()) ?? _cycleTargetDays;
+    final validTargetDays = targetDays.clamp(1, 1000);
+
     await PlannerService.instance.generatePlan(
       mode: mode,
-      targetDays: _cycleTargetDays,
+      targetDays: validTargetDays,
       startPara: _cycleStartPara,
       startDate: _selectedDate,
     );
     await _loadData();
     setState(() {
+      _cycleTargetDays = validTargetDays;
       _cycleSummary =
-          'আলহামদুলিল্লাহ! আপনার নির্বাচন অনুযায়ী আগামী ${TriCalendarHelper.toBnNum(_cycleTargetDays)} দিনের রোডম্যাপ প্রস্তুত করা হয়েছে।';
+          'আলহামদুলিল্লাহ! আপনার নির্বাচন অনুযায়ী আগামী ${TriCalendarHelper.toBnNum(validTargetDays)} দিনের রোডম্যাপ প্রস্তুত করা হয়েছে।';
     });
     _showSnack('নতুন রোডম্যাপ তৈরি সম্পন্ন!');
   }
@@ -217,7 +276,6 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Header
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -243,7 +301,6 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
                     ),
                     const Divider(height: 20),
 
-                    // Profile Mode Selection
                     Text(
                       'আপনার প্রোফাইল মোড নির্ধারণ করুন:',
                       style: GoogleFonts.notoSansBengali(
@@ -254,7 +311,7 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
                     ),
                     const SizedBox(height: 8),
                     _buildModeTile(
-                      title: '🌿 সাধারণ তিলাওয়াতকারী',
+                      title: 'সাধারণ তিলাওয়াতকারী',
                       subtitle: 'দৈনিক তিলাওয়াত ও খতম প্ল্যানার',
                       value: 'general',
                       groupValue: selectedMode,
@@ -263,7 +320,7 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
                       },
                     ),
                     _buildModeTile(
-                      title: '📖 হিফজ শিক্ষার্থী',
+                      title: 'হিফজ শিক্ষার্থী',
                       subtitle: 'সবক, সবকি ও আমপারা রুটিন',
                       value: 'student',
                       groupValue: selectedMode,
@@ -272,7 +329,7 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
                       },
                     ),
                     _buildModeTile(
-                      title: '🌟 হুফ্ফাজ মোড',
+                      title: 'হুফ্ফাজ মোড',
                       subtitle: 'মঞ্জিল ও দাওর সাইকেল ট্র্যাকার',
                       value: 'hafiz',
                       groupValue: selectedMode,
@@ -282,7 +339,6 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
                     ),
                     const SizedBox(height: 16),
 
-                    // Reminder Setting
                     Text(
                       'দৈনিক তিলাওয়াত রিমাইন্ডার:',
                       style: GoogleFonts.notoSansBengali(
@@ -356,7 +412,6 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
                     ],
                     const SizedBox(height: 16),
 
-                    // Hijri Date Adjustment
                     Text(
                       'হিজরি তারিখ সমন্বয় (+/- দিন):',
                       style: GoogleFonts.notoSansBengali(
@@ -392,7 +447,6 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
                     ),
                     const SizedBox(height: 16),
 
-                    // Backup and Reset actions
                     Row(
                       children: [
                         Expanded(
@@ -438,7 +492,6 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
                     ),
                     const SizedBox(height: 20),
 
-                    // Save Button
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -565,7 +618,6 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
           preferredSize: const Size.fromHeight(84),
           child: Column(
             children: [
-              // Tri-Calendar Date Header
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
@@ -600,8 +652,6 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
                   ],
                 ),
               ),
-
-              // 3 Clean Tabs
               Container(
                 color: Colors.white,
                 child: TabBar(
@@ -613,9 +663,9 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
                   labelStyle: GoogleFonts.notoSansBengali(fontWeight: FontWeight.bold, fontSize: 13),
                   unselectedLabelStyle: GoogleFonts.notoSansBengali(fontSize: 12),
                   tabs: const [
-                    Tab(text: '🌿 আজকের ফোকাস'),
-                    Tab(text: '🎯 রোডম্যাপ ও প্ল্যান'),
-                    Tab(text: '📝 কুরআনিক ডায়েরি'),
+                    Tab(text: 'আজকের ফোকাস'),
+                    Tab(text: 'রোডম্যাপ ও প্ল্যান'),
+                    Tab(text: 'কুরআনিক ডায়েরি'),
                   ],
                 ),
               ),
@@ -642,14 +692,8 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
     final log = _plannerModel!.logs[dateKey] ?? DayLog();
     final isCompleted = log.status == 'completed';
 
-    // Calculate Khatam Progress (total completed days)
-    int completedDays = 0;
-    _plannerModel!.logs.forEach((k, v) {
-      if (v.status == 'completed') completedDays++;
-    });
-    final targetDays = _plannerModel!.targetDays > 0 ? _plannerModel!.targetDays : 30;
-    final progress = (completedDays / targetDays).clamp(0.0, 1.0);
-    final percentage = (progress * 100).toInt();
+    final stats = PlannerService.instance.calculateKhatamStats(_plannerModel!);
+    final totalDayPages = (_currentParasRead * PlannerService.pagesPerPara) + _currentPagesRead;
 
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
@@ -691,10 +735,10 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
                       children: [
                         Text(
                           mode == 'general'
-                              ? 'আজকের তিলাওয়াত'
+                              ? 'আজকের তিলাওয়াত হিসেব'
                               : mode == 'student'
-                                  ? 'আজকের সবক ও রুটিন'
-                                  : 'আজকের নির্ধারিত দাওর',
+                                  ? 'আজকের সবক ও পৃষ্ঠা হিসেব'
+                                  : 'আজকের দাওর ও পৃষ্ঠা হিসেব',
                           style: GoogleFonts.notoSansBengali(
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
@@ -713,69 +757,216 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
                         color: isCompleted ? const Color(0xFF0F5132) : Colors.grey[400],
                         size: 32,
                       ),
+                      tooltip: isCompleted ? 'পড়া সম্পন্ন' : 'অসম্পন্ন',
                       onPressed: _toggleCurrentDayStatus,
                     ),
                   ],
                 ),
                 const Divider(height: 20),
 
-                // Content depending on profile mode
-                if (mode == 'general') ...[
-                  Text(
-                    'নির্ধারিত অংশ / পৃষ্ঠা:',
-                    style: GoogleFonts.notoSansBengali(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey[700]),
+                // Integer Input: Paras & Pages
+                Text(
+                  'তিলাওয়াতকৃত পরিমাণ (পূর্ণাঙ্গ পৃষ্ঠা হিসেব):',
+                  style: GoogleFonts.notoSansBengali(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.grey[800],
                   ),
-                  const SizedBox(height: 6),
-                  TextField(
-                    controller: _generalTilawatController,
-                    decoration: InputDecoration(
-                      hintText: 'যেমন: পারা ১ অথবা পৃষ্ঠা ১ থেকে ২০',
-                      hintStyle: GoogleFonts.notoSansBengali(fontSize: 12, color: Colors.grey[400]),
-                      filled: true,
-                      fillColor: const Color(0xFFF8F9FA),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide(color: Colors.grey[300]!)),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-                    ),
-                    style: GoogleFonts.notoSansBengali(fontSize: 13),
-                  ),
-                  const SizedBox(height: 10),
-                  Row(
-                    children: [
-                      ElevatedButton.icon(
-                        icon: const Icon(Icons.save_rounded, size: 16),
-                        label: Text('সংরক্ষণ করুন', style: GoogleFonts.notoSansBengali(fontSize: 12, fontWeight: FontWeight.bold)),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF0F5132),
-                          foregroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                ),
+                const SizedBox(height: 10),
+
+                // Stepper Row: Paras & Pages
+                Row(
+                  children: [
+                    // Paras Counter
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFF8F9FA),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.grey[300]!),
                         ),
-                        onPressed: _saveGeneralTilawat,
+                        child: Column(
+                          children: [
+                            Text(
+                              'পারা (১ পারা = ২০ পৃষ্ঠা)',
+                              style: GoogleFonts.notoSansBengali(fontSize: 11, color: Colors.grey[700]),
+                            ),
+                            const SizedBox(height: 6),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                _buildStepperButton(
+                                  icon: Icons.remove,
+                                  onPressed: () => _adjustParas(-1),
+                                ),
+                                SizedBox(
+                                  width: 56,
+                                  child: TextField(
+                                    controller: _parasController,
+                                    keyboardType: TextInputType.number,
+                                    textAlign: TextAlign.center,
+                                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                    decoration: const InputDecoration(
+                                      isDense: true,
+                                      contentPadding: EdgeInsets.symmetric(vertical: 4),
+                                      border: InputBorder.none,
+                                    ),
+                                    style: GoogleFonts.notoSansBengali(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: const Color(0xFF0F5132),
+                                    ),
+                                    onChanged: (val) {
+                                      final parsed = int.tryParse(val) ?? 0;
+                                      setState(() {
+                                        _currentParasRead = parsed.clamp(0, 30);
+                                      });
+                                    },
+                                  ),
+                                ),
+                                _buildStepperButton(
+                                  icon: Icons.add,
+                                  onPressed: () => _adjustParas(1),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                      const SizedBox(width: 8),
-                      OutlinedButton.icon(
-                        icon: Icon(
-                          isCompleted ? Icons.check_rounded : Icons.check_box_outline_blank_rounded,
-                          size: 16,
-                          color: isCompleted ? const Color(0xFF0F5132) : Colors.grey[700],
+                    ),
+                    const SizedBox(width: 10),
+
+                    // Pages Counter
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFF8F9FA),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Colors.grey[300]!),
                         ),
-                        label: Text(
-                          isCompleted ? 'পড়া সম্পন্ন' : 'সম্পন্ন চিহ্নিত করুন',
+                        child: Column(
+                          children: [
+                            Text(
+                              'পৃষ্ঠা (০ - ৬১২)',
+                              style: GoogleFonts.notoSansBengali(fontSize: 11, color: Colors.grey[700]),
+                            ),
+                            const SizedBox(height: 6),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                _buildStepperButton(
+                                  icon: Icons.remove,
+                                  onPressed: () => _adjustPages(-1),
+                                ),
+                                SizedBox(
+                                  width: 56,
+                                  child: TextField(
+                                    controller: _pagesController,
+                                    keyboardType: TextInputType.number,
+                                    textAlign: TextAlign.center,
+                                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                                    decoration: const InputDecoration(
+                                      isDense: true,
+                                      contentPadding: EdgeInsets.symmetric(vertical: 4),
+                                      border: InputBorder.none,
+                                    ),
+                                    style: GoogleFonts.notoSansBengali(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                      color: const Color(0xFF0F5132),
+                                    ),
+                                    onChanged: (val) {
+                                      final parsed = int.tryParse(val) ?? 0;
+                                      setState(() {
+                                        _currentPagesRead = parsed.clamp(0, 612);
+                                      });
+                                    },
+                                  ),
+                                ),
+                                _buildStepperButton(
+                                  icon: Icons.add,
+                                  onPressed: () => _adjustPages(1),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+
+                // Quick Addition Chips
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  children: [
+                    _buildQuickChip('+৫ পৃষ্ঠা', () => _adjustPages(5)),
+                    _buildQuickChip('+১০ পৃষ্ঠা', () => _adjustPages(10)),
+                    _buildQuickChip('+১ পারা', () => _adjustParas(1)),
+                    _buildQuickChip('+২ পারা', () => _adjustParas(2)),
+                    _buildQuickChip('রিসেট', _resetTodayCounters, isDestructive: true),
+                  ],
+                ),
+                const SizedBox(height: 12),
+
+                // Live Calculation Dynamic Banner
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE8F5E9),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: const Color(0xFF0F5132).withOpacity(0.3)),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.auto_stories_rounded, color: Color(0xFF0F5132), size: 20),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: Text(
+                          'আজকের সর্বমোট তিলাওয়াত: ${TriCalendarHelper.toBnNum(totalDayPages)} পৃষ্ঠা (${TriCalendarHelper.toBnNum(_currentParasRead)} পারা ${TriCalendarHelper.toBnNum(_currentPagesRead)} পৃষ্ঠা)',
                           style: GoogleFonts.notoSansBengali(
-                            fontSize: 12,
-                            color: isCompleted ? const Color(0xFF0F5132) : Colors.grey[700],
+                            fontSize: 12.5,
                             fontWeight: FontWeight.bold,
+                            color: const Color(0xFF0F5132),
                           ),
                         ),
-                        onPressed: _toggleCurrentDayStatus,
                       ),
                     ],
                   ),
+                ),
+                const SizedBox(height: 14),
+
+                // Optional notes or specific mode fields
+                if (mode == 'general') ...[
+                  Text(
+                    'মন্তব্য / পঠিত সূরা বা আয়াত (ঐচ্ছিক):',
+                    style: GoogleFonts.notoSansBengali(fontSize: 11.5, color: Colors.grey[700]),
+                  ),
+                  const SizedBox(height: 4),
+                  TextField(
+                    controller: _generalTilawatController,
+                    decoration: InputDecoration(
+                      hintText: 'যেমন: সূরা আল-ইমরান ১-৫০ আয়াত',
+                      hintStyle: GoogleFonts.notoSansBengali(fontSize: 12, color: Colors.grey[400]),
+                      filled: true,
+                      fillColor: const Color(0xFFF8F9FA),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8), borderSide: BorderSide(color: Colors.grey[300]!)),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+                    ),
+                    style: GoogleFonts.notoSansBengali(fontSize: 12),
+                  ),
                 ] else if (mode == 'hafiz') ...[
                   Text(
-                    'আজকের রিভিশন পারা:',
-                    style: GoogleFonts.notoSansBengali(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey[700]),
+                    'আজকের রিভিশন পারা / সূরার নাম:',
+                    style: GoogleFonts.notoSansBengali(fontSize: 11.5, color: Colors.grey[700]),
                   ),
-                  const SizedBox(height: 6),
+                  const SizedBox(height: 4),
                   TextField(
                     controller: _hafizDourController,
                     decoration: InputDecoration(
@@ -783,30 +974,18 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
                       hintStyle: GoogleFonts.notoSansBengali(fontSize: 12, color: Colors.grey[400]),
                       filled: true,
                       fillColor: const Color(0xFFF8F9FA),
-                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(10), borderSide: BorderSide(color: Colors.grey[300]!)),
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                      border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                      contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                     ),
-                    style: GoogleFonts.notoSansBengali(fontSize: 13),
-                  ),
-                  const SizedBox(height: 10),
-                  ElevatedButton.icon(
-                    icon: const Icon(Icons.save_rounded, size: 16),
-                    label: Text('দাওর সংরক্ষণ করুন', style: GoogleFonts.notoSansBengali(fontSize: 12, fontWeight: FontWeight.bold)),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF0F5132),
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                    ),
-                    onPressed: _saveHafizDour,
+                    style: GoogleFonts.notoSansBengali(fontSize: 12),
                   ),
                 ] else ...[
-                  // Student mode
-                  Text('আজকের সবক:', style: GoogleFonts.notoSansBengali(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.grey[700])),
+                  Text('আজকের সবক:', style: GoogleFonts.notoSansBengali(fontSize: 11, color: Colors.grey[700])),
                   const SizedBox(height: 4),
                   TextField(
                     controller: _studentSabakController,
                     decoration: InputDecoration(
-                      hintText: 'পৃষ্ঠা / আয়াতের রেঞ্জ',
+                      hintText: 'পৃষ্ঠা বা আয়াতের রেঞ্জ',
                       hintStyle: GoogleFonts.notoSansBengali(fontSize: 11, color: Colors.grey[400]),
                       filled: true,
                       fillColor: const Color(0xFFF8F9FA),
@@ -815,8 +994,8 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
                     ),
                     style: GoogleFonts.notoSansBengali(fontSize: 12),
                   ),
-                  const SizedBox(height: 8),
-                  Text('সবকি ও পেছনের দাওর:', style: GoogleFonts.notoSansBengali(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.grey[700])),
+                  const SizedBox(height: 6),
+                  Text('সবকি ও পেছনের দাওর:', style: GoogleFonts.notoSansBengali(fontSize: 11, color: Colors.grey[700])),
                   const SizedBox(height: 4),
                   TextField(
                     controller: _studentSabkiController,
@@ -830,24 +1009,48 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
                     ),
                     style: GoogleFonts.notoSansBengali(fontSize: 12),
                   ),
-                  const SizedBox(height: 10),
-                  ElevatedButton.icon(
-                    icon: const Icon(Icons.save_rounded, size: 16),
-                    label: Text('রুটিন সংরক্ষণ করুন', style: GoogleFonts.notoSansBengali(fontSize: 12, fontWeight: FontWeight.bold)),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF0F5132),
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                    ),
-                    onPressed: _saveStudentRoutine,
-                  ),
                 ],
+                const SizedBox(height: 14),
+
+                // Save and Complete Buttons
+                Row(
+                  children: [
+                    ElevatedButton.icon(
+                      icon: const Icon(Icons.save_rounded, size: 16),
+                      label: Text('হিসেব সংরক্ষণ করুন', style: GoogleFonts.notoSansBengali(fontSize: 12, fontWeight: FontWeight.bold)),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF0F5132),
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                      ),
+                      onPressed: _saveDayReading,
+                    ),
+                    const SizedBox(width: 8),
+                    OutlinedButton.icon(
+                      icon: Icon(
+                        isCompleted ? Icons.check_rounded : Icons.check_box_outline_blank_rounded,
+                        size: 16,
+                        color: isCompleted ? const Color(0xFF0F5132) : Colors.grey[700],
+                      ),
+                      label: Text(
+                        isCompleted ? 'পড়া সম্পন্ন' : 'সম্পন্ন চিহ্নিত করুন',
+                        style: GoogleFonts.notoSansBengali(
+                          fontSize: 12,
+                          color: isCompleted ? const Color(0xFF0F5132) : Colors.grey[700],
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onPressed: _toggleCurrentDayStatus,
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
           const SizedBox(height: 16),
 
-          // 3. Khatam Progress Card
+          // 3. Khatam Progress Card (Valid 612-page percentage math engine)
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(16),
@@ -884,7 +1087,7 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Text(
-                        '${TriCalendarHelper.toBnNum(percentage)}% সম্পন্ন',
+                        '${TriCalendarHelper.toBnNum(stats.percent.toStringAsFixed(1))}% সম্পন্ন',
                         style: GoogleFonts.notoSansBengali(
                           fontSize: 11.5,
                           fontWeight: FontWeight.bold,
@@ -898,26 +1101,92 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
                 ClipRRect(
                   borderRadius: BorderRadius.circular(6),
                   child: LinearProgressIndicator(
-                    value: progress,
+                    value: (stats.percent / 100.0).clamp(0.0, 1.0),
                     minHeight: 10,
                     backgroundColor: Colors.grey[200],
                     valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF0F5132)),
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 12),
+
+                // Precise Statistics Row 1
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'মোট পড়া হয়েছে: ${TriCalendarHelper.toBnNum(completedDays)} দিন',
+                      'পড়া হয়েছে: ${TriCalendarHelper.toBnNum(stats.totalPagesRead)} / ৬১২ পৃষ্ঠা',
+                      style: GoogleFonts.notoSansBengali(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey[800]),
+                    ),
+                    Text(
+                      '(${TriCalendarHelper.toBnNum((stats.totalPagesRead / 20.0).toStringAsFixed(1))} পারা)',
+                      style: GoogleFonts.notoSansBengali(fontSize: 11.5, color: const Color(0xFF0F5132), fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 4),
+
+                // Precise Statistics Row 2
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'অবশিষ্ট: ${TriCalendarHelper.toBnNum(stats.remainingPages)} পৃষ্ঠা (~${TriCalendarHelper.toBnNum(stats.remainingParas.toStringAsFixed(1))} পারা)',
                       style: GoogleFonts.notoSansBengali(fontSize: 11.5, color: Colors.grey[600]),
                     ),
                     Text(
-                      'টার্গেট: ${TriCalendarHelper.toBnNum(targetDays)} দিন',
+                      'টার্গেট: ${TriCalendarHelper.toBnNum(stats.targetDays)} দিন (লগ: ${TriCalendarHelper.toBnNum(stats.completedDays)} দিন)',
                       style: GoogleFonts.notoSansBengali(fontSize: 11.5, color: Colors.grey[600]),
                     ),
                   ],
                 ),
+                if (stats.remainingPages > 0) ...[
+                  const Divider(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'টার্গেট অনুযায়ী দৈনিক গতি:',
+                        style: GoogleFonts.notoSansBengali(fontSize: 12, color: Colors.grey[700]),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFEF3C7),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          '${TriCalendarHelper.toBnNum(stats.dailyRequiredPages)} পৃষ্ঠা/দিন',
+                          style: GoogleFonts.notoSansBengali(
+                            fontSize: 11.5,
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xFF92400E),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+                if (stats.isCompleted) ...[
+                  const SizedBox(height: 10),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFEF9C3),
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: const Color(0xFFCA8A04)),
+                    ),
+                    child: Text(
+                      'মাশাআল্লাহ! আপনি পূর্ণ ৬১২ পৃষ্ঠা (৩০ পারা) তিলাওয়াত সম্পন্ন করেছেন! আল্লাহ কবুল করুন।',
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.notoSansBengali(
+                        fontSize: 12,
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xFF854D0E),
+                      ),
+                    ),
+                  ),
+                ],
               ],
             ),
           ),
@@ -930,9 +1199,50 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
     );
   }
 
+  Widget _buildStepperButton({required IconData icon, required VoidCallback onPressed}) {
+    return Container(
+      width: 32,
+      height: 32,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.grey[300]!),
+      ),
+      child: IconButton(
+        icon: Icon(icon, size: 16, color: const Color(0xFF0F5132)),
+        padding: EdgeInsets.zero,
+        onPressed: onPressed,
+      ),
+    );
+  }
+
+  Widget _buildQuickChip(String label, VoidCallback onTap, {bool isDestructive = false}) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(8),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        decoration: BoxDecoration(
+          color: isDestructive ? const Color(0xFFFEE2E2) : const Color(0xFFF1F5F9),
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(
+            color: isDestructive ? Colors.redAccent.withOpacity(0.5) : Colors.grey[300]!,
+          ),
+        ),
+        child: Text(
+          label,
+          style: GoogleFonts.notoSansBengali(
+            fontSize: 11,
+            fontWeight: FontWeight.w600,
+            color: isDestructive ? Colors.red[800] : Colors.grey[800],
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildHorizontalDateStrip() {
     final now = DateTime.now();
-    // 7 days past to 3 days future
     final dates = List.generate(11, (i) => now.subtract(Duration(days: 7 - i)));
 
     return SizedBox(
@@ -1104,13 +1414,20 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
   // TAB 2: ROADMAP & PLANNER (রোডম্যাপ ও প্ল্যান)
   // ----------------------------------------------------
   Widget _buildRoadmapTab(String mode) {
+    final stats = PlannerService.instance.calculateKhatamStats(_plannerModel!);
+    final targetDaysInput = int.tryParse(_targetDaysController.text.trim()) ?? _cycleTargetDays;
+    final validDays = targetDaysInput > 0 ? targetDaysInput : 1;
+
+    final remainingPages = stats.remainingPages > 0 ? stats.remainingPages : 612;
+    final dynamicDailyPace = (remainingPages / validDays).ceil();
+    final estCompletionDate = _selectedDate.add(Duration(days: validDays));
+
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Plan Generator Card
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -1140,44 +1457,109 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  'আপনার সুবিধাজনক সময় নির্বাচন করলে অ্যাপ স্বয়ংক্রিয়ভাবে প্রতিদিনের পড়ার টার্গেট রোডম্যাপ সাজিয়ে দেবে।',
+                  'আপনার সুবিধাজনক লক্ষ্য দিন লিখুন, অ্যাপ স্বয়ংক্রিয়ভাবে প্রতিদিনের সুনির্দিষ্ট পৃষ্ঠা রোডম্যাপ সাজিয়ে দেবে।',
                   style: GoogleFonts.notoSansBengali(fontSize: 11.5, color: Colors.grey[600]),
                 ),
                 const SizedBox(height: 14),
 
+                // Integer Input for Target Days
                 Text(
-                  'টার্গেট সময়সীমা:',
+                  'টার্গেট সময়সীমা (দিন সংখ্যা লিখুন):',
                   style: GoogleFonts.notoSansBengali(fontSize: 12, fontWeight: FontWeight.bold, color: Colors.grey[700]),
                 ),
                 const SizedBox(height: 8),
 
-                Wrap(
-                  spacing: 8,
-                  runSpacing: 8,
-                  children: (mode == 'general' ? [30, 60, 90, 120, 365] : [7, 10, 15, 20, 30]).map((days) {
-                    final isSel = _cycleTargetDays == days;
-                    return ChoiceChip(
-                      label: Text(
-                        mode == 'general'
-                            ? (days == 30 ? '৩০ দিন (১ মাস)' : days == 60 ? '৬০ দিন (২ মাস)' : days == 90 ? '৩ মাস' : days == 120 ? '৪ মাস' : '১ বছর')
-                            : '$days দিনের সাইকেল',
-                        style: GoogleFonts.notoSansBengali(
-                          fontSize: 11.5,
-                          fontWeight: isSel ? FontWeight.bold : FontWeight.normal,
-                          color: isSel ? Colors.white : Colors.black87,
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFF8F9FA),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.grey[300]!),
+                  ),
+                  child: Row(
+                    children: [
+                      _buildStepperButton(
+                        icon: Icons.remove,
+                        onPressed: () {
+                          final current = int.tryParse(_targetDaysController.text.trim()) ?? _cycleTargetDays;
+                          _setTargetDays(current - 1);
+                        },
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: TextField(
+                          controller: _targetDaysController,
+                          keyboardType: TextInputType.number,
+                          textAlign: TextAlign.center,
+                          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'দিন সংখ্যা',
+                          ),
+                          style: GoogleFonts.notoSansBengali(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xFF0F5132),
+                          ),
+                          onChanged: (val) {
+                            final parsed = int.tryParse(val) ?? 30;
+                            setState(() {
+                              _cycleTargetDays = parsed.clamp(1, 1000);
+                            });
+                          },
                         ),
                       ),
-                      selected: isSel,
-                      selectedColor: const Color(0xFF0F5132),
-                      backgroundColor: Colors.grey[100],
-                      onSelected: (val) {
-                        if (val) setState(() => _cycleTargetDays = days);
-                      },
+                      const SizedBox(width: 8),
+                      _buildStepperButton(
+                        icon: Icons.add,
+                        onPressed: () {
+                          final current = int.tryParse(_targetDaysController.text.trim()) ?? _cycleTargetDays;
+                          _setTargetDays(current + 1);
+                        },
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        'দিন',
+                        style: GoogleFonts.notoSansBengali(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.grey[700]),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 10),
+
+                // Quick preset chips
+                Wrap(
+                  spacing: 6,
+                  runSpacing: 6,
+                  children: [3, 5, 7, 10, 15, 20, 30, 60, 90].map((d) {
+                    final isSel = _cycleTargetDays == d;
+                    return InkWell(
+                      onTap: () => _setTargetDays(d),
+                      borderRadius: BorderRadius.circular(8),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: isSel ? const Color(0xFF0F5132) : const Color(0xFFF1F5F9),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            color: isSel ? const Color(0xFF0F5132) : Colors.grey[300]!,
+                          ),
+                        ),
+                        child: Text(
+                          '${TriCalendarHelper.toBnNum(d)} দিন',
+                          style: GoogleFonts.notoSansBengali(
+                            fontSize: 11,
+                            fontWeight: isSel ? FontWeight.bold : FontWeight.normal,
+                            color: isSel ? Colors.white : Colors.black87,
+                          ),
+                        ),
+                      ),
                     );
                   }).toList(),
                 ),
                 const SizedBox(height: 14),
 
+                // Start Para & Start Date
                 Row(
                   children: [
                     Expanded(
@@ -1244,6 +1626,50 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
                     ),
                   ],
                 ),
+                const SizedBox(height: 14),
+
+                // Dynamic Live Roadmap Preview Box
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFE8F5E9),
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: const Color(0xFF0F5132).withOpacity(0.3)),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(Icons.calculate_rounded, color: Color(0xFF0F5132), size: 18),
+                          const SizedBox(width: 6),
+                          Text(
+                            'লাইভ রোডম্যাপ ক্যালকুলেটর:',
+                            style: GoogleFonts.notoSansBengali(
+                              fontSize: 12.5,
+                              fontWeight: FontWeight.bold,
+                              color: const Color(0xFF0F5132),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8),
+                      Text(
+                        'অবশিষ্ট পৃষ্ঠা: ${TriCalendarHelper.toBnNum(remainingPages)} পৃষ্ঠা (${TriCalendarHelper.toBnNum((remainingPages / 20.0).toStringAsFixed(1))} পারা)',
+                        style: GoogleFonts.notoSansBengali(fontSize: 11.5, color: Colors.grey[800]),
+                      ),
+                      Text(
+                        'প্রয়োজনীয় দৈনিক গতি: ${TriCalendarHelper.toBnNum(dynamicDailyPace)} পৃষ্ঠা/দিন (~${TriCalendarHelper.toBnNum((dynamicDailyPace / 20.0).toStringAsFixed(1))} পারা)',
+                        style: GoogleFonts.notoSansBengali(fontSize: 11.5, fontWeight: FontWeight.bold, color: const Color(0xFF0F5132)),
+                      ),
+                      Text(
+                        'সম্ভাব্য সমাপ্তির তারিখ: ${TriCalendarHelper.toBnNum(estCompletionDate.day)} ${TriCalendarHelper.getBengaliDate(estCompletionDate).monthName} ${TriCalendarHelper.toBnNum(estCompletionDate.year)}',
+                        style: GoogleFonts.notoSansBengali(fontSize: 11.5, color: Colors.grey[700]),
+                      ),
+                    ],
+                  ),
+                ),
                 const SizedBox(height: 16),
 
                 SizedBox(
@@ -1268,7 +1694,6 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
           ),
           const SizedBox(height: 16),
 
-          // Cycle Summary Card
           if (_cycleSummary != null) ...[
             Container(
               padding: const EdgeInsets.all(14),
@@ -1297,7 +1722,6 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
             const SizedBox(height: 16),
           ],
 
-          // Daily Target Reference Info
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -1349,7 +1773,6 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Add Note Card
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
@@ -1430,7 +1853,6 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
               ),
               const SizedBox(height: 16),
 
-              // Notes List Header
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -1442,7 +1864,6 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
               ),
               const SizedBox(height: 8),
 
-              // Notes List
               if (notes.isEmpty)
                 Container(
                   width: double.infinity,
@@ -1522,7 +1943,6 @@ class _PlannerScreenState extends State<PlannerScreen> with SingleTickerProvider
                               ],
                             ),
                           ),
-                          // Open Page Button
                           TextButton.icon(
                             style: TextButton.styleFrom(
                               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),

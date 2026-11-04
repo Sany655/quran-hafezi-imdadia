@@ -1,4 +1,4 @@
-const CACHE_NAME = 'quran-huffaz-v11';
+const CACHE_NAME = 'quran-huffaz-v12';
 const CORE_ASSETS = [
   './',
   './index.html',

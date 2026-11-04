@@ -35,6 +35,9 @@ class PlannerNote {
 }
 
 class DayLog {
+  int parasRead;
+  int pagesRead;
+  int totalDayPages;
   String? dourPara;
   String? status; // 'completed' | 'partial' | 'pending'
   String? sabak;
@@ -45,6 +48,9 @@ class DayLog {
   List<PlannerNote> notes;
 
   DayLog({
+    this.parasRead = 0,
+    this.pagesRead = 0,
+    int? totalDayPages,
     this.dourPara,
     this.status,
     this.sabak,
@@ -53,10 +59,14 @@ class DayLog {
     this.generalTilawat,
     this.pagesCount = 0,
     List<PlannerNote>? notes,
-  }) : notes = notes ?? [];
+  })  : totalDayPages = totalDayPages ?? ((parasRead * 20) + pagesRead),
+        notes = notes ?? [];
 
   Map<String, dynamic> toMap() {
     return {
+      'parasRead': parasRead,
+      'pagesRead': pagesRead,
+      'totalDayPages': totalDayPages,
       'dourPara': dourPara,
       'status': status,
       'sabak': sabak,
@@ -80,14 +90,34 @@ class DayLog {
         }
       }
     }
+
+    final pRead = map['parasRead'] is int
+        ? map['parasRead'] as int
+        : int.tryParse(map['parasRead']?.toString() ?? '0') ?? 0;
+
+    final pgRead = map['pagesRead'] is int
+        ? map['pagesRead'] as int
+        : int.tryParse(map['pagesRead']?.toString() ?? '0') ?? 0;
+
+    final calculatedTotal = (pRead * 20) + pgRead;
+
+    final tPages = map['totalDayPages'] is int
+        ? map['totalDayPages'] as int
+        : int.tryParse(map['totalDayPages']?.toString() ?? '') ?? calculatedTotal;
+
     return DayLog(
+      parasRead: pRead,
+      pagesRead: pgRead,
+      totalDayPages: tPages > 0 ? tPages : calculatedTotal,
       dourPara: map['dourPara']?.toString(),
       status: map['status']?.toString(),
       sabak: map['sabak']?.toString(),
       sabki: map['sabki']?.toString(),
       studentDour: map['studentDour']?.toString(),
       generalTilawat: map['generalTilawat']?.toString(),
-      pagesCount: map['pagesCount'] is int ? map['pagesCount'] : int.tryParse(map['pagesCount']?.toString() ?? '0') ?? 0,
+      pagesCount: map['pagesCount'] is int
+          ? map['pagesCount'] as int
+          : int.tryParse(map['pagesCount']?.toString() ?? '0') ?? 0,
       notes: parsedNotes,
     );
   }
@@ -142,9 +172,15 @@ class PlannerModel {
     }
     return PlannerModel(
       profileMode: map['profileMode']?.toString() ?? 'general',
-      hijriOffset: map['hijriOffset'] is int ? map['hijriOffset'] : int.tryParse(map['hijriOffset']?.toString() ?? '0') ?? 0,
-      targetDays: map['targetDays'] is int ? map['targetDays'] : int.tryParse(map['targetDays']?.toString() ?? '30') ?? 30,
-      pagesPerDay: map['pagesPerDay'] is int ? map['pagesPerDay'] : int.tryParse(map['pagesPerDay']?.toString() ?? '20') ?? 20,
+      hijriOffset: map['hijriOffset'] is int
+          ? map['hijriOffset']
+          : int.tryParse(map['hijriOffset']?.toString() ?? '0') ?? 0,
+      targetDays: map['targetDays'] is int
+          ? map['targetDays']
+          : int.tryParse(map['targetDays']?.toString() ?? '30') ?? 30,
+      pagesPerDay: map['pagesPerDay'] is int
+          ? map['pagesPerDay']
+          : int.tryParse(map['pagesPerDay']?.toString() ?? '20') ?? 20,
       reminderEnabled: map['reminderEnabled'] == true,
       reminderTime: map['reminderTime']?.toString() ?? '06:00',
       logs: parsedLogs,
