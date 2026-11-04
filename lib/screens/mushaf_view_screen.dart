@@ -128,6 +128,7 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
           maxChildSize: 0.95,
           minChildSize: 0.35,
           builder: (_, __) => StudySheet(
+            pageNumber: _currentPage,
             surah: surah,
             initialAyahNumber: initialAyah,
           ),

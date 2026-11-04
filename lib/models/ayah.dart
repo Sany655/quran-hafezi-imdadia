@@ -7,6 +7,7 @@ class Ayah {
   final String verseKey;
   final String textIndopak;
   final String textUthmani;
+  String? surahNameBn;
   String? translationTaisirul;
   String? translationZakaria;
   String? tafsirAhsanulBayan;
@@ -20,6 +21,7 @@ class Ayah {
     required this.verseKey,
     required this.textIndopak,
     required this.textUthmani,
+    this.surahNameBn,
     this.translationTaisirul,
     this.translationZakaria,
     this.tafsirAhsanulBayan,

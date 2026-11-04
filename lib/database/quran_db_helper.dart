@@ -128,6 +128,93 @@ class QuranDbHelper {
   }
 
   // 4. Fetch Ayahs for a Surah with Translations & Word-by-Word
+    Future<List<Ayah>> getAyahsForPage(int pageNumber) async {
+    final db = await database;
+    final pageMaps = await db.query(
+      'pages',
+      where: 'page_number = ?',
+      whereArgs: [pageNumber],
+      limit: 1,
+    );
+
+    if (pageMaps.isEmpty) return [];
+    final verseKeysStr = pageMaps.first['verse_keys'] as String?;
+    if (verseKeysStr == null || verseKeysStr.trim().isEmpty) return [];
+
+    final vks = verseKeysStr.split(',');
+    if (vks.isEmpty) return [];
+
+    final placeholders = List.filled(vks.length, '?').join(',');
+    final ayahMaps = await db.rawQuery('''
+      SELECT a.*, s.name_bn as surah_name_bn
+      FROM ayahs a
+      LEFT JOIN surahs s ON s.id = a.surah_id
+      WHERE a.verse_key IN ($placeholders)
+    ''', vks);
+
+    final Map<String, Ayah> ayahsByVk = {};
+    for (var m in ayahMaps) {
+      final a = Ayah.fromMap(m);
+      a.surahNameBn = m['surah_name_bn'] as String?;
+      ayahsByVk[a.verseKey] = a;
+    }
+
+    final List<Ayah> ayahs = [];
+    for (var vk in vks) {
+      if (ayahsByVk.containsKey(vk)) {
+        ayahs.add(ayahsByVk[vk]!);
+      }
+    }
+
+    if (ayahs.isEmpty) return [];
+
+    final conditions = List.filled(vks.length, '(surah_id = ? AND ayah_number = ?)').join(' OR ');
+    final List<dynamic> params = [];
+    for (var vk in vks) {
+      final parts = vk.split(':');
+      params.add(int.parse(parts[0]));
+      params.add(int.parse(parts[1]));
+    }
+
+    final transMaps = await db.rawQuery(
+      'SELECT surah_id, ayah_number, edition, text_bn FROM translations WHERE $conditions',
+      params,
+    );
+
+    for (var t in transMaps) {
+      final sid = t['surah_id'] as int;
+      final an = t['ayah_number'] as int;
+      final vk = '$sid:$an';
+      final a = ayahsByVk[vk];
+      if (a != null) {
+        if (t['edition'] == 'taisirul') {
+          a.translationTaisirul = t['text_bn'] as String?;
+        } else if (t['edition'] == 'zakaria') {
+          a.translationZakaria = t['text_bn'] as String?;
+        }
+      }
+    }
+
+    final wordMaps = await db.rawQuery(
+      'SELECT surah_id, ayah_number, position, text_arabic, meaning_bn FROM words_wbw WHERE $conditions ORDER BY surah_id, ayah_number, position ASC',
+      params,
+    );
+
+    final Map<String, List<WordWbw>> wordsByVk = {};
+    for (var w in wordMaps) {
+      final sid = w['surah_id'] as int;
+      final an = w['ayah_number'] as int;
+      final vk = '$sid:$an';
+      wordsByVk.putIfAbsent(vk, () => []).add(WordWbw.fromMap(w));
+    }
+
+    for (var a in ayahs) {
+      a.words = wordsByVk[a.verseKey] ?? [];
+    }
+
+    return ayahs;
+  }
+
   Future<List<Ayah>> getAyahsForSurah(int surahId) async {
     final db = await database;
     final ayahMaps = await db.query(

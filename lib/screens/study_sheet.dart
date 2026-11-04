@@ -4,14 +4,17 @@ import 'package:share_plus/share_plus.dart';
 import '../models/ayah.dart';
 import '../models/surah.dart';
 import '../database/quran_db_helper.dart';
+import '../utils/tri_calendar_helper.dart';
 
 class StudySheet extends StatefulWidget {
-  final Surah surah;
+  final int pageNumber;
+  final Surah? surah;
   final int initialAyahNumber;
 
   const StudySheet({
     super.key,
-    required this.surah,
+    required this.pageNumber,
+    this.surah,
     this.initialAyahNumber = 1,
   });
 
@@ -21,30 +24,24 @@ class StudySheet extends StatefulWidget {
 
 class _StudySheetState extends State<StudySheet> {
   late Future<List<Ayah>> _ayahsFuture;
-  final ScrollController _scrollController = ScrollController();
   bool _showWordByWord = true;
   String _selectedTranslation = 'taisirul'; // 'taisirul' or 'zakaria'
-  bool _hasScrolledToInitial = false;
 
   @override
   void initState() {
     super.initState();
-    _ayahsFuture = QuranDbHelper.instance.getAyahsForSurah(widget.surah.id);
-  }
-
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    super.dispose();
+    _ayahsFuture = QuranDbHelper.instance.getAyahsForPage(widget.pageNumber);
   }
 
   void _showTafsirModal(BuildContext context, Ayah ayah) async {
     final tafsirs = await QuranDbHelper.instance.getTafsirForAyah(
-      widget.surah.id,
+      ayah.surahId,
       ayah.ayahNumber,
     );
 
     if (!context.mounted) return;
+
+    final sName = ayah.surahNameBn ?? widget.surah?.nameBn ?? 'সূরা';
 
     showModalBottomSheet(
       context: context,
@@ -78,12 +75,15 @@ class _StudySheetState extends State<StudySheet> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'তাফসীর: ${widget.surah.nameBn} (${ayah.ayahNumber})',
-                          style: GoogleFonts.notoSansBengali(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: const Color(0xFF0F5132),
+                        Expanded(
+                          child: Text(
+                            'তাফসীর: $sName (আয়াত ${TriCalendarHelper.toBnNum(ayah.ayahNumber)})',
+                            style: GoogleFonts.notoSansBengali(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: const Color(0xFF0F5132),
+                            ),
+                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         IconButton(
@@ -120,10 +120,14 @@ class _StudySheetState extends State<StudySheet> {
 
   Widget _buildTafsirContent(String? rawHtml, ScrollController scrollController) {
     if (rawHtml == null || rawHtml.trim().isEmpty) {
-      return const Center(
+      return Center(
         child: Padding(
-          padding: EdgeInsets.all(32),
-          child: Text('এই আয়াতের জন্য তাফসীর উপলব্ধ নয়।'),
+          padding: const EdgeInsets.all(32),
+          child: Text(
+            'এই আয়াতের জন্য পৃথক তাফসীর উল্লেখ নেই (পূর্ববর্তী অথবা পরবর্তী আয়াতের সাথে সংযুক্ত হতে পারে)।',
+            textAlign: TextAlign.center,
+            style: GoogleFonts.notoSansBengali(color: Colors.grey[600]),
+          ),
         ),
       );
     }
@@ -145,7 +149,7 @@ class _StudySheetState extends State<StudySheet> {
       child: SelectableText(
         cleanText,
         style: GoogleFonts.notoSansBengali(
-          fontSize: 15,
+          fontSize: 14,
           height: 1.8,
           color: Colors.black87,
         ),
@@ -178,36 +182,38 @@ class _StudySheetState extends State<StudySheet> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.surah.nameBn,
-                      style: GoogleFonts.notoSansBengali(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: const Color(0xFF0F5132),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'পৃষ্ঠা ${TriCalendarHelper.toBnNum(widget.pageNumber)} এর অনুবাদ ও শব্দার্থ',
+                        style: GoogleFonts.notoSansBengali(
+                          fontSize: 17,
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xFF0F5132),
+                        ),
+                        overflow: TextOverflow.ellipsis,
                       ),
-                    ),
-                    Text(
-                      widget.initialAyahNumber > 1
-                          ? '${widget.surah.nameEn} • আয়াত ${widget.initialAyahNumber} থেকে শুরু • ${widget.surah.revelationType}'
-                          : '${widget.surah.nameEn} • ${widget.surah.totalAyahs} আয়াত • ${widget.surah.revelationType}',
-                      style: GoogleFonts.notoSansBengali(
-                        fontSize: 12,
-                        color: Colors.grey[600],
+                      Text(
+                        'হাফেজী কোরআন • ১৫ লাইন ভিত্তিক পাতা',
+                        style: GoogleFonts.notoSansBengali(
+                          fontSize: 12,
+                          color: Colors.grey[600],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
                 Row(
                   children: [
+                    // Word by word toggle
                     IconButton(
                       icon: Icon(
                         _showWordByWord ? Icons.view_column : Icons.view_headline,
                         color: const Color(0xFF0F5132),
                       ),
-                      tooltip: _showWordByWord ? 'শব্দে শব্দে বন্ধ করুন' : 'শব্দে শব্দে দেখুন',
+                      tooltip: _showWordByWord ? 'শব্দার্থ বন্ধ করুন' : 'শব্দার্থ দেখুন',
                       onPressed: () {
                         setState(() {
                           _showWordByWord = !_showWordByWord;
@@ -224,214 +230,297 @@ class _StudySheetState extends State<StudySheet> {
             ),
           ),
           const Divider(height: 1),
+
+          // Translation Switcher Tabs (Taisirul vs Zakaria)
+          Container(
+            color: const Color(0xFFF0FDF4),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+            child: Row(
+              children: [
+                Text(
+                  'অনুবাদ:',
+                  style: GoogleFonts.notoSansBengali(
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                    color: const Color(0xFF0F5132),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                ChoiceChip(
+                  label: Text('তাইসীরুল কুরআন', style: GoogleFonts.notoSansBengali(fontSize: 11)),
+                  selected: _selectedTranslation == 'taisirul',
+                  selectedColor: const Color(0xFF0F5132),
+                  labelStyle: TextStyle(color: _selectedTranslation == 'taisirul' ? Colors.white : Colors.black87),
+                  onSelected: (val) {
+                    if (val) setState(() => _selectedTranslation = 'taisirul');
+                  },
+                ),
+                const SizedBox(width: 6),
+                ChoiceChip(
+                  label: Text('ড. আবু বকর যাকারিয়া', style: GoogleFonts.notoSansBengali(fontSize: 11)),
+                  selected: _selectedTranslation == 'zakaria',
+                  selectedColor: const Color(0xFF0F5132),
+                  labelStyle: TextStyle(color: _selectedTranslation == 'zakaria' ? Colors.white : Colors.black87),
+                  onSelected: (val) {
+                    if (val) setState(() => _selectedTranslation = 'zakaria');
+                  },
+                ),
+              ],
+            ),
+          ),
+          const Divider(height: 1),
+
           // Ayahs List
           Expanded(
             child: FutureBuilder<List<Ayah>>(
               future: _ayahsFuture,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator(color: Color(0xFF0F5132)));
                 }
                 if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(child: Text('কোন তথ্য পাওয়া যায়নি'));
+                  return const Center(child: Text('এই পৃষ্ঠার জন্য তথ্য পাওয়া যায়নি'));
                 }
 
                 final ayahs = snapshot.data!;
 
-                if (!_hasScrolledToInitial && widget.initialAyahNumber > 1) {
-                  _hasScrolledToInitial = true;
-                  final targetIndex = ayahs.indexWhere((a) => a.ayahNumber == widget.initialAyahNumber);
-                  if (targetIndex > 0) {
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      if (_scrollController.hasClients) {
-                        final targetOffset = (targetIndex * 250.0).clamp(0.0, _scrollController.position.maxScrollExtent);
-                        _scrollController.animateTo(
-                          targetOffset,
-                          duration: const Duration(milliseconds: 350),
-                          curve: Curves.easeInOut,
-                        );
-                      }
-                    });
-                  }
-                }
-
                 return ListView.separated(
-                  controller: _scrollController,
                   padding: const EdgeInsets.all(16),
                   itemCount: ayahs.length,
                   separatorBuilder: (_, __) => const Divider(height: 24),
                   itemBuilder: (context, index) {
                     final ayah = ayahs[index];
-                    final isInitial = ayah.ayahNumber == widget.initialAyahNumber;
+                    final isInitial = (index == 0);
+                    final isNewSurah = (index == 0 || ayah.surahId != ayahs[index - 1].surahId);
+                    final surahTitle = ayah.surahNameBn ?? widget.surah?.nameBn ?? 'সূরা';
 
-                    return Container(
-                      padding: isInitial ? const EdgeInsets.all(8) : EdgeInsets.zero,
-                      decoration: isInitial
-                          ? BoxDecoration(
-                              color: const Color(0xFF0F5132).withOpacity(0.04),
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        // Surah Header if new surah starts on this page
+                        if (isNewSurah) ...[
+                          Container(
+                            margin: EdgeInsets.only(bottom: 12, top: index > 0 ? 8 : 0),
+                            padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF0F5132),
                               borderRadius: BorderRadius.circular(12),
-                              border: Border.all(
-                                color: const Color(0xFF0F5132).withOpacity(0.2),
-                                width: 1.5,
-                              ),
-                            )
-                          : null,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          // Ayah number badge & actions
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                    decoration: BoxDecoration(
-                                      color: const Color(0xFF0F5132).withOpacity(0.1),
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    child: Text(
-                                      'আয়াত ${ayah.ayahNumber}',
-                                      style: GoogleFonts.notoSansBengali(
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold,
-                                        color: const Color(0xFF0F5132),
-                                      ),
-                                    ),
-                                  ),
-                                  if (isInitial && widget.initialAyahNumber > 1) ...[
-                                    const SizedBox(width: 8),
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xFF0F5132),
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                      child: Text(
-                                        'পৃষ্ঠার শুরু',
-                                        style: GoogleFonts.notoSansBengali(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ],
-                              ),
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                IconButton(
-                                  icon: const Icon(Icons.share, size: 18, color: Color(0xFF0F5132)),
-                                  tooltip: 'আয়াত শেয়ার করুন',
-                                  onPressed: () {
-                                    final bnText = _selectedTranslation == 'zakaria'
-                                        ? (ayah.translationZakaria ?? ayah.translationTaisirul ?? '')
-                                        : (ayah.translationTaisirul ?? '');
-                                    final text = '﴿ ' + ayah.textIndopak + ' ﴾\n\n' +
-                                        'বাংলা অর্থ:\n"' + bnText + '"\n\n' +
-                                        '[সূরা ' + widget.surah.nameBengali + ', আয়াত ' + ayah.ayahNumber.toString() + ']\n' +
-                                        'আল-কুরআন';
-                                    Share.share(text);
-                                  },
-                                ),
-                                TextButton.icon(
-                                  icon: const Icon(Icons.menu_book, size: 16, color: Color(0xFF0F5132)),
-                                  label: Text(
-                                    'তাফসীর',
-                                    style: GoogleFonts.notoSansBengali(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
-                                      color: const Color(0xFF0F5132),
-                                    ),
+                                Text(
+                                  surahTitle,
+                                  style: GoogleFonts.notoSansBengali(
+                                    color: Colors.white,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                  onPressed: () => _showTafsirModal(context, ayah),
+                                ),
+                                Text(
+                                  'পৃষ্ঠা ${TriCalendarHelper.toBnNum(widget.pageNumber)}',
+                                  style: GoogleFonts.notoSansBengali(
+                                    color: const Color(0xFFFDE68A),
+                                    fontSize: 11,
+                                  ),
                                 ),
                               ],
                             ),
+                          ),
+                          if (ayah.ayahNumber == 1 && ayah.surahId != 1 && ayah.surahId != 9) ...[
+                            Container(
+                              margin: const EdgeInsets.only(bottom: 12),
+                              alignment: Alignment.center,
+                              child: const Text(
+                                'بِسۡمِ اللهِ الرَّحۡمٰنِ الرَّحِيۡمِ',
+                                style: TextStyle(
+                                  fontFamily: 'serif',
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xFF0F5132),
+                                ),
+                              ),
+                            ),
                           ],
-                        ),
-                        const SizedBox(height: 12),
-                        // Arabic text
-                        Text(
-                          ayah.textIndopak,
-                          textAlign: TextAlign.right,
-                          textDirection: TextDirection.rtl,
-                          style: const TextStyle(
-                            fontFamily: 'serif',
-                            fontSize: 22,
-                            height: 1.8,
-                            color: Colors.black87,
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        // Word-by-Word View
-                        if (_showWordByWord && ayah.words.isNotEmpty) ...[
-                          Wrap(
-                            alignment: WrapAlignment.end,
-                            textDirection: TextDirection.rtl,
-                            spacing: 8,
-                            runSpacing: 8,
-                            children: ayah.words.map((w) {
-                              return Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFFF8F9FA),
-                                  borderRadius: BorderRadius.circular(6),
-                                  border: Border.all(color: Colors.grey[300]!),
-                                ),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: [
-                                    Text(
-                                      w.textArabic,
-                                      style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
-                                    ),
-                                    const SizedBox(height: 2),
-                                    Text(
-                                      w.meaningBn,
-                                      style: GoogleFonts.notoSansBengali(
-                                        fontSize: 11,
-                                        color: Colors.grey[700],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              );
-                            }).toList(),
-                          ),
-                          const SizedBox(height: 12),
                         ],
-                        // Translation
+
+                        // Ayah Card
                         Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFF7FBF9),
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: const Color(0xFFE2EFE7)),
-                          ),
+                          padding: isInitial ? const EdgeInsets.all(10) : EdgeInsets.zero,
+                          decoration: isInitial
+                              ? BoxDecoration(
+                                  color: const Color(0xFF0F5132).withOpacity(0.04),
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(
+                                    color: const Color(0xFF0F5132).withOpacity(0.2),
+                                    width: 1.5,
+                                  ),
+                                )
+                              : null,
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              Text(
-                                _selectedTranslation == 'taisirul'
-                                    ? (ayah.translationTaisirul ?? '')
-                                    : (ayah.translationZakaria ?? ''),
-                                style: GoogleFonts.notoSansBengali(
-                                  fontSize: 15,
-                                  height: 1.6,
+                              // Top info row
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFF0F5132).withOpacity(0.1),
+                                          borderRadius: BorderRadius.circular(12),
+                                        ),
+                                        child: Text(
+                                          '$surahTitle • আয়াত ${TriCalendarHelper.toBnNum(ayah.ayahNumber)}',
+                                          style: GoogleFonts.notoSansBengali(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold,
+                                            color: const Color(0xFF0F5132),
+                                          ),
+                                        ),
+                                      ),
+                                      if (isInitial) ...[
+                                        const SizedBox(width: 8),
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                          decoration: BoxDecoration(
+                                            color: const Color(0xFF0F5132),
+                                            borderRadius: BorderRadius.circular(8),
+                                          ),
+                                          child: Text(
+                                            'পৃষ্ঠার শুরু',
+                                            style: GoogleFonts.notoSansBengali(
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      IconButton(
+                                        icon: const Icon(Icons.share, size: 18, color: Color(0xFF0F5132)),
+                                        tooltip: 'আয়াত শেয়ার করুন',
+                                        onPressed: () {
+                                          final bnText = _selectedTranslation == 'zakaria'
+                                              ? (ayah.translationZakaria ?? ayah.translationTaisirul ?? '')
+                                              : (ayah.translationTaisirul ?? '');
+                                          final text = '﴿ ${ayah.textIndopak} ﴾\n\n'
+                                              'বাংলা অর্থ:\n"$bnText"\n\n'
+                                              '[সূরা $surahTitle, আয়াত ${TriCalendarHelper.toBnNum(ayah.ayahNumber)}, পৃষ্ঠা ${TriCalendarHelper.toBnNum(widget.pageNumber)}]\n'
+                                              'আল-কুরআন';
+                                          Share.share(text);
+                                        },
+                                      ),
+                                      TextButton.icon(
+                                        icon: const Icon(Icons.menu_book, size: 16, color: Color(0xFF0F5132)),
+                                        label: Text(
+                                          'তাফসীর',
+                                          style: GoogleFonts.notoSansBengali(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold,
+                                            color: const Color(0xFF0F5132),
+                                          ),
+                                        ),
+                                        onPressed: () => _showTafsirModal(context, ayah),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 12),
+
+                              // Arabic text
+                              SelectableText(
+                                ayah.textIndopak,
+                                textAlign: TextAlign.right,
+                                textDirection: TextDirection.rtl,
+                                style: const TextStyle(
+                                  fontFamily: 'serif',
+                                  fontSize: 22,
+                                  height: 1.8,
                                   color: Colors.black87,
                                 ),
                               ),
-                              const SizedBox(height: 6),
-                              Text(
-                                _selectedTranslation == 'taisirul' ? '(তাইসীরুল কুরআন)' : '(ড. আবু বকর যাকারিয়া)',
-                                style: GoogleFonts.notoSansBengali(
-                                  fontSize: 11,
-                                  color: Colors.grey[600],
-                                  fontStyle: FontStyle.italic,
+                              const SizedBox(height: 12),
+
+                              // Word-by-Word View
+                              if (_showWordByWord && ayah.words.isNotEmpty) ...[
+                                Wrap(
+                                  alignment: WrapAlignment.end,
+                                  textDirection: TextDirection.rtl,
+                                  spacing: 8,
+                                  runSpacing: 8,
+                                  children: ayah.words.map((w) {
+                                    return Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFFF8F9FA),
+                                        borderRadius: BorderRadius.circular(6),
+                                        border: Border.all(color: Colors.grey[300]!),
+                                      ),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            w.textArabic,
+                                            style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+                                          ),
+                                          const SizedBox(height: 2),
+                                          Text(
+                                            w.meaningBn,
+                                            style: GoogleFonts.notoSansBengali(
+                                              fontSize: 11,
+                                              color: Colors.grey[700],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }).toList(),
+                                ),
+                                const SizedBox(height: 12),
+                              ],
+
+                              // Translation Text
+                              Container(
+                                padding: const EdgeInsets.all(12),
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFFF7FBF9),
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(color: const Color(0xFFE2EFE7)),
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SelectableText(
+                                      _selectedTranslation == 'taisirul'
+                                          ? (ayah.translationTaisirul ?? '')
+                                          : (ayah.translationZakaria ?? ''),
+                                      style: GoogleFonts.notoSansBengali(
+                                        fontSize: 14,
+                                        height: 1.6,
+                                        color: Colors.black87,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 6),
+                                    Text(
+                                      _selectedTranslation == 'taisirul'
+                                          ? '(তাইসীরুল কুরআন)'
+                                          : '(ড. আবু বকর যাকারিয়া)',
+                                      style: GoogleFonts.notoSansBengali(
+                                        fontSize: 11,
+                                        color: Colors.grey[600],
+                                        fontStyle: FontStyle.italic,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],

@@ -126,6 +126,8 @@ void main() {
       );
 
       expect(ayah.ayahNumber, 1);
+      ayah.surahNameBn = 'আল-ফাতিহা';
+      expect(ayah.surahNameBn, 'আল-ফাতিহা');
       expect(ayah.words.length, 2);
       expect(ayah.words.first.meaningBn, 'নামে');
       expect(ayah.translationTaisirul, contains('আল্লাহর নামে'));
