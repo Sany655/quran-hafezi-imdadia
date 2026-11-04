@@ -157,19 +157,24 @@
       </nav>
 
       <!-- Action Buttons -->
-      <div class="flex items-center gap-1.5 sm:gap-3">
-        <a href="reader.html" class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white font-bengali text-xs sm:text-sm font-semibold shadow-md transition transform hover:-translate-y-0.5 border border-emerald-600/50">
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Web Reader PWA (Desktop only) -->
+        <a href="reader.html" class="hidden lg:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white font-bengali text-sm font-semibold shadow-md transition transform hover:-translate-y-0.5 border border-emerald-600/50">
           <span class="text-gold-400">📖</span>
-          <span class="hidden sm:inline">ওয়েবে পড়ুন (PWA)</span>
-          <span class="sm:hidden">ওয়েবে পড়ুন</span>
+          <span>ওয়েবে পড়ুন (PWA)</span>
         </a>
+
+        <!-- Contribute (Desktop only) -->
         <a href="#collaborate" class="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-gold-600 hover:bg-gold-500 text-white font-bengali text-sm font-semibold shadow-md shadow-gold-600/20 transition transform hover:-translate-y-0.5">
           <span>খেদমতে যোগ দিন</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </a>
-        <a href="https://github.com/Sany655/quran-hafezi-imdadia" target="_blank" class="p-2 sm:p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition text-slate-700 dark:text-slate-300" title="GitHub Repository">
+
+        <!-- GitHub (Desktop only) -->
+        <a href="https://github.com/Sany655/quran-hafezi-imdadia" target="_blank" class="hidden lg:inline-flex p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition text-slate-700 dark:text-slate-300" title="GitHub Repository">
           <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         </a>
+
         <!-- Mobile Menu Toggle Button -->
         <button id="mobileMenuBtn" class="lg:hidden p-2 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition text-slate-700 dark:text-slate-300" aria-label="মেনু খুলুন">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -182,17 +187,35 @@
   </header>
 
   <!-- Mobile Navigation Dropdown -->
-  <div id="mobileMenuDropdown" class="hidden lg:hidden border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-4 py-3 space-y-2 font-bengali text-sm font-semibold transition-all shadow-lg sticky top-20 z-40">
-    <a href="#aim" class="block py-2 px-3 rounded-lg hover:bg-emerald-50 dark:hover:bg-slate-800 hover:text-emerald-600 transition mobile-nav-link">উদ্দেশ্য</a>
-    <a href="#features" class="block py-2 px-3 rounded-lg hover:bg-emerald-50 dark:hover:bg-slate-800 hover:text-emerald-600 transition mobile-nav-link">বৈশিষ্ট্যসমূহ</a>
-    <a href="#preview" class="block py-2 px-3 rounded-lg hover:bg-emerald-50 dark:hover:bg-slate-800 hover:text-emerald-600 transition mobile-nav-link">লাইভ ডেমো</a>
-    <a href="#collaborate" class="block py-2 px-3 rounded-lg hover:bg-emerald-50 dark:hover:bg-slate-800 hover:text-emerald-600 transition mobile-nav-link">সহযোগিতা</a>
-    <a href="#authenticity" class="block py-2 px-3 rounded-lg hover:bg-emerald-50 dark:hover:bg-slate-800 hover:text-emerald-600 transition mobile-nav-link">সত্যতা ও সনদ</a>
-    <div class="pt-2 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-2">
-      <a href="reader.html" class="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-emerald-800 text-white shadow-md">
-        <span>📖 ওয়েবে পড়ুন (PWA)</span>
+  <div id="mobileMenuDropdown" class="hidden lg:hidden border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-4 py-4 space-y-2 font-bengali text-sm font-semibold transition-all shadow-xl sticky top-20 z-40 max-h-[calc(100dvh-5rem)] overflow-y-auto">
+    <a href="#aim" class="block py-2.5 px-3 rounded-xl hover:bg-emerald-50 dark:hover:bg-slate-800 hover:text-emerald-600 transition mobile-nav-link">উদ্দেশ্য</a>
+    <a href="#features" class="block py-2.5 px-3 rounded-xl hover:bg-emerald-50 dark:hover:bg-slate-800 hover:text-emerald-600 transition mobile-nav-link">বৈশিষ্ট্যসমূহ</a>
+    <a href="#preview" class="block py-2.5 px-3 rounded-xl hover:bg-emerald-50 dark:hover:bg-slate-800 hover:text-emerald-600 transition mobile-nav-link">লাইভ ডেমো</a>
+    <a href="#collaborate" class="block py-2.5 px-3 rounded-xl hover:bg-emerald-50 dark:hover:bg-slate-800 hover:text-emerald-600 transition mobile-nav-link">সহযোগিতা</a>
+    <a href="#authenticity" class="block py-2.5 px-3 rounded-xl hover:bg-emerald-50 dark:hover:bg-slate-800 hover:text-emerald-600 transition mobile-nav-link">সত্যতা ও সনদ</a>
+
+    <!-- Action Links inside Mobile Dropdown -->
+    <div class="pt-3 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-2.5">
+      <!-- 1. Android APK Download Link -->
+      <a id="mobileApkDownloadBtn" href="https://github.com/Sany655/quran-hafezi-imdadia/releases/latest/download/Quran-Hafezi-Imdadia.apk" class="flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white shadow-md transition font-bold text-sm">
+        <svg class="w-5 h-5 text-emerald-200" fill="currentColor" viewBox="0 0 24 24"><path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4483.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.996-3.4568a.416.416 0 00-.152-.5669.416.416 0 00-.568.1522L17.135 8.9416C15.617 8.2494 13.882 7.855 12 7.855c-1.882 0-3.617.3944-5.135 1.0866L4.8427 5.4499a.4161.4161 0 00-.568-.1522.416.416 0 00-.152.5669l1.996 3.4568C2.688 11.2386 0 14.887 0 19.145h24c0-4.258-2.688-7.9064-6.1185-9.8236"/></svg>
+        <span>অ্যান্ড্রয়েড অ্যাপ (APK ডাউনলোড)</span>
       </a>
-      <a href="#collaborate" class="flex items-center justify-center gap-2 py-2.5 rounded-xl bg-gold-600 text-white shadow-md mobile-nav-link">
+
+      <!-- 2. Web Version (PWA) Link -->
+      <a href="reader.html" class="flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl bg-emerald-900 hover:bg-emerald-800 text-white shadow-md transition font-bold text-sm border border-emerald-700/60">
+        <span class="text-gold-400">📖</span>
+        <span>ওয়েব সংস্করণ (PWA পড়ুন)</span>
+      </a>
+
+      <!-- 3. GitHub Repository Link -->
+      <a href="https://github.com/Sany655/quran-hafezi-imdadia" target="_blank" class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition text-sm">
+        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <span>GitHub রিপোজিটরি</span>
+      </a>
+
+      <!-- 4. Contribute / Collaborate Link -->
+      <a href="#collaborate" class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-gold-600 hover:bg-gold-500 text-white shadow-md transition mobile-nav-link text-sm font-bold">
         <span>খেদমতে যোগ দিন →</span>
       </a>
     </div>
@@ -1163,6 +1186,8 @@
         const apkAsset = data.assets && data.assets.find(asset => asset.name.endsWith('.apk'));
         if (apkAsset) {
           downloadBtn.href = apkAsset.browser_download_url;
+          const mobileApkBtn = document.getElementById('mobileApkDownloadBtn');
+          if (mobileApkBtn) mobileApkBtn.href = apkAsset.browser_download_url;
           if (apkAsset.size) {
             const sizeInMB = (apkAsset.size / (1024 * 1024)).toFixed(1);
             sizeBadge.textContent = `• ${sizeInMB} MB`;
