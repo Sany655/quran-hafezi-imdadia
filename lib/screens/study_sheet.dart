@@ -10,12 +10,14 @@ class StudySheet extends StatefulWidget {
   final int pageNumber;
   final Surah? surah;
   final int initialAyahNumber;
+  final ScrollController? scrollController;
 
   const StudySheet({
     super.key,
     required this.pageNumber,
     this.surah,
     this.initialAyahNumber = 1,
+    this.scrollController,
   });
 
   @override
@@ -278,13 +280,71 @@ class _StudySheetState extends State<StudySheet> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator(color: Color(0xFF0F5132)));
                 }
+                if (snapshot.hasError) {
+                  return Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(Icons.error_outline, color: Colors.red, size: 40),
+                          const SizedBox(height: 8),
+                          Text(
+                            'পৃষ্ঠা ${widget.pageNumber} এর তথ্য লোড করতে সমস্যা হয়েছে',
+                            style: GoogleFonts.notoSansBengali(fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(height: 12),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF0F5132),
+                              foregroundColor: Colors.white,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _ayahsFuture = QuranDbHelper.instance.getAyahsForPage(widget.pageNumber);
+                              });
+                            },
+                            child: Text('পুনরায় চেষ্টা করুন', style: GoogleFonts.notoSansBengali()),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }
+
                 if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return const Center(child: Text('এই পৃষ্ঠার জন্য তথ্য পাওয়া যায়নি'));
+                  return Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(Icons.menu_book, color: Colors.grey, size: 40),
+                          const SizedBox(height: 8),
+                          Text('এই পৃষ্ঠার জন্য তথ্য পাওয়া যায়নি', style: GoogleFonts.notoSansBengali()),
+                          const SizedBox(height: 12),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF0F5132),
+                              foregroundColor: Colors.white,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _ayahsFuture = QuranDbHelper.instance.getAyahsForPage(widget.pageNumber);
+                              });
+                            },
+                            child: Text('পুনরায় লোড করুন', style: GoogleFonts.notoSansBengali()),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
                 }
 
                 final ayahs = snapshot.data!;
 
                 return ListView.separated(
+                  controller: widget.scrollController,
                   padding: const EdgeInsets.all(16),
                   itemCount: ayahs.length,
                   separatorBuilder: (_, __) => const Divider(height: 24),

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -11,6 +12,13 @@ import '../models/bookmark.dart';
 class QuranDbHelper {
   static final QuranDbHelper instance = QuranDbHelper._init();
   static Database? _database;
+
+  static const int kDatabaseVersion = 2;
+
+  // In-memory static caches for instant zero-lag page navigation
+  static List<Surah>? _cachedSurahs;
+  static List<Juz>? _cachedJuz;
+  static Map<int, Map<String, dynamic>>? _cachedPagesInfo;
 
   QuranDbHelper._init();
 
@@ -30,30 +38,45 @@ class QuranDbHelper {
     if (exists) {
       try {
         final checkDb = await openDatabase(path, readOnly: true);
+        final vRes = await checkDb.rawQuery("PRAGMA user_version");
+        final currentVersion = Sqflite.firstIntValue(vRes) ?? 0;
+
         final pageCols = await checkDb.rawQuery("PRAGMA table_info(pages)");
+        final hasVerseKeys = pageCols.any((c) => c['name'] == 'verse_keys');
         final hasStartSurah = pageCols.any((c) => c['name'] == 'start_surah_id');
+
         final tafsirCountRes = await checkDb.rawQuery("SELECT COUNT(*) as cnt FROM tafsirs WHERE tafsir_id = 164");
         final ikCount = Sqflite.firstIntValue(tafsirCountRes) ?? 0;
+
         await checkDb.close();
-        if (!hasStartSurah || ikCount < 6000) {
+
+        // Enforce update if version < 2, or missing verse_keys, or tafsir is incomplete
+        if (currentVersion < kDatabaseVersion || !hasVerseKeys || !hasStartSurah || ikCount < 6000) {
           needsCopy = true;
         }
-      } catch (_) {
+      } catch (e) {
+        debugPrint('Verification check error on existing DB: $e');
         needsCopy = true;
       }
     }
 
     if (needsCopy) {
+      debugPrint('Re-copying quran_imdadia.db (fresh install or update)...');
+      try {
+        await deleteDatabase(path);
+      } catch (_) {}
+
       try {
         await Directory(dirname(path)).create(recursive: true);
       } catch (_) {}
 
       ByteData data = await rootBundle.load('data/quran_imdadia.db');
-      List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+      final bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
       await File(path).writeAsBytes(bytes, flush: true);
     }
 
     final db = await openDatabase(path, readOnly: false);
+    await db.execute('PRAGMA user_version = $kDatabaseVersion;');
 
     // Create Bookmarks & Last Read tables if they don't exist
     await db.execute('''
@@ -78,32 +101,41 @@ class QuranDbHelper {
     return db;
   }
 
-  // 1. Fetch all Surahs
+  // 1. Fetch all Surahs (with in-memory cache)
   Future<List<Surah>> getAllSurahs() async {
+    if (_cachedSurahs != null && _cachedSurahs!.isNotEmpty) {
+      return _cachedSurahs!;
+    }
     final db = await database;
     final maps = await db.query('surahs', orderBy: 'id ASC');
-    return maps.map((e) => Surah.fromMap(e)).toList();
+    _cachedSurahs = maps.map((e) => Surah.fromMap(e)).toList();
+    return _cachedSurahs!;
   }
 
-  // 2. Fetch all Juz
+  // 2. Fetch all Juz (with in-memory cache)
   Future<List<Juz>> getAllJuz() async {
+    if (_cachedJuz != null && _cachedJuz!.isNotEmpty) {
+      return _cachedJuz!;
+    }
     final db = await database;
     final maps = await db.query('juz', orderBy: 'id ASC');
-    return maps.map((e) => Juz.fromMap(e)).toList();
+    _cachedJuz = maps.map((e) => Juz.fromMap(e)).toList();
+    return _cachedJuz!;
   }
 
   // 3. Fetch Surah by ID
   Future<Surah?> getSurah(int surahId) async {
-    final db = await database;
-    final maps = await db.query('surahs', where: 'id = ?', whereArgs: [surahId]);
-    if (maps.isNotEmpty) {
-      return Surah.fromMap(maps.first);
-    }
+    final surahs = await getAllSurahs();
+    final matches = surahs.where((s) => s.id == surahId);
+    if (matches.isNotEmpty) return matches.first;
     return null;
   }
 
-  // 3b. Fetch all Page Mappings
+  // 3b. Fetch all Page Mappings (with in-memory cache)
   Future<Map<int, Map<String, dynamic>>> getAllPagesInfo() async {
+    if (_cachedPagesInfo != null && _cachedPagesInfo!.isNotEmpty) {
+      return _cachedPagesInfo!;
+    }
     final db = await database;
     final maps = await db.query('pages');
     Map<int, Map<String, dynamic>> result = {};
@@ -111,108 +143,162 @@ class QuranDbHelper {
       final p = m['page_number'] as int;
       result[p] = m;
     }
-    return result;
+    _cachedPagesInfo = result;
+    return _cachedPagesInfo!;
   }
 
   Future<Map<String, dynamic>?> getPageInfo(int pageNumber) async {
-    final db = await database;
-    final maps = await db.query(
-      'pages',
-      where: 'page_number = ?',
-      whereArgs: [pageNumber],
-    );
-    if (maps.isNotEmpty) {
-      return maps.first;
-    }
-    return null;
+    final allPages = await getAllPagesInfo();
+    return allPages[pageNumber];
   }
 
-  // 4. Fetch Ayahs for a Surah with Translations & Word-by-Word
-    Future<List<Ayah>> getAyahsForPage(int pageNumber) async {
-    final db = await database;
-    final pageMaps = await db.query(
-      'pages',
-      where: 'page_number = ?',
-      whereArgs: [pageNumber],
-      limit: 1,
-    );
+  // 4. Fetch Ayahs for a Page with Translations & Word-by-Word
+  Future<List<Ayah>> getAyahsForPage(int pageNumber) async {
+    try {
+      final db = await database;
 
-    if (pageMaps.isEmpty) return [];
-    final verseKeysStr = pageMaps.first['verse_keys'] as String?;
-    if (verseKeysStr == null || verseKeysStr.trim().isEmpty) return [];
+      // 1. Fetch verse keys for this page from pages table
+      final pageMaps = await db.query(
+        'pages',
+        where: 'page_number = ?',
+        whereArgs: [pageNumber],
+        limit: 1,
+      );
 
-    final vks = verseKeysStr.split(',');
-    if (vks.isEmpty) return [];
-
-    final placeholders = List.filled(vks.length, '?').join(',');
-    final ayahMaps = await db.rawQuery('''
-      SELECT a.*, s.name_bn as surah_name_bn
-      FROM ayahs a
-      LEFT JOIN surahs s ON s.id = a.surah_id
-      WHERE a.verse_key IN ($placeholders)
-    ''', vks);
-
-    final Map<String, Ayah> ayahsByVk = {};
-    for (var m in ayahMaps) {
-      final a = Ayah.fromMap(m);
-      a.surahNameBn = m['surah_name_bn'] as String?;
-      ayahsByVk[a.verseKey] = a;
-    }
-
-    final List<Ayah> ayahs = [];
-    for (var vk in vks) {
-      if (ayahsByVk.containsKey(vk)) {
-        ayahs.add(ayahsByVk[vk]!);
-      }
-    }
-
-    if (ayahs.isEmpty) return [];
-
-    final conditions = List.filled(vks.length, '(surah_id = ? AND ayah_number = ?)').join(' OR ');
-    final List<dynamic> params = [];
-    for (var vk in vks) {
-      final parts = vk.split(':');
-      params.add(int.parse(parts[0]));
-      params.add(int.parse(parts[1]));
-    }
-
-    final transMaps = await db.rawQuery(
-      'SELECT surah_id, ayah_number, edition, text_bn FROM translations WHERE $conditions',
-      params,
-    );
-
-    for (var t in transMaps) {
-      final sid = t['surah_id'] as int;
-      final an = t['ayah_number'] as int;
-      final vk = '$sid:$an';
-      final a = ayahsByVk[vk];
-      if (a != null) {
-        if (t['edition'] == 'taisirul') {
-          a.translationTaisirul = t['text_bn'] as String?;
-        } else if (t['edition'] == 'zakaria') {
-          a.translationZakaria = t['text_bn'] as String?;
+      List<String> vks = [];
+      if (pageMaps.isNotEmpty) {
+        final verseKeysStr = pageMaps.first['verse_keys'] as String?;
+        if (verseKeysStr != null && verseKeysStr.trim().isNotEmpty) {
+          vks = verseKeysStr.split(',').map((e) => e.trim()).where((e) => e.isNotEmpty).toList();
         }
       }
+
+      List<Map<String, dynamic>> ayahMaps = [];
+
+      if (vks.isNotEmpty) {
+        final placeholders = List.filled(vks.length, '?').join(',');
+        ayahMaps = await db.rawQuery('''
+          SELECT a.*, s.name_bn as surah_name_bn
+          FROM ayahs a
+          LEFT JOIN surahs s ON s.id = a.surah_id
+          WHERE a.verse_key IN ($placeholders)
+        ''', vks);
+      } else {
+        // Fallback 1: Query by ayahs.page_number
+        ayahMaps = await db.rawQuery('''
+          SELECT a.*, s.name_bn as surah_name_bn
+          FROM ayahs a
+          LEFT JOIN surahs s ON s.id = a.surah_id
+          WHERE a.page_number = ?
+          ORDER BY a.id ASC
+        ''', [pageNumber]);
+
+        if (ayahMaps.isNotEmpty) {
+          vks = ayahMaps.map((m) => m['verse_key'] as String).toList();
+        } else if (pageMaps.isNotEmpty) {
+          // Fallback 2: Query by start_surah_id/start_ayah_number to end_surah_id/end_ayah_number
+          final p = pageMaps.first;
+          final sSid = (p['start_surah_id'] ?? 1) as int;
+          final sAid = (p['start_ayah_number'] ?? 1) as int;
+          final eSid = (p['end_surah_id'] ?? sSid) as int;
+          final eAid = (p['end_ayah_number'] ?? sAid) as int;
+
+          if (sSid == eSid) {
+            ayahMaps = await db.rawQuery('''
+              SELECT a.*, s.name_bn as surah_name_bn
+              FROM ayahs a
+              LEFT JOIN surahs s ON s.id = a.surah_id
+              WHERE a.surah_id = ? AND a.ayah_number >= ? AND a.ayah_number <= ?
+              ORDER BY a.ayah_number ASC
+            ''', [sSid, sAid, eAid]);
+          } else {
+            ayahMaps = await db.rawQuery('''
+              SELECT a.*, s.name_bn as surah_name_bn
+              FROM ayahs a
+              LEFT JOIN surahs s ON s.id = a.surah_id
+              WHERE (a.surah_id = ? AND a.ayah_number >= ?)
+                 OR (a.surah_id = ? AND a.ayah_number <= ?)
+                 OR (a.surah_id > ? AND a.surah_id < ?)
+              ORDER BY a.id ASC
+            ''', [sSid, sAid, eSid, eAid, sSid, eSid]);
+          }
+          vks = ayahMaps.map((m) => m['verse_key'] as String).toList();
+        }
+      }
+
+      if (ayahMaps.isEmpty) return [];
+
+      final Map<String, Ayah> ayahsByVk = {};
+      for (var m in ayahMaps) {
+        final a = Ayah.fromMap(m);
+        a.surahNameBn = m['surah_name_bn'] as String?;
+        ayahsByVk[a.verseKey] = a;
+      }
+
+      final List<Ayah> ayahs = [];
+      for (var vk in vks) {
+        if (ayahsByVk.containsKey(vk)) {
+          ayahs.add(ayahsByVk[vk]!);
+        }
+      }
+      for (var a in ayahsByVk.values) {
+        if (!ayahs.contains(a)) {
+          ayahs.add(a);
+        }
+      }
+
+      if (ayahs.isEmpty) return [];
+
+      // Query translations
+      final conditions = List.filled(ayahs.length, '(surah_id = ? AND ayah_number = ?)').join(' OR ');
+      final List<dynamic> params = [];
+      for (var a in ayahs) {
+        params.add(a.surahId);
+        params.add(a.ayahNumber);
+      }
+
+      final transMaps = await db.rawQuery(
+        'SELECT surah_id, ayah_number, edition, text_bn FROM translations WHERE $conditions',
+        params,
+      );
+
+      for (var t in transMaps) {
+        final sid = t['surah_id'] as int;
+        final an = t['ayah_number'] as int;
+        final vk = '$sid:$an';
+        final a = ayahsByVk[vk];
+        if (a != null) {
+          if (t['edition'] == 'taisirul') {
+            a.translationTaisirul = t['text_bn'] as String?;
+          } else if (t['edition'] == 'zakaria') {
+            a.translationZakaria = t['text_bn'] as String?;
+          }
+        }
+      }
+
+      // Query Word-by-Word data
+      final wordMaps = await db.rawQuery(
+        'SELECT surah_id, ayah_number, position, text_arabic, meaning_bn FROM words_wbw WHERE $conditions ORDER BY surah_id, ayah_number, position ASC',
+        params,
+      );
+
+      final Map<String, List<WordWbw>> wordsByVk = {};
+      for (var w in wordMaps) {
+        final sid = w['surah_id'] as int;
+        final an = w['ayah_number'] as int;
+        final vk = '$sid:$an';
+        wordsByVk.putIfAbsent(vk, () => []).add(WordWbw.fromMap(w));
+      }
+
+      for (var a in ayahs) {
+        a.words = wordsByVk[a.verseKey] ?? [];
+      }
+
+      return ayahs;
+    } catch (e, stack) {
+      debugPrint('Error in getAyahsForPage($pageNumber): $e\n$stack');
+      return [];
     }
-
-    final wordMaps = await db.rawQuery(
-      'SELECT surah_id, ayah_number, position, text_arabic, meaning_bn FROM words_wbw WHERE $conditions ORDER BY surah_id, ayah_number, position ASC',
-      params,
-    );
-
-    final Map<String, List<WordWbw>> wordsByVk = {};
-    for (var w in wordMaps) {
-      final sid = w['surah_id'] as int;
-      final an = w['ayah_number'] as int;
-      final vk = '$sid:$an';
-      wordsByVk.putIfAbsent(vk, () => []).add(WordWbw.fromMap(w));
-    }
-
-    for (var a in ayahs) {
-      a.words = wordsByVk[a.verseKey] ?? [];
-    }
-
-    return ayahs;
   }
 
   Future<List<Ayah>> getAyahsForSurah(int surahId) async {

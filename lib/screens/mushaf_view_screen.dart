@@ -111,8 +111,6 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
 
   void _openStudySheet() {
     final surah = _getCurrentSurah(_currentPage);
-    if (surah == null) return;
-
     final info = _pagesInfo[_currentPage];
     final int initialAyah = (info != null && info['start_ayah_number'] != null)
         ? (info['start_ayah_number'] as int)
@@ -124,13 +122,14 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
       backgroundColor: Colors.transparent,
       builder: (_) {
         return DraggableScrollableSheet(
-          initialChildSize: 0.65,
+          initialChildSize: 0.70,
           maxChildSize: 0.95,
           minChildSize: 0.35,
-          builder: (_, __) => StudySheet(
+          builder: (ctx, scrollController) => StudySheet(
             pageNumber: _currentPage,
             surah: surah,
             initialAyahNumber: initialAyah,
+            scrollController: scrollController,
           ),
         );
       },
@@ -406,11 +405,24 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
                 controller: _pageController,
                 itemCount: 612,
                 onPageChanged: (index) {
+                  final newPage = index + 1;
                   setState(() {
-                    _currentPage = index + 1;
+                    _currentPage = newPage;
                   });
                   _checkBookmarkStatus();
                   _saveCurrentLastRead();
+                  if (newPage > 1) {
+                    precacheImage(
+                      AssetImage('assets/pages/page_${(newPage - 1).toString().padLeft(3, '0')}.jpg'),
+                      context,
+                    );
+                  }
+                  if (newPage < 612) {
+                    precacheImage(
+                      AssetImage('assets/pages/page_${(newPage + 1).toString().padLeft(3, '0')}.jpg'),
+                      context,
+                    );
+                  }
                 },
                 itemBuilder: (context, index) {
                   final pageNum = index + 1;
@@ -423,6 +435,7 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
                       child: Image.asset(
                         fileName,
                         fit: BoxFit.contain,
+                        gaplessPlayback: true,
                         errorBuilder: (_, __, ___) => Center(
                           child: Text('পৃষ্ঠা $pageNum লোড করা যায়নি'),
                         ),
