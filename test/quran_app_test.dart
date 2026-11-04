@@ -4,6 +4,8 @@ import 'package:quran_hafezi_imdadia/models/juz.dart';
 import 'package:quran_hafezi_imdadia/models/ayah.dart';
 import 'package:quran_hafezi_imdadia/models/word_wbw.dart';
 import 'package:quran_hafezi_imdadia/models/bookmark.dart';
+import 'package:quran_hafezi_imdadia/models/planner_model.dart';
+import 'package:quran_hafezi_imdadia/utils/tri_calendar_helper.dart';
 
 void main() {
   group('Quran Data Models Verification Tests', () {
@@ -53,6 +55,45 @@ void main() {
       expect(juz.id, 1);
       expect(juz.nameBn, 'আলিফ লাম মীম');
       expect(juz.startPage, 2);
+    });
+
+
+    test('TriCalendarHelper numeral and date calculations should be accurate', () {
+      expect(TriCalendarHelper.toBnNum(12345), '১২৩৪৫');
+      final date = DateTime(2026, 11, 4);
+      final bn = TriCalendarHelper.getBengaliDate(date);
+      expect(bn.year, 1433);
+      expect(bn.monthName, 'কার্তিক');
+
+      final hj = TriCalendarHelper.getHijriDate(date);
+      expect(hj.year, 1448);
+      expect(hj.monthName, 'জমাদিউল আউয়াল');
+
+      final formatted = TriCalendarHelper.formatTriDateFull(date);
+      expect(formatted, contains('নভেম্বর'));
+      expect(formatted, contains('কার্তিক'));
+      expect(formatted, contains('জমাদিউল আউয়াল'));
+    });
+
+    test('PlannerModel and DayLog JSON serialization works correctly', () {
+      final model = PlannerModel(profileMode: 'general', hijriOffset: 0);
+      final dKey = '2026-11-04';
+      model.logs[dKey] = DayLog(
+        generalTilawat: 'পারা ১',
+        status: 'completed',
+        notes: [
+          PlannerNote(id: 101, page: 45, text: 'তিলাওয়াত নোট', dateKey: dKey),
+        ],
+      );
+
+      final map = model.toMap();
+      final restored = PlannerModel.fromMap(map);
+
+      expect(restored.profileMode, 'general');
+      expect(restored.logs[dKey]?.generalTilawat, 'পারা ১');
+      expect(restored.logs[dKey]?.status, 'completed');
+      expect(restored.logs[dKey]?.notes.length, 1);
+      expect(restored.logs[dKey]?.notes.first.text, 'তিলাওয়াত নোট');
     });
 
     test('Ayah and WordWbw relationships should attach properly', () {
