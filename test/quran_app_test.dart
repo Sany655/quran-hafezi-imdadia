@@ -77,7 +77,12 @@ void main() {
     });
 
     test('PlannerModel and DayLog JSON serialization works correctly', () {
-      final model = PlannerModel(profileMode: 'general', hijriOffset: 0);
+      final model = PlannerModel(
+        profileMode: 'general',
+        hijriOffset: 0,
+        roadmapGoalMode: 'pages',
+        planStartDate: '2026-11-04',
+      );
       final dKey = '2026-11-04';
       model.logs[dKey] = DayLog(
         generalTilawat: 'পারা ১',
@@ -91,6 +96,8 @@ void main() {
       final restored = PlannerModel.fromMap(map);
 
       expect(restored.profileMode, 'general');
+      expect(restored.roadmapGoalMode, 'pages');
+      expect(restored.planStartDate, '2026-11-04');
       expect(restored.logs[dKey]?.generalTilawat, 'পারা ১');
       expect(restored.logs[dKey]?.status, 'completed');
       expect(restored.logs[dKey]?.notes.length, 1);
@@ -141,6 +148,29 @@ void main() {
 
       // daysLeft = 5 - 2 = 3. dailyRequired = ceil(407 / 3) = 136 pages/day
       expect(stats.dailyRequiredPages, 136);
+    });
+
+    test('Hafiz day ranges cover a full cycle without overlap', () {
+      for (final cycleDays in [7, 15, 30]) {
+        final coveredParas = <int>[];
+        for (var day = 0; day < cycleDays; day++) {
+          final (start, end) = PlannerService.hafizParaRangeForDay(
+            dayIndex: day,
+            targetDays: cycleDays,
+            startPara: 27,
+          );
+          var para = start;
+          while (true) {
+            coveredParas.add(para);
+            if (para == end) break;
+            para = para % 30 + 1;
+          }
+        }
+
+        expect(coveredParas.length, 30);
+        expect(coveredParas.toSet().length, 30);
+        expect(coveredParas.toSet(), Set<int>.from(List.generate(30, (i) => i + 1)));
+      }
     });
 
     test('Ayah and WordWbw relationships should attach properly', () {

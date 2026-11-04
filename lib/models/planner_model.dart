@@ -128,6 +128,8 @@ class PlannerModel {
   int hijriOffset;
   int targetDays;
   int pagesPerDay;
+  String roadmapGoalMode;
+  String? planStartDate;
   bool reminderEnabled;
   String reminderTime;
   Map<String, DayLog> logs;
@@ -137,6 +139,8 @@ class PlannerModel {
     this.hijriOffset = 0,
     this.targetDays = 30,
     this.pagesPerDay = 20,
+    this.roadmapGoalMode = 'days',
+    this.planStartDate,
     this.reminderEnabled = false,
     this.reminderTime = '06:00',
     Map<String, DayLog>? logs,
@@ -152,6 +156,8 @@ class PlannerModel {
       'hijriOffset': hijriOffset,
       'targetDays': targetDays,
       'pagesPerDay': pagesPerDay,
+      'roadmapGoalMode': roadmapGoalMode,
+      'planStartDate': planStartDate,
       'reminderEnabled': reminderEnabled,
       'reminderTime': reminderTime,
       'logs': logsMap,
@@ -181,6 +187,8 @@ class PlannerModel {
       pagesPerDay: map['pagesPerDay'] is int
           ? map['pagesPerDay']
           : int.tryParse(map['pagesPerDay']?.toString() ?? '20') ?? 20,
+      roadmapGoalMode: map['roadmapGoalMode'] == 'pages' ? 'pages' : 'days',
+      planStartDate: map['planStartDate']?.toString(),
       reminderEnabled: map['reminderEnabled'] == true,
       reminderTime: map['reminderTime']?.toString() ?? '06:00',
       logs: parsedLogs,
