@@ -29,205 +29,238 @@
     <span id="toastMessage"></span>
   </div>
 
-  <!-- 4. Huffaz Routine & Tri-Calendar Modal -->
+    <!-- Wudu & Purity Adab Gateway Modal -->
+  <div id="wuduGatewayModal" class="fixed inset-0 z-[100] flex items-center justify-center bg-slate-950/90 backdrop-blur-md p-4 font-bengali overflow-y-auto transition-opacity duration-300">
+    <div class="max-w-md w-full bg-gradient-to-b from-[#061e12] via-[#0b3821] to-[#04160d] text-white rounded-3xl p-5 sm:p-6 shadow-2xl border border-gold-500/40 space-y-4 my-auto relative">
+      <!-- Icon & Bismillah -->
+      <div class="text-center space-y-2">
+        <div class="w-14 h-14 mx-auto rounded-full bg-emerald-800 border-2 border-gold-500/80 flex items-center justify-center shadow-lg shadow-gold-500/20 text-gold-300 text-2xl">
+          📖
+        </div>
+        <div class="text-xl sm:text-2xl font-serif text-gold-300 font-bold tracking-wide">
+          بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+        </div>
+        <div class="text-sm font-bold text-white tracking-wide">
+          পবিত্রতা ও তিলাওয়াতের আদব
+        </div>
+      </div>
+
+      <!-- Ayah Card -->
+      <div class="p-4 rounded-2xl bg-white/5 border border-gold-500/30 text-center space-y-2">
+        <div class="text-base sm:text-lg font-serif text-amber-100 font-semibold leading-relaxed">
+          إِنَّهُ لَقُرْآنٌ كَرِيمٌ ﴿٧٧﴾ فِي كِتَابٍ مَّكْنُونٍ ﴿٧٨﴾ لَّا يَمَسُّهُ إِلَّا الْمُطَهَّরُونَ ﴿٧٩﴾
+        </div>
+        <div class="w-16 h-px bg-gold-500/40 mx-auto my-1.5"></div>
+        <p class="text-xs sm:text-sm text-slate-200 italic leading-relaxed">
+          “নিশ্চয় এটি এক সম্মানিত কুরআন, যা আছে সুরক্ষিত কিতাবে; পবিত্রগণ ব্যতীত অন্য কেউ তা স্পর্শ করে না।”
+        </p>
+        <span class="text-[11px] font-bold text-gold-300 block">
+          (সূরা আল-ওয়াকি'আহ: ৭৭-৭৯)
+        </span>
+      </div>
+
+      <!-- Mobile Touch Guidance Card -->
+      <div class="p-3.5 rounded-2xl bg-emerald-950/70 border border-emerald-700/50 space-y-2 text-xs leading-relaxed text-slate-200">
+        <div class="flex items-center gap-2 font-bold text-gold-300 text-xs">
+          <span>📱</span>
+          <span>মোবাইলে কুরআন স্পর্শের বিধান</span>
+        </div>
+        <p class="text-[11.5px] text-slate-200 leading-normal">
+          অনেকে মনে করেন মোবাইলের স্ক্রিনে কোরআন থাকলে অজুর প্রয়োজন নেই। কিন্তু ফুকাহায়ে কিরাম ও ওলামাদের নির্ভরযোগ্য ও সতর্কতামূলক ফতোয়া অনুযায়ী: মোবাইলের পর্দায় যখন কুরআনের আয়াত দৃশ্যমান থাকে, তখন বিনা অজুতে সরাসরি স্ক্রিনের আয়াতের ওপর হাত বা আঙুল লাগানো থেকে বিরত থাকা উচিত।
+        </p>
+        <div class="p-2 rounded-xl bg-black/30 border border-sky-500/20 text-sky-200 text-[11px] flex items-start gap-2">
+          <span class="text-sky-400">💧</span>
+          <span>কুরআনের পূর্ণ বরকত ও সর্বোচ্চ সম্মান প্রদর্শনের জন্য তিলাওয়াত শুরুর পূর্বে অজু করে নেওয়া সবচেয়ে উত্তম ও নিরাপদ।</span>
+        </div>
+      </div>
+
+      <!-- Quick Adab Pills -->
+      <div class="grid grid-cols-3 gap-2 text-center text-[10.5px]">
+        <div class="p-2 rounded-xl bg-white/5 border border-white/10 text-slate-200 flex flex-col items-center gap-1">
+          <span class="text-gold-300 text-sm">✓</span>
+          <span>অজু নিশ্চিত করুন</span>
+        </div>
+        <div class="p-2 rounded-xl bg-white/5 border border-white/10 text-slate-200 flex flex-col items-center gap-1">
+          <span class="text-gold-300 text-sm">🎙️</span>
+          <span>ধীরে ধীরে তিলাওয়াত</span>
+        </div>
+        <div class="p-2 rounded-xl bg-white/5 border border-white/10 text-slate-200 flex flex-col items-center gap-1">
+          <span class="text-gold-300 text-sm">❤️</span>
+          <span>একনিষ্ঠ মনযোগ</span>
+        </div>
+      </div>
+
+      <!-- Slide to Enter Action -->
+      <div class="pt-2 text-center space-y-2">
+        <div class="text-[11.5px] text-slate-300 font-medium">
+          অজু অবস্থায় পবিত্র অন্তরে তিলাওয়াত শুরু করুন
+        </div>
+        <!-- Slider Container -->
+        <div id="wuduSliderTrack" class="relative w-full h-14 rounded-full bg-emerald-950/80 border-2 border-gold-500/60 p-1 flex items-center overflow-hidden cursor-pointer select-none">
+          <div id="wuduSliderFill" class="absolute left-0 top-0 bottom-0 bg-emerald-700/60 rounded-full transition-all duration-75" style="width: 48px;"></div>
+          <div id="wuduSliderText" class="w-full text-center text-gold-300 font-bold text-xs sm:text-sm tracking-wide z-10 pointer-events-none transition-opacity duration-150">
+            স্লাইড করে প্রবেশ করুন »»
+          </div>
+          <div id="wuduSliderThumb" class="absolute left-1 top-1 w-12 h-12 rounded-full bg-gradient-to-r from-gold-300 to-gold-500 text-emerald-950 flex items-center justify-center font-bold text-lg shadow-lg z-20 cursor-grab active:cursor-grabbing transition-transform duration-75">
+            ➔
+          </div>
+        </div>
+        <button id="skipWuduGatewayBtn" class="text-[11px] text-gold-400 hover:text-gold-300 underline pt-1">
+          সরাসরি তিলাওয়াতে প্রবেশ করুন →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Huffaz Routine & Tri-Calendar Modal (Draft v3 Architecture) -->
   <div id="plannerModalBackdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300 flex items-end sm:items-center justify-center p-0 sm:p-4 font-bengali">
-    <div id="plannerModalContent" class="w-full max-w-2xl bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col max-h-[88dvh] sm:max-h-[85vh] overflow-hidden transform translate-y-full transition-transform duration-300 pb-[env(safe-area-inset-bottom,0px)]">
+    <div id="plannerModalContent" class="w-full max-w-2xl bg-white dark:bg-slate-900 rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col max-h-[90dvh] sm:max-h-[85vh] overflow-hidden transform translate-y-full transition-transform duration-300 pb-[env(safe-area-inset-bottom,0px)] relative">
       
       <!-- Header -->
-      <div class="p-4 bg-emerald-900 text-white flex items-center justify-between border-b border-emerald-800 shrink-0">
+      <div class="p-3.5 sm:p-4 bg-emerald-900 text-white flex items-center justify-between border-b border-emerald-800 shrink-0">
         <div>
           <div class="flex items-center gap-2">
-            <h2 id="plannerModalMainTitle" class="font-bold text-base sm:text-lg text-white">কুরআন তিলাওয়াত ট্র্যাকার ও ক্যালেন্ডার</h2>
+            <h2 id="plannerModalMainTitle" class="font-bold text-base sm:text-lg text-white">কুরআন তিলাওয়াত ট্র্যাকার</h2>
             <span class="text-[10px] bg-gold-500 text-emerald-950 font-bold px-2 py-0.5 rounded-full">v3 অফলাইন</span>
           </div>
           <p id="plannerTodayTriDate" class="text-xs text-gold-300 font-medium mt-0.5"></p>
         </div>
-        <button id="closePlannerBtn" class="p-2 rounded-lg hover:bg-emerald-800 text-emerald-200 transition">✕</button>
-      </div>
-
-      <!-- Smart Profile Mode Switcher -->
-      <div class="px-3 py-2 bg-emerald-950/90 border-b border-emerald-800/60 flex items-center justify-between gap-1.5 overflow-x-auto no-scrollbar shrink-0">
-        <span class="text-[11px] text-emerald-200 font-medium shrink-0 hidden sm:inline">মোড:</span>
-        <div class="flex items-center gap-1.5 flex-1 justify-start">
-          <button id="modeBtnGeneral" class="px-2.5 sm:px-3 py-1 rounded-xl text-xs font-semibold bg-emerald-600 text-white shadow-sm transition shrink-0">
-            🌿 সাধারণ তিলাওয়াত
+        <div class="flex items-center gap-1">
+          <button id="openPlannerSettingsBtn" class="p-2 rounded-xl hover:bg-emerald-800 text-gold-300 hover:text-white transition" title="প্ল্যানার সেটিংস">
+            ⚙️
           </button>
-          <button id="modeBtnStudent" class="px-2.5 sm:px-3 py-1 rounded-xl text-xs font-semibold bg-emerald-900/60 text-emerald-300 hover:text-white transition shrink-0">
-            📖 শিক্ষার্থী (সবক/দাওর)
-          </button>
-          <button id="modeBtnHafiz" class="px-2.5 sm:px-3 py-1 rounded-xl text-xs font-semibold bg-emerald-900/60 text-emerald-300 hover:text-white transition shrink-0">
-            🌟 হুফ্ফাজ মোড (শুধু দাওর)
+          <button id="closePlannerBtn" class="p-2 rounded-xl hover:bg-emerald-800 text-emerald-200 transition" title="বন্ধ করুন">
+            ✕
           </button>
         </div>
       </div>
 
-      <!-- Navigation Tabs inside Planner -->
-      <div class="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 flex items-center gap-1 overflow-x-auto no-scrollbar shrink-0">
-        <button id="plannerTabCalendar" class="flex-1 py-1.5 px-2 rounded-lg text-xs font-semibold bg-white dark:bg-slate-700 text-emerald-800 dark:text-emerald-300 shadow-sm transition text-center shrink-0">
-          📅 ক্যালেন্ডার ও তিলাওয়াত
+      <!-- Navigation Tabs (3 Clean Tabs, no persistent mode bar) -->
+      <div class="px-3 py-1.5 bg-slate-100 dark:bg-slate-800 border-b border-slate-200 dark:border-slate-700 flex items-center gap-1.5 shrink-0">
+        <button id="plannerTabToday" class="flex-1 py-2 px-2 rounded-xl text-xs font-bold bg-white dark:bg-slate-700 text-emerald-800 dark:text-emerald-300 shadow-sm transition text-center">
+          🌿 আজকের ফোকাস
         </button>
-        <button id="plannerTabCycle" class="flex-1 py-1.5 px-2 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-emerald-700 transition text-center shrink-0">
-          🎯 খতম প্ল্যানার
+        <button id="plannerTabRoadmap" class="flex-1 py-2 px-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-emerald-700 transition text-center">
+          🎯 রোডম্যাপ ও প্ল্যান
         </button>
-        <button id="plannerTabNotes" class="flex-1 py-1.5 px-2 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-emerald-700 transition text-center shrink-0">
-          📝 তিলাওয়াত নোট ও আয়াত
-        </button>
-        <button id="plannerTabSettings" class="py-1.5 px-3 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-emerald-700 transition text-center shrink-0">
-          ⚙️ ব্যাকআপ ও সেটিংস
+        <button id="plannerTabDiary" class="flex-1 py-2 px-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-emerald-700 transition text-center">
+          📝 কুরআনিক ডায়েরি
         </button>
       </div>
 
       <!-- Scrollable Tab Content Container -->
       <div class="flex-1 overflow-y-auto p-3 sm:p-4 space-y-4 no-scrollbar">
 
-        <!-- TAB 1: Calendar & Dour View -->
-        <div id="plannerViewCalendar" class="space-y-4">
-          
-          <!-- Month Switcher & Tri-Month Banner -->
-          <div class="p-3 bg-emerald-50 dark:bg-slate-800/80 rounded-2xl border border-emerald-200/60 dark:border-slate-700 flex items-center justify-between">
-            <button id="prevMonthBtn" class="p-2 rounded-xl bg-white dark:bg-slate-700 shadow-sm hover:bg-emerald-100 text-emerald-800 dark:text-emerald-200 transition">
-              ◀
-            </button>
-            <div class="text-center">
-              <div id="calendarGregorianMonth" class="text-sm sm:text-base font-bold text-slate-900 dark:text-white"></div>
-              <div id="calendarSubTriMonth" class="text-[11px] sm:text-xs text-emerald-700 dark:text-emerald-300 font-medium"></div>
-            </div>
-            <button id="nextMonthBtn" class="p-2 rounded-xl bg-white dark:bg-slate-700 shadow-sm hover:bg-emerald-100 text-emerald-800 dark:text-emerald-200 transition">
-              ▶
-            </button>
-          </div>
-
-          <!-- Calendar Days Grid -->
+        <!-- TAB 1: Today's Focus -->
+        <div id="plannerViewToday" class="space-y-4">
+          <!-- 1. Horizontal Date Strip (11 days) -->
           <div>
-            <!-- Weekday headers -->
-            <div class="grid grid-cols-7 gap-1 text-center font-bold text-xs text-slate-500 dark:text-slate-400 mb-1">
-              <span>রবি</span><span>সোম</span><span>মঙ্গল</span><span>বুধ</span><span>বৃহঃ</span><span class="text-emerald-600 dark:text-emerald-400">শুক্র</span><span>শনি</span>
+            <div class="text-[11px] font-bold text-slate-500 dark:text-slate-400 mb-1.5 px-0.5 flex items-center justify-between">
+              <span>দিন নির্বাচন করুন:</span>
+              <span id="dateStripCurrentLabel" class="text-emerald-700 dark:text-emerald-400 font-semibold"></span>
             </div>
-            <!-- Month Cells Grid -->
-            <div id="calendarGrid" class="grid grid-cols-7 gap-1 sm:gap-1.5">
-              <!-- Dynamically populated -->
+            <div id="plannerDateStrip" class="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+              <!-- Dynamically populated via JS -->
             </div>
           </div>
 
-          <!-- Selected Day Details & Routine Card -->
-          <div id="selectedDayCard" class="p-4 rounded-2xl bg-white dark:bg-slate-800 border-2 border-emerald-500/40 shadow-sm space-y-3">
+          <!-- 2. Today's Action Card -->
+          <div id="selectedDayCard" class="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm space-y-3">
             <div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-700">
               <div>
-                <span class="text-[11px] font-bold text-gold-600 dark:text-gold-400">নির্বাচিত দিন</span>
+                <span class="text-[11px] font-bold text-gold-600 dark:text-gold-400">নির্বাচিত দিনের লক্ষ্য</span>
                 <h3 id="selectedDateHeader" class="text-sm sm:text-base font-bold text-slate-900 dark:text-white"></h3>
               </div>
-              <span id="selectedDateSpecialBadge" class="hidden text-[10px] bg-gold-500 text-emerald-950 font-bold px-2 py-0.5 rounded-full"></span>
+              <button id="toggleDayStatusBtn" class="px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+                <!-- Status icon + text populated via JS -->
+              </button>
             </div>
 
-            <!-- HUFFAZ MODE SECTION -->
-            <div id="sectionHafizMode" class="space-y-3">
-              <!-- Dour Para Tracker -->
-              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 bg-slate-50 dark:bg-slate-900/60 p-3 rounded-xl border border-slate-200 dark:border-slate-700">
-                <div>
-                  <label class="text-xs font-bold text-slate-700 dark:text-slate-300">আজকের দাওর (পারা):</label>
-                  <p class="text-[11px] text-slate-500 dark:text-slate-400">রিভিশন করার নির্ধারিত পারা</p>
-                </div>
-                <div class="flex items-center gap-2">
-                  <input type="text" id="hafizDourInput" placeholder="যেমন: পারা ৭, ৮" 
-                         class="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-base sm:text-sm font-bengali focus:outline-none focus:ring-2 focus:ring-emerald-500 w-full sm:w-36">
-                  <button id="saveHafizDourBtn" class="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold transition shadow-sm">
-                    সংরক্ষণ
-                  </button>
-                </div>
-              </div>
-
-              <!-- Dour Completion Status Toggle -->
-              <div class="flex items-center justify-between gap-2 pt-1">
-                <span class="text-xs font-bold text-slate-700 dark:text-slate-300">দাওর স্ট্যাটাস:</span>
-                <div class="flex items-center gap-1.5">
-                  <button data-status="completed" class="status-btn px-2.5 py-1 rounded-xl text-xs font-semibold border border-emerald-500/50 hover:bg-emerald-100 dark:hover:bg-emerald-950/60 text-slate-700 dark:text-slate-300 transition">
-                    ✅ সম্পন্ন
-                  </button>
-                  <button data-status="partial" class="status-btn px-2.5 py-1 rounded-xl text-xs font-semibold border border-amber-500/50 hover:bg-amber-100 dark:hover:bg-amber-950/60 text-slate-700 dark:text-slate-300 transition">
-                    ⏳ আংশিক
-                  </button>
-                  <button data-status="pending" class="status-btn px-2.5 py-1 rounded-xl text-xs font-semibold border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition">
-                    ❌ বাকি
-                  </button>
-                </div>
+            <!-- General Mode Input -->
+            <div id="sectionGeneralMode" class="space-y-2.5">
+              <label class="text-xs font-bold text-slate-700 dark:text-slate-300 block">আজকের তিলাওয়াত (পৃষ্ঠা/পারা):</label>
+              <div class="flex items-center gap-2">
+                <input type="text" id="generalTilawatInput" placeholder="যেমন: পারা ১ অথবা পৃষ্ঠা ১-২০" class="flex-1 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-xs sm:text-sm font-bengali">
+                <button id="saveGeneralTilawatBtn" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold transition shrink-0 shadow-sm">
+                  সংরক্ষণ
+                </button>
               </div>
             </div>
 
-            <!-- STUDENT MODE SECTION -->
+            <!-- Hafiz Mode Input -->
+            <div id="sectionHafizMode" class="hidden space-y-2.5">
+              <label class="text-xs font-bold text-slate-700 dark:text-slate-300 block">আজকের রিভিশন পারা (দাওর):</label>
+              <div class="flex items-center gap-2">
+                <input type="text" id="hafizDourInput" placeholder="যেমন: ৩য় ও ৪র্থ পারা" class="flex-1 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-xs sm:text-sm font-bengali">
+                <button id="saveHafizDourBtn" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold transition shrink-0 shadow-sm">
+                  সংরক্ষণ
+                </button>
+              </div>
+            </div>
+
+            <!-- Student Mode Input -->
             <div id="sectionStudentMode" class="hidden space-y-2.5">
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700">
-                  <span class="text-xs font-bold text-emerald-700 dark:text-emerald-400">১. সবক (নতুন):</span>
-                  <input type="text" id="studentSabakInput" placeholder="পেজ/আয়াত..." class="w-full mt-1 px-2.5 py-1 text-base sm:text-xs rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800">
+                <div>
+                  <span class="text-[11px] font-bold text-emerald-700 dark:text-emerald-400">১. সবক (নতুন):</span>
+                  <input type="text" id="studentSabakInput" placeholder="পেজ/আয়াত..." class="w-full mt-1 px-2.5 py-1.5 text-xs rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900">
                 </div>
-                <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700">
-                  <span class="text-xs font-bold text-teal-700 dark:text-teal-400">২. সবকী (সাম্প্রতিক):</span>
-                  <input type="text" id="studentSabkiInput" placeholder="পেজ ৭-১২..." class="w-full mt-1 px-2.5 py-1 text-base sm:text-xs rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800">
+                <div>
+                  <span class="text-[11px] font-bold text-teal-700 dark:text-teal-400">২. সবকী (সাম্প্রতিক):</span>
+                  <input type="text" id="studentSabkiInput" placeholder="পেজ ৭-১২..." class="w-full mt-1 px-2.5 py-1.5 text-xs rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900">
                 </div>
-                <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700">
-                  <span class="text-xs font-bold text-cyan-700 dark:text-cyan-400">৩. দাওর (পুরনো):</span>
-                  <input type="text" id="studentDourInput" placeholder="পারা ৫..." class="w-full mt-1 px-2.5 py-1 text-base sm:text-xs rounded-lg border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800">
+                <div>
+                  <span class="text-[11px] font-bold text-cyan-700 dark:text-cyan-400">৩. দাওর (পুরনো):</span>
+                  <input type="text" id="studentDourInput" placeholder="পারা ৫..." class="w-full mt-1 px-2.5 py-1.5 text-xs rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900">
                 </div>
               </div>
-              <button id="saveStudentRoutineBtn" class="w-full py-1.5 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold transition">
+              <button id="saveStudentRoutineBtn" class="w-full py-2 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold transition shadow-sm">
                 শিক্ষার্থী রুটিন সংরক্ষণ
               </button>
             </div>
-
-            <!-- GENERAL MODE SECTION -->
-            <div id="sectionGeneralMode" class="hidden space-y-2.5">
-              <div class="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-2">
-                <div>
-                  <label class="text-xs font-bold text-slate-700 dark:text-slate-300">আজকের তিলাওয়াত:</label>
-                  <p class="text-[11px] text-slate-500 dark:text-slate-400">কতটুকু তিলাওয়াত সম্পন্ন করলেন?</p>
-                </div>
-                <input type="text" id="generalTilawatInput" placeholder="যেমন: ৫ পৃষ্ঠা / ১ পারা" class="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-xs sm:text-sm font-bengali w-36">
-              </div>
-              <button id="saveGeneralTilawatBtn" class="w-full py-1.5 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold transition">
-                তিলাওয়াত সম্পন্ন হিসেবে সংরক্ষণ
-              </button>
-            </div>
-
-            <!-- Self-Correction & Mutashabihat Logger (Common to all, vital for Huffaz) -->
-            <div class="pt-3 border-t border-slate-200 dark:border-slate-700 space-y-2">
-              <div class="flex items-center justify-between">
-                <span class="text-xs font-bold text-slate-800 dark:text-slate-200">মুতাশাবিহাত ও সেলফ-কারেকশন নোট:</span>
-                <span class="text-[10px] text-slate-500">ভুল বা আটকে যাওয়ার জায়গা</span>
-              </div>
-              <div class="flex items-center gap-2">
-                <input type="number" id="notePageInput" placeholder="পৃষ্ঠা (১-৬১২)" min="1" max="612" 
-                       class="w-28 px-2.5 py-1.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-xs font-mono font-bold text-center">
-                <input type="text" id="noteTextInput" placeholder="কোথায় প্যাঁচ লেগেছিল বা নোট..." 
-                       class="flex-1 px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-xs font-bengali">
-                <button id="addSelfCorrectionBtn" class="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold transition shrink-0">
-                  + যোগ
-                </button>
-              </div>
-
-              <!-- List of notes for selected day -->
-              <div id="selectedDayNotesList" class="space-y-1.5 pt-1">
-                <!-- Injected via JS -->
-              </div>
-            </div>
-
           </div>
 
+          <!-- 3. Khatam Progress Card -->
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-800 dark:text-slate-200">চলতি খতমের অগ্রগতি</span>
+              <span id="khatamPercentBadge" class="text-xs bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-bold px-2.5 py-0.5 rounded-full">০% সম্পন্ন</span>
+            </div>
+            <div class="w-full bg-slate-100 dark:bg-slate-700 rounded-full h-2.5 overflow-hidden">
+              <div id="khatamProgressBar" class="bg-emerald-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+            </div>
+            <div class="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 pt-0.5">
+              <span id="khatamCompletedDaysText">মোট পড়া হয়েছে: ০ দিন</span>
+              <span id="khatamTargetDaysText">টার্গেট: ৩০ দিন</span>
+            </div>
+          </div>
+
+          <!-- 4. 7-Day Consistency Streak -->
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-800 dark:text-slate-200">গত ৭ দিনের ধারাবাহিকতা (Streak)</span>
+              <span id="streakCountBadge" class="text-xs font-bold text-emerald-700 dark:text-emerald-400">০/৭ দিন</span>
+            </div>
+            <div id="sevenDayStreakContainer" class="flex items-center justify-around pt-1">
+              <!-- Dynamically populated via JS -->
+            </div>
+          </div>
         </div>
 
-        <!-- TAB 2: Khatam / Dour Plan Generator -->
-        <div id="plannerViewCycle" class="hidden space-y-4">
-          <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-3">
+        <!-- TAB 2: Roadmap & Plan -->
+        <div id="plannerViewRoadmap" class="hidden space-y-4">
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-3">
             <h3 class="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
               <span id="cycleViewIcon">🎯</span>
-              <span id="cycleViewTitle">সহজ কুরআন খতম প্ল্যানার</span>
+              <span id="cycleViewTitle">খতম ও দাওর রোডম্যাপ নির্ধারণ</span>
             </h3>
             <p id="cycleViewDesc" class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              আপনি কত দিনে পুরো কুরআন তিলাওয়াত শেষ করতে চান নির্বাচন করুন। ক্যালেন্ডার স্বয়ংক্রিয়ভাবে প্রতিদিনের পড়ার লক্ষ্য বণ্টন করে দেবে।
+              আপনার সুবিধাজনক সময় নির্বাচন করলে অ্যাপ স্বয়ংক্রিয়ভাবে প্রতিদিনের পড়ার টার্গেট রোডম্যাপ সাজিয়ে দেবে।
             </p>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+            <div class="space-y-3 pt-1">
               <div>
-                <label id="cycleTargetDaysLabel" class="text-xs font-bold text-slate-700 dark:text-slate-300">খতমের সময়সীমা:</label>
+                <label id="cycleTargetDaysLabel" class="text-xs font-bold text-slate-700 dark:text-slate-300">টার্গেট সময়সীমা:</label>
                 <select id="cycleTargetDaysSelect" class="w-full mt-1 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-xs font-bengali">
                   <option value="30" selected>৩০ দিনে খতম (প্রতিদিন ১ পারা / ২০ পৃষ্ঠা)</option>
                   <option value="60">৬০ দিনে খতম (প্রতিদিন আধা পারা / ১০ পৃষ্ঠা)</option>
@@ -237,83 +270,154 @@
                 </select>
               </div>
 
-              <div>
-                <label id="cycleStartLabel" class="text-xs font-bold text-slate-700 dark:text-slate-300">শুরুর পারা (১-৩০):</label>
-                <input type="number" id="cycleStartParaInput" min="1" max="30" value="1" 
-                       class="w-full mt-1 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-xs font-mono font-bold">
+              <div class="grid grid-cols-2 gap-3">
+                <div>
+                  <label class="text-xs font-bold text-slate-700 dark:text-slate-300">শুরুর পারা (১-৩০):</label>
+                  <input type="number" id="cycleStartParaInput" min="1" max="30" value="1" 
+                         class="w-full mt-1 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-xs font-mono font-bold">
+                </div>
+                <div>
+                  <label class="text-xs font-bold text-slate-700 dark:text-slate-300">শুরুর তারিখ:</label>
+                  <input type="date" id="cycleStartDateInput" class="w-full mt-1 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-xs font-mono">
+                </div>
               </div>
-            </div>
 
-            <button id="generateCycleBtn" class="w-full py-2.5 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-md">
-              খতম পরিকল্পনা তৈরি করুন
-            </button>
+              <button id="generateCycleBtn" class="w-full py-2.5 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs sm:text-sm font-semibold transition shadow-md">
+                রোডম্যাপ তৈরি সম্পন্ন করুন
+              </button>
+            </div>
           </div>
 
-          <div id="cycleSummaryBox" class="hidden p-4 rounded-2xl bg-emerald-900 text-white space-y-2">
-            <div id="cycleSummaryTitle" class="text-xs font-bold text-gold-300">✓ পরিকল্পনা সফলভাবে তৈরি হয়েছে!</div>
+          <div id="cycleSummaryBox" class="hidden p-4 rounded-2xl bg-emerald-900 text-white space-y-1.5 shadow-md">
+            <div id="cycleSummaryTitle" class="text-xs font-bold text-gold-300">✓ রোডম্যাপ সফলভাবে প্রস্তুত হয়েছে!</div>
             <p id="cycleSummaryText" class="text-xs text-emerald-100 leading-relaxed"></p>
           </div>
-        </div>
 
-        <!-- TAB 3: Notes List (Tilawat notes / Hifz mistakes / Mutashabihat) -->
-        <div id="plannerViewNotes" class="hidden space-y-3">
-          <div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-700">
-            <div>
-              <h3 id="notesListMainTitle" class="text-sm font-bold text-slate-900 dark:text-white">তিলাওয়াত নোট ও আয়াত সংগ্রহ</h3>
-              <p id="notesListMainSub" class="text-xs text-slate-500">যেকোনো পৃষ্ঠায় যেতে সরাসরি "পৃষ্ঠা খুলুন" বাটনে চাপুন</p>
-            </div>
-            <span id="totalNotesCountBadge" class="text-xs bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-bold px-2.5 py-1 rounded-full"></span>
-          </div>
-
-          <div id="allNotesListContainer" class="space-y-2 max-h-[50vh] overflow-y-auto no-scrollbar">
-            <!-- Dynamically populated -->
+          <!-- Tilawat Tips Card -->
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            <div class="font-bold text-emerald-800 dark:text-emerald-300">💡 নিয়মিত তিলাওয়াতের পরামর্শ:</div>
+            <p>১. প্রতিদিন নির্দিষ্ট সময়ে (যেমন: ফজরের পর) তিলাওয়াত সম্পন্ন করার চেষ্টা করুন।</p>
+            <p>২. এক বসায় সম্ভব না হলে ৫ ওয়াক্ত নামাজের পর ৪ পৃষ্ঠা করে পড়লে দিনে ১ পারা শেষ হয়।</p>
+            <p>৩. হাফেজ ভাইদের জন্য প্রতিদিনের সবক ও সবকি তাজা রাখা দাওরের পূর্বশর্ত।</p>
           </div>
         </div>
 
-        <!-- TAB 4: Settings & Offline Backup -->
-        <div id="plannerViewSettings" class="hidden space-y-4">
-          <!-- Hijri Offset Setting -->
-          <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
-            <label class="text-xs font-bold text-slate-900 dark:text-white flex items-center justify-between">
-              <span>চাঁদ দেখা অনুযায়ী হিজরি তারিখ সমন্বয়:</span>
-              <span id="hijriOffsetLabel" class="text-emerald-700 dark:text-emerald-400 font-bold font-mono">০ দিন</span>
-            </label>
-            <p class="text-[11px] text-slate-500 leading-relaxed">
-              স্থানীয় চাঁদ দেখা অনুযায়ী হিজরি তারিখ ১ বা ২ দিন এগিয়ে বা পিছিয়ে নিতে পারেন (১০০% অফলাইন গাণিতিক হিসেব)।
-            </p>
-            <div class="flex items-center gap-2 pt-1">
-              <button data-offset="-2" class="offset-btn flex-1 py-1 rounded-lg border text-xs font-semibold">-২ দিন</button>
-              <button data-offset="-1" class="offset-btn flex-1 py-1 rounded-lg border text-xs font-semibold">-১ দিন</button>
-              <button data-offset="0" class="offset-btn flex-1 py-1 rounded-lg border text-xs font-semibold bg-emerald-600 text-white">০ দিন</button>
-              <button data-offset="1" class="offset-btn flex-1 py-1 rounded-lg border text-xs font-semibold">+১ দিন</button>
-              <button data-offset="2" class="offset-btn flex-1 py-1 rounded-lg border text-xs font-semibold">+২ দিন</button>
+        <!-- TAB 3: Quranic Diary & Notes -->
+        <div id="plannerViewDiary" class="hidden space-y-4">
+          <!-- Add Note Card -->
+          <div class="p-4 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-3 shadow-sm">
+            <div class="text-xs font-bold text-slate-800 dark:text-slate-200">
+              ভুল বা তিলাওয়াত নোট টুকে রাখুন:
             </div>
-          </div>
-
-          <!-- Offline Backup & Restore -->
-          <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-3">
-            <h4 class="text-xs font-bold text-slate-900 dark:text-white">অফলাইন ব্যাকআপ ও রিস্টোর:</h4>
-            <p class="text-[11px] text-slate-500 leading-relaxed">
-              আপনার সমস্ত দাওর রুটিন, খতম সাইকেল ও মুতাশাবিহাত নোট অফলাইনে একটি ছোট JSON ফাইল হিসেবে ডাউনলোড করে সংরক্ষণ করতে পারেন।
-            </p>
             <div class="flex items-center gap-2">
-              <button id="backupDownloadBtn" class="flex-1 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white text-xs font-semibold transition shadow-sm">
-                📥 ব্যাকআপ ডাউনলোড
+              <input type="number" id="notePageInput" placeholder="পৃষ্ঠা (১-৬১২)" min="1" max="612" 
+                     class="w-28 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-xs font-mono font-bold text-center">
+              <input type="text" id="noteTextInput" placeholder="ভুল শব্দ বা বিশেষ আয়াত..." 
+                     class="flex-1 px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-xs font-bengali">
+              <button id="addSelfCorrectionBtn" class="px-4 py-2 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold transition shrink-0 shadow-sm">
+                + সংরক্ষণ
               </button>
-              <label class="flex-1 py-2 rounded-xl border border-emerald-600 text-emerald-700 dark:text-emerald-300 hover:bg-emerald-50 dark:hover:bg-slate-700 text-xs font-semibold transition text-center cursor-pointer shadow-sm">
-                📤 রিস্টোর করুন
-                <input type="file" id="restoreFileInput" accept=".json" class="hidden">
-              </label>
             </div>
           </div>
 
+          <!-- Notes List -->
+          <div class="space-y-2">
+            <div class="flex items-center justify-between pb-1">
+              <h3 id="notesListMainTitle" class="text-xs font-bold text-slate-800 dark:text-slate-200">সংরক্ষিত নোটসমূহ</h3>
+              <span id="totalNotesCountBadge" class="text-xs bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-bold px-2 py-0.5 rounded-full"></span>
+            </div>
+            <div id="allNotesListContainer" class="space-y-2 max-h-[50vh] overflow-y-auto no-scrollbar">
+              <!-- Dynamically populated via JS -->
+            </div>
+          </div>
         </div>
 
       </div>
 
+      <!-- Settings Overlay / Drawer inside Planner -->
+      <div id="plannerSettingsModal" class="hidden absolute inset-0 bg-white dark:bg-slate-900 z-30 p-4 sm:p-5 flex flex-col justify-between overflow-y-auto font-bengali">
+        <div class="space-y-4">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-700">
+            <div class="flex items-center gap-2">
+              <span class="text-lg">⚙️</span>
+              <h3 class="font-bold text-base text-slate-900 dark:text-white">প্ল্যানার সেটিংস ও প্রোফাইল</h3>
+            </div>
+            <button id="closePlannerSettingsBtn" class="p-1.5 rounded-lg text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition">✕</button>
+          </div>
+
+          <!-- Profile Mode -->
+          <div class="space-y-2">
+            <label class="text-xs font-bold text-slate-800 dark:text-slate-200">আপনার প্রোফাইল মোড:</label>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <button data-mode="general" class="planner-mode-btn p-3 rounded-2xl border text-left transition flex flex-col gap-1">
+                <span class="font-bold text-xs">🌿 সাধারণ তিলাওয়াত</span>
+                <span class="text-[11px] text-slate-500">দৈনিক তিলাওয়াত ও খতম</span>
+              </button>
+              <button data-mode="student" class="planner-mode-btn p-3 rounded-2xl border text-left transition flex flex-col gap-1">
+                <span class="font-bold text-xs">📖 শিক্ষার্থী</span>
+                <span class="text-[11px] text-slate-500">সবক, সবকি ও আমপারা</span>
+              </button>
+              <button data-mode="hafiz" class="planner-mode-btn p-3 rounded-2xl border text-left transition flex flex-col gap-1">
+                <span class="font-bold text-xs">🌟 হুফ্ফাজ মোড</span>
+                <span class="text-[11px] text-slate-500">মঞ্জিল ও দাওর সাইকেল</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Daily Reminder Setting -->
+          <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="text-xs font-bold text-slate-800 dark:text-slate-200">দৈনিক তিলাওয়াত রিমাইন্ডার:</div>
+                <div class="text-[11px] text-slate-500">প্রতিদিন নির্দিষ্ট সময়ে তিলাওয়াতের তাগিদ</div>
+              </div>
+              <input type="checkbox" id="plannerReminderToggle" class="w-5 h-5 accent-emerald-600 rounded cursor-pointer">
+            </div>
+            <div id="plannerReminderTimeContainer" class="flex items-center gap-2 pt-1">
+              <span class="text-xs text-slate-600 dark:text-slate-400">সময়:</span>
+              <input type="time" id="plannerReminderTimeInput" value="06:00" class="px-3 py-1.5 rounded-xl border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-900 text-xs font-mono font-bold">
+            </div>
+          </div>
+
+          <!-- Hijri Offset -->
+          <div class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-800 dark:text-slate-200">হিজরি তারিখ সমন্বয়:</span>
+              <span id="hijriOffsetLabel" class="text-xs font-bold text-emerald-700 dark:text-emerald-400 font-mono">০ দিন</span>
+            </div>
+            <div class="flex items-center gap-1.5 pt-1">
+              <button data-offset="-2" class="offset-btn flex-1 py-1.5 rounded-xl border text-xs font-semibold">-২</button>
+              <button data-offset="-1" class="offset-btn flex-1 py-1.5 rounded-xl border text-xs font-semibold">-১</button>
+              <button data-offset="0" class="offset-btn flex-1 py-1.5 rounded-xl border text-xs font-semibold bg-emerald-600 text-white">০</button>
+              <button data-offset="1" class="offset-btn flex-1 py-1.5 rounded-xl border text-xs font-semibold">+১</button>
+              <button data-offset="2" class="offset-btn flex-1 py-1.5 rounded-xl border text-xs font-semibold">+২</button>
+            </div>
+          </div>
+
+          <!-- Offline Backup & Reset -->
+          <div class="flex items-center gap-2 pt-1">
+            <button id="backupDownloadBtn" class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 text-xs font-semibold transition border border-slate-300 dark:border-slate-700">
+              📥 ব্যাকআপ ডাউনলোড
+            </button>
+            <label class="flex-1 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 text-xs font-semibold transition text-center cursor-pointer border border-slate-300 dark:border-slate-700">
+              📤 রিস্টোর
+              <input type="file" id="restoreFileInput" accept=".json" class="hidden">
+            </label>
+            <button id="resetPlannerProgressBtn" class="px-3 py-2.5 rounded-xl text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-950/40 border border-rose-300 text-xs font-semibold transition">
+              রিসেট
+            </button>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-200 dark:border-slate-700">
+          <button id="savePlannerSettingsBtn" class="w-full py-2.5 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs sm:text-sm font-bold transition shadow-md">
+            সেটিংস সংরক্ষণ করুন
+          </button>
+        </div>
+      </div>
+
     </div>
   </div>
-
 
   <!-- 5. Quran Global Search Modal (আরবি ও বাংলা অনুসন্ধান) -->
   <div id="searchModalBackdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300 flex items-end sm:items-center justify-center p-0 sm:p-4 font-bengali">
@@ -1693,15 +1797,18 @@
     }
 
     // ==========================================
-    // PLANNER STATE & DATA MANAGEMENT
+    // ==========================================
+    // PLANNER STATE & DATA MANAGEMENT (Draft v3)
     // ==========================================
     const PLANNER_STORAGE_KEY = 'quran_huffaz_planner_v3';
     let plannerState = {
       profileMode: 'general', // 'general' | 'student' | 'hafiz'
       hijriOffset: 0,
-      activeTab: 'calendar',
-      dourCycle: null,
-      logs: {} // dateKey -> { dourPara, status, sabak, sabki, generalTilawat, notes: [] }
+      activeTab: 'today', // 'today' | 'roadmap' | 'diary'
+      targetDays: 30,
+      reminderEnabled: false,
+      reminderTime: '06:00',
+      logs: {} // dateKey -> { dourPara, status, sabak, sabki, studentDour, generalTilawat, notes: [] }
     };
 
     function loadPlannerData() {
@@ -1724,9 +1831,7 @@
       }
     }
 
-    // Selected Date in Planner (defaults to today)
-    let calendarCurrentDate = new Date();
-    let selectedDate = new Date();
+    let selectedPlannerDate = new Date();
 
     const openPlannerBtn = document.getElementById('openPlannerBtn');
     const closePlannerBtn = document.getElementById('closePlannerBtn');
@@ -1735,11 +1840,9 @@
 
     function openPlannerSheet() {
       loadPlannerData();
-      updateProfileModeUI();
       renderTodayTriDate();
-      renderCalendar();
-      renderSelectedDayCard();
-      renderAllNotesList();
+      updatePlannerModeUI();
+      switchPlannerTab(plannerState.activeTab || 'today');
       plannerModalBackdrop.classList.remove('hidden');
       setTimeout(() => {
         plannerModalBackdrop.classList.remove('opacity-0');
@@ -1770,456 +1873,209 @@
       }
     }
 
-    // Mode Buttons
-    const modeBtnHafiz = document.getElementById('modeBtnHafiz');
-    const modeBtnStudent = document.getElementById('modeBtnStudent');
-    const modeBtnGeneral = document.getElementById('modeBtnGeneral');
-
-    function setProfileMode(mode) {
-      plannerState.profileMode = mode;
-      savePlannerData();
-      updateProfileModeUI();
-      renderSelectedDayCard();
-    }
-
-    if (modeBtnHafiz) modeBtnHafiz.addEventListener('click', () => setProfileMode('hafiz'));
-    if (modeBtnStudent) modeBtnStudent.addEventListener('click', () => setProfileMode('student'));
-    if (modeBtnGeneral) modeBtnGeneral.addEventListener('click', () => setProfileMode('general'));
-
-    function updateProfileModeUI() {
+    function updatePlannerModeUI() {
       const mode = plannerState.profileMode || 'general';
-      const activeClass = 'px-2.5 sm:px-3 py-1 rounded-xl text-xs font-semibold bg-emerald-600 text-white shadow-sm transition shrink-0';
-      const inactiveClass = 'px-2.5 sm:px-3 py-1 rounded-xl text-xs font-semibold bg-emerald-900/60 text-emerald-300 hover:text-white transition shrink-0';
-
-      if (modeBtnGeneral) modeBtnGeneral.className = (mode === 'general') ? activeClass : inactiveClass;
-      if (modeBtnStudent) modeBtnStudent.className = (mode === 'student') ? activeClass : inactiveClass;
-      if (modeBtnHafiz) modeBtnHafiz.className = (mode === 'hafiz') ? activeClass : inactiveClass;
-
-      // 1. Dynamic Modal Header Title
       const mainTitle = document.getElementById('plannerModalMainTitle');
       if (mainTitle) {
         if (mode === 'general') {
-          mainTitle.textContent = 'কুরআন তিলাওয়াত ট্র্যাকার ও ক্যালেন্ডার';
+          mainTitle.textContent = 'কুরআন তিলাওয়াত ট্র্যাকার';
         } else if (mode === 'student') {
-          mainTitle.textContent = 'হিফজ শিক্ষার্থী রুটিন ও ক্যালেন্ডার';
+          mainTitle.textContent = 'হিফজ শিক্ষার্থী রুটিন';
         } else {
-          mainTitle.textContent = 'হুফ্ফাজ দাওর রুটিন ও ক্যালেন্ডার';
+          mainTitle.textContent = 'হুফ্ফাজ দাওর ট্র্যাকার';
         }
       }
 
-      // 2. Dynamic Inner Tab Labels
-      if (plannerTabCalendar) {
-        plannerTabCalendar.textContent = (mode === 'general') ? '📅 ক্যালেন্ডার ও তিলাওয়াত' : (mode === 'student') ? '📅 সবক ও ক্যালেন্ডার' : '📅 ক্যালেন্ডার ও দাওর';
-      }
-      if (plannerTabCycle) {
-        plannerTabCycle.textContent = (mode === 'general') ? '🎯 খতম প্ল্যানার' : (mode === 'student') ? '🔄 সবক ও দাওর সাইকেল' : '🔄 দাওর সাইকেল';
-      }
-      if (plannerTabNotes) {
-        plannerTabNotes.textContent = (mode === 'general') ? '📝 তিলাওয়াত নোট ও আয়াত' : (mode === 'student') ? '📝 হিফজ ভুল ও মুতাশাবিহাত' : '📝 মুতাশাবিহাত ও ভুল খাতা';
-      }
-      if (plannerTabSettings) {
-        plannerTabSettings.textContent = '⚙️ ব্যাকআপ ও সেটিংস';
-      }
+      // Sections in Today View
+      const secGen = document.getElementById('sectionGeneralMode');
+      const secHaf = document.getElementById('sectionHafizMode');
+      const secStu = document.getElementById('sectionStudentMode');
 
-      // 3. Sections in Selected Day Card
-      const secGeneral = document.getElementById('sectionGeneralMode');
-      const secStudent = document.getElementById('sectionStudentMode');
-      const secHafiz = document.getElementById('sectionHafizMode');
+      if (secGen) secGen.classList.toggle('hidden', mode !== 'general');
+      if (secHaf) secHaf.classList.toggle('hidden', mode !== 'hafiz');
+      if (secStu) secStu.classList.toggle('hidden', mode !== 'student');
 
-      if (secGeneral) secGeneral.classList.toggle('hidden', mode !== 'general');
-      if (secStudent) secStudent.classList.toggle('hidden', mode !== 'student');
-      if (secHafiz) secHafiz.classList.toggle('hidden', mode !== 'hafiz');
-
-      // 4. Daily Status Label
-      const dailyStatusLabel = document.getElementById('dailyStatusLabel');
-      if (dailyStatusLabel) {
-        dailyStatusLabel.textContent = (mode === 'general') ? 'তিলাওয়াত স্ট্যাটাস:' : (mode === 'student') ? 'পড়ার স্ট্যাটাস:' : 'দাওর স্ট্যাটাস:';
-      }
-
-      // 5. Note Section in Selected Day Card
-      const noteSecTitle = document.getElementById('dayNoteSectionTitle');
-      const noteSecSub = document.getElementById('dayNoteSectionSub');
-      const noteInput = document.getElementById('noteTextInput');
-
-      if (noteSecTitle) {
-        noteSecTitle.textContent = (mode === 'general') ? 'তিলাওয়াত নোট বা পছন্দের আয়াত:' : (mode === 'student') ? 'সবক ও হিফজ ভুল নোট:' : 'মুতাশাবিহাত ও সেলফ-কারেকশন নোট:';
-      }
-      if (noteSecSub) {
-        noteSecSub.textContent = (mode === 'general') ? 'শিক্ষা বা পছন্দের আয়াত' : (mode === 'student') ? 'উস্তাদের সংশোধন ও ভুল' : 'ভুল বা আটকে যাওয়ার জায়গা';
-      }
-      if (noteInput) {
-        noteInput.placeholder = (mode === 'general') ? 'আয়াতের শিক্ষণীয় বিষয় বা তিলাওয়াত নোট...' : (mode === 'student') ? 'উস্তাদের সংশোধন বা আয়াতে কোথায় ভুল হয়েছিল...' : 'কোথায় প্যাঁচ লেগেছিল বা নোট...';
-      }
-
-      // 6. Tab 2 (Cycle / Plan Generator) View
-      const cycleIcon = document.getElementById('cycleViewIcon');
-      const cycleTitle = document.getElementById('cycleViewTitle');
-      const cycleDesc = document.getElementById('cycleViewDesc');
-      const cycleDaysLabel = document.getElementById('cycleTargetDaysLabel');
-      const cycleDaysSelect = document.getElementById('cycleTargetDaysSelect');
-      const cycleStartLabel = document.getElementById('cycleStartLabel');
-      const cycleBtn = document.getElementById('generateCycleBtn');
-
-      if (cycleIcon) cycleIcon.textContent = (mode === 'general') ? '🎯' : (mode === 'student') ? '📖' : '🔄';
-      if (cycleTitle) {
-        cycleTitle.textContent = (mode === 'general') ? 'সহজ কুরআন খতম প্ল্যানার' : (mode === 'student') ? 'হিফজ সবক ও দাওর সাইকেল' : 'স্বয়ংক্রিয় দাওর সাইকেল ক্যালকুলেটর';
-      }
-      if (cycleDesc) {
-        cycleDesc.textContent = (mode === 'general')
-          ? 'আপনি কত দিনে পুরো কুরআন তিলাওয়াত শেষ করতে চান নির্বাচন করুন। ক্যালেন্ডার স্বয়ংক্রিয়ভাবে প্রতিদিনের পড়ার লক্ষ্য বণ্টন করে দেবে।'
-          : (mode === 'student')
-          ? 'হিফজ শিক্ষার্থী হিসেবে আপনি কত দিনে রিভিশন সাইকেল শেষ করতে চান নির্বাচন করুন।'
-          : 'আপনি কত দিনে পুরো কুরআন দাওর (রিভিশন) শেষ করতে চান নির্বাচন করুন। ক্যালেন্ডার স্বয়ংক্রিয়ভাবে প্রতিদিনের জন্য নির্ধারিত পারার তালিকা তৈরি করে দেবে।';
-      }
-      if (cycleDaysLabel) {
-        cycleDaysLabel.textContent = (mode === 'general') ? 'খতমের সময়সীমা:' : 'দাওর শেষ করার সময়সীমা:';
-      }
-      if (cycleStartLabel) {
-        cycleStartLabel.textContent = 'শুরুর পারা (১-৩০):';
-      }
-      if (cycleBtn) {
-        cycleBtn.textContent = (mode === 'general') ? 'খতম পরিকল্পনা তৈরি করুন' : (mode === 'student') ? 'হিফজ সাইকেল তৈরি করুন' : 'দাওর সাইকেল তৈরি করুন';
-      }
-
-      // Dynamic Dropdown Options for Tab 2
-      if (cycleDaysSelect) {
-        const prevVal = cycleDaysSelect.value;
+      // Update cycle options in roadmap view
+      const cycleSelect = document.getElementById('cycleTargetDaysSelect');
+      if (cycleSelect) {
         if (mode === 'general') {
-          cycleDaysSelect.innerHTML = `
-            <option value="30" ${(!prevVal || prevVal==='30')?'selected':''}>৩০ দিনে খতম (প্রতিদিন ১ পারা / ২০ পৃষ্ঠা)</option>
-            <option value="60" ${prevVal==='60'?'selected':''}>৬০ দিনে খতম (প্রতিদিন আধা পারা / ১০ পৃষ্ঠা)</option>
-            <option value="90" ${prevVal==='90'?'selected':''}>৯০ দিনে খতম (প্রতিদিন ৭ পৃষ্ঠা)</option>
-            <option value="120" ${prevVal==='120'?'selected':''}>১২০ দিনে খতম (প্রতিদিন ৫ পৃষ্ঠা)</option>
-            <option value="365" ${prevVal==='365'?'selected':''}>১ বছরে খতম (প্রতিদিন ১-২ পৃষ্ঠা)</option>
+          cycleSelect.innerHTML = `
+            <option value="30" selected>৩০ দিনে খতম (প্রতিদিন ১ পারা / ২০ পৃষ্ঠা)</option>
+            <option value="60">৬০ দিনে খতম (প্রতিদিন আধা পারা / ১০ পৃষ্ঠা)</option>
+            <option value="90">৯০ দিনে খতম (প্রতিদিন ৭ পৃষ্ঠা)</option>
+            <option value="120">১২০ দিনে খতম (প্রতিদিন ৫ পৃষ্ঠা)</option>
+            <option value="365">১ বছরে খতম (প্রতিদিন ১-২ পৃষ্ঠা)</option>
           `;
         } else if (mode === 'student') {
-          cycleDaysSelect.innerHTML = `
-            <option value="15" ${prevVal==='15'?'selected':''}>১৫ দিনে রিভিশন (প্রতিদিন ২ পারা)</option>
-            <option value="20" ${prevVal==='20'?'selected':''}>২০ দিনে রিভিশন (প্রতিদিন ১.৫ পারা)</option>
-            <option value="30" ${(!prevVal || prevVal==='30')?'selected':''}>৩০ দিনে রিভিশন (প্রতিদিন ১ পারা)</option>
-            <option value="60" ${prevVal==='60'?'selected':''}>৬০ দিনে রিভিশন (প্রতিদিন আধা পারা)</option>
+          cycleSelect.innerHTML = `
+            <option value="15">১৫ দিনে রিভিশন (প্রতিদিন ২ পারা)</option>
+            <option value="20">২০ দিনে রিভিশন (প্রতিদিন ১.৫ পারা)</option>
+            <option value="30" selected>৩০ দিনে রিভিশন (প্রতিদিন ১ পারা)</option>
+            <option value="60">৬০ দিনে রিভিশন (প্রতিদিন আধা পারা)</option>
           `;
         } else {
-          cycleDaysSelect.innerHTML = `
-            <option value="7" ${prevVal==='7'?'selected':''}>৭ দিনে খতম (প্রতিদিন ৪-৫ পারা)</option>
-            <option value="10" ${prevVal==='10'?'selected':''}>১০ দিনে খতম (প্রতিদিন ৩ পারা)</option>
-            <option value="15" ${prevVal==='15'?'selected':''}>১৫ দিনে খতম (প্রতিদিন ২ পারা)</option>
-            <option value="20" ${prevVal==='20'?'selected':''}>২০ দিনে খতম (প্রতিদিন ১.৫ পারা)</option>
-            <option value="30" ${(!prevVal || prevVal==='30')?'selected':''}>৩০ দিনে খতম (প্রতিদিন ১ পারা)</option>
+          cycleSelect.innerHTML = `
+            <option value="7">৭ দিনে খতম (প্রতিদিন ৪-৫ পারা)</option>
+            <option value="10">১০ দিনে খতম (প্রতিদিন ৩ পারা)</option>
+            <option value="15">১৫ দিনে খতম (প্রতিদিন ২ পারা)</option>
+            <option value="20">২০ দিনে খতম (প্রতিদিন ১.৫ পারা)</option>
+            <option value="30" selected>৩০ দিনে খতম (প্রতিদিন ১ পারা)</option>
           `;
         }
       }
-
-      // 7. Tab 3 (Notes List) Headers
-      const notesListTitle = document.getElementById('notesListMainTitle');
-      const notesListSub = document.getElementById('notesListMainSub');
-
-      if (notesListTitle) {
-        notesListTitle.textContent = (mode === 'general') ? 'তিলাওয়াত নোট ও আয়াত সংগ্রহ' : (mode === 'student') ? 'হিফজ সবক ভুল ও মুতাশাবিহাত খাতা' : 'মুতাশাবিহাত ও সেলফ-কারেকশন সংগ্রহ';
-      }
-      if (notesListSub) {
-        notesListSub.textContent = (mode === 'general') ? 'কুরআন পড়ার সময় সংরক্ষিত শিক্ষণীয় পয়েন্ট ও পছন্দের আয়াত' : (mode === 'student') ? 'উস্তাদকে সবক বা দাওর শোনানোর সময় চিহ্নিত ভুলসমূহ' : 'যেকোনো পৃষ্ঠায় যেতে সরাসরি "পৃষ্ঠা খুলুন" বাটনে চাপুন';
-      }
-
-      renderAllNotesList();
     }
 
-    // Planner Inner Tabs
-    const plannerTabCalendar = document.getElementById('plannerTabCalendar');
-    const plannerTabCycle = document.getElementById('plannerTabCycle');
-    const plannerTabNotes = document.getElementById('plannerTabNotes');
-    const plannerTabSettings = document.getElementById('plannerTabSettings');
+    // Tab Switching
+    const plannerTabToday = document.getElementById('plannerTabToday');
+    const plannerTabRoadmap = document.getElementById('plannerTabRoadmap');
+    const plannerTabDiary = document.getElementById('plannerTabDiary');
 
-    const plannerViewCalendar = document.getElementById('plannerViewCalendar');
-    const plannerViewCycle = document.getElementById('plannerViewCycle');
-    const plannerViewNotes = document.getElementById('plannerViewNotes');
-    const plannerViewSettings = document.getElementById('plannerViewSettings');
+    const plannerViewToday = document.getElementById('plannerViewToday');
+    const plannerViewRoadmap = document.getElementById('plannerViewRoadmap');
+    const plannerViewDiary = document.getElementById('plannerViewDiary');
 
     function switchPlannerTab(tabName) {
       plannerState.activeTab = tabName;
-      const tabBtns = [plannerTabCalendar, plannerTabCycle, plannerTabNotes, plannerTabSettings];
-      const views = [plannerViewCalendar, plannerViewCycle, plannerViewNotes, plannerViewSettings];
-      const activeBtnClass = 'flex-1 py-1.5 px-2 rounded-lg text-xs font-semibold bg-white dark:bg-slate-700 text-emerald-800 dark:text-emerald-300 shadow-sm transition text-center shrink-0';
-      const inactiveBtnClass = 'flex-1 py-1.5 px-2 rounded-lg text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-emerald-700 transition text-center shrink-0';
+      savePlannerData();
 
-      tabBtns.forEach(btn => {
-        if (btn) btn.className = inactiveBtnClass;
-      });
+      const tabs = [
+        { id: 'today', btn: plannerTabToday, view: plannerViewToday },
+        { id: 'roadmap', btn: plannerTabRoadmap, view: plannerViewRoadmap },
+        { id: 'diary', btn: plannerTabDiary, view: plannerViewDiary }
+      ];
 
-      views.forEach(v => {
-        if (v) v.classList.add('hidden');
-      });
-
-      if (tabName === 'calendar') {
-        if (plannerTabCalendar) plannerTabCalendar.className = activeBtnClass;
-        if (plannerViewCalendar) plannerViewCalendar.classList.remove('hidden');
-        renderCalendar();
-      } else if (tabName === 'cycle') {
-        if (plannerTabCycle) plannerTabCycle.className = activeBtnClass;
-        if (plannerViewCycle) plannerViewCycle.classList.remove('hidden');
-      } else if (tabName === 'notes') {
-        if (plannerTabNotes) plannerTabNotes.className = activeBtnClass;
-        if (plannerViewNotes) plannerViewNotes.classList.remove('hidden');
-        renderAllNotesList();
-      } else if (tabName === 'settings') {
-        if (plannerTabSettings) plannerTabSettings.className = activeBtnClass;
-        if (plannerViewSettings) plannerViewSettings.classList.remove('hidden');
-      }
-    }
-
-    if (plannerTabCalendar) plannerTabCalendar.addEventListener('click', () => switchPlannerTab('calendar'));
-    if (plannerTabCycle) plannerTabCycle.addEventListener('click', () => switchPlannerTab('cycle'));
-    if (plannerTabNotes) plannerTabNotes.addEventListener('click', () => switchPlannerTab('notes'));
-    if (plannerTabSettings) plannerTabSettings.addEventListener('click', () => switchPlannerTab('settings'));
-
-    // Month Navigation
-    const prevMonthBtn = document.getElementById('prevMonthBtn');
-    const nextMonthBtn = document.getElementById('nextMonthBtn');
-
-    if (prevMonthBtn) {
-      prevMonthBtn.addEventListener('click', () => {
-        calendarCurrentDate.setMonth(calendarCurrentDate.getMonth() - 1);
-        renderCalendar();
-      });
-    }
-
-    if (nextMonthBtn) {
-      nextMonthBtn.addEventListener('click', () => {
-        calendarCurrentDate.setMonth(calendarCurrentDate.getMonth() + 1);
-        renderCalendar();
-      });
-    }
-
-    // Render Calendar Grid
-    function renderCalendar() {
-      const year = calendarCurrentDate.getFullYear();
-      const month = calendarCurrentDate.getMonth();
-
-      const gMonthEl = document.getElementById('calendarGregorianMonth');
-      const subMonthEl = document.getElementById('calendarSubTriMonth');
-      const gridEl = document.getElementById('calendarGrid');
-
-      if (!gridEl) return;
-
-      const midDate = new Date(year, month, 15);
-      const bnMid = getBengaliDate(midDate);
-      const hjMid = getHijriDate(midDate, plannerState.hijriOffset);
-
-      if (gMonthEl) {
-        gMonthEl.textContent = `${GREGORIAN_MONTHS_BN[month]} ${toBnNum(year)}`;
-      }
-      if (subMonthEl) {
-        subMonthEl.textContent = `${bnMid.monthName} ${toBnNum(bnMid.year)} • ${hjMid.monthName} ${toBnNum(hjMid.year)}`;
-      }
-
-      const firstDay = new Date(year, month, 1).getDay(); // 0 is Sunday
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-      let cellsHtml = '';
-
-      // Empty padding cells before first day
-      for (let i = 0; i < firstDay; i++) {
-        cellsHtml += `<div class="p-1 sm:p-1.5 rounded-xl bg-slate-50/40 dark:bg-slate-900/30 opacity-30"></div>`;
-      }
-
-      const todayKey = formatDateKey(new Date());
-      const selectedKey = formatDateKey(selectedDate);
-
-      for (let day = 1; day <= daysInMonth; day++) {
-        const thisDate = new Date(year, month, day);
-        const dateKey = formatDateKey(thisDate);
-        const bn = getBengaliDate(thisDate);
-        const hj = getHijriDate(thisDate, plannerState.hijriOffset);
-
-        const isToday = (dateKey === todayKey);
-        const isSelected = (dateKey === selectedKey);
-        const isFriday = (thisDate.getDay() === 5);
-        const isSpecialDay = hj.isAyyamAlBeed || isFriday || hj.isRamadan;
-
-        const dayData = plannerState.logs[dateKey] || {};
-        const hasNotes = dayData.notes && dayData.notes.length > 0;
-        const status = dayData.status || '';
-
-        let statusDot = '';
-        if (status === 'completed') {
-          statusDot = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>';
-        } else if (status === 'partial') {
-          statusDot = '<span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>';
+      tabs.forEach(t => {
+        if (t.id === tabName) {
+          if (t.btn) {
+            t.btn.className = 'flex-1 py-2 px-2 rounded-xl text-xs font-bold bg-white dark:bg-slate-700 text-emerald-800 dark:text-emerald-300 shadow-sm transition text-center';
+          }
+          if (t.view) t.view.classList.remove('hidden');
+        } else {
+          if (t.btn) {
+            t.btn.className = 'flex-1 py-2 px-2 rounded-xl text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-emerald-700 transition text-center';
+          }
+          if (t.view) t.view.classList.add('hidden');
         }
+      });
 
-        let noteDot = hasNotes ? '<span class="w-1.5 h-1.5 rounded-full bg-rose-500" title="মুতাশাবিহাত/নোট রয়েছে"></span>' : '';
+      if (tabName === 'today') renderPlannerTodayView();
+      if (tabName === 'roadmap') renderPlannerRoadmapView();
+      if (tabName === 'diary') renderPlannerDiaryView();
+    }
 
-        cellsHtml += `
-          <button onclick="selectCalendarDate('${dateKey}')" 
-                  class="p-0.5 sm:p-1.5 rounded-lg sm:rounded-xl text-center border transition relative flex flex-col justify-between items-center min-h-[46px] sm:min-h-[58px] ${
+    if (plannerTabToday) plannerTabToday.addEventListener('click', () => switchPlannerTab('today'));
+    if (plannerTabRoadmap) plannerTabRoadmap.addEventListener('click', () => switchPlannerTab('roadmap'));
+    if (plannerTabDiary) plannerTabDiary.addEventListener('click', () => switchPlannerTab('diary'));
+
+    // TAB 1: Render Today's Focus View
+    function renderPlannerTodayView() {
+      renderDateStrip();
+      renderTodayActionCard();
+      renderKhatamProgress();
+      renderSevenDayStreak();
+    }
+
+    function renderDateStrip() {
+      const container = document.getElementById('plannerDateStrip');
+      const label = document.getElementById('dateStripCurrentLabel');
+      if (!container) return;
+
+      const now = new Date();
+      if (label) {
+        label.textContent = `${toBnNum(selectedPlannerDate.getDate())} ${GREGORIAN_MONTHS_BN[selectedPlannerDate.getMonth()]}`;
+      }
+
+      // 7 days past, today, 3 days future
+      const dates = [];
+      for (let i = -7; i <= 3; i++) {
+        const d = new Date(now);
+        d.setDate(d.getDate() + i);
+        dates.push(d);
+      }
+
+      const dayNames = ['রবি', 'সোম', 'মঙ্গল', 'বুধ', 'বৃহঃ', 'শুক্র', 'শনি'];
+
+      container.innerHTML = dates.map(d => {
+        const isSelected = d.toDateString() === selectedPlannerDate.toDateString();
+        const isToday = d.toDateString() === now.toDateString();
+        const dKey = formatDateKey(d);
+        const log = plannerState.logs[dKey];
+        const isDone = log && log.status === 'completed';
+        const dayName = dayNames[d.getDay()];
+
+        return `
+          <button onclick="selectPlannerDate('${dKey}')" 
+                  class="flex-shrink-0 w-14 py-2 px-1 rounded-2xl flex flex-col items-center justify-center transition border ${
                     isSelected
-                      ? 'border-emerald-600 bg-emerald-50 dark:bg-emerald-950/70 ring-2 ring-emerald-500'
+                      ? 'bg-emerald-700 text-white border-emerald-600 shadow-md ring-2 ring-emerald-500'
                       : isToday
-                      ? 'border-gold-500 bg-gold-50/60 dark:bg-slate-800'
-                      : isSpecialDay
-                      ? 'border-emerald-200 dark:border-slate-700 bg-emerald-50/30 dark:bg-slate-800/60'
-                      : 'border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/40 hover:border-emerald-400'
+                      ? 'bg-emerald-50 dark:bg-slate-800 text-emerald-800 dark:text-emerald-300 border-emerald-500 font-bold'
+                      : 'bg-slate-50 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700 hover:border-emerald-400'
                   }">
-            <div class="flex items-center justify-between w-full px-0.5">
-              <span class="text-[8px] sm:text-[9px] text-emerald-700 dark:text-emerald-400 font-mono">${toBnNum(hj.day)}</span>
-              <div class="flex items-center gap-0.5">${statusDot}${noteDot}</div>
-            </div>
-            <span class="text-xs sm:text-sm font-bold font-mono ${isToday ? 'text-gold-600 dark:text-gold-400 font-extrabold' : 'text-slate-800 dark:text-slate-200'}">
-              ${toBnNum(day)}
-            </span>
-            <span class="text-[8px] sm:text-[9px] text-slate-500 dark:text-slate-400">
-              ${toBnNum(bn.day)}
+            <span class="text-[10px] ${isSelected ? 'text-emerald-100' : 'text-slate-500 dark:text-slate-400'}">${dayName}</span>
+            <span class="text-sm font-bold font-mono my-0.5">${toBnNum(d.getDate())}</span>
+            <span class="text-[10px] ${isDone ? (isSelected ? 'text-gold-300' : 'text-emerald-600 dark:text-emerald-400') : 'text-transparent'}">
+              ✓
             </span>
           </button>
         `;
-      }
-
-      gridEl.innerHTML = cellsHtml;
+      }).join('');
     }
 
-    window.selectCalendarDate = function(dateKey) {
-      const parts = dateKey.split('-');
-      selectedDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
-      renderCalendar();
-      renderSelectedDayCard();
+    window.selectPlannerDate = function(dKey) {
+      const parts = dKey.split('-');
+      selectedPlannerDate = new Date(parseInt(parts[0]), parseInt(parts[1]) - 1, parseInt(parts[2]));
+      renderPlannerTodayView();
     };
 
-    // Render Selected Day Card
-    function renderSelectedDayCard() {
+    function renderTodayActionCard() {
       const headerEl = document.getElementById('selectedDateHeader');
-      const badgeEl = document.getElementById('selectedDateSpecialBadge');
+      const toggleBtn = document.getElementById('toggleDayStatusBtn');
       if (!headerEl) return;
 
-      const hj = getHijriDate(selectedDate, plannerState.hijriOffset);
-      const isFriday = (selectedDate.getDay() === 5);
+      headerEl.textContent = formatTriDateFull(selectedPlannerDate, plannerState.hijriOffset);
 
-      headerEl.textContent = formatTriDateFull(selectedDate, plannerState.hijriOffset);
+      const dKey = formatDateKey(selectedPlannerDate);
+      const dayData = plannerState.logs[dKey] || {};
+      const isDone = dayData.status === 'completed';
 
-      if (badgeEl) {
-        if (hj.isAyyamAlBeed) {
-          badgeEl.textContent = 'আইয়ামে বীজ (নফল রোজা)';
-          badgeEl.classList.remove('hidden');
-        } else if (isFriday) {
-          badgeEl.textContent = "জুমু'আতুল মুবারক";
-          badgeEl.classList.remove('hidden');
-        } else if (hj.isRamadan) {
-          badgeEl.textContent = 'পবিত্র মাহে রমাদান';
-          badgeEl.classList.remove('hidden');
+      if (toggleBtn) {
+        if (isDone) {
+          toggleBtn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 bg-emerald-700 text-white shadow-sm';
+          toggleBtn.innerHTML = '<span>✓</span><span>পড়া সম্পন্ন</span>';
         } else {
-          badgeEl.classList.add('hidden');
+          toggleBtn.className = 'px-3 py-1.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5 border border-slate-300 dark:border-slate-600 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800';
+          toggleBtn.innerHTML = '<span>○</span><span>সম্পন্ন চিহ্নিত করুন</span>';
         }
       }
 
-      const dateKey = formatDateKey(selectedDate);
-      const dayData = plannerState.logs[dateKey] || { notes: [] };
+      // Populate input values
+      const genInput = document.getElementById('generalTilawatInput');
+      if (genInput) genInput.value = dayData.generalTilawat || dayData.dourPara || '';
 
-      // Hafiz Mode Fields
-      const hafizDourInput = document.getElementById('hafizDourInput');
-      if (hafizDourInput) hafizDourInput.value = dayData.dourPara || '';
+      const hafInput = document.getElementById('hafizDourInput');
+      if (hafInput) hafInput.value = dayData.dourPara || '';
 
-      // Update status buttons UI
-      document.querySelectorAll('.status-btn').forEach(btn => {
-        const btnStatus = btn.getAttribute('data-status');
-        if (dayData.status === btnStatus) {
-          btn.className = 'status-btn px-2.5 py-1 rounded-xl text-xs font-semibold bg-emerald-600 text-white shadow-sm transition';
-        } else {
-          btn.className = 'status-btn px-2.5 py-1 rounded-xl text-xs font-semibold border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition';
-        }
-      });
-
-      // Student Mode Fields
-      const studentSabak = document.getElementById('studentSabakInput');
-      const studentSabki = document.getElementById('studentSabkiInput');
-      const studentDour = document.getElementById('studentDourInput');
-      if (studentSabak) studentSabak.value = dayData.sabak || '';
-      if (studentSabki) studentSabki.value = dayData.sabki || '';
-      if (studentDour) studentDour.value = dayData.studentDour || '';
-
-      // General Mode Fields
-      const generalTilawat = document.getElementById('generalTilawatInput');
-      if (generalTilawat) generalTilawat.value = dayData.generalTilawat || '';
-
-      // Render Notes list for selected day
-      renderSelectedDayNotes(dayData.notes || []);
+      const sabakInput = document.getElementById('studentSabakInput');
+      const sabkiInput = document.getElementById('studentSabkiInput');
+      const dourInput = document.getElementById('studentDourInput');
+      if (sabakInput) sabakInput.value = dayData.sabak || '';
+      if (sabkiInput) sabkiInput.value = dayData.sabki || '';
+      if (dourInput) dourInput.value = dayData.studentDour || '';
     }
 
-    function renderSelectedDayNotes(notes) {
-      const container = document.getElementById('selectedDayNotesList');
-      if (!container) return;
-
-      if (!notes || notes.length === 0) {
-        const mode = plannerState.profileMode || 'general';
-        const emptyMsg = (mode === 'general')
-          ? 'এই দিনের জন্য কোনো তিলাওয়াত নোট নেই।'
-          : (mode === 'student')
-          ? 'এই দিনের জন্য কোনো সবক ভুল নোট নেই।'
-          : 'এই দিনের জন্য কোনো সেলফ-কারেকশন নোট নেই।';
-        container.innerHTML = `<p class="text-[11px] text-slate-400 italic py-1">${emptyMsg}</p>`;
-        return;
-      }
-
-      container.innerHTML = notes.map((n, idx) => `
-        <div class="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-2">
-          <div class="flex-1">
-            <div class="flex items-center gap-1.5 mb-1">
-              <span class="text-[11px] bg-emerald-700 text-white font-bold px-2 py-0.5 rounded-full font-mono">পৃষ্ঠা ${toBnNum(n.page)}</span>
-              ${n.line ? `<span class="text-[10px] text-slate-500 font-mono">লাইন ${toBnNum(n.line)}</span>` : ''}
-            </div>
-            <p class="text-xs text-slate-800 dark:text-slate-200 font-bengali">${n.text}</p>
-          </div>
-          <div class="flex items-center gap-1.5 shrink-0">
-            <button onclick="jumpToPageFromNote(${n.page})" class="px-2.5 py-1 bg-emerald-700 hover:bg-emerald-600 text-white rounded-lg text-xs font-semibold transition shadow-sm" title="সরাসরি এই পৃষ্ঠায় যান">
-              📖 পৃষ্ঠা খুলুন
-            </button>
-            <button onclick="deleteDayNote(${idx})" class="p-1 text-rose-500 hover:text-rose-700 transition" title="মুছে ফেলুন">
-              ✕
-            </button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    // Save Hafiz Dour
-    const saveHafizDourBtn = document.getElementById('saveHafizDourBtn');
-    if (saveHafizDourBtn) {
-      saveHafizDourBtn.addEventListener('click', () => {
-        const val = document.getElementById('hafizDourInput').value.trim();
-        const dateKey = formatDateKey(selectedDate);
-        if (!plannerState.logs[dateKey]) plannerState.logs[dateKey] = { notes: [] };
-        plannerState.logs[dateKey].dourPara = val;
+    // Toggle Status Button Click
+    const toggleDayStatusBtn = document.getElementById('toggleDayStatusBtn');
+    if (toggleDayStatusBtn) {
+      toggleDayStatusBtn.addEventListener('click', () => {
+        const dKey = formatDateKey(selectedPlannerDate);
+        if (!plannerState.logs[dKey]) plannerState.logs[dKey] = { notes: [] };
+        const current = plannerState.logs[dKey].status;
+        const newStatus = (current === 'completed') ? 'pending' : 'completed';
+        plannerState.logs[dKey].status = newStatus;
         savePlannerData();
-        renderCalendar();
-        showToast('আজকের দাওর সংরক্ষিত হয়েছে!');
-      });
-    }
-
-    // Status Toggle Buttons
-    document.querySelectorAll('.status-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const status = btn.getAttribute('data-status');
-        const dateKey = formatDateKey(selectedDate);
-        if (!plannerState.logs[dateKey]) plannerState.logs[dateKey] = { notes: [] };
-        plannerState.logs[dateKey].status = status;
-        savePlannerData();
-        renderCalendar();
-        renderSelectedDayCard();
-        showToast((plannerState.profileMode === 'general' ? 'তিলাওয়াত' : plannerState.profileMode === 'student' ? 'পড়ার' : 'দাওর') + ' স্ট্যাটাস আপডেট হয়েছে!');
-      });
-    });
-
-    // Save Student Routine
-    const saveStudentRoutineBtn = document.getElementById('saveStudentRoutineBtn');
-    if (saveStudentRoutineBtn) {
-      saveStudentRoutineBtn.addEventListener('click', () => {
-        const dateKey = formatDateKey(selectedDate);
-        if (!plannerState.logs[dateKey]) plannerState.logs[dateKey] = { notes: [] };
-        plannerState.logs[dateKey].sabak = document.getElementById('studentSabakInput').value.trim();
-        plannerState.logs[dateKey].sabki = document.getElementById('studentSabkiInput').value.trim();
-        plannerState.logs[dateKey].studentDour = document.getElementById('studentDourInput').value.trim();
-        plannerState.logs[dateKey].status = 'completed';
-        savePlannerData();
-        renderCalendar();
-        showToast('শিক্ষার্থী রুটিন সংরক্ষিত হয়েছে!');
+        renderPlannerTodayView();
+        showToast(newStatus === 'completed' ? 'আলহামদুলিল্লাহ! তিলাওয়াত সম্পন্ন চিহ্নিত করা হয়েছে।' : 'স্ট্যাটাস আপডেট হয়েছে।');
       });
     }
 
@@ -2227,17 +2083,223 @@
     const saveGeneralTilawatBtn = document.getElementById('saveGeneralTilawatBtn');
     if (saveGeneralTilawatBtn) {
       saveGeneralTilawatBtn.addEventListener('click', () => {
-        const dateKey = formatDateKey(selectedDate);
-        if (!plannerState.logs[dateKey]) plannerState.logs[dateKey] = { notes: [] };
-        plannerState.logs[dateKey].generalTilawat = document.getElementById('generalTilawatInput').value.trim();
-        plannerState.logs[dateKey].status = 'completed';
+        const val = document.getElementById('generalTilawatInput').value.trim();
+        const dKey = formatDateKey(selectedPlannerDate);
+        if (!plannerState.logs[dKey]) plannerState.logs[dKey] = { notes: [] };
+        plannerState.logs[dKey].generalTilawat = val;
+        plannerState.logs[dKey].status = 'completed';
         savePlannerData();
-        renderCalendar();
-        showToast('তিলাওয়াত সম্পন্ন হিসেবে সংরক্ষিত হয়েছে!');
+        renderPlannerTodayView();
+        showToast('আজকের তিলাওয়াত সংরক্ষিত হয়েছে!');
       });
     }
 
-    // Add Self-Correction Note
+    // Save Hafiz Dour
+    const saveHafizDourBtn = document.getElementById('saveHafizDourBtn');
+    if (saveHafizDourBtn) {
+      saveHafizDourBtn.addEventListener('click', () => {
+        const val = document.getElementById('hafizDourInput').value.trim();
+        const dKey = formatDateKey(selectedPlannerDate);
+        if (!plannerState.logs[dKey]) plannerState.logs[dKey] = { notes: [] };
+        plannerState.logs[dKey].dourPara = val;
+        plannerState.logs[dKey].status = 'completed';
+        savePlannerData();
+        renderPlannerTodayView();
+        showToast('আজকের দাওর সংরক্ষিত হয়েছে!');
+      });
+    }
+
+    // Save Student Routine
+    const saveStudentRoutineBtn = document.getElementById('saveStudentRoutineBtn');
+    if (saveStudentRoutineBtn) {
+      saveStudentRoutineBtn.addEventListener('click', () => {
+        const dKey = formatDateKey(selectedPlannerDate);
+        if (!plannerState.logs[dKey]) plannerState.logs[dKey] = { notes: [] };
+        plannerState.logs[dKey].sabak = document.getElementById('studentSabakInput').value.trim();
+        plannerState.logs[dKey].sabki = document.getElementById('studentSabkiInput').value.trim();
+        plannerState.logs[dKey].studentDour = document.getElementById('studentDourInput').value.trim();
+        plannerState.logs[dKey].status = 'completed';
+        savePlannerData();
+        renderPlannerTodayView();
+        showToast('শিক্ষার্থী রুটিন সংরক্ষিত হয়েছে!');
+      });
+    }
+
+    function renderKhatamProgress() {
+      let completedCount = 0;
+      Object.keys(plannerState.logs || {}).forEach(k => {
+        if (plannerState.logs[k] && plannerState.logs[k].status === 'completed') {
+          completedCount++;
+        }
+      });
+
+      const target = plannerState.targetDays || 30;
+      const pct = Math.min(100, Math.round((completedCount / target) * 100));
+
+      const bar = document.getElementById('khatamProgressBar');
+      const badge = document.getElementById('khatamPercentBadge');
+      const doneText = document.getElementById('khatamCompletedDaysText');
+      const targetText = document.getElementById('khatamTargetDaysText');
+
+      if (bar) bar.style.width = pct + '%';
+      if (badge) badge.textContent = toBnNum(pct) + '% সম্পন্ন';
+      if (doneText) doneText.textContent = `মোট পড়া হয়েছে: ${toBnNum(completedCount)} দিন`;
+      if (targetText) targetText.textContent = `টার্গেট: ${toBnNum(target)} দিন`;
+    }
+
+    function renderSevenDayStreak() {
+      const container = document.getElementById('sevenDayStreakContainer');
+      const badge = document.getElementById('streakCountBadge');
+      if (!container) return;
+
+      const now = new Date();
+      const past7 = [];
+      let streakCount = 0;
+
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date(now);
+        d.setDate(d.getDate() - i);
+        const k = formatDateKey(d);
+        const isDone = plannerState.logs[k] && plannerState.logs[k].status === 'completed';
+        if (isDone) streakCount++;
+        past7.push({ date: d, isDone });
+      }
+
+      if (badge) badge.textContent = `${toBnNum(streakCount)}/৭ দিন`;
+
+      const dayNames = ['রবি', 'সোম', 'মঙ্গল', 'বুধ', 'বৃহঃ', 'শুক্র', 'শনি'];
+
+      container.innerHTML = past7.map(item => `
+        <div class="flex flex-col items-center gap-1">
+          <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold ${
+            item.isDone
+              ? 'bg-emerald-700 text-white shadow-sm'
+              : 'bg-slate-200 dark:bg-slate-700 text-slate-400'
+          }">
+            ${item.isDone ? '✓' : '-'}
+          </div>
+          <span class="text-[9.5px] text-slate-500">${dayNames[item.date.getDay()]}</span>
+        </div>
+      `).join('');
+    }
+
+    // TAB 2: Roadmap Generator
+    function renderPlannerRoadmapView() {
+      const startDateInput = document.getElementById('cycleStartDateInput');
+      if (startDateInput && !startDateInput.value) {
+        startDateInput.value = formatDateKey(new Date());
+      }
+    }
+
+    const generateCycleBtn = document.getElementById('generateCycleBtn');
+    if (generateCycleBtn) {
+      generateCycleBtn.addEventListener('click', () => {
+        const mode = plannerState.profileMode || 'general';
+        const targetDays = parseInt(document.getElementById('cycleTargetDaysSelect').value, 10) || 30;
+        const startPara = parseInt(document.getElementById('cycleStartParaInput').value, 10) || 1;
+        const startDateVal = document.getElementById('cycleStartDateInput').value;
+        const startDate = startDateVal ? new Date(startDateVal) : new Date();
+
+        plannerState.targetDays = targetDays;
+
+        let currPara = startPara;
+        let d = new Date(startDate);
+
+        for (let i = 0; i < targetDays; i++) {
+          const dKey = formatDateKey(d);
+          if (!plannerState.logs[dKey]) plannerState.logs[dKey] = { notes: [] };
+
+          let text = '';
+          if (mode === 'general') {
+            if (targetDays === 30) {
+              const p = ((currPara - 1) % 30) + 1;
+              text = `পারা ${toBnNum(p)} (প্রতিদিন ১ পারা)`;
+              currPara++;
+            } else if (targetDays === 60) {
+              const p = (((Math.floor(i / 2)) + startPara - 1) % 30) + 1;
+              text = `পারা ${toBnNum(p)} (${i % 2 === 0 ? '১ম ১০ পৃষ্ঠা' : '২য় ১০ পৃষ্ঠা'})`;
+            } else {
+              const p = ((currPara - 1) % 30) + 1;
+              text = `পারা ${toBnNum(p)}`;
+              currPara++;
+            }
+            plannerState.logs[dKey].generalTilawat = text;
+          } else {
+            const p = ((currPara - 1) % 30) + 1;
+            text = `পারা ${toBnNum(p)}`;
+            currPara++;
+            plannerState.logs[dKey].dourPara = text;
+          }
+
+          if (!plannerState.logs[dKey].status) {
+            plannerState.logs[dKey].status = 'pending';
+          }
+          d.setDate(d.getDate() + 1);
+        }
+
+        savePlannerData();
+
+        const summaryBox = document.getElementById('cycleSummaryBox');
+        const summaryText = document.getElementById('cycleSummaryText');
+        if (summaryBox && summaryText) {
+          summaryBox.classList.remove('hidden');
+          summaryText.textContent = `আলহামদুলিল্লাহ! আপনার নির্বাচন অনুযায়ী আগামী ${toBnNum(targetDays)} দিনের রোডম্যাপ প্রস্তুত করা হয়েছে। প্রতিদিনের টার্গেট আজকের ড্যাশবোর্ডে দেখতে পাবেন।`;
+        }
+
+        showToast('রোডম্যাপ সফলভাবে সাজানো হয়েছে!');
+      });
+    }
+
+    // TAB 3: Quranic Diary & Notes
+    function renderPlannerDiaryView() {
+      const container = document.getElementById('allNotesListContainer');
+      const countBadge = document.getElementById('totalNotesCountBadge');
+      if (!container) return;
+
+      const allNotes = [];
+      Object.keys(plannerState.logs || {}).forEach(dKey => {
+        const item = plannerState.logs[dKey];
+        if (item && item.notes && item.notes.length > 0) {
+          item.notes.forEach((n, idx) => {
+            allNotes.push({ ...n, dateKey: dKey, originalIdx: idx });
+          });
+        }
+      });
+
+      if (countBadge) countBadge.textContent = `${toBnNum(allNotes.length)} টি`;
+
+      if (allNotes.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 text-center bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 text-slate-400 text-xs">
+            এখনও কোনো নোট সংরক্ষণ করা হয়নি।<br>তিলাওয়াত বা হিফজের সময় ভুল আয়াত বা অনুভূতি টুকে রাখুন।
+          </div>
+        `;
+        return;
+      }
+
+      allNotes.sort((a, b) => (b.id || 0) - (a.id || 0));
+
+      container.innerHTML = allNotes.map(n => `
+        <div class="p-3 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-3 shadow-sm">
+          <div class="flex-1">
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xs bg-emerald-700 text-white font-bold px-2.5 py-0.5 rounded-full font-mono">পৃষ্ঠা ${toBnNum(n.page)}</span>
+              <span class="text-[10px] text-slate-500 font-mono">${n.dateKey}</span>
+            </div>
+            <p class="text-xs text-slate-800 dark:text-slate-200 font-bengali leading-relaxed">${n.text}</p>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <button onclick="jumpToPageFromNote(${n.page})" class="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold transition shadow-sm">
+              📖 পৃষ্ঠায় যান
+            </button>
+            <button onclick="deleteDiaryNote('${n.dateKey}', ${n.id})" class="p-1.5 text-rose-500 hover:text-rose-700 transition" title="মুছে ফেলুন">
+              ✕
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
     const addSelfCorrectionBtn = document.getElementById('addSelfCorrectionBtn');
     if (addSelfCorrectionBtn) {
       addSelfCorrectionBtn.addEventListener('click', () => {
@@ -2253,11 +2315,11 @@
           return;
         }
 
-        const dateKey = formatDateKey(selectedDate);
-        if (!plannerState.logs[dateKey]) plannerState.logs[dateKey] = { notes: [] };
-        if (!plannerState.logs[dateKey].notes) plannerState.logs[dateKey].notes = [];
+        const dKey = formatDateKey(selectedPlannerDate);
+        if (!plannerState.logs[dKey]) plannerState.logs[dKey] = { notes: [] };
+        if (!plannerState.logs[dKey].notes) plannerState.logs[dKey].notes = [];
 
-        plannerState.logs[dateKey].notes.push({
+        plannerState.logs[dKey].notes.push({
           id: Date.now(),
           page: pageVal,
           text: textVal
@@ -2265,230 +2327,118 @@
 
         savePlannerData();
         document.getElementById('noteTextInput').value = '';
-        renderCalendar();
-        renderSelectedDayCard();
-        showToast((plannerState.profileMode === 'general' ? 'তিলাওয়াত' : plannerState.profileMode === 'student' ? 'সবক/হিফজ' : 'সেলফ-কারেকশন') + ' নোট যুক্ত হয়েছে!');
+        renderPlannerDiaryView();
+        showToast('নোট সফলভাবে যুক্ত হয়েছে!');
       });
     }
 
-    window.deleteDayNote = function(idx) {
-      const dateKey = formatDateKey(selectedDate);
+    window.jumpToPageFromNote = function(pageNum) {
+      closePlannerSheet();
+      goToPage(pageNum);
+    };
+
+    window.deleteDiaryNote = function(dateKey, noteId) {
       if (plannerState.logs[dateKey] && plannerState.logs[dateKey].notes) {
-        plannerState.logs[dateKey].notes.splice(idx, 1);
+        plannerState.logs[dateKey].notes = plannerState.logs[dateKey].notes.filter(n => n.id !== noteId);
         savePlannerData();
-        renderCalendar();
-        renderSelectedDayCard();
+        renderPlannerDiaryView();
         showToast('নোট মুছে ফেলা হয়েছে');
       }
     };
 
-    // TAB 2: Generate Khatam / Dour Plan
-    const generateCycleBtn = document.getElementById('generateCycleBtn');
-    if (generateCycleBtn) {
-      generateCycleBtn.addEventListener('click', () => {
-        const mode = plannerState.profileMode || 'general';
-        const targetDays = parseInt(document.getElementById('cycleTargetDaysSelect').value, 10) || 30;
-        const startPara = parseInt(document.getElementById('cycleStartParaInput').value, 10) || 1;
+    // SETTINGS DRAWER / OVERLAY LOGIC
+    const openPlannerSettingsBtn = document.getElementById('openPlannerSettingsBtn');
+    const closePlannerSettingsBtn = document.getElementById('closePlannerSettingsBtn');
+    const plannerSettingsModal = document.getElementById('plannerSettingsModal');
+    const savePlannerSettingsBtn = document.getElementById('savePlannerSettingsBtn');
 
-        if (mode === 'general') {
-          let currPara = startPara;
-          let d = new Date(selectedDate);
+    let tempSelectedMode = plannerState.profileMode || 'general';
 
-          for (let i = 0; i < targetDays; i++) {
-            const dKey = formatDateKey(d);
-            if (!plannerState.logs[dKey]) plannerState.logs[dKey] = { notes: [] };
-
-            let planText = '';
-            if (targetDays === 30) {
-              const p1 = ((currPara - 1) % 30) + 1;
-              planText = `পারা ${toBnNum(p1)} (প্রতিদিন ১ পারা)`;
-              currPara += 1;
-            } else if (targetDays === 60) {
-              const p1 = ((Math.floor(i / 2) + startPara - 1) % 30) + 1;
-              const part = (i % 2 === 0) ? '১ম অর্ধেক (১০ পৃষ্ঠা)' : '২য় অর্ধেক (১০ পৃষ্ঠা)';
-              planText = `পারা ${toBnNum(p1)} (${part})`;
-            } else if (targetDays === 90) {
-              const pg1 = ((i * 7) % 612) + 1;
-              const pg2 = Math.min(612, pg1 + 6);
-              planText = `পৃষ্ঠা ${toBnNum(pg1)} থেকে ${toBnNum(pg2)}`;
-            } else if (targetDays === 120) {
-              const pg1 = ((i * 5) % 612) + 1;
-              const pg2 = Math.min(612, pg1 + 4);
-              planText = `পৃষ্ঠা ${toBnNum(pg1)} থেকে ${toBnNum(pg2)}`;
-            } else if (targetDays === 365) {
-              const pg1 = Math.floor(i * 1.67) + 1;
-              const pg2 = Math.min(612, Math.floor((i + 1) * 1.67));
-              planText = (pg1 === pg2) ? `পৃষ্ঠা ${toBnNum(pg1)}` : `পৃষ্ঠা ${toBnNum(pg1)} - ${toBnNum(pg2)}`;
-            } else {
-              const p1 = ((currPara - 1) % 30) + 1;
-              planText = `পারা ${toBnNum(p1)}`;
-              currPara += 1;
-            }
-
-            plannerState.logs[dKey].generalTilawat = planText;
-            plannerState.logs[dKey].dourPara = planText;
-            if (!plannerState.logs[dKey].status) plannerState.logs[dKey].status = 'pending';
-
-            d.setDate(d.getDate() + 1);
-          }
-
-          savePlannerData();
-          renderCalendar();
-          renderSelectedDayCard();
-
-          const summaryBox = document.getElementById('cycleSummaryBox');
-          const summaryTitle = document.getElementById('cycleSummaryTitle');
-          const summaryText = document.getElementById('cycleSummaryText');
-          if (summaryBox && summaryText) {
-            summaryBox.classList.remove('hidden');
-            if (summaryTitle) summaryTitle.textContent = '✓ খতম পরিকল্পনা সফলভাবে ক্যালেন্ডারে যুক্ত হয়েছে!';
-            summaryText.textContent = `আলহামদুলিল্লাহ! আপনার নির্বাচন অনুযায়ী আগামী ${toBnNum(targetDays)} দিনের প্রতিদিনের তিলাওয়াতের লক্ষ্য ক্যালেন্ডারে সাজানো হয়েছে (শুরু: ${formatTriDateFull(selectedDate, plannerState.hijriOffset)})।`;
-          }
-          showToast('খতম পরিকল্পনা তৈরি সম্পন্ন!');
-          return;
-        }
-
-        // Student & Hafiz Mode: Dour cycle
-        let currPara = startPara;
-        let d = new Date(selectedDate);
-
-        for (let i = 0; i < targetDays; i++) {
-          const dKey = formatDateKey(d);
-          if (!plannerState.logs[dKey]) plannerState.logs[dKey] = { notes: [] };
-
-          let paraText = '';
-          if (targetDays === 7) {
-            const p1 = ((currPara - 1) % 30) + 1;
-            const p4 = ((currPara + 3) % 30) + 1;
-            paraText = `পারা ${toBnNum(p1)} থেকে ${toBnNum(p4)} (৪-৫ পারা)`;
-            currPara += 4;
-          } else if (targetDays === 10) {
-            const p1 = ((currPara - 1) % 30) + 1;
-            const p2 = (currPara % 30) + 1;
-            const p3 = ((currPara + 1) % 30) + 1;
-            paraText = `পারা ${toBnNum(p1)}, ${toBnNum(p2)} ও ${toBnNum(p3)}`;
-            currPara += 3;
-          } else if (targetDays === 15) {
-            const p1 = ((currPara - 1) % 30) + 1;
-            const p2 = (currPara % 30) + 1;
-            paraText = `পারা ${toBnNum(p1)} ও ${toBnNum(p2)}`;
-            currPara += 2;
-          } else if (targetDays === 20) {
-            const p1 = ((currPara - 1) % 30) + 1;
-            paraText = (i % 2 === 0) ? `পারা ${toBnNum(p1)} (১ম অংশ)` : `পারা ${toBnNum(p1)} (২য় অংশ)`;
-            if (i % 2 === 1) currPara += 1;
-          } else {
-            const p1 = ((currPara - 1) % 30) + 1;
-            paraText = `পারা ${toBnNum(p1)}`;
-            currPara += 1;
-          }
-
-          plannerState.logs[dKey].dourPara = paraText;
-          if (!plannerState.logs[dKey].status) plannerState.logs[dKey].status = 'pending';
-
-          d.setDate(d.getDate() + 1);
-        }
-
-        savePlannerData();
-        renderCalendar();
-        renderSelectedDayCard();
-
-        const summaryBox = document.getElementById('cycleSummaryBox');
-        const summaryTitle = document.getElementById('cycleSummaryTitle');
-        const summaryText = document.getElementById('cycleSummaryText');
-        if (summaryBox && summaryText) {
-          summaryBox.classList.remove('hidden');
-          if (summaryTitle) summaryTitle.textContent = (mode === 'student') ? '✓ হিফজ সাইকেল সফলভাবে তৈরি হয়েছে!' : '✓ দাওর সাইকেল সফলভাবে তৈরি হয়েছে!';
-          summaryText.textContent = `${toBnNum(targetDays)} দিনে পুরো কুরআন দাওর (রিভিশন) শেষ করার রুটিন ক্যালেন্ডারে যুক্ত হয়েছে (শুরু: ${formatTriDateFull(selectedDate, plannerState.hijriOffset)})।`;
-        }
-        showToast((mode === 'student' ? 'হিফজ সাইকেল' : 'দাওর সাইকেল') + ' তৈরি সম্পন্ন!');
-      });
+    function openPlannerSettings() {
+      tempSelectedMode = plannerState.profileMode || 'general';
+      updateSettingsModalUI();
+      if (plannerSettingsModal) plannerSettingsModal.classList.remove('hidden');
     }
 
-    // TAB 3: All Mutashabihat & Notes List
-    function renderAllNotesList() {
-      const container = document.getElementById('allNotesListContainer');
-      const badge = document.getElementById('totalNotesCountBadge');
-      if (!container) return;
+    function closePlannerSettings() {
+      if (plannerSettingsModal) plannerSettingsModal.classList.add('hidden');
+    }
 
-      const allNotes = [];
-      Object.keys(plannerState.logs).forEach(dKey => {
-        const item = plannerState.logs[dKey];
-        if (item && item.notes && item.notes.length > 0) {
-          item.notes.forEach(n => {
-            allNotes.push({ dateKey: dKey, ...n });
-          });
+    function updateSettingsModalUI() {
+      document.querySelectorAll('.planner-mode-btn').forEach(btn => {
+        const m = btn.getAttribute('data-mode');
+        if (m === tempSelectedMode) {
+          btn.className = 'planner-mode-btn p-3 rounded-2xl border-2 border-emerald-600 bg-emerald-50 dark:bg-emerald-950/40 text-left transition flex flex-col gap-1';
+        } else {
+          btn.className = 'planner-mode-btn p-3 rounded-2xl border border-slate-200 dark:border-slate-700 text-left transition flex flex-col gap-1 hover:border-slate-400';
         }
       });
 
-      if (badge) badge.textContent = `মোট ${toBnNum(allNotes.length)} টি নোট`;
+      const remToggle = document.getElementById('plannerReminderToggle');
+      const remTime = document.getElementById('plannerReminderTimeInput');
+      if (remToggle) remToggle.checked = !!plannerState.reminderEnabled;
+      if (remTime) remTime.value = plannerState.reminderTime || '06:00';
 
-      if (allNotes.length === 0) {
-        const mode = plannerState.profileMode || 'general';
-        const emptyMsg = (mode === 'general')
-          ? 'এখনো কোনো তিলাওয়াত নোট যোগ করা হয়নি। ক্যালেন্ডারে গিয়ে যেকোনো দিনের জন্য আপনার পছন্দের আয়াত বা নোট যুক্ত করতে পারেন।'
-          : (mode === 'student')
-          ? 'এখনো কোনো হিফজ ভুল বা সবক নোট নেই। উস্তাদকে পড়া দেওয়ার সময় যেসব আয়াতে সমস্যা হয় তা ক্যালেন্ডারের দিন থেকে টুকে রাখুন।'
-          : 'এখনো কোনো সেলফ-কারেকশন বা মুতাশাবিহাত নোট যোগ করা হয়নি। ক্যালেন্ডারে গিয়ে যেকোনো দিনের জন্য নোট যুক্ত করতে পারেন।';
-        container.innerHTML = `<p class="text-xs text-slate-400 italic text-center py-8">${emptyMsg}</p>`;
-        return;
+      const offsetLabel = document.getElementById('hijriOffsetLabel');
+      if (offsetLabel) {
+        offsetLabel.textContent = `${plannerState.hijriOffset > 0 ? '+' : ''}${toBnNum(plannerState.hijriOffset)} দিন`;
       }
-
-      // Sort newest first
-      allNotes.sort((a, b) => (b.id || 0) - (a.id || 0));
-
-      container.innerHTML = allNotes.map(n => `
-        <div class="p-3 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-between gap-3 shadow-sm">
-          <div class="flex-1">
-            <div class="flex items-center gap-2 mb-1">
-              <span class="text-xs bg-emerald-700 text-white font-bold px-2.5 py-0.5 rounded-full font-mono">পৃষ্ঠা ${toBnNum(n.page)}</span>
-              <span class="text-[10px] text-slate-500 font-mono">${n.dateKey}</span>
-            </div>
-            <p class="text-xs text-slate-800 dark:text-slate-200 font-bengali">${n.text}</p>
-          </div>
-          <button onclick="jumpToPageFromNote(${n.page})" class="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold transition shrink-0 shadow-sm">
-            📖 পৃষ্ঠা খুলুন
-          </button>
-        </div>
-      `).join('');
+      document.querySelectorAll('.offset-btn').forEach(b => {
+        const off = parseInt(b.getAttribute('data-offset'), 10);
+        if (off === plannerState.hijriOffset) {
+          b.className = 'offset-btn flex-1 py-1.5 rounded-xl border text-xs font-semibold bg-emerald-600 text-white';
+        } else {
+          b.className = 'offset-btn flex-1 py-1.5 rounded-xl border text-xs font-semibold';
+        }
+      });
     }
 
-    // TAB 4: Hijri Offset Settings
-    document.querySelectorAll('.offset-btn').forEach(btn => {
+    if (openPlannerSettingsBtn) openPlannerSettingsBtn.addEventListener('click', openPlannerSettings);
+    if (closePlannerSettingsBtn) closePlannerSettingsBtn.addEventListener('click', closePlannerSettings);
+
+    document.querySelectorAll('.planner-mode-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        const offset = parseInt(btn.getAttribute('data-offset'), 10);
-        plannerState.hijriOffset = offset;
-        savePlannerData();
-
-        document.querySelectorAll('.offset-btn').forEach(b => {
-          b.className = 'offset-btn flex-1 py-1 rounded-lg border text-xs font-semibold';
-        });
-        btn.className = 'offset-btn flex-1 py-1 rounded-lg border text-xs font-semibold bg-emerald-600 text-white';
-
-        const offsetLabel = document.getElementById('hijriOffsetLabel');
-        if (offsetLabel) {
-          offsetLabel.textContent = `${offset > 0 ? '+' : ''}${toBnNum(offset)} দিন`;
-        }
-
-        renderTodayTriDate();
-        renderCalendar();
-        renderSelectedDayCard();
-        showToast('হিজরি সমন্বয় সফলভাবে সংরক্ষিত হয়েছে');
+        tempSelectedMode = btn.getAttribute('data-mode');
+        updateSettingsModalUI();
       });
     });
 
-    // Offline Backup & Restore
+    document.querySelectorAll('.offset-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        plannerState.hijriOffset = parseInt(btn.getAttribute('data-offset'), 10);
+        updateSettingsModalUI();
+      });
+    });
+
+    if (savePlannerSettingsBtn) {
+      savePlannerSettingsBtn.addEventListener('click', () => {
+        plannerState.profileMode = tempSelectedMode;
+        const remToggle = document.getElementById('plannerReminderToggle');
+        const remTime = document.getElementById('plannerReminderTimeInput');
+        if (remToggle) plannerState.reminderEnabled = remToggle.checked;
+        if (remTime) plannerState.reminderTime = remTime.value;
+
+        savePlannerData();
+        closePlannerSettings();
+        updatePlannerModeUI();
+        renderTodayTriDate();
+        switchPlannerTab(plannerState.activeTab || 'today');
+        showToast('প্ল্যানার সেটিংস সফলভাবে সংরক্ষিত হয়েছে!');
+      });
+    }
+
+    // Backup & Restore
     const backupDownloadBtn = document.getElementById('backupDownloadBtn');
     if (backupDownloadBtn) {
       backupDownloadBtn.addEventListener('click', () => {
         const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(plannerState, null, 2));
-        const dlAnchor = document.createElement('a');
-        dlAnchor.setAttribute('href', dataStr);
-        dlAnchor.setAttribute('download', `quran_huffaz_planner_backup_${formatDateKey(new Date())}.json`);
-        document.body.appendChild(dlAnchor);
-        dlAnchor.click();
-        dlAnchor.remove();
-        showToast('অফলাইন ব্যাকআপ ডাউনলোড হয়েছে!');
+        const dl = document.createElement('a');
+        dl.setAttribute('href', dataStr);
+        dl.setAttribute('download', `quran_planner_backup_${formatDateKey(new Date())}.json`);
+        document.body.appendChild(dl);
+        dl.click();
+        dl.remove();
+        showToast('ব্যাকআপ ডাউনলোড সম্পন্ন হয়েছে!');
       });
     }
 
@@ -2498,16 +2448,15 @@
         const file = e.target.files[0];
         if (!file) return;
         const reader = new FileReader();
-        reader.onload = (event) => {
+        reader.onload = (evt) => {
           try {
-            const restored = JSON.parse(event.target.result);
+            const restored = JSON.parse(evt.target.result);
             if (restored && typeof restored === 'object') {
               plannerState = { ...plannerState, ...restored };
               savePlannerData();
+              updatePlannerModeUI();
               renderTodayTriDate();
-              renderCalendar();
-              renderSelectedDayCard();
-              renderAllNotesList();
+              switchPlannerTab(plannerState.activeTab || 'today');
               showToast('ব্যাকআপ সফলভাবে রিস্টোর হয়েছে!');
             }
           } catch (err) {
@@ -2518,12 +2467,136 @@
       });
     }
 
-    // Initialize planner state on load
+    // Reset Progress
+    const resetPlannerProgressBtn = document.getElementById('resetPlannerProgressBtn');
+    if (resetPlannerProgressBtn) {
+      resetPlannerProgressBtn.addEventListener('click', () => {
+        if (confirm('আপনি কি সকল ট্র্যাকিং হিসেব রিসেট করতে চান?')) {
+          plannerState.logs = {};
+          savePlannerData();
+          renderPlannerTodayView();
+          closePlannerSettings();
+          showToast('প্ল্যানার প্রগ্রেস রিসেট করা হয়েছে!');
+        }
+      });
+    }
+
+    // Initialize planner state
     loadPlannerData();
 
-
-
     // ==========================================
+    // WUDU & PURITY GATEWAY SLIDER INTERACTION
+    // ==========================================
+    (function initWuduGateway() {
+      const modal = document.getElementById('wuduGatewayModal');
+      const track = document.getElementById('wuduSliderTrack');
+      const thumb = document.getElementById('wuduSliderThumb');
+      const fill = document.getElementById('wuduSliderFill');
+      const text = document.getElementById('wuduSliderText');
+      const skipBtn = document.getElementById('skipWuduGatewayBtn');
+
+      if (!modal || !track || !thumb) return;
+
+      // Check if dismissed in this session
+      if (sessionStorage.getItem('wuduGatewayDismissed') === 'true') {
+        modal.classList.add('hidden');
+        return;
+      }
+
+      let isDragging = false;
+      let startX = 0;
+      let currentOffset = 0;
+
+      function getMaxDrag() {
+        return Math.max(0, track.clientWidth - thumb.clientWidth - 8);
+      }
+
+      function updateDrag(x) {
+        const maxDrag = getMaxDrag();
+        currentOffset = Math.max(0, Math.min(x, maxDrag));
+        thumb.style.transform = `translateX(${currentOffset}px)`;
+        if (fill) fill.style.width = `${currentOffset + thumb.clientWidth}px`;
+        if (text) {
+          const progress = maxDrag > 0 ? (currentOffset / maxDrag) : 0;
+          text.style.opacity = Math.max(0, 1 - progress * 1.5);
+        }
+      }
+
+      function confirmPurityAndDismiss() {
+        thumb.innerHTML = '✓';
+        modal.classList.add('opacity-0');
+        modal.style.pointerEvents = 'none';
+        sessionStorage.setItem('wuduGatewayDismissed', 'true');
+        setTimeout(() => {
+          modal.classList.add('hidden');
+        }, 350);
+      }
+
+      function resetSlider() {
+        thumb.style.transition = 'transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+        if (fill) fill.style.transition = 'width 0.25s ease';
+        currentOffset = 0;
+        thumb.style.transform = 'translateX(0px)';
+        if (fill) fill.style.width = '48px';
+        if (text) text.style.opacity = '1';
+        setTimeout(() => {
+          thumb.style.transition = '';
+          if (fill) fill.style.transition = '';
+        }, 250);
+      }
+
+      // Mouse drag handlers
+      thumb.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX - currentOffset;
+        e.preventDefault();
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        updateDrag(e.clientX - startX);
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        const maxDrag = getMaxDrag();
+        if (currentOffset >= maxDrag * 0.75) {
+          updateDrag(maxDrag);
+          confirmPurityAndDismiss();
+        } else {
+          resetSlider();
+        }
+      });
+
+      // Touch drag handlers
+      thumb.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        startX = e.touches[0].clientX - currentOffset;
+      }, { passive: true });
+
+      window.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        updateDrag(e.touches[0].clientX - startX);
+      }, { passive: true });
+
+      window.addEventListener('touchend', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        const maxDrag = getMaxDrag();
+        if (currentOffset >= maxDrag * 0.75) {
+          updateDrag(maxDrag);
+          confirmPurityAndDismiss();
+        } else {
+          resetSlider();
+        }
+      });
+
+      if (skipBtn) {
+        skipBtn.addEventListener('click', confirmPurityAndDismiss);
+      }
+    })();
+
     // GLOBAL QURAN SEARCH ENGINE (ARABIC & BENGALI)
     // ==========================================
     let searchIndexData = null;
