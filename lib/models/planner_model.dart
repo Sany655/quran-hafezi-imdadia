@@ -41,6 +41,7 @@ class DayLog {
   String? sabki;
   String? studentDour;
   String? generalTilawat;
+  int pagesCount;
   List<PlannerNote> notes;
 
   DayLog({
@@ -50,6 +51,7 @@ class DayLog {
     this.sabki,
     this.studentDour,
     this.generalTilawat,
+    this.pagesCount = 0,
     List<PlannerNote>? notes,
   }) : notes = notes ?? [];
 
@@ -61,6 +63,7 @@ class DayLog {
       'sabki': sabki,
       'studentDour': studentDour,
       'generalTilawat': generalTilawat,
+      'pagesCount': pagesCount,
       'notes': notes.map((n) => n.toMap()).toList(),
     };
   }
@@ -84,6 +87,7 @@ class DayLog {
       sabki: map['sabki']?.toString(),
       studentDour: map['studentDour']?.toString(),
       generalTilawat: map['generalTilawat']?.toString(),
+      pagesCount: map['pagesCount'] is int ? map['pagesCount'] : int.tryParse(map['pagesCount']?.toString() ?? '0') ?? 0,
       notes: parsedNotes,
     );
   }
@@ -92,11 +96,19 @@ class DayLog {
 class PlannerModel {
   String profileMode; // 'general' | 'student' | 'hafiz'
   int hijriOffset;
+  int targetDays;
+  int pagesPerDay;
+  bool reminderEnabled;
+  String reminderTime;
   Map<String, DayLog> logs;
 
   PlannerModel({
     this.profileMode = 'general',
     this.hijriOffset = 0,
+    this.targetDays = 30,
+    this.pagesPerDay = 20,
+    this.reminderEnabled = false,
+    this.reminderTime = '06:00',
     Map<String, DayLog>? logs,
   }) : logs = logs ?? {};
 
@@ -108,6 +120,10 @@ class PlannerModel {
     return {
       'profileMode': profileMode,
       'hijriOffset': hijriOffset,
+      'targetDays': targetDays,
+      'pagesPerDay': pagesPerDay,
+      'reminderEnabled': reminderEnabled,
+      'reminderTime': reminderTime,
       'logs': logsMap,
     };
   }
@@ -127,6 +143,10 @@ class PlannerModel {
     return PlannerModel(
       profileMode: map['profileMode']?.toString() ?? 'general',
       hijriOffset: map['hijriOffset'] is int ? map['hijriOffset'] : int.tryParse(map['hijriOffset']?.toString() ?? '0') ?? 0,
+      targetDays: map['targetDays'] is int ? map['targetDays'] : int.tryParse(map['targetDays']?.toString() ?? '30') ?? 30,
+      pagesPerDay: map['pagesPerDay'] is int ? map['pagesPerDay'] : int.tryParse(map['pagesPerDay']?.toString() ?? '20') ?? 20,
+      reminderEnabled: map['reminderEnabled'] == true,
+      reminderTime: map['reminderTime']?.toString() ?? '06:00',
       logs: parsedLogs,
     );
   }

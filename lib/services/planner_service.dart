@@ -58,6 +58,45 @@ class PlannerService {
     await savePlannerData(model);
   }
 
+  Future<void> setReminderSettings({required bool enabled, required String time}) async {
+    final model = await getPlannerData();
+    model.reminderEnabled = enabled;
+    model.reminderTime = time;
+    await savePlannerData(model);
+  }
+
+  Future<void> setTargetSettings({required int targetDays, required int pagesPerDay}) async {
+    final model = await getPlannerData();
+    model.targetDays = targetDays;
+    model.pagesPerDay = pagesPerDay;
+    await savePlannerData(model);
+  }
+
+  Future<void> resetProgress() async {
+    final model = await getPlannerData();
+    model.logs.clear();
+    await savePlannerData(model);
+  }
+
+  Future<String> exportBackup() async {
+    final model = await getPlannerData();
+    return json.encode(model.toMap());
+  }
+
+  Future<bool> importBackup(String jsonStr) async {
+    try {
+      final data = json.decode(jsonStr);
+      if (data is Map<String, dynamic>) {
+        final model = PlannerModel.fromMap(data);
+        await savePlannerData(model);
+        return true;
+      }
+    } catch (e) {
+      // invalid json
+    }
+    return false;
+  }
+
   Future<void> saveDayLog(String dateKey, DayLog log) async {
     final model = await getPlannerData();
     model.logs[dateKey] = log;
@@ -105,6 +144,7 @@ class PlannerService {
     required DateTime startDate,
   }) async {
     final model = await getPlannerData();
+    model.targetDays = targetDays;
 
     if (mode == 'general') {
       int currPara = startPara;
@@ -117,36 +157,44 @@ class PlannerService {
         }
 
         String planText = '';
+        int pCount = 20;
         if (targetDays == 30) {
           final p1 = ((currPara - 1) % 30) + 1;
           planText = 'পারা ${TriCalendarHelper.toBnNum(p1)} (প্রতিদিন ১ পারা)';
+          pCount = 20;
           currPara += 1;
         } else if (targetDays == 60) {
           final p1 = (((i ~/ 2) + startPara - 1) % 30) + 1;
           final part = (i % 2 == 0) ? '১ম অর্ধেক (১০ পৃষ্ঠা)' : '২য় অর্ধেক (১০ পৃষ্ঠা)';
           planText = 'পারা ${TriCalendarHelper.toBnNum(p1)} ($part)';
+          pCount = 10;
         } else if (targetDays == 90) {
           final pg1 = ((i * 7) % 612) + 1;
           final pg2 = (pg1 + 6 > 612) ? 612 : pg1 + 6;
           planText = 'পৃষ্ঠা ${TriCalendarHelper.toBnNum(pg1)} থেকে ${TriCalendarHelper.toBnNum(pg2)}';
+          pCount = 7;
         } else if (targetDays == 120) {
           final pg1 = ((i * 5) % 612) + 1;
           final pg2 = (pg1 + 4 > 612) ? 612 : pg1 + 4;
           planText = 'পৃষ্ঠা ${TriCalendarHelper.toBnNum(pg1)} থেকে ${TriCalendarHelper.toBnNum(pg2)}';
+          pCount = 5;
         } else if (targetDays == 365) {
           final pg1 = (i * 1.67).floor() + 1;
           final pg2 = (((i + 1) * 1.67).floor() > 612) ? 612 : ((i + 1) * 1.67).floor();
           planText = (pg1 == pg2)
               ? 'পৃষ্ঠা ${TriCalendarHelper.toBnNum(pg1)}'
               : 'পৃষ্ঠা ${TriCalendarHelper.toBnNum(pg1)} - ${TriCalendarHelper.toBnNum(pg2)}';
+          pCount = 2;
         } else {
           final p1 = ((currPara - 1) % 30) + 1;
           planText = 'পারা ${TriCalendarHelper.toBnNum(p1)}';
+          pCount = 20;
           currPara += 1;
         }
 
         model.logs[dKey]!.generalTilawat = planText;
         model.logs[dKey]!.dourPara = planText;
+        model.logs[dKey]!.pagesCount = pCount;
         model.logs[dKey]!.status ??= 'pending';
 
         d = d.add(const Duration(days: 1));

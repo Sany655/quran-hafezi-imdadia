@@ -5,7 +5,7 @@ import '../database/quran_db_helper.dart';
 import '../models/surah.dart';
 import 'study_sheet.dart';
 import 'search_screen.dart';
-import 'planner_sheet.dart';
+import 'planner_screen.dart';
 
 class MushafViewScreen extends StatefulWidget {
   final int initialPage;
@@ -331,15 +331,15 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
                   icon: const Icon(Icons.calendar_month, color: Color(0xFFD4AF37)),
                   tooltip: 'রুটিন ও ক্যালেন্ডার',
                   onPressed: () {
-                    showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      backgroundColor: Colors.transparent,
-                      builder: (_) => PlannerSheet(
-                        onOpenPage: (pageNum) {
-                          Navigator.pop(context);
-                          _goToPage(pageNum);
-                        },
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => PlannerScreen(
+                          onOpenPage: (pageNum) {
+                            Navigator.pop(context);
+                            _goToPage(pageNum);
+                          },
+                        ),
                       ),
                     );
                   },

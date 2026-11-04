@@ -6,7 +6,7 @@ import '../models/bookmark.dart';
 import '../database/quran_db_helper.dart';
 import 'mushaf_view_screen.dart';
 import 'search_screen.dart';
-import 'planner_sheet.dart';
+import 'planner_screen.dart';
 
 class IndexScreen extends StatefulWidget {
   const IndexScreen({super.key});
@@ -157,15 +157,15 @@ class _IndexScreenState extends State<IndexScreen> {
               icon: const Icon(Icons.calendar_month, color: Color(0xFFD4AF37)),
               tooltip: 'রুটিন ও ক্যালেন্ডার',
               onPressed: () {
-                showModalBottomSheet(
-                  context: context,
-                  isScrollControlled: true,
-                  backgroundColor: Colors.transparent,
-                  builder: (_) => PlannerSheet(
-                    onOpenPage: (pageNum) {
-                      Navigator.pop(context);
-                      _openPage(pageNum);
-                    },
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => PlannerScreen(
+                      onOpenPage: (pageNum) {
+                        Navigator.pop(context);
+                        _openPage(pageNum);
+                      },
+                    ),
                   ),
                 );
               },
