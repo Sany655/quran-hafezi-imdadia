@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'screens/index_screen.dart';
+import 'screens/wudu_reminder_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +25,7 @@ class QuranApp extends StatelessWidget {
         textTheme: GoogleFonts.notoSansBengaliTextTheme(Theme.of(context).textTheme),
         scaffoldBackgroundColor: const Color(0xFFFBF8EE),
       ),
-      home: const IndexScreen(), // Starts at Table of Contents (সূচীপত্র)
+      home: const WuduReminderScreen(), // Starts at Purity & Adab Gateway
     );
   }
 }
