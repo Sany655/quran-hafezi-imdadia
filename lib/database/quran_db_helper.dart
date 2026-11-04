@@ -253,8 +253,8 @@ class QuranDbHelper {
       );
 
       for (var t in transMaps) {
-        final sid = t['surah_id'] as int;
-        final an = t['ayah_number'] as int;
+        final sid = (t['surah_id'] as int?) ?? 0;
+        final an = (t['ayah_number'] as int?) ?? 0;
         final vk = '$sid:$an';
         final a = ayahsByVk[vk];
         if (a != null) {
@@ -266,16 +266,16 @@ class QuranDbHelper {
         }
       }
 
-      // Query Word-by-Word data
+      // Query Word-by-Word data (including id)
       final wordMaps = await db.rawQuery(
-        'SELECT surah_id, ayah_number, position, text_arabic, meaning_bn FROM words_wbw WHERE $conditions ORDER BY surah_id, ayah_number, position ASC',
+        'SELECT id, surah_id, ayah_number, position, text_arabic, meaning_bn FROM words_wbw WHERE $conditions ORDER BY surah_id, ayah_number, position ASC',
         params,
       );
 
       final Map<String, List<WordWbw>> wordsByVk = {};
       for (var w in wordMaps) {
-        final sid = w['surah_id'] as int;
-        final an = w['ayah_number'] as int;
+        final sid = (w['surah_id'] as int?) ?? 0;
+        final an = (w['ayah_number'] as int?) ?? 0;
         final vk = '$sid:$an';
         wordsByVk.putIfAbsent(vk, () => []).add(WordWbw.fromMap(w));
       }

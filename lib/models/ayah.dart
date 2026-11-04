@@ -31,12 +31,12 @@ class Ayah {
 
   factory Ayah.fromMap(Map<String, dynamic> map) {
     return Ayah(
-      id: map['id'] as int,
-      surahId: map['surah_id'] as int,
-      ayahNumber: map['ayah_number'] as int,
-      verseKey: map['verse_key'] as String,
-      textIndopak: map['text_indopak'] as String,
-      textUthmani: map['text_uthmani'] as String,
+      id: (map['id'] as int?) ?? 0,
+      surahId: (map['surah_id'] as int?) ?? 0,
+      ayahNumber: (map['ayah_number'] as int?) ?? 0,
+      verseKey: (map['verse_key'] as String?) ?? '',
+      textIndopak: (map['text_indopak'] as String?) ?? '',
+      textUthmani: (map['text_uthmani'] as String?) ?? '',
     );
   }
 }

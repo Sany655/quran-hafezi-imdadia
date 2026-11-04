@@ -17,12 +17,12 @@ class WordWbw {
 
   factory WordWbw.fromMap(Map<String, dynamic> map) {
     return WordWbw(
-      id: map['id'] as int,
-      surahId: map['surah_id'] as int,
-      ayahNumber: map['ayah_number'] as int,
-      position: map['position'] as int,
-      textArabic: map['text_arabic'] as String,
-      meaningBn: map['meaning_bn'] as String,
+      id: (map['id'] as int?) ?? 0,
+      surahId: (map['surah_id'] as int?) ?? 0,
+      ayahNumber: (map['ayah_number'] as int?) ?? 0,
+      position: (map['position'] as int?) ?? 0,
+      textArabic: (map['text_arabic'] as String?) ?? '',
+      meaningBn: (map['meaning_bn'] as String?) ?? '',
     );
   }
 }
