@@ -22,7 +22,6 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
   bool _isUiVisible = true;
   bool _isBookmarked = false;
   List<Surah> _surahs = [];
-  Map<int, Map<String, dynamic>> _pagesInfo = {};
 
   @override
   void initState() {
@@ -36,11 +35,9 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
 
   void _loadSurahs() async {
     final list = await QuranDbHelper.instance.getAllSurahs();
-    final pMap = await QuranDbHelper.instance.getAllPagesInfo();
     if (mounted) {
       setState(() {
         _surahs = list;
-        _pagesInfo = pMap;
       });
       _saveCurrentLastRead();
     }
@@ -63,12 +60,6 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
 
   Surah? _getCurrentSurah(int page) {
     if (_surahs.isEmpty) return null;
-    final info = _pagesInfo[page];
-    if (info != null && info['start_surah_id'] != null) {
-      final startSurahId = info['start_surah_id'] as int;
-      final found = _surahs.where((s) => s.id == startSurahId);
-      if (found.isNotEmpty) return found.first;
-    }
     Surah current = _surahs.first;
     for (var s in _surahs) {
       if (page >= s.startPage) {
@@ -111,10 +102,6 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
 
   void _openStudySheet() {
     final surah = _getCurrentSurah(_currentPage);
-    final info = _pagesInfo[_currentPage];
-    final int initialAyah = (info != null && info['start_ayah_number'] != null)
-        ? (info['start_ayah_number'] as int)
-        : 1;
 
     showModalBottomSheet(
       context: context,
@@ -128,7 +115,6 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
           builder: (ctx, scrollController) => StudySheet(
             pageNumber: _currentPage,
             surah: surah,
-            initialAyahNumber: initialAyah,
             scrollController: scrollController,
           ),
         );
@@ -142,23 +128,35 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
       context: context,
       builder: (ctx) {
         return AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
           title: Text(
-            'পৃষ্ঠা নম্বরে যান (১ - ৬১২)',
-            style: GoogleFonts.notoSansBengali(fontWeight: FontWeight.bold, fontSize: 16),
+            'পৃষ্ঠা নম্বরে যান',
+            style: GoogleFonts.notoSansBengali(fontWeight: FontWeight.bold, fontSize: 18),
           ),
-          content: TextField(
-            controller: controller,
-            keyboardType: TextInputType.number,
-            autofocus: true,
-            decoration: const InputDecoration(
-              hintText: 'পৃষ্ঠা নম্বর',
-              border: OutlineInputBorder(),
-            ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                '১ থেকে ৬১২ এর মধ্যে যেকোনো পৃষ্ঠা নির্বাচন করুন:',
+                style: GoogleFonts.notoSansBengali(fontSize: 14),
+              ),
+              const SizedBox(height: 12),
+              TextField(
+                controller: controller,
+                keyboardType: TextInputType.number,
+                autofocus: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                  labelText: 'পৃষ্ঠা নম্বর',
+                  hintText: '১-৬১২',
+                ),
+              ),
+            ],
           ),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx),
-              child: Text('বাতিল', style: GoogleFonts.notoSansBengali()),
+              child: Text('বাতিল', style: GoogleFonts.notoSansBengali(color: Colors.grey[700])),
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -166,13 +164,13 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
                 foregroundColor: Colors.white,
               ),
               onPressed: () {
-                final p = int.tryParse(controller.text);
-                if (p != null && p >= 1 && p <= 612) {
+                final page = int.tryParse(controller.text);
+                if (page != null && page >= 1 && page <= 612) {
                   Navigator.pop(ctx);
-                  _goToPage(p);
+                  _goToPage(page);
                 }
               },
-              child: Text('যাও', style: GoogleFonts.notoSansBengali()),
+              child: Text('যান', style: GoogleFonts.notoSansBengali()),
             ),
           ],
         );
@@ -180,10 +178,9 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
     );
   }
 
-  // Bookmark Toggle with Yes/No Prompt
   void _promptBookmarkDialog() {
     final s = _getCurrentSurah(_currentPage);
-    final sname = s?.nameBn ?? 'কুরআন শরীফ';
+    final sname = s?.nameBn ?? 'সূরা';
     final juzNum = _getCurrentJuz(_currentPage);
 
     if (_isBookmarked) {
@@ -204,7 +201,7 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
               ],
             ),
             content: Text(
-              'পৃষ্ঠা $_currentPage ($sname) ইতিমধ্যে বুকমার্ক করা আছে। আপনি কি এটি মুছে ফেলতে চান?',
+              'আপনি কি পৃষ্ঠা $_currentPage ($sname) বুকমার্ক থেকে অপসারণ করতে চান?',
               style: GoogleFonts.notoSansBengali(fontSize: 15, height: 1.5),
             ),
             actions: [
@@ -396,7 +393,7 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
             _isUiVisible = !_isUiVisible;
           });
         },
-        onLongPress: _promptBookmarkDialog, // Long press with Yes/No prompt!
+        onLongPress: _promptBookmarkDialog,
         child: Stack(
           children: [
             Directionality(
@@ -405,24 +402,11 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
                 controller: _pageController,
                 itemCount: 612,
                 onPageChanged: (index) {
-                  final newPage = index + 1;
                   setState(() {
-                    _currentPage = newPage;
+                    _currentPage = index + 1;
                   });
                   _checkBookmarkStatus();
                   _saveCurrentLastRead();
-                  if (newPage > 1) {
-                    precacheImage(
-                      AssetImage('assets/pages/page_${(newPage - 1).toString().padLeft(3, '0')}.jpg'),
-                      context,
-                    );
-                  }
-                  if (newPage < 612) {
-                    precacheImage(
-                      AssetImage('assets/pages/page_${(newPage + 1).toString().padLeft(3, '0')}.jpg'),
-                      context,
-                    );
-                  }
                 },
                 itemBuilder: (context, index) {
                   final pageNum = index + 1;
@@ -474,11 +458,20 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    TextButton.icon(
-                      icon: const Icon(Icons.numbers, color: Colors.white),
+                    Text(
+                      'পারা ${_getCurrentJuz(_currentPage)}',
+                      style: GoogleFonts.notoSansBengali(color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
+                    ElevatedButton.icon(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: const Color(0xFF0F5132),
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                      ),
+                      icon: const Icon(Icons.pin_drop, size: 18),
                       label: Text(
-                        'পৃষ্ঠা লাফান',
-                        style: GoogleFonts.notoSansBengali(color: Colors.white),
+                        'পৃষ্ঠা: $_currentPage',
+                        style: GoogleFonts.notoSansBengali(fontWeight: FontWeight.bold),
                       ),
                       onPressed: _showJumpDialog,
                     ),

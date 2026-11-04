@@ -12,6 +12,7 @@ import '../models/bookmark.dart';
 class QuranDbHelper {
   static final QuranDbHelper instance = QuranDbHelper._init();
   static Database? _database;
+  static Future<Database>? _initDbFuture;
 
   static const int kDatabaseVersion = 2;
 
@@ -23,9 +24,19 @@ class QuranDbHelper {
   QuranDbHelper._init();
 
   Future<Database> get database async {
-    if (_database != null) return _database!;
-    _database = await _initDB('quran_imdadia.db');
+    if (_database != null && _database!.isOpen) return _database!;
+    _initDbFuture ??= _initDB('quran_imdadia.db');
+    _database = await _initDbFuture!;
     return _database!;
+  }
+
+  Future<void> _copyAssetDb(String path) async {
+    try {
+      await Directory(dirname(path)).create(recursive: true);
+    } catch (_) {}
+    ByteData data = await rootBundle.load('data/quran_imdadia.db');
+    final bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
+    await File(path).writeAsBytes(bytes, flush: true);
   }
 
   Future<Database> _initDB(String filePath) async {
@@ -33,52 +44,31 @@ class QuranDbHelper {
     final path = join(dbPath, filePath);
 
     final exists = await databaseExists(path);
-    bool needsCopy = !exists;
-
-    if (exists) {
-      try {
-        final checkDb = await openDatabase(path, readOnly: true);
-        final vRes = await checkDb.rawQuery("PRAGMA user_version");
-        final currentVersion = Sqflite.firstIntValue(vRes) ?? 0;
-
-        final pageCols = await checkDb.rawQuery("PRAGMA table_info(pages)");
-        final hasVerseKeys = pageCols.any((c) => c['name'] == 'verse_keys');
-        final hasStartSurah = pageCols.any((c) => c['name'] == 'start_surah_id');
-
-        final tafsirCountRes = await checkDb.rawQuery("SELECT COUNT(*) as cnt FROM tafsirs WHERE tafsir_id = 164");
-        final ikCount = Sqflite.firstIntValue(tafsirCountRes) ?? 0;
-
-        await checkDb.close();
-
-        // Enforce update if version < 2, or missing verse_keys, or tafsir is incomplete
-        if (currentVersion < kDatabaseVersion || !hasVerseKeys || !hasStartSurah || ikCount < 6000) {
-          needsCopy = true;
-        }
-      } catch (e) {
-        debugPrint('Verification check error on existing DB: $e');
-        needsCopy = true;
-      }
+    if (!exists) {
+      debugPrint('Database file does not exist, copying from assets...');
+      await _copyAssetDb(path);
     }
 
-    if (needsCopy) {
-      debugPrint('Re-copying quran_imdadia.db (fresh install or update)...');
-      try {
+    var db = await openDatabase(path, readOnly: false);
+
+    // Fast version check: PRAGMA user_version takes 0.1ms
+    try {
+      final vRes = await db.rawQuery("PRAGMA user_version");
+      final currentVersion = Sqflite.firstIntValue(vRes) ?? 0;
+
+      if (currentVersion < kDatabaseVersion) {
+        debugPrint('Old database version ($currentVersion < $kDatabaseVersion), upgrading...');
+        await db.close();
         await deleteDatabase(path);
-      } catch (_) {}
-
-      try {
-        await Directory(dirname(path)).create(recursive: true);
-      } catch (_) {}
-
-      ByteData data = await rootBundle.load('data/quran_imdadia.db');
-      final bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-      await File(path).writeAsBytes(bytes, flush: true);
+        await _copyAssetDb(path);
+        db = await openDatabase(path, readOnly: false);
+        await db.execute('PRAGMA user_version = $kDatabaseVersion;');
+      }
+    } catch (e) {
+      debugPrint('Error during version verification: $e');
     }
 
-    final db = await openDatabase(path, readOnly: false);
-    await db.execute('PRAGMA user_version = $kDatabaseVersion;');
-
-    // Create Bookmarks & Last Read tables if they don't exist
+    // Fast table creation with IF NOT EXISTS
     await db.execute('''
       CREATE TABLE IF NOT EXISTS bookmarks (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
