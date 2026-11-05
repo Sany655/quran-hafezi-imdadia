@@ -304,6 +304,10 @@ class QuranDbHelper {
         if (a != null) {
           if (t['edition'] == 'taisirul') {
             a.translationTaisirul = t['text_bn'] as String?;
+          } else if (t['edition'] == 'tawzeehul') {
+            a.translationTawzeehul = t['text_bn'] as String?;
+          } else if (t['edition'] == 'shafi') {
+            a.translationShafi = t['text_bn'] as String?;
           } else if (t['edition'] == 'zakaria') {
             a.translationZakaria = t['text_bn'] as String?;
           }
@@ -357,6 +361,10 @@ class QuranDbHelper {
         if (t['ayah_number'] == a.ayahNumber) {
           if (t['edition'] == 'taisirul') {
             a.translationTaisirul = t['text_bn'] as String?;
+          } else if (t['edition'] == 'tawzeehul') {
+            a.translationTawzeehul = t['text_bn'] as String?;
+          } else if (t['edition'] == 'shafi') {
+            a.translationShafi = t['text_bn'] as String?;
           } else if (t['edition'] == 'zakaria') {
             a.translationZakaria = t['text_bn'] as String?;
           }

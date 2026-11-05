@@ -27,7 +27,7 @@ class StudySheet extends StatefulWidget {
 class _StudySheetState extends State<StudySheet> {
   late Future<List<Ayah>> _ayahsFuture;
   bool _showWordByWord = true;
-  String _selectedTranslation = 'taisirul'; // 'taisirul' or 'zakaria'
+  String _selectedTranslation = 'tawzeehul'; // 'tawzeehul', 'shafi', 'taisirul'
 
   @override
   void initState() {
@@ -54,7 +54,7 @@ class _StudySheetState extends State<StudySheet> {
       ),
       builder: (ctx) {
         return DefaultTabController(
-          length: 2,
+          length: 3,
           child: DraggableScrollableSheet(
             initialChildSize: 0.75,
             maxChildSize: 0.95,
@@ -98,7 +98,9 @@ class _StudySheetState extends State<StudySheet> {
                   const TabBar(
                     labelColor: Color(0xFF0F5132),
                     indicatorColor: Color(0xFF0F5132),
+                    isScrollable: true,
                     tabs: [
+                      Tab(text: 'তাওযীহুল কুরআন'),
                       Tab(text: 'আহসানুল বায়ান'),
                       Tab(text: 'ইবনে কাসীর'),
                     ],
@@ -106,6 +108,7 @@ class _StudySheetState extends State<StudySheet> {
                   Expanded(
                     child: TabBarView(
                       children: [
+                        _buildTafsirContent(tafsirs['tawzeehul_quran'], scrollController),
                         _buildTafsirContent(tafsirs['ahsanul_bayan'], scrollController),
                         _buildTafsirContent(tafsirs['ibn_kathir'], scrollController),
                       ],
@@ -157,6 +160,30 @@ class _StudySheetState extends State<StudySheet> {
         ),
       ),
     );
+  }
+
+  String _getTranslationText(Ayah ayah) {
+    switch (_selectedTranslation) {
+      case 'tawzeehul':
+        return ayah.translationTawzeehul ?? ayah.translationTaisirul ?? '';
+      case 'shafi':
+        return ayah.translationShafi ?? ayah.translationTaisirul ?? '';
+      case 'taisirul':
+      default:
+        return ayah.translationTaisirul ?? ayah.translationTawzeehul ?? '';
+    }
+  }
+
+  String _getTranslationLabel() {
+    switch (_selectedTranslation) {
+      case 'tawzeehul':
+        return '(তাফসীরে তাওযীহুল কুরআন - মুফতী তাকী উসমানী)';
+      case 'shafi':
+        return "(মা'আরিফুল কুরআন - মুফতী শফী রহ.)";
+      case 'taisirul':
+      default:
+        return '(তাইসীরুল কুরআন - তাওহীদ পাবলিকেশন্স)';
+    }
   }
 
   @override
@@ -249,22 +276,32 @@ class _StudySheetState extends State<StudySheet> {
                 ),
                 const SizedBox(width: 8),
                 ChoiceChip(
+                  label: Text('তাওযীহুল কুরআন', style: GoogleFonts.notoSansBengali(fontSize: 11)),
+                  selected: _selectedTranslation == 'tawzeehul',
+                  selectedColor: const Color(0xFF0F5132),
+                  labelStyle: TextStyle(color: _selectedTranslation == 'tawzeehul' ? Colors.white : Colors.black87),
+                  onSelected: (val) {
+                    if (val) setState(() => _selectedTranslation = 'tawzeehul');
+                  },
+                ),
+                const SizedBox(width: 6),
+                ChoiceChip(
+                  label: Text("মা'আরিফুল কুরআন", style: GoogleFonts.notoSansBengali(fontSize: 11)),
+                  selected: _selectedTranslation == 'shafi',
+                  selectedColor: const Color(0xFF0F5132),
+                  labelStyle: TextStyle(color: _selectedTranslation == 'shafi' ? Colors.white : Colors.black87),
+                  onSelected: (val) {
+                    if (val) setState(() => _selectedTranslation = 'shafi');
+                  },
+                ),
+                const SizedBox(width: 6),
+                ChoiceChip(
                   label: Text('তাইসীরুল কুরআন', style: GoogleFonts.notoSansBengali(fontSize: 11)),
                   selected: _selectedTranslation == 'taisirul',
                   selectedColor: const Color(0xFF0F5132),
                   labelStyle: TextStyle(color: _selectedTranslation == 'taisirul' ? Colors.white : Colors.black87),
                   onSelected: (val) {
                     if (val) setState(() => _selectedTranslation = 'taisirul');
-                  },
-                ),
-                const SizedBox(width: 6),
-                ChoiceChip(
-                  label: Text('ড. আবু বকর যাকারিয়া', style: GoogleFonts.notoSansBengali(fontSize: 11)),
-                  selected: _selectedTranslation == 'zakaria',
-                  selectedColor: const Color(0xFF0F5132),
-                  labelStyle: TextStyle(color: _selectedTranslation == 'zakaria' ? Colors.white : Colors.black87),
-                  onSelected: (val) {
-                    if (val) setState(() => _selectedTranslation = 'zakaria');
                   },
                 ),
               ],
@@ -468,9 +505,7 @@ class _StudySheetState extends State<StudySheet> {
                                         icon: const Icon(Icons.share, size: 18, color: Color(0xFF0F5132)),
                                         tooltip: 'আয়াত শেয়ার করুন',
                                         onPressed: () {
-                                          final bnText = _selectedTranslation == 'zakaria'
-                                              ? (ayah.translationZakaria ?? ayah.translationTaisirul ?? '')
-                                              : (ayah.translationTaisirul ?? '');
+                                          final bnText = _getTranslationText(ayah);
                                           final text = '﴿ ${ayah.textIndopak} ﴾\n\n'
                                               'বাংলা অর্থ:\n"$bnText"\n\n'
                                               '[সূরা $surahTitle, আয়াত ${TriCalendarHelper.toBnNum(ayah.ayahNumber)}, পৃষ্ঠা ${TriCalendarHelper.toBnNum(widget.pageNumber)}]\n'
@@ -560,9 +595,7 @@ class _StudySheetState extends State<StudySheet> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     SelectableText(
-                                      _selectedTranslation == 'taisirul'
-                                          ? (ayah.translationTaisirul ?? '')
-                                          : (ayah.translationZakaria ?? ''),
+                                      _getTranslationText(ayah),
                                       style: GoogleFonts.notoSansBengali(
                                         fontSize: 14,
                                         height: 1.6,
@@ -571,9 +604,7 @@ class _StudySheetState extends State<StudySheet> {
                                     ),
                                     const SizedBox(height: 6),
                                     Text(
-                                      _selectedTranslation == 'taisirul'
-                                          ? '(তাইসীরুল কুরআন)'
-                                          : '(ড. আবু বকর যাকারিয়া)',
+                                      _getTranslationLabel(),
                                       style: GoogleFonts.notoSansBengali(
                                         fontSize: 11,
                                         color: Colors.grey[600],

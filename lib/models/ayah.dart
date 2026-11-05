@@ -10,8 +10,11 @@ class Ayah {
   String? surahNameBn;
   String? translationTaisirul;
   String? translationZakaria;
+  String? translationShafi;
+  String? translationTawzeehul;
   String? tafsirAhsanulBayan;
   String? tafsirIbnKathir;
+  String? tafsirTawzeehul;
   List<WordWbw> words;
 
   Ayah({
@@ -24,8 +27,11 @@ class Ayah {
     this.surahNameBn,
     this.translationTaisirul,
     this.translationZakaria,
+    this.translationShafi,
+    this.translationTawzeehul,
     this.tafsirAhsanulBayan,
     this.tafsirIbnKathir,
+    this.tafsirTawzeehul,
     this.words = const [],
   });
 
