@@ -1,10 +1,12 @@
-const CACHE_NAME = 'quran-huffaz-v12';
+const CACHE_NAME = 'quran-huffaz-v14';
 const CORE_ASSETS = [
   './',
   './index.html',
   './reader.html',
   './manifest.json',
   './assets/app_icon.png',
+  './assets/icon-192.png',
+  './assets/icon-512.png',
   './data/surahs.json',
   './data/juz.json',
   './data/page_map.json'

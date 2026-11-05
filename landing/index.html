@@ -243,14 +243,19 @@
 
         <!-- CTA Buttons -->
         <div class="mt-10 flex flex-wrap items-center justify-center gap-4 font-bengali">
-          <a href="reader.html" class="px-8 py-4 rounded-xl bg-gold-600 hover:bg-gold-500 text-white font-semibold text-lg shadow-xl shadow-gold-700/25 transition transform hover:-translate-y-0.5 flex items-center gap-3">
+          <button id="heroPwaInstallBtn" class="px-7 py-4 rounded-xl bg-gold-600 hover:bg-gold-500 text-white font-semibold text-lg shadow-xl shadow-gold-700/25 transition transform hover:-translate-y-0.5 flex items-center gap-2.5">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <span>PWA অ্যাপ ইনস্টল করুন</span>
+          </button>
+
+          <a href="reader.html" class="px-7 py-4 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white font-semibold text-lg shadow-xl shadow-emerald-900/25 transition transform hover:-translate-y-0.5 flex items-center gap-2.5">
             <span class="text-xl">📖</span>
-            <span>ওয়েবে সরাসরি পড়ুন (PWA)</span>
+            <span>ওয়েবে সরাসরি পড়ুন</span>
           </a>
 
-          <a href="#download" class="px-7 py-4 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-semibold text-lg shadow-xl shadow-emerald-800/25 transition transform hover:-translate-y-0.5 flex items-center gap-3">
+          <a href="#download" class="px-7 py-4 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-semibold text-lg shadow-xl shadow-emerald-800/25 transition transform hover:-translate-y-0.5 flex items-center gap-2.5">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-            <span>অ্যান্ড্রয়েড APK ডাউনলোড</span>
+            <span>অ্যান্ড্রয়েড APK</span>
           </a>
         </div>
 
@@ -901,16 +906,24 @@
 
       <div class="grid sm:grid-cols-3 gap-5 max-w-4xl mx-auto">
         
-        <!-- Option 1: Web PWA App (iPhone / Web) -->
-        <a href="reader.html" class="p-5 rounded-2xl bg-gold-600 hover:bg-gold-500 text-white shadow-xl shadow-gold-700/20 transition transform hover:-translate-y-1 flex flex-col items-center text-center group">
+        <!-- Option 1: Web PWA App (iPhone / Android / Desktop) -->
+        <div class="p-5 rounded-2xl bg-gold-600 hover:bg-gold-500 text-white shadow-xl shadow-gold-700/20 transition transform hover:-translate-y-1 flex flex-col items-center text-center group">
           <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition">
             📱
           </div>
-          <span class="text-[11px] text-gold-200 font-semibold uppercase">আইফোন, সাফারি ও কম্পিউটার</span>
-          <h3 class="text-lg font-bold text-white mt-1">ওয়েবে পড়ুন (PWA)</h3>
-          <p class="text-xs text-gold-100 mt-1">ইনস্টল ছাড়াই ব্রাউজারে পড়ুন অথবা "Add to Home Screen" করে নিন।</p>
-          <div class="mt-4 px-4 py-1.5 rounded-lg bg-white text-gold-800 text-xs font-bold shadow">ওয়েব রিডার চালু করুন →</div>
-        </a>
+          <span class="text-[11px] text-gold-200 font-semibold uppercase">মোবাইল ও কম্পিউটার</span>
+          <h3 class="text-lg font-bold text-white mt-1">ওয়েব অ্যাপ (PWA)</h3>
+          <p class="text-xs text-gold-100 mt-1">হোম স্ক্রিনে ইনস্টল করে ব্রাউজার ছাড়াই সরাসরি পড়ুন।</p>
+          <div class="mt-4 flex flex-col sm:flex-row items-center gap-2 w-full justify-center">
+            <button id="pwaCardInstallBtn" class="w-full sm:w-auto px-3 py-1.5 rounded-lg bg-white text-gold-800 text-xs font-bold shadow flex items-center justify-center gap-1 hover:bg-gold-50 transition">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>PWA ইনস্টল করুন</span>
+            </button>
+            <a href="reader.html" class="w-full sm:w-auto px-3 py-1.5 rounded-lg bg-gold-700 hover:bg-gold-800 text-white text-xs font-bold shadow transition text-center">
+              সরাসরি পড়ুন →
+            </a>
+          </div>
+        </div>
 
         <!-- Option 2: Android APK -->
         <a id="apkDownloadBtn" href="https://github.com/Sany655/quran-hafezi-imdadia/releases/latest/download/Quran-Hafezi-Imdadia.apk" class="p-5 rounded-2xl bg-emerald-700 hover:bg-emerald-600 text-white shadow-xl shadow-emerald-800/30 transition transform hover:-translate-y-1 flex flex-col items-center text-center group">
@@ -1179,7 +1192,14 @@
     }
     updateLatestReleaseInfo();
 
-    // Register PWA Service Worker
+    // PWA Service Worker Registration & Mobile Install Logic
+    let deferredPrompt = null;
+    const pwaInstallBanner = document.getElementById('pwaInstallBanner');
+    const installPwaBtn = document.getElementById('installPwaBtn');
+    const closePwaBannerBtn = document.getElementById('closePwaBannerBtn');
+    const pwaCardInstallBtn = document.getElementById('pwaCardInstallBtn');
+    const heroPwaInstallBtn = document.getElementById('heroPwaInstallBtn');
+
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js').then((reg) => {
@@ -1187,7 +1207,74 @@
         }).catch(() => {});
       });
     }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      if (pwaInstallBanner && !localStorage.getItem('pwa_banner_dismissed')) {
+        pwaInstallBanner.classList.remove('hidden');
+      }
+    });
+
+    const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+
+    if (!isStandalone && !localStorage.getItem('pwa_banner_dismissed')) {
+      setTimeout(() => {
+        if (pwaInstallBanner && !isStandalone) pwaInstallBanner.classList.remove('hidden');
+      }, 3000);
+    }
+
+    async function triggerPwaInstall() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          if (pwaInstallBanner) pwaInstallBanner.classList.add('hidden');
+        }
+        deferredPrompt = null;
+      } else if (isIos) {
+        alert('Safari ব্রাউজারে Share বাটনে চাপ দিয়ে "Add to Home Screen" বেছে নিন');
+      } else {
+        alert('ব্রাউজারের ৩-ডট মেনু থেকে "Install app" অথবা "Add to Home screen" চাপুন');
+      }
+    }
+
+    if (installPwaBtn) installPwaBtn.addEventListener('click', triggerPwaInstall);
+    if (pwaCardInstallBtn) pwaCardInstallBtn.addEventListener('click', triggerPwaInstall);
+    if (heroPwaInstallBtn) heroPwaInstallBtn.addEventListener('click', triggerPwaInstall);
+    if (closePwaBannerBtn) {
+      closePwaBannerBtn.addEventListener('click', () => {
+        if (pwaInstallBanner) pwaInstallBanner.classList.add('hidden');
+        localStorage.setItem('pwa_banner_dismissed', 'true');
+      });
+    }
+
+    window.addEventListener('appinstalled', () => {
+      deferredPrompt = null;
+      if (pwaInstallBanner) pwaInstallBanner.classList.add('hidden');
+    });
   </script>
+
+  <!-- Floating PWA Install Banner -->
+  <div id="pwaInstallBanner" class="fixed bottom-4 left-4 right-4 max-w-md mx-auto bg-emerald-950/95 text-white p-3.5 rounded-2xl shadow-2xl border border-emerald-700/60 z-50 hidden flex-col gap-2.5 font-bengali transition-all duration-300">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <img src="assets/icon-192.png" alt="App Icon" class="w-10 h-10 rounded-xl shadow border border-emerald-600/40">
+        <div>
+          <h4 class="font-bold text-sm text-white">আল-কুরআন ওয়েব অ্যাপ</h4>
+          <p class="text-[11px] text-emerald-200/90">মোবাইলে ইনস্টল করে অফলাইনে পড়ুন</p>
+        </div>
+      </div>
+      <button id="closePwaBannerBtn" class="text-emerald-300 hover:text-white p-1">✕</button>
+    </div>
+    <div class="flex items-center gap-2 pt-1">
+      <button id="installPwaBtn" class="flex-1 py-2 px-3 bg-gold-500 hover:bg-gold-400 text-slate-950 font-bold text-xs rounded-xl shadow transition text-center flex items-center justify-center gap-1.5">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        <span>হোম স্ক্রিনে ইনস্টল করুন</span>
+      </button>
+    </div>
+  </div>
 
 </body>
 </html>

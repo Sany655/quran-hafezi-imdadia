@@ -238,13 +238,15 @@
     .ribbon-glow {
       filter: drop-shadow(0 2px 8px rgba(245, 158, 11, 0.6));
     }
-    /* Hide scrollbars but keep functionality */
+    /* Hide scrollbars completely across WebKit, Firefox, IE/Edge */
     .no-scrollbar::-webkit-scrollbar {
-      display: none;
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
     }
     .no-scrollbar {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+      -ms-overflow-style: none !important;
+      scrollbar-width: none !important;
     }
   </style>
 </head>
@@ -312,6 +314,12 @@
       <button id="fullscreenBtn" class="p-1.5 sm:p-2 rounded-lg sm:rounded-xl hover:bg-emerald-800 dark:hover:bg-slate-800 text-emerald-100 transition hidden sm:inline-flex" title="পূর্ণপর্দা">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
       </button>
+
+      <!-- PWA Install Button (Mobile & Desktop) -->
+      <button id="headerPwaInstallBtn" class="p-1.5 sm:px-2.5 sm:py-1 rounded-lg sm:rounded-xl bg-gold-500/90 hover:bg-gold-400 text-slate-950 font-bold transition flex items-center gap-1 shadow-sm" title="হোম স্ক্রিনে ইনস্টল করুন">
+        <svg class="w-4 h-4 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        <span class="text-[11px] sm:text-xs font-bengali hidden sm:inline">ইনস্টল</span>
+      </button>
     </div>
 
   </header>
@@ -323,6 +331,26 @@
       <span><strong>আইফোন ব্যবহারকারী:</strong> Safari-তে Share বাটনে চাপ দিয়ে <strong>Add to Home Screen</strong> বেছে নিন।</span>
     </div>
     <button id="closeIosBannerBtn" class="text-emerald-950 font-bold px-2 py-0.5 rounded hover:bg-gold-600/30">✕</button>
+  </div>
+
+  <!-- Mobile PWA Install Floating Banner -->
+  <div id="pwaInstallBanner" class="fixed bottom-4 left-4 right-4 max-w-md mx-auto bg-emerald-950/95 text-white p-3.5 rounded-2xl shadow-2xl border border-emerald-700/60 z-50 hidden flex-col gap-2.5 font-bengali transition-all duration-300">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <img src="assets/icon-192.png" alt="App Icon" class="w-10 h-10 rounded-xl shadow border border-emerald-600/40">
+        <div>
+          <h4 class="font-bold text-sm text-white">আল-কুরআন ওয়েব অ্যাপ</h4>
+          <p class="text-[11px] text-emerald-200/90">মোবাইলে ইনস্টল করে অফলাইনে পড়ুন</p>
+        </div>
+      </div>
+      <button id="closePwaBannerBtn" class="text-emerald-300 hover:text-white p-1">✕</button>
+    </div>
+    <div class="flex items-center gap-2 pt-1">
+      <button id="installPwaBtn" class="flex-1 py-2 px-3 bg-gold-500 hover:bg-gold-400 text-slate-950 font-bold text-xs rounded-xl shadow transition text-center flex items-center justify-center gap-1.5">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        <span>হোম স্ক্রিনে ইনস্টল করুন</span>
+      </button>
+    </div>
   </div>
 
   <!-- Main Mushaf Viewer Viewport -->
@@ -477,32 +505,51 @@
       </div>
 
       <!-- Scope Switcher: Tarjuma vs Tafsir + WBW Toggle -->
-      <div class="px-3 sm:px-4 py-2 bg-emerald-950/80 border-b border-emerald-800/60 flex items-center justify-between gap-2 overflow-x-auto">
-        <div class="flex items-center gap-1.5 sm:gap-2 flex-1 min-w-[200px]">
-          <button id="studyTabScopeTarjuma" class="flex-1 py-1.5 px-2.5 sm:px-3 rounded-xl text-xs font-semibold bg-emerald-600 text-white shadow-sm transition whitespace-nowrap">
-            পৃষ্ঠার অনুবাদ
+      <div class="px-3 sm:px-4 py-1.5 bg-emerald-950/90 border-b border-emerald-800/60 flex items-center justify-between gap-2 no-scrollbar">
+        <div class="flex items-center gap-1.5 flex-1 min-w-0">
+          <button id="studyTabScopeTarjuma" class="flex-1 py-1 px-2.5 rounded-lg text-xs font-semibold bg-emerald-600 text-white shadow-sm transition whitespace-nowrap">
+            অনুবাদ
           </button>
-          <button id="studyTabScopeTafsir" class="flex-1 py-1.5 px-2.5 sm:px-3 rounded-xl text-xs font-semibold bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 transition whitespace-nowrap">
+          <button id="studyTabScopeTafsir" class="flex-1 py-1 px-2.5 rounded-lg text-xs font-semibold bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 transition whitespace-nowrap">
             তাফসীর
           </button>
         </div>
-        <button id="toggleWbwBtn" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-emerald-900/90 hover:bg-emerald-800 text-white border border-emerald-700/60 transition shrink-0 shadow-sm whitespace-nowrap" title="শব্দে শব্দে অনুবাদ চালু বা বন্ধ করুন">
-          <span class="text-white font-bold">শব্দার্থ</span>
-          <span id="wbwBadge" class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-600 text-white font-mono">চালু</span>
+        <button id="toggleWbwBtn" class="flex items-center gap-1 px-2 py-1 rounded-lg text-xs font-semibold bg-emerald-900/90 hover:bg-emerald-800 text-white border border-emerald-700/60 transition shrink-0 shadow-sm whitespace-nowrap" title="শব্দে শব্দে অর্থ চালু বা বন্ধ করুন">
+          <span class="text-white font-medium text-[11px] sm:text-xs">শব্দার্থ</span>
+          <span id="wbwBadge" class="text-[10px] px-1 py-0.2 rounded bg-emerald-600 text-white font-mono">চালু</span>
         </button>
       </div>
 
-      <!-- Tafsir Source Switcher (Visible only when Tafsir tab is selected) -->
-      <div id="tafsirSourceBar" class="hidden px-3 sm:px-4 py-2 bg-emerald-900/30 dark:bg-emerald-950/60 border-b border-emerald-800/40 flex items-center justify-between text-xs overflow-x-auto">
-        <span class="text-emerald-200/90 font-medium text-[11px] sm:text-xs whitespace-nowrap mr-2">তাফসীর:</span>
-        <div class="flex items-center gap-1 sm:gap-1.5 bg-emerald-950/60 p-1 rounded-xl border border-emerald-800/50 shrink-0">
-          <button id="tafsirBtnTQ" class="px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition shadow-sm whitespace-nowrap">
-            তাওযীহুল কুরআন
+      <!-- Translation Source Switcher (Visible only when Translation tab is selected) -->
+      <div id="translationSourceBar" class="px-3 sm:px-4 py-1.5 bg-emerald-900/30 dark:bg-emerald-950/60 border-b border-emerald-800/40 flex items-center justify-between text-xs no-scrollbar">
+        <span class="text-emerald-200/90 font-medium text-[11px] whitespace-nowrap mr-1.5">অনুবাদ:</span>
+        <div class="flex items-center gap-1 bg-emerald-950/60 p-0.5 rounded-xl border border-emerald-800/50 overflow-x-auto no-scrollbar">
+          <button id="transBtnAll" class="px-2 py-0.5 rounded-lg text-[11px] sm:text-xs font-semibold text-emerald-300 hover:text-white transition whitespace-nowrap">
+            সবগুলো
           </button>
-          <button id="tafsirBtnAB" class="px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold text-emerald-300 hover:text-white transition whitespace-nowrap">
+          <button id="transBtnTQ" class="px-2 py-0.5 rounded-lg text-[11px] sm:text-xs font-semibold bg-emerald-600 text-white transition shadow-sm whitespace-nowrap">
+            তাওযীহুল
+          </button>
+          <button id="transBtnMK" class="px-2 py-0.5 rounded-lg text-[11px] sm:text-xs font-semibold text-emerald-300 hover:text-white transition whitespace-nowrap">
+            মা'আরিফুল
+          </button>
+          <button id="transBtnTK" class="px-2 py-0.5 rounded-lg text-[11px] sm:text-xs font-semibold text-emerald-300 hover:text-white transition whitespace-nowrap">
+            তাইসীরুল
+          </button>
+        </div>
+      </div>
+
+      <!-- Tafsir Source Switcher (Visible only when Tafsir tab is selected) -->
+      <div id="tafsirSourceBar" class="hidden px-3 sm:px-4 py-1.5 bg-emerald-900/30 dark:bg-emerald-950/60 border-b border-emerald-800/40 flex items-center justify-between text-xs no-scrollbar">
+        <span class="text-emerald-200/90 font-medium text-[11px] whitespace-nowrap mr-1.5">তাফসীর:</span>
+        <div class="flex items-center gap-1 bg-emerald-950/60 p-0.5 rounded-xl border border-emerald-800/50 overflow-x-auto no-scrollbar">
+          <button id="tafsirBtnTQ" class="px-2 py-0.5 rounded-lg text-[11px] sm:text-xs font-semibold bg-emerald-600 text-white transition shadow-sm whitespace-nowrap">
+            তাওযীহুল
+          </button>
+          <button id="tafsirBtnAB" class="px-2 py-0.5 rounded-lg text-[11px] sm:text-xs font-semibold text-emerald-300 hover:text-white transition whitespace-nowrap">
             আহসানুল বায়ান
           </button>
-          <button id="tafsirBtnIK" class="px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold text-emerald-300 hover:text-white transition whitespace-nowrap">
+          <button id="tafsirBtnIK" class="px-2 py-0.5 rounded-lg text-[11px] sm:text-xs font-semibold text-emerald-300 hover:text-white transition whitespace-nowrap">
             ইবনে কাসীর
           </button>
         </div>
@@ -588,7 +635,13 @@
       applyTheme(isDark ? 'light' : 'dark');
     });
 
-    // PWA Service Worker Registration
+    // PWA Service Worker Registration & Mobile Install Logic
+    let deferredPrompt = null;
+    const pwaInstallBanner = document.getElementById('pwaInstallBanner');
+    const installPwaBtn = document.getElementById('installPwaBtn');
+    const closePwaBannerBtn = document.getElementById('closePwaBannerBtn');
+    const headerPwaInstallBtn = document.getElementById('headerPwaInstallBtn');
+
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('sw.js').then((reg) => {
@@ -597,15 +650,66 @@
       });
     }
 
-    // iOS Banner Detection
     const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
-    if (isIos && !isStandalone && !localStorage.getItem('ios_banner_dismissed')) {
-      document.getElementById('iosPwaBanner').classList.remove('hidden');
+
+    // Capture Chrome / Edge beforeinstallprompt on mobile & desktop
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      if (headerPwaInstallBtn) headerPwaInstallBtn.classList.remove('hidden');
+      if (pwaInstallBanner && !localStorage.getItem('pwa_banner_dismissed')) {
+        pwaInstallBanner.classList.remove('hidden');
+      }
+    });
+
+    // If not in standalone mode, show header install button
+    if (!isStandalone) {
+      if (headerPwaInstallBtn) headerPwaInstallBtn.classList.remove('hidden');
+      if (isIos && !localStorage.getItem('ios_banner_dismissed')) {
+        document.getElementById('iosPwaBanner').classList.remove('hidden');
+      } else if (!localStorage.getItem('pwa_banner_dismissed')) {
+        setTimeout(() => {
+          if (pwaInstallBanner && !isStandalone) pwaInstallBanner.classList.remove('hidden');
+        }, 3000);
+      }
+    }
+
+    async function triggerPwaInstall() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          if (pwaInstallBanner) pwaInstallBanner.classList.add('hidden');
+          if (headerPwaInstallBtn) headerPwaInstallBtn.classList.add('hidden');
+          showToast('আল-কুরআন অ্যাপ সফলভাবে ইনস্টল হয়েছে!');
+        }
+        deferredPrompt = null;
+      } else if (isIos) {
+        showToast('Safari ব্রাউজারে Share বাটনে চাপ দিয়ে "Add to Home Screen" বেছে নিন');
+      } else {
+        showToast('ব্রাউজারের ৩-ডট মেনু থেকে "Install app" অথবা "Add to Home screen" চাপুন');
+      }
+    }
+
+    if (installPwaBtn) installPwaBtn.addEventListener('click', triggerPwaInstall);
+    if (headerPwaInstallBtn) headerPwaInstallBtn.addEventListener('click', triggerPwaInstall);
+    if (closePwaBannerBtn) {
+      closePwaBannerBtn.addEventListener('click', () => {
+        if (pwaInstallBanner) pwaInstallBanner.classList.add('hidden');
+        localStorage.setItem('pwa_banner_dismissed', 'true');
+      });
     }
     document.getElementById('closeIosBannerBtn').addEventListener('click', () => {
       document.getElementById('iosPwaBanner').classList.add('hidden');
       localStorage.setItem('ios_banner_dismissed', 'true');
+    });
+
+    window.addEventListener('appinstalled', () => {
+      deferredPrompt = null;
+      if (pwaInstallBanner) pwaInstallBanner.classList.add('hidden');
+      if (headerPwaInstallBtn) headerPwaInstallBtn.classList.add('hidden');
+      showToast('আল-কুরআন অ্যাপ ইনস্টল সম্পন্ন হয়েছে!');
     });
 
     // Load Metadata
@@ -1001,6 +1105,11 @@
     const studyAyahsContainer = document.getElementById('studyAyahsContainer');
     const studyTabScopeTarjuma = document.getElementById('studyTabScopeTarjuma');
     const studyTabScopeTafsir = document.getElementById('studyTabScopeTafsir');
+    const translationSourceBar = document.getElementById('translationSourceBar');
+    const transBtnAll = document.getElementById('transBtnAll');
+    const transBtnTQ = document.getElementById('transBtnTQ');
+    const transBtnMK = document.getElementById('transBtnMK');
+    const transBtnTK = document.getElementById('transBtnTK');
     const tafsirSourceBar = document.getElementById('tafsirSourceBar');
     const tafsirBtnTQ = document.getElementById('tafsirBtnTQ');
     const tafsirBtnAB = document.getElementById('tafsirBtnAB');
@@ -1009,6 +1118,7 @@
     const wbwBadge = document.getElementById('wbwBadge');
 
     let studyCurrentScope = 'tarjuma'; // 'tarjuma' or 'tafsir'
+    let selectedTranslationSource = 'tq'; // 'tq' (Tawzeehul), 'mk' (Ma'ariful), 'tk' (Taisirul), or 'all'
     let selectedTafsirSource = 'tq'; // 'tq' (Tawzeehul Quran), 'ab' (Ahsanul Bayaan), or 'ik' (Ibn Kathir)
     let showWordByWord = (localStorage.getItem('quran_show_wbw') !== 'false'); // default true
     const surahDataCache = {};
@@ -1057,6 +1167,55 @@
         </div>
       ` : '';
 
+      let transContentHtml = '';
+      if (selectedTranslationSource === 'tq') {
+        transContentHtml = `
+          <div class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-bengali mt-2">
+            <div class="text-emerald-700 dark:text-emerald-400 text-[11px] font-bold mb-0.5">তাওযীহুল কুরআন (মুফতী তাকী উসমানী):</div>
+            <p>${a.bn_tw || a.bn_t || 'অনুবাদ সংরক্ষিত হচ্ছে'}</p>
+          </div>
+        `;
+      } else if (selectedTranslationSource === 'mk') {
+        transContentHtml = `
+          <div class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-bengali mt-2">
+            <div class="text-emerald-700 dark:text-emerald-400 text-[11px] font-bold mb-0.5">মা'আরিফুল কুরআন (মুফতী শফী রহ.):</div>
+            <p>${a.bn_s || a.bn_tw || a.bn_t || 'অনুবাদ সংরক্ষিত হচ্ছে'}</p>
+          </div>
+        `;
+      } else if (selectedTranslationSource === 'tk') {
+        transContentHtml = `
+          <div class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-bengali mt-2">
+            <div class="text-emerald-700 dark:text-emerald-400 text-[11px] font-bold mb-0.5">তাইসীরুল কুরআন (তাওহীদ পাবলিকেশন্স):</div>
+            <p>${a.bn_t || 'অনুবাদ সংরক্ষিত হচ্ছে'}</p>
+          </div>
+        `;
+      } else {
+        transContentHtml = `
+          <div class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-bengali mt-2 space-y-2">
+            <div>
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 font-bold">তাওযীহুল কুরআন</span>
+              <p class="mt-1">${a.bn_tw || a.bn_t || 'অনুবাদ সংরক্ষিত হচ্ছে'}</p>
+            </div>
+            ${a.bn_s ? `
+            <div class="pt-2 border-t border-slate-200 dark:border-slate-700">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 dark:bg-amber-900/60 text-amber-800 dark:text-amber-300 font-bold">মা'আরিফুল কুরআন</span>
+              <p class="mt-1">${a.bn_s}</p>
+            </div>` : ''}
+            ${a.bn_t ? `
+            <div class="pt-2 border-t border-slate-200 dark:border-slate-700">
+              <span class="text-[10px] px-1.5 py-0.5 rounded bg-blue-100 dark:bg-blue-900/60 text-blue-800 dark:text-blue-300 font-bold">তাইসীরুল কুরআন</span>
+              <p class="mt-1">${a.bn_t}</p>
+            </div>` : ''}
+          </div>
+        `;
+      }
+
+      const activeTransText = (selectedTranslationSource === 'mk' && a.bn_s) 
+        ? a.bn_s 
+        : (selectedTranslationSource === 'tk' && a.bn_t) 
+          ? a.bn_t 
+          : (a.bn_tw || a.bn_t || '');
+
       return `
         <div id="study-ayah-${a.a}" class="p-3.5 rounded-2xl transition duration-200 ${
           isFirstVerse
@@ -1072,7 +1231,7 @@
             </div>
             <div class="flex items-center gap-1.5">
               ${isFirstVerse ? `<span class="text-[10px] bg-emerald-700 text-white px-2 py-0.5 rounded-full font-bold">পৃষ্ঠার শুরু</span>` : isPageVerse ? `<span class="text-[10px] bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 px-2 py-0.5 rounded-full">পৃষ্ঠা ${currentPage}</span>` : ''}
-              <button onclick="shareVerse('${surahName || (pageMap[currentPage] && pageMap[currentPage].sn) || "আল-কুরআন"}', ${a.a}, ${currentPage}, ${encodeURIComponent(JSON.stringify(a.ar))}, ${encodeURIComponent(JSON.stringify(a.bn_t || ''))})" class="p-1 rounded-lg text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-slate-700 transition" title="আয়াত শেয়ার করুন">
+              <button onclick="shareVerse('${surahName || (pageMap[currentPage] && pageMap[currentPage].sn) || "আল-কুরআন"}', ${a.a}, ${currentPage}, ${encodeURIComponent(JSON.stringify(a.ar))}, ${encodeURIComponent(JSON.stringify(activeTransText))})" class="p-1 rounded-lg text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-slate-700 transition" title="আয়াত শেয়ার করুন">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
               </button>
             </div>
@@ -1081,12 +1240,7 @@
             ${a.ar}
           </div>
           ${wordsHtml}
-          <div class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-bengali mt-2 space-y-1.5">
-            <div><strong>তাওযীহুল কুরআন:</strong> ${a.bn_tw || a.bn_t || 'অনুবাদ সংরক্ষিত হচ্ছে'}</div>
-            ${a.bn_s ? `<div class="text-slate-600 dark:text-slate-400 pt-1.5 border-t border-slate-200 dark:border-slate-700"><strong>মা'আরিফুল কুরআন:</strong> ${a.bn_s}</div>` : ''}
-            ${a.bn_t ? `<div class="text-slate-600 dark:text-slate-400 pt-1.5 border-t border-slate-200 dark:border-slate-700"><strong>তাইসীরুল কুরআন:</strong> ${a.bn_t}</div>` : ''}
-            ${a.bn_z ? `<div class="text-slate-600 dark:text-slate-400 pt-1.5 border-t border-slate-200 dark:border-slate-700"><strong>ড. আবু বকর যাকারিয়া:</strong> ${a.bn_z}</div>` : ''}
-          </div>
+          ${transContentHtml}
         </div>
       `;
     }
@@ -1130,23 +1284,37 @@
 
       // Update tabs UI
       if (studyCurrentScope === 'tarjuma') {
-        studyTabScopeTarjuma.className = 'flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold bg-emerald-600 text-white shadow-sm transition';
-        studyTabScopeTafsir.className = 'flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 transition';
-        tafsirSourceBar.classList.add('hidden');
+        studyTabScopeTarjuma.className = 'flex-1 py-1 px-2.5 rounded-lg text-xs font-semibold bg-emerald-600 text-white shadow-sm transition whitespace-nowrap';
+        studyTabScopeTafsir.className = 'flex-1 py-1 px-2.5 rounded-lg text-xs font-semibold bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 transition whitespace-nowrap';
+        if (translationSourceBar) translationSourceBar.classList.remove('hidden');
+        if (tafsirSourceBar) tafsirSourceBar.classList.add('hidden');
+
+        // Update Translation Source buttons
+        const activeTransBtnClass = 'px-2 py-0.5 rounded-lg text-[11px] sm:text-xs font-semibold bg-emerald-600 text-white transition shadow-sm whitespace-nowrap';
+        const inactiveTransBtnClass = 'px-2 py-0.5 rounded-lg text-[11px] sm:text-xs font-semibold text-emerald-300 hover:text-white transition whitespace-nowrap';
+        if (transBtnAll) transBtnAll.className = selectedTranslationSource === 'all' ? activeTransBtnClass : inactiveTransBtnClass;
+        if (transBtnTQ) transBtnTQ.className = selectedTranslationSource === 'tq' ? activeTransBtnClass : inactiveTransBtnClass;
+        if (transBtnMK) transBtnMK.className = selectedTranslationSource === 'mk' ? activeTransBtnClass : inactiveTransBtnClass;
+        if (transBtnTK) transBtnTK.className = selectedTranslationSource === 'tk' ? activeTransBtnClass : inactiveTransBtnClass;
+
+        const transName = selectedTranslationSource === 'tq' ? 'তাওযীহুল কুরআন' : selectedTranslationSource === 'mk' ? "মা'আরিফুল কুরআন" : selectedTranslationSource === 'tk' ? 'তাইসীরুল কুরআন' : 'বাংলা অনুবাদ (সবগুলো)';
         studyModalTitle.textContent = `${info.sn} (পৃষ্ঠা ${currentPage} • আয়াত ${startAyah}–${endAyah})`;
+        studyModalSubTitle.textContent = transName;
       } else {
-        studyTabScopeTarjuma.className = 'flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 transition';
-        studyTabScopeTafsir.className = 'flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold bg-emerald-600 text-white shadow-sm transition';
-        tafsirSourceBar.classList.remove('hidden');
+        studyTabScopeTarjuma.className = 'flex-1 py-1 px-2.5 rounded-lg text-xs font-semibold bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 transition whitespace-nowrap';
+        studyTabScopeTafsir.className = 'flex-1 py-1 px-2.5 rounded-lg text-xs font-semibold bg-emerald-600 text-white shadow-sm transition whitespace-nowrap';
+        if (translationSourceBar) translationSourceBar.classList.add('hidden');
+        if (tafsirSourceBar) tafsirSourceBar.classList.remove('hidden');
 
         // Update Tafsir Source buttons
-        const activeTafBtnClass = 'px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition shadow-sm whitespace-nowrap';
-        const inactiveTafBtnClass = 'px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold text-emerald-300 hover:text-white transition whitespace-nowrap';
+        const activeTafBtnClass = 'px-2 py-0.5 rounded-lg text-[11px] sm:text-xs font-semibold bg-emerald-600 text-white transition shadow-sm whitespace-nowrap';
+        const inactiveTafBtnClass = 'px-2 py-0.5 rounded-lg text-[11px] sm:text-xs font-semibold text-emerald-300 hover:text-white transition whitespace-nowrap';
         if (tafsirBtnTQ) tafsirBtnTQ.className = selectedTafsirSource === 'tq' ? activeTafBtnClass : inactiveTafBtnClass;
         if (tafsirBtnAB) tafsirBtnAB.className = selectedTafsirSource === 'ab' ? activeTafBtnClass : inactiveTafBtnClass;
         if (tafsirBtnIK) tafsirBtnIK.className = selectedTafsirSource === 'ik' ? activeTafBtnClass : inactiveTafBtnClass;
         const tafName = selectedTafsirSource === 'tq' ? 'তাওযীহুল কুরআন' : selectedTafsirSource === 'ab' ? 'আহসানুল বায়ান' : 'ইবনে কাসীর';
-        studyModalTitle.textContent = `তাফসীর ${tafName} (পৃষ্ঠা ${currentPage} • আয়াত ${startAyah}–${endAyah})`;
+        studyModalTitle.textContent = `${info.sn} (পৃষ্ঠা ${currentPage} • আয়াত ${startAyah}–${endAyah})`;
+        studyModalSubTitle.textContent = `তাফসীর ${tafName}`;
       }
 
       studyAyahsContainer.innerHTML = `
@@ -1254,6 +1422,39 @@
       studyTabScopeTarjuma.addEventListener('click', () => {
         if (studyCurrentScope !== 'tarjuma') {
           studyCurrentScope = 'tarjuma';
+          renderStudyContent();
+        }
+      });
+    }
+
+    if (transBtnAll) {
+      transBtnAll.addEventListener('click', () => {
+        if (selectedTranslationSource !== 'all') {
+          selectedTranslationSource = 'all';
+          renderStudyContent();
+        }
+      });
+    }
+    if (transBtnTQ) {
+      transBtnTQ.addEventListener('click', () => {
+        if (selectedTranslationSource !== 'tq') {
+          selectedTranslationSource = 'tq';
+          renderStudyContent();
+        }
+      });
+    }
+    if (transBtnMK) {
+      transBtnMK.addEventListener('click', () => {
+        if (selectedTranslationSource !== 'mk') {
+          selectedTranslationSource = 'mk';
+          renderStudyContent();
+        }
+      });
+    }
+    if (transBtnTK) {
+      transBtnTK.addEventListener('click', () => {
+        if (selectedTranslationSource !== 'tk') {
+          selectedTranslationSource = 'tk';
           renderStudyContent();
         }
       });
