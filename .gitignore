@@ -27,6 +27,9 @@ ios/Pods/
 
 # Scanned PDFs (no longer needed in repo, 170MB)
 quran - word by word al quran/
+reference_books/
+pdf_tafsirs/
+*.pdf
 
 # IDE / System
 .idea/
@@ -41,3 +44,6 @@ docs/pages/
 landing/pages/
 docs/data/tafsir/
 landing/data/tafsir/
+
+# Scratch samples
+sample_*

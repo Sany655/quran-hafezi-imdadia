@@ -88,7 +88,37 @@ class QuranDbHelper {
       );
     ''');
 
+    await db.execute('''
+      CREATE TABLE IF NOT EXISTS planner_state (
+        id INTEGER PRIMARY KEY CHECK (id = 1),
+        data TEXT NOT NULL
+      );
+    ''');
+
     return db;
+  }
+
+  Future<String?> getPlannerStateJson() async {
+    final db = await database;
+    final rows = await db.query(
+      'planner_state',
+      columns: ['data'],
+      where: 'id = ?',
+      whereArgs: [1],
+      limit: 1,
+    );
+    return rows.isEmpty ? null : rows.first['data'] as String?;
+  }
+
+  Future<void> savePlannerStateJson(String json) async {
+    final db = await database;
+    await db.transaction((transaction) async {
+      await transaction.insert(
+        'planner_state',
+        {'id': 1, 'data': json},
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    });
   }
 
   // 1. Fetch all Surahs (with in-memory cache)
@@ -140,6 +170,20 @@ class QuranDbHelper {
   Future<Map<String, dynamic>?> getPageInfo(int pageNumber) async {
     final allPages = await getAllPagesInfo();
     return allPages[pageNumber];
+  }
+
+  Future<int?> getPageForAyah(int surahId, int ayahNumber) async {
+    final db = await database;
+    final rows = await db.query(
+      'ayahs',
+      columns: ['page_number'],
+      where: 'surah_id = ? AND ayah_number = ?',
+      whereArgs: [surahId, ayahNumber],
+      limit: 1,
+    );
+    if (rows.isEmpty) return null;
+    final page = rows.first['page_number'];
+    return page is int ? page : int.tryParse(page?.toString() ?? '');
   }
 
   // 4. Fetch Ayahs for a Page with Translations & Word-by-Word

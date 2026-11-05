@@ -1,0 +1,629 @@
+Amar main observation: current system-ta primarily daily page-count tracker. Kintu Hifz-er khetre eta enough na. Ekjon student-er memorization, recent revision, older revision, mistake history and teacher-assigned portions—egulo alada lifecycle-e manage korte hobe.
+
+Ami existing UI completely discard korar recommendation dicchi na. Existing Quran reader, Surah/Ayah selection, offline date system and daily tracking reuse kore planner/tracker-er underlying experience redesign korbo.
+
+## 1. Hifz methodology: the foundation
+
+Research-er moddhe South Asian madrasa tradition-er core structure consistently peyechi:
+
+| Term                        | Meaning          | Main purpose                             |
+| --------------------------- | ---------------- | ---------------------------------------- |
+| Sabaq (সবক)                 | New memorization | New ayah/page memorize kora              |
+| Sabqi (সবকি)                | Recent revision  | Recently memorized portions strong kora  |
+| Manzil / Daur (মনজিল / দৌর) | Older revision   | Previously memorized Quran preserve kora |
+
+Darul Qasim-er Hifz programme-o daily routine-e new lesson, current memorization revision and older memorized portions revision alada rakhe.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://darulqasim.org\&sz=32)
+
+darulqasim.org+2
+
+
+
+Ekta important distinction: Sabqi-r exact range shob madrasa-te same na. Kothao last 7–10 lessons, kothao current Juz, abar kothao 20–30 days-er memorization. Tai app-e ekta fixed universal rule impose kora uchit hobe na. Teacher-configurable system dorkar.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://hifz.iqs.org.in\&sz=32)
+
+Hifz Focus+2
+
+
+
+Ami three modes-er jonno three separate planning engines recommend korbo, shared UI components thakbe but data structure and calculation alada hobe.
+
+# 2. Mode A — General Quran Reader
+
+Reading completion journey
+
+Ei mode-er objective: user nijer available time onujayi Quran complete korbe, daily routine maintain korbe.
+
+## A.1 Plan creation wizard
+
+Current UI-te target days, starting Para and starting date already ache. Egulo rekhe setup-ta aro meaningful koro.
+
+## Create your reading plan
+
+Illustrative setup screen
+
+1\. Where do you want to start?
+
+Starting point
+
+Continue reading
+
+Starting point
+
+Start from Al-Fatiha
+
+2\. When do you want to finish?
+
+Target duration
+
+30 days
+
+7 days
+
+15 days
+
+30 days
+
+60 days
+
+3\. How much can you read daily?
+
+# 20 pages
+
+Example daily capacity
+
+4\. Your preferred reading sessions
+
+After Fajr
+
+5 pages · 5:30 AM
+
+After Dhuhr
+
+5 pages · 1:30 PM
+
+After Asr
+
+5 pages · 4:30 PM
+
+After Isha
+
+5 pages · 8:30 PM
+
+Illustrative values, not a prescribed routine.
+
+## A.2 Calculation engine
+
+Formula:
+
+\\[ DailyTarget = \frac{RemainingPages}{RemainingDays} \\]
+
+For example, if 600 pages remain and the user selects 30 days:
+
+- Daily target = 20 pages.
+- Four sessions = 5 pages each.
+- Expected completion = target date.
+
+The app should also support two different planning methods:
+
+1. Goal-based: User chooses finish date; app calculates daily requirement.
+2. Capacity-based: User chooses pages per day; app estimates completion date.
+
+If the user changes their target, future plans recalculate, but historical completed records must remain unchanged.
+
+## A.3 Daily tracker
+
+Today's reading
+
+On track
+
+# 12/20
+
+60% completed
+
+Fajr session
+
+5 pages · 5:30 AM
+
+Done
+
+Dhuhr session
+
+5 pages · 1:30 PM
+
+Done
+
+Asr session
+
+5 pages · 4:30 PM
+
+Pending
+
+Isha session
+
+5 pages · 8:30 PM
+
+Pending
+
+Example: Record readingConceptual preview, not an interactive app screen.
+
+Recording should allow actual start and end Surah/Ayah, or pages, depending on the reader's preferred tracking method.
+
+Important: Pages and Ayahs should be the underlying Quran references, not just arbitrary numbers. Page numbering depends on the selected Mushaf edition.
+
+# 3. Mode B — Hafezi Student
+
+Memorization journey
+
+This is the most important and complex mode. Ekhane app-er kaj just daily target deya na; student-er memorization lifecycle manage kora.
+
+## B.1 The three-layer memorization system
+
+## 1. Sabaq
+
+New
+
+[Quran Cordoba - Inspiring people to Love and Live with Quran](https://images.openai.com/static-rsc-4/RhUqdqLRsi1V5JpA8-_52gSpHEq94ukW8Rbzlu_y5_Fh2xTZmag60cWZ4EoTkC9HfiNsz-328WuB5yEM2aFGi_iyKVfLbdphQumgckhKX1e-vMSVmZ1phxUUJf7WhINvKC004MCbOSt3Wd6yoz8u2tfGc1GBXLAGSRmbDn7kjXE?purpose=inline)
+
+[qurancordoba.com](https://www.qurancordoba.com/artikel/akhlak-dan-adab-terbaik-dalam-menghafal-quran?utm_source=chatgpt.com)
+
+Today's new memorization
+
+- New Surah/Ayah range.
+- Planned lines/pages.
+- Memorization session time.
+- Repetition practice count (optional).
+- Recitation to teacher.
+- Teacher approval / correction.
+
+## 2. Sabqi
+
+Recent
+
+Recently memorized portions
+
+- Last N completed Sabaq lessons.
+- Current Juz revision.
+- Previous lessons not yet consolidated.
+- Weak portions requiring extra revision.
+
+## 3. Manzil / Daur
+
+Old revision
+
+Previously memorized portions
+
+- Completed Juz rotation.
+- Daily older revision.
+- Revision cycle completion.
+- Weak Juz requiring additional attention.
+
+### B.2 Memorization lifecycle
+
+This is where I would make your app different from a basic Hifz tracker.
+
+A Quran portion should have a memorization status independent of its daily task status.
+
+## Memorization lifecycle
+
+1. Not memorized
+
+   Portion is still ahead of the student's memorization boundary.
+2. Learning — Sabaq
+
+   Currently learning a new portion.
+3. Recently memorized — Sabqi
+
+   Newly learned material undergoing repeated revision.
+4. Established — Manzil eligible
+
+   Teacher-approved or student-confirmed memorization, ready for the older revision rotation.
+5. Needs reinforcement
+
+   A portion that has become weak and needs extra revision.
+
+These are app-level states. Teacher approval and actual recitation quality should determine progression, not just elapsed days.
+
+A very important rule: calendar automatically change kore Sabaq-ke Manzil baniye fela jabe na. Student jodi ekhono portion properly memorize na kore, tahole seta recent revision-e ba reinforcement-e thakbe.
+
+## B.3 Hafezi onboarding wizard
+
+First time Hafezi mode select korle ei configuration lagbe.
+
+Step 1 — Current memorization position
+
+- Not started.
+- Currently memorizing.
+- Already memorized some Juz.
+- Continuing from a previous Hifz programme.
+
+If already memorized, user selects completed portions through a Quran range selector.
+
+Step 2 — Learning pace
+
+- Beginner: few lines per day.
+- Regular: configurable lines/pages.
+- Advanced: configurable pages/Juz.
+
+Do not hardcode these as religious or educational standards. Egulo starting presets only.
+
+Step 3 — Revision methodology
+
+- Traditional Sabaq + Sabqi + Manzil.
+- Teacher-defined schedule.
+- Custom schedule.
+
+Step 4 — Sabqi configuration
+
+- Last 7 lessons.
+- Last 10 lessons.
+- Current Juz.
+- Last N pages.
+- Custom Quran range.
+
+Step 5 — Manzil configuration
+
+- Daily amount in pages or Juz.
+- Rotation order.
+- Weekly revision-only days.
+- Optional rest days.
+
+Step 6 — Daily routine
+
+Separate notification schedules for Sabaq, Sabqi and Manzil.
+
+## B.4 How the daily planning engine should work
+
+Example: A student has memorized 3 Juz and is currently learning Juz 4.
+
+## Daily Hifz plan
+
+Sabaq
+
+New lesson
+
+# Page 65
+
+Today's new lesson · Planned
+
+Surah Al-Baqarah · Actual Ayah range to be confirmed
+
+Sabqi
+
+Recent revision
+
+Previous 7 lessons
+
+Recent memorization, up to the current lesson boundary.
+
+Manzil
+
+Old revision
+
+Juz 1 · Rotation
+
+Older memorized portion, following the current rotation cursor.
+
+Illustrative example only. Actual portions are generated from the student's memorization history and selected method.
+
+Notice the important difference: Sabqi and Manzil are not independent arbitrary tasks. They must be derived from the student's actual memorized Quran inventory.
+
+### B.5 Automatic daily schedule generation
+
+I recommend this algorithm:
+
+1. Generate today's Sabaq from the current learning position.
+2. Retrieve eligible recent lessons according to the configured Sabqi rule.
+3. Retrieve the next due portion from the Manzil rotation.
+4. Check for overlap.
+5. Produce today's task list.
+6. Let the student or teacher modify today's assignments.
+7. Save the actual completed ranges separately.
+
+Overlap prevention: A portion should not accidentally be counted twice in the same revision layer. However, a teacher may intentionally assign the same portion in two different sessions.
+
+### B.6 Recitation assessment
+
+This is an essential feature.
+
+After every revision, student should be able to record:
+
+- Perfect / no significant mistake.
+- Minor hesitation.
+- Multiple mistakes.
+- Needed assistance.
+- Needs repeat revision.
+
+Also provide optional mistake categories:
+
+- Missed Ayah.
+- Word substitution.
+- Hesitation.
+- Ayah sequence confusion.
+- Tajweed correction.
+
+Keep teacher feedback optional. The app must never claim that it can independently verify Hifz accuracy simply because a user marked a task completed.
+
+### B.7 Weekly Hifz review
+
+Every week, show:
+
+| Metric             | What it tells                                 |
+| ------------------ | --------------------------------------------- |
+| New memorization   | How much new material was learned             |
+| Sabqi completion   | Whether recent memorization is being retained |
+| Manzil completion  | Whether older Quran is being maintained       |
+| Weak portions      | What needs extra attention                    |
+| Teacher assessment | Whether progress is satisfactory              |
+
+One particularly useful feature: a weekly review can recommend reducing new Sabaq when revision is repeatedly unfinished or weak. It should suggest, not force, a new target.
+
+# 4. Mode C — Hafez / Completed Hifz
+
+Lifetime preservation journey
+
+Ekjon complete Hafez-er jonno Sabaq-based memorization planner unnecessary. Tar main challenge holo 30 Juz consistently strong rakha.
+
+## C.1 Core concept: Daur management
+
+A Hafez should be able to create a revision cycle:
+
+- 7-day cycle.
+- 10-day cycle.
+- 15-day cycle.
+- 30-day cycle.
+- Custom cycle.
+
+These are planning options, not universal requirements. The appropriate daily workload depends on the person's ability, time and current retention.
+
+For a complete Hafez:
+
+\\[ DailyTarget=\frac{30\ Juz}{CycleDays} \\]
+
+Examples:
+
+| Cycle   | Average daily target |
+| ------- | -------------------- |
+| 7 days  | 4.29 Juz             |
+| 10 days | 3 Juz                |
+| 15 days | 2 Juz                |
+| 30 days | 1 Juz                |
+
+This is a mathematical distribution, not a recommendation that every Hafez should follow the seven-day schedule.
+
+## C.2 Hafez onboarding
+
+Ask:
+
+1. Is your entire Quran memorization completed?
+2. How many Juz can you comfortably revise daily?
+3. How many days do you want to complete one full Daur?
+4. Do you want sequential or custom rotation?
+5. Do you have weak Juz or Surahs?
+6. Which days are available for revision?
+
+## C.3 Hafez daily dashboard
+
+## Today's Daur
+
+10-day cycle
+
+# 2 / 3 Juz
+
+Example revision completion
+
+Today's assigned portions
+
+Juz 01
+
+Completed
+
+Juz 02
+
+Completed
+
+Juz 03
+
+Pending
+
+Weak portion reminders
+
+Surah Al-Kahf
+
+Revisit
+
+Surah Maryam
+
+Revisit
+
+Illustrative dashboard. Actual weak portions must come from recorded assessments.
+
+## C.4 Weak portion management
+
+This is a feature I strongly recommend.
+
+Hafez can bookmark a Quran range as:
+
+- Weak.
+- Needs revision.
+- Frequently forgotten.
+- Recently strengthened.
+
+When a weak range is added:
+
+1. It enters the reinforcement queue.
+2. It receives a suggested revision date.
+3. It can be assigned an additional session.
+4. After successful revision, user records its condition.
+5. It remains in the overall Daur rotation regardless.
+
+Never remove weak portions from normal Daur. Extra revision should supplement the full Quran cycle, not replace it.
+
+## C.5 Additional practices
+
+Optional features that would be valuable:
+
+- Salah revision log: record which Surahs or ranges were recited in Salah.
+- Listening practice log.
+- Weekly complete revision summary.
+- Ramadan/Taraweeh preparation planner.
+- Teacher or listener assessment.
+- Custom Surah revision collections.
+
+The traditional seven-part Quran division (Manazil) can also be offered as a reference-based optional planning template, not as the mandatory Hifz schedule.
+
+# 5. Shared UX architecture
+
+Now, three modes have different logic. But navigation should remain familiar.
+
+I recommend this structure:
+
+# Quran Journey
+
+Your personal Quran routine
+
+Today
+
+Mode-specific daily dashboard and tasks
+
+Planner
+
+Calendar, future tasks, routine
+
+Tracker
+
+History, analytics, assessment
+
+Routine & Settings
+
+Mode configuration, reminders, targets
+
+Your existing three tabs (Today's Focus, Roadmap & Plan, Quranic Diary) can evolve into these four destinations.
+
+I would not keep Quranic Diary as a separate primary destination. Its notes and mistake records belong inside the relevant task/history details.
+
+## 6. Flutter + SQLite architecture
+
+Since you explicitly want independent structures, don't force all three modes into a universal planner table.
+
+I recommend separate domain models.
+
+| Domain | Main records                                                       |
+| ------ | ------------------------------------------------------------------ |
+| Reader | Reading plans, sessions, daily logs                                |
+| Hafezi | Memorization inventory, lessons, revision assignments, assessments |
+| Hafez  | Memorized inventory, Daur cycles, revision logs, weak portions     |
+| Shared | Reminder preferences, routine configuration, app settings          |
+
+### Important data separation
+
+There are three different concepts:
+
+1. Planned activity — what the user intended to do.
+2. Actual activity — what the user really completed.
+3. Quran knowledge state — what the user has memorized and how well it is retained.
+
+These must not be confused.
+
+For example, completing today's Sabqi task doesn't necessarily mean the corresponding Quran range has achieved established memorization status.
+
+### Offline calculation strategy
+
+- SQLite is the single source of truth.
+- Calculate daily tasks from persisted plans and progress.
+- Cache expensive dashboard summaries if necessary.
+- Rebuild analytics from actual activity records.
+- Use local notifications; no server dependency.
+- Rescheduling must update future notifications.
+- Preserve completed historical records when plans change.
+- Keep all Quran references anchored to Surah/Ayah ranges, with page numbers derived from the selected Mushaf.
+
+# 7. What I would change in your existing UI
+
+Based on your screenshots:
+
+| Existing UI          | Recommended change                              |
+| -------------------- | ----------------------------------------------- |
+| Daily page counter   | Mode-specific task cards                        |
+| Target duration form | Guided plan creation                            |
+| Roadmap calculator   | Visual calendar and future assignments          |
+| Quranic diary        | Task-specific notes and mistake log             |
+| Streak               | Consistency calendar, optional                  |
+| Progress card        | Meaningful mode-specific analytics              |
+| Manual page input    | Quran range selector with Surah/Ayah references |
+
+One particular issue: your current UI puts too many controls, calculations and progress cards on one long page. Separate configuration from daily execution.
+
+Today should be about doing. Planner should be about deciding. Tracker should be about understanding.
+
+# 8. Recommended implementation roadmap
+
+I would develop it in this order:
+
+1. Shared Quran range selector
+
+   Surah, Ayah, Juz, page range selection; range validation and Mushaf mapping.
+2. General Reader
+
+   Goal-based planning, capacity-based planning, reading sessions and notifications.
+3. Hafezi Student
+
+   Memorization inventory, Sabaq/Sabqi/Manzil generation, lifecycle and assessment.
+4. Hafez
+
+   Full Quran inventory, Daur rotation, weak portions and revision scheduling.
+5. Progress and analytics
+
+   History, weekly reports, revision quality and consistency.
+6. Offline reliability
+
+   SQLite persistence, date rollover, missed-task handling, notification rescheduling and backup/export compatibility.
+
+# 9. Important product decisions
+
+These are the decisions I would lock before implementation:
+
+| Decision                                   | My recommendation                            |
+| ------------------------------------------ | -------------------------------------------- |
+| Can users have multiple plans?             | Yes, but one active primary plan per mode    |
+| Can students modify teacher-assigned work? | Yes, with assigned vs actual distinction     |
+| Can missed tasks auto-complete?            | Never                                        |
+| Can missed tasks carry forward?            | Configurable; preserve original date         |
+| Can a Hafez use a different Daur cycle?    | Yes                                          |
+| Can Hafezi progress be automatic?          | Suggest transitions; require confirmation    |
+| Can users change modes?                    | Yes, preserve separate histories             |
+| Can users change targets mid-plan?         | Yes, preserve history and recalculate future |
+
+## 10. My final product vision
+
+I want you to think about this as three different products inside one Quran app:
+
+[Prophetic Wellness: Sleep, Movement and Daily Sunnah Habits – SIDR & STONE](https://images.openai.com/static-rsc-4/8Gxlni-1GTFWzwnmJAGtIE-Lm0167CfQ_uxPVhHBML_fZEJiXfuDLh1g2Ew-O-M3LZMYOWDbTPN1QnnQX7NEj0wUATbdcr2gr4PFdxqeTOpLkPr_aMcMqZt7TjRrTQTJ2spqUL2eYn1yEIMm_dryt7uYV3fOwcih1d1lH4kwRxE?purpose=inline)
+
+General Reader — Completion
+
+Help people establish a consistent reading habit and complete the Quran according to their available time.
+
+[المَجمَع العلميّ يباشر دروسه في حفظ القرآن الكريم لطلبته الجدد](https://images.openai.com/static-rsc-4/YLNLV6_EsSODyBKoFcSoMu9AiHSoyo9P6fHl8E1MKXNqFsmi-4XDvFhC6rfnnfD4E-cpWWiEtqLVbxHooFsPcPNrZZsBjwNwZhtmn3rVgvTEvNNcq7tU1SlKk3NSpllbooUgFHjagdzM2OPHoWOlWkwc1YDipMtnCfzu4w0pO54?purpose=inline)
+
+Hafezi Student — Memorization
+
+Help students progress through the entire Quran while protecting previously memorized portions.
+
+[Kelas Al-Qur’an Gratis di Masjid Nabawi, Terbuka untuk Semua Jamaah](https://images.openai.com/static-rsc-4/M6fPJ4RzS2XDx78bdyR68tK3BKqDt9rM2PsSQ8-OBjJzAGKUz6KO5lX0ObPO2Lov5CQgWaD_Q6WQYo1tykdo7m1CEePpH6RNwEPuC3xdXliMGtzfMR1yoHABQVqAuiq32fkjwpK1SM-EWRtwx_Id4YZY6gQqpvhKAifliLLgosc?purpose=inline)
+
+Hafez — Preservation
+
+Help Huffaz maintain their memorization throughout their lives through structured revision.
+
+One final principle: The app should encourage consistency, not pressure people into chasing numbers. A smaller amount recited correctly and consistently is more meaningful than an ambitious target that the user cannot maintain.
+
+Useful methodology references:
+
+- [Darul Qasim — Full-time and Part-time Quran Hifz Programme](https://darulqasim.org/wp-content/uploads/2022/09/DQ-Quran-Program-2022-2023.pdf?utm_source=chatgpt.com).
+- [The Hifz Project — Sabaq, Sabqi and Manzil](https://thehifzproject.com/articles/sabaq-sabqi-manzil?utm_source=chatgpt.com).
+- [QuranCrest — Hifz Revision Planner](https://qurancrest.com/resources/hifz-revision-planner/?utm_source=chatgpt.com).
+
+My recommendation is to finalize the three planning engines before asking your coding agent to redesign the screens. That prevents a beautiful UI from being built on incorrect memorization logic.
