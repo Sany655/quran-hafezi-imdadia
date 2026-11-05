@@ -95,11 +95,21 @@ class _StudySheetState extends State<StudySheet> {
                       ],
                     ),
                   ),
-                  const TabBar(
-                    labelColor: Color(0xFF0F5132),
-                    indicatorColor: Color(0xFF0F5132),
+                  TabBar(
+                    labelColor: const Color(0xFF0F5132),
+                    unselectedLabelColor: Colors.grey[600],
+                    indicatorColor: const Color(0xFF0F5132),
+                    indicatorWeight: 3,
                     isScrollable: true,
-                    tabs: [
+                    tabAlignment: TabAlignment.start,
+                    labelStyle: GoogleFonts.notoSansBengali(
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    unselectedLabelStyle: GoogleFonts.notoSansBengali(
+                      fontSize: 13,
+                    ),
+                    tabs: const [
                       Tab(text: 'তাওযীহুল কুরআন'),
                       Tab(text: 'আহসানুল বায়ান'),
                       Tab(text: 'ইবনে কাসীর'),
@@ -186,6 +196,36 @@ class _StudySheetState extends State<StudySheet> {
     }
   }
 
+  Widget _buildTranslationChip(String key, String label) {
+    final isSelected = _selectedTranslation == key;
+    return ChoiceChip(
+      label: Text(
+        label,
+        style: GoogleFonts.notoSansBengali(
+          fontSize: 11.5,
+          fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+          color: isSelected ? Colors.white : const Color(0xFF0F5132),
+        ),
+      ),
+      selected: isSelected,
+      showCheckmark: false,
+      selectedColor: const Color(0xFF0F5132),
+      backgroundColor: Colors.white,
+      side: BorderSide(
+        color: isSelected ? const Color(0xFF0F5132) : const Color(0xFFB7D5C4),
+        width: 1,
+      ),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+      visualDensity: VisualDensity.compact,
+      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+      onSelected: (val) {
+        if (val) setState(() => _selectedTranslation = key);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -260,51 +300,44 @@ class _StudySheetState extends State<StudySheet> {
           ),
           const Divider(height: 1),
 
-          // Translation Switcher Tabs (Taisirul vs Zakaria)
+          // Translation Switcher Tabs (Scrollable tab boxes bar)
           Container(
-            color: const Color(0xFFF0FDF4),
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-            child: Row(
-              children: [
-                Text(
-                  'অনুবাদ:',
-                  style: GoogleFonts.notoSansBengali(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: const Color(0xFF0F5132),
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              color: Color(0xFFF0FDF4),
+              border: Border(
+                bottom: BorderSide(color: Color(0xFFE2EFE7), width: 1),
+              ),
+            ),
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
+              child: Row(
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Icon(Icons.translate, size: 15, color: Color(0xFF0F5132)),
+                      const SizedBox(width: 5),
+                      Text(
+                        'অনুবাদ:',
+                        style: GoogleFonts.notoSansBengali(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: const Color(0xFF0F5132),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                const SizedBox(width: 8),
-                ChoiceChip(
-                  label: Text('তাওযীহুল কুরআন', style: GoogleFonts.notoSansBengali(fontSize: 11)),
-                  selected: _selectedTranslation == 'tawzeehul',
-                  selectedColor: const Color(0xFF0F5132),
-                  labelStyle: TextStyle(color: _selectedTranslation == 'tawzeehul' ? Colors.white : Colors.black87),
-                  onSelected: (val) {
-                    if (val) setState(() => _selectedTranslation = 'tawzeehul');
-                  },
-                ),
-                const SizedBox(width: 6),
-                ChoiceChip(
-                  label: Text("মা'আরিফুল কুরআন", style: GoogleFonts.notoSansBengali(fontSize: 11)),
-                  selected: _selectedTranslation == 'shafi',
-                  selectedColor: const Color(0xFF0F5132),
-                  labelStyle: TextStyle(color: _selectedTranslation == 'shafi' ? Colors.white : Colors.black87),
-                  onSelected: (val) {
-                    if (val) setState(() => _selectedTranslation = 'shafi');
-                  },
-                ),
-                const SizedBox(width: 6),
-                ChoiceChip(
-                  label: Text('তাইসীরুল কুরআন', style: GoogleFonts.notoSansBengali(fontSize: 11)),
-                  selected: _selectedTranslation == 'taisirul',
-                  selectedColor: const Color(0xFF0F5132),
-                  labelStyle: TextStyle(color: _selectedTranslation == 'taisirul' ? Colors.white : Colors.black87),
-                  onSelected: (val) {
-                    if (val) setState(() => _selectedTranslation = 'taisirul');
-                  },
-                ),
-              ],
+                  const SizedBox(width: 10),
+                  _buildTranslationChip('tawzeehul', 'তাওযীহুল কুরআন'),
+                  const SizedBox(width: 8),
+                  _buildTranslationChip('shafi', "মা'আরিফুল কুরআন"),
+                  const SizedBox(width: 8),
+                  _buildTranslationChip('taisirul', 'তাইসীরুল কুরআন'),
+                ],
+              ),
             ),
           ),
           const Divider(height: 1),
@@ -461,42 +494,48 @@ class _StudySheetState extends State<StudySheet> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                                        decoration: BoxDecoration(
-                                          color: const Color(0xFF0F5132).withOpacity(0.1),
-                                          borderRadius: BorderRadius.circular(12),
-                                        ),
-                                        child: Text(
-                                          '$surahTitle • আয়াত ${TriCalendarHelper.toBnNum(ayah.ayahNumber)}',
-                                          style: GoogleFonts.notoSansBengali(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold,
-                                            color: const Color(0xFF0F5132),
-                                          ),
-                                        ),
-                                      ),
-                                      if (isInitial) ...[
-                                        const SizedBox(width: 8),
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                                          decoration: BoxDecoration(
-                                            color: const Color(0xFF0F5132),
-                                            borderRadius: BorderRadius.circular(8),
-                                          ),
-                                          child: Text(
-                                            'পৃষ্ঠার শুরু',
-                                            style: GoogleFonts.notoSansBengali(
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
+                                  Expanded(
+                                    child: SingleChildScrollView(
+                                      scrollDirection: Axis.horizontal,
+                                      physics: const BouncingScrollPhysics(),
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                                            decoration: BoxDecoration(
+                                              color: const Color(0xFF0F5132).withOpacity(0.1),
+                                              borderRadius: BorderRadius.circular(12),
+                                            ),
+                                            child: Text(
+                                              '$surahTitle • আয়াত ${TriCalendarHelper.toBnNum(ayah.ayahNumber)}',
+                                              style: GoogleFonts.notoSansBengali(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold,
+                                                color: const Color(0xFF0F5132),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                      ],
-                                    ],
+                                          if (isInitial) ...[
+                                            const SizedBox(width: 8),
+                                            Container(
+                                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                              decoration: BoxDecoration(
+                                                color: const Color(0xFF0F5132),
+                                                borderRadius: BorderRadius.circular(8),
+                                              ),
+                                              child: Text(
+                                                'পৃষ্ঠার শুরু',
+                                                style: GoogleFonts.notoSansBengali(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                   Row(
                                     mainAxisSize: MainAxisSize.min,
