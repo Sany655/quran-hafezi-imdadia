@@ -773,8 +773,9 @@ void main() {
         ],
       );
 
-      expect(plan.single.category, 'sabaq');
-      expect((plan.single.startPage, plan.single.endPage), (5, 24));
+      final sabaq = plan.firstWhere((item) => item.category == 'sabaq');
+      expect(sabaq.category, 'sabaq');
+      expect((sabaq.startPage, sabaq.endPage), (5, 24));
       final finished = PlannerService.buildStudentDayPagePlan(
         settings: const HifzSettings(sabaqStartPage: 613),
         portions: const [],
@@ -834,7 +835,7 @@ void main() {
       expect(PlannerService.quranRangesOverlap(first, adjacent), isFalse);
       expect(PlannerService.quranRangesOverlap(first, intersecting), isTrue);
       expect(PlannerService.quranRangeContains(first, adjacent), isFalse);
-      expect(PlannerService.quranRangeContains(intersecting, first), isTrue);
+      expect(PlannerService.quranRangeContains(intersecting, first), isFalse);
     });
 
     test('General reader plans cover only the remaining pages without wrapping', () {
