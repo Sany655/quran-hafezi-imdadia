@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import '../database/quran_db_helper.dart';
+import '../models/hafez_model.dart';
 import '../models/hifz_model.dart';
 import '../models/planner_model.dart';
 import '../models/quran_range.dart';
@@ -395,12 +396,13 @@ class PlannerService {
         }
       }
 
-      final weakPortions = model.hafezSettings.availableWeekdays.contains(date.weekday)
-          ? model.hafezWeakPortions
-              .where((portion) => isHafezWeakPortionDue(portion, date))
-              .toList()
-            ..sort((a, b) => a.range.startPage.compareTo(b.range.startPage))
-          : <HafezWeakPortion>[];
+      List<HafezWeakPortion> weakPortions = const [];
+      if (model.hafezSettings.availableWeekdays.contains(date.weekday)) {
+        weakPortions = model.hafezWeakPortions
+            .where((portion) => isHafezWeakPortionDue(portion, date))
+            .toList()
+          ..sort((a, b) => a.range.startPage.compareTo(b.range.startPage));
+      }
       for (final portion in weakPortions) {
         assignments.add(
           HafezAssignment(
@@ -1025,7 +1027,7 @@ class PlannerService {
     return HifzWeeklyStats(
       sabaqPagesLearned: assignments
           .where((item) => item.category == 'sabaq' && item.status == 'completed')
-          .fold(
+          .fold<int>(
             0,
             (total, item) =>
                 total +
@@ -1065,7 +1067,7 @@ class PlannerService {
     return HafezWeeklyStats(
       daurAssignments: assignments.where((item) => item.category == 'daur').length,
       completedDaurAssignments: completedDaur.length,
-      daurPagesCompleted: completedDaur.fold(
+      daurPagesCompleted: completedDaur.fold<int>(
         0,
         (total, item) => total + item.range.endPage - item.range.startPage + 1,
       ),

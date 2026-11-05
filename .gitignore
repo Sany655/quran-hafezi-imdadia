@@ -47,3 +47,6 @@ landing/data/tafsir/
 
 # Scratch samples
 sample_*
+
+*.apk
+drafts/ashraf_db/
