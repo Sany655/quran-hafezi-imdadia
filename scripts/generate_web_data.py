@@ -118,6 +118,19 @@ for s in surahs:
     ).fetchall()
     trans_map = {r[0]: r[1] for r in trans_rows}
 
+    # Also Tawzeehul and Shafi
+    trans_tw_rows = cur.execute(
+        "SELECT ayah_number, text_bn FROM translations WHERE surah_id = ? AND edition = 'tawzeehul' ORDER BY ayah_number ASC",
+        (sid,)
+    ).fetchall()
+    trans_tw_map = {r[0]: r[1] for r in trans_tw_rows}
+
+    trans_shafi_rows = cur.execute(
+        "SELECT ayah_number, text_bn FROM translations WHERE surah_id = ? AND edition = 'shafi' ORDER BY ayah_number ASC",
+        (sid,)
+    ).fetchall()
+    trans_shafi_map = {r[0]: r[1] for r in trans_shafi_rows}
+
     # Also Zakaria if available
     trans_zakaria_rows = cur.execute(
         "SELECT ayah_number, text_bn FROM translations WHERE surah_id = ? AND edition = 'zakaria' ORDER BY ayah_number ASC",
@@ -143,6 +156,8 @@ for s in surahs:
             'p': p_num,
             'ar': text_ar,
             'bn_t': trans_map.get(an, ''),
+            'bn_tw': trans_tw_map.get(an, ''),
+            'bn_s': trans_shafi_map.get(an, ''),
             'bn_z': trans_zakaria_map.get(an, ''),
             'words': wbw_map.get(an, [])
         })
@@ -182,6 +197,7 @@ for p in range(2, 612):
         page_data[vk] = {
             's': s_id,
             'a': a_num,
+            'tq': tafsir_cache.get((s_id, a_num, 170), ''),
             'ik': tafsir_cache.get((s_id, a_num, 164), ''),
             'ab': tafsir_cache.get((s_id, a_num, 165), '')
         }
@@ -216,6 +232,8 @@ for sid in range(1, 115):
                 'ar': ayah.get('ar', ''),
                 'arc': remove_tashkeel(ayah.get('ar', '')),
                 'bnt': ayah.get('bn_t', ''),
+                'bntw': ayah.get('bn_tw', ''),
+                'bns': ayah.get('bn_s', ''),
                 'bnz': ayah.get('bn_z', '')
             })
 

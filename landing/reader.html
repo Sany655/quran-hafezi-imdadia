@@ -477,29 +477,32 @@
       </div>
 
       <!-- Scope Switcher: Tarjuma vs Tafsir + WBW Toggle -->
-      <div class="px-4 py-2 bg-emerald-950/80 border-b border-emerald-800/60 flex items-center justify-between gap-2">
-        <div class="flex items-center gap-2 flex-1">
-          <button id="studyTabScopeTarjuma" class="flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold bg-emerald-600 text-white shadow-sm transition">
+      <div class="px-3 sm:px-4 py-2 bg-emerald-950/80 border-b border-emerald-800/60 flex items-center justify-between gap-2 overflow-x-auto">
+        <div class="flex items-center gap-1.5 sm:gap-2 flex-1 min-w-[200px]">
+          <button id="studyTabScopeTarjuma" class="flex-1 py-1.5 px-2.5 sm:px-3 rounded-xl text-xs font-semibold bg-emerald-600 text-white shadow-sm transition whitespace-nowrap">
             পৃষ্ঠার অনুবাদ
           </button>
-          <button id="studyTabScopeTafsir" class="flex-1 py-1.5 px-3 rounded-xl text-xs font-semibold bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 transition">
+          <button id="studyTabScopeTafsir" class="flex-1 py-1.5 px-2.5 sm:px-3 rounded-xl text-xs font-semibold bg-emerald-900/60 hover:bg-emerald-800 text-emerald-200 transition whitespace-nowrap">
             তাফসীর
           </button>
         </div>
-        <button id="toggleWbwBtn" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-emerald-900/90 hover:bg-emerald-800 text-white border border-emerald-700/60 transition shrink-0 shadow-sm" title="শব্দে শব্দে অনুবাদ চালু বা বন্ধ করুন">
+        <button id="toggleWbwBtn" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-emerald-900/90 hover:bg-emerald-800 text-white border border-emerald-700/60 transition shrink-0 shadow-sm whitespace-nowrap" title="শব্দে শব্দে অনুবাদ চালু বা বন্ধ করুন">
           <span class="text-white font-bold">শব্দার্থ</span>
           <span id="wbwBadge" class="text-[10px] px-1.5 py-0.5 rounded bg-emerald-600 text-white font-mono">চালু</span>
         </button>
       </div>
 
       <!-- Tafsir Source Switcher (Visible only when Tafsir tab is selected) -->
-      <div id="tafsirSourceBar" class="hidden px-4 py-2 bg-emerald-900/30 dark:bg-emerald-950/60 border-b border-emerald-800/40 flex items-center justify-between text-xs">
-        <span class="text-emerald-200/90 font-medium text-[11px] sm:text-xs">তাফসীর গ্রন্থ:</span>
-        <div class="flex items-center gap-1.5 bg-emerald-950/60 p-1 rounded-xl border border-emerald-800/50">
-          <button id="tafsirBtnAB" class="px-2.5 sm:px-3 py-1 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition shadow-sm">
+      <div id="tafsirSourceBar" class="hidden px-3 sm:px-4 py-2 bg-emerald-900/30 dark:bg-emerald-950/60 border-b border-emerald-800/40 flex items-center justify-between text-xs overflow-x-auto">
+        <span class="text-emerald-200/90 font-medium text-[11px] sm:text-xs whitespace-nowrap mr-2">তাফসীর:</span>
+        <div class="flex items-center gap-1 sm:gap-1.5 bg-emerald-950/60 p-1 rounded-xl border border-emerald-800/50 shrink-0">
+          <button id="tafsirBtnTQ" class="px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition shadow-sm whitespace-nowrap">
+            তাওযীহুল কুরআন
+          </button>
+          <button id="tafsirBtnAB" class="px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold text-emerald-300 hover:text-white transition whitespace-nowrap">
             আহসানুল বায়ান
           </button>
-          <button id="tafsirBtnIK" class="px-2.5 sm:px-3 py-1 rounded-lg text-xs font-semibold text-emerald-300 hover:text-white transition">
+          <button id="tafsirBtnIK" class="px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold text-emerald-300 hover:text-white transition whitespace-nowrap">
             ইবনে কাসীর
           </button>
         </div>
@@ -999,13 +1002,14 @@
     const studyTabScopeTarjuma = document.getElementById('studyTabScopeTarjuma');
     const studyTabScopeTafsir = document.getElementById('studyTabScopeTafsir');
     const tafsirSourceBar = document.getElementById('tafsirSourceBar');
+    const tafsirBtnTQ = document.getElementById('tafsirBtnTQ');
     const tafsirBtnAB = document.getElementById('tafsirBtnAB');
     const tafsirBtnIK = document.getElementById('tafsirBtnIK');
     const toggleWbwBtn = document.getElementById('toggleWbwBtn');
     const wbwBadge = document.getElementById('wbwBadge');
 
     let studyCurrentScope = 'tarjuma'; // 'tarjuma' or 'tafsir'
-    let selectedTafsirSource = 'ab'; // 'ab' (Ahsanul Bayaan) or 'ik' (Ibn Kathir)
+    let selectedTafsirSource = 'tq'; // 'tq' (Tawzeehul Quran), 'ab' (Ahsanul Bayaan), or 'ik' (Ibn Kathir)
     let showWordByWord = (localStorage.getItem('quran_show_wbw') !== 'false'); // default true
     const surahDataCache = {};
     const pageTafsirCache = {};
@@ -1077,14 +1081,12 @@
             ${a.ar}
           </div>
           ${wordsHtml}
-          <div class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-bengali mt-2">
-            <strong>তাইসীরুল কুরআন:</strong> ${a.bn_t || 'অনুবাদ সংরক্ষিত হচ্ছে'}
+          <div class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-bengali mt-2 space-y-1.5">
+            <div><strong>তাওযীহুল কুরআন:</strong> ${a.bn_tw || a.bn_t || 'অনুবাদ সংরক্ষিত হচ্ছে'}</div>
+            ${a.bn_s ? `<div class="text-slate-600 dark:text-slate-400 pt-1.5 border-t border-slate-200 dark:border-slate-700"><strong>মা'আরিফুল কুরআন:</strong> ${a.bn_s}</div>` : ''}
+            ${a.bn_t ? `<div class="text-slate-600 dark:text-slate-400 pt-1.5 border-t border-slate-200 dark:border-slate-700"><strong>তাইসীরুল কুরআন:</strong> ${a.bn_t}</div>` : ''}
+            ${a.bn_z ? `<div class="text-slate-600 dark:text-slate-400 pt-1.5 border-t border-slate-200 dark:border-slate-700"><strong>ড. আবু বকর যাকারিয়া:</strong> ${a.bn_z}</div>` : ''}
           </div>
-          ${a.bn_z ? `
-            <div class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed font-bengali mt-2 pt-2 border-t border-slate-200 dark:border-slate-700">
-              <strong>ড. আবু বকর যাকারিয়া:</strong> ${a.bn_z}
-            </div>
-          ` : ''}
         </div>
       `;
     }
@@ -1138,15 +1140,13 @@
         tafsirSourceBar.classList.remove('hidden');
 
         // Update Tafsir Source buttons
-        if (selectedTafsirSource === 'ab') {
-          tafsirBtnAB.className = 'px-2.5 sm:px-3 py-1 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition shadow-sm';
-          tafsirBtnIK.className = 'px-2.5 sm:px-3 py-1 rounded-lg text-xs font-semibold text-emerald-300 hover:text-white transition';
-          studyModalTitle.textContent = `তাফসীর আহসানুল বায়ান (পৃষ্ঠা ${currentPage} • আয়াত ${startAyah}–${endAyah})`;
-        } else {
-          tafsirBtnAB.className = 'px-2.5 sm:px-3 py-1 rounded-lg text-xs font-semibold text-emerald-300 hover:text-white transition';
-          tafsirBtnIK.className = 'px-2.5 sm:px-3 py-1 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition shadow-sm';
-          studyModalTitle.textContent = `তাফসীর ইবনে কাসীর (পৃষ্ঠা ${currentPage} • আয়াত ${startAyah}–${endAyah})`;
-        }
+        const activeTafBtnClass = 'px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-600 text-white transition shadow-sm whitespace-nowrap';
+        const inactiveTafBtnClass = 'px-2 sm:px-2.5 py-1 rounded-lg text-xs font-semibold text-emerald-300 hover:text-white transition whitespace-nowrap';
+        if (tafsirBtnTQ) tafsirBtnTQ.className = selectedTafsirSource === 'tq' ? activeTafBtnClass : inactiveTafBtnClass;
+        if (tafsirBtnAB) tafsirBtnAB.className = selectedTafsirSource === 'ab' ? activeTafBtnClass : inactiveTafBtnClass;
+        if (tafsirBtnIK) tafsirBtnIK.className = selectedTafsirSource === 'ik' ? activeTafBtnClass : inactiveTafBtnClass;
+        const tafName = selectedTafsirSource === 'tq' ? 'তাওযীহুল কুরআন' : selectedTafsirSource === 'ab' ? 'আহসানুল বায়ান' : 'ইবনে কাসীর';
+        studyModalTitle.textContent = `তাফসীর ${tafName} (পৃষ্ঠা ${currentPage} • আয়াত ${startAyah}–${endAyah})`;
       }
 
       studyAyahsContainer.innerHTML = `
@@ -1192,7 +1192,7 @@
         } else {
           // Tafsir Mode
           const tafsirData = await fetchPageTafsir(currentPage);
-          const tafsirLabel = selectedTafsirSource === 'ab' ? 'তাফসীর আহসানুল বায়ান' : 'তাফসীর ইবনে কাসীর';
+          const tafsirLabel = selectedTafsirSource === 'tq' ? 'তাফসীরে তাওযীহুল কুরআন' : selectedTafsirSource === 'ab' ? 'তাফসীর আহসানুল বায়ান' : 'তাফসীর ইবনে কাসীর';
 
           let cardsHtml = '';
           for (const sId of surahIds) {
@@ -1213,7 +1213,7 @@
             for (const a of ayahsOnPage) {
               const vk = `${sId}:${a.a}`;
               const tfEntry = tafsirData[vk] || {};
-              const tfText = selectedTafsirSource === 'ab' ? (tfEntry.ab || '') : (tfEntry.ik || '');
+              const tfText = selectedTafsirSource === 'tq' ? (tfEntry.tq || '') : selectedTafsirSource === 'ab' ? (tfEntry.ab || '') : (tfEntry.ik || '');
               cardsHtml += renderTafsirCard(a.a, surahIds.length > 1 ? sData.name_bn : '', a.ar, tfText, tafsirLabel);
             }
           }
@@ -1263,6 +1263,15 @@
       studyTabScopeTafsir.addEventListener('click', () => {
         if (studyCurrentScope !== 'tafsir') {
           studyCurrentScope = 'tafsir';
+          renderStudyContent();
+        }
+      });
+    }
+
+    if (tafsirBtnTQ) {
+      tafsirBtnTQ.addEventListener('click', () => {
+        if (selectedTafsirSource !== 'tq') {
+          selectedTafsirSource = 'tq';
           renderStudyContent();
         }
       });
