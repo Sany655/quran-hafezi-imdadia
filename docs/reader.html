@@ -408,11 +408,11 @@
     </div>
 
     <!-- Touch Navigation Left & Right Overlays (Hidden on Desktop, accessible on touch) -->
-    <button id="navLeftBtn" class="absolute left-1 sm:left-4 top-1/2 -translate-y-1/2 w-10 sm:w-12 h-14 sm:h-20 rounded-xl bg-black/20 hover:bg-black/40 text-white backdrop-blur flex items-center justify-center opacity-60 hover:opacity-100 transition z-20" aria-label="পূর্ববর্তী পাতা">
+    <button id="navLeftBtn" class="absolute left-1 sm:left-4 top-1/2 -translate-y-1/2 w-10 sm:w-12 h-14 sm:h-20 rounded-xl bg-black/20 hover:bg-black/40 text-white backdrop-blur flex items-center justify-center opacity-60 hover:opacity-100 transition z-20" aria-label="পরবর্তী পাতা">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
     </button>
 
-    <button id="navRightBtn" class="absolute right-1 sm:right-4 top-1/2 -translate-y-1/2 w-10 sm:w-12 h-14 sm:h-20 rounded-xl bg-black/20 hover:bg-black/40 text-white backdrop-blur flex items-center justify-center opacity-60 hover:opacity-100 transition z-20" aria-label="পরবর্তী পাতা">
+    <button id="navRightBtn" class="absolute right-1 sm:right-4 top-1/2 -translate-y-1/2 w-10 sm:w-12 h-14 sm:h-20 rounded-xl bg-black/20 hover:bg-black/40 text-white backdrop-blur flex items-center justify-center opacity-60 hover:opacity-100 transition z-20" aria-label="পূর্ববর্তী পাতা">
       <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
     </button>
 
@@ -434,8 +434,8 @@
       <div class="flex items-center justify-between text-xs sm:text-sm">
         
         <!-- Prev Button -->
-        <button id="footerPrevBtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-stone-300 dark:border-slate-700 hover:bg-emerald-50 dark:hover:bg-slate-700 font-semibold shadow-sm transition">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        <button id="footerPrevBtn" class="order-last flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800 border border-stone-300 dark:border-slate-700 hover:bg-emerald-50 dark:hover:bg-slate-700 font-semibold shadow-sm transition">
+          <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
           <span class="hidden sm:inline">পূর্ববর্তী পাতা</span>
         </button>
 
@@ -448,9 +448,9 @@
         </button>
 
         <!-- Next Button -->
-        <button id="footerNextBtn" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white font-semibold shadow-sm transition">
+        <button id="footerNextBtn" class="order-first flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white font-semibold shadow-sm transition">
           <span class="hidden sm:inline">পরবর্তী পাতা</span>
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          <svg class="w-4 h-4 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
         </button>
 
       </div>
@@ -862,11 +862,11 @@
       // Disable/enable buttons
       footerPrevBtn.disabled = (currentPage === 1);
       footerPrevBtn.style.opacity = (currentPage === 1) ? '0.4' : '1';
-      navLeftBtn.style.display = (currentPage === 1) ? 'none' : 'flex';
+      navRightBtn.style.display = (currentPage === 1) ? 'none' : 'flex';
 
       footerNextBtn.disabled = (currentPage === totalPages);
       footerNextBtn.style.opacity = (currentPage === totalPages) ? '0.4' : '1';
-      navRightBtn.style.display = (currentPage === totalPages) ? 'none' : 'flex';
+      navLeftBtn.style.display = (currentPage === totalPages) ? 'none' : 'flex';
     }
 
     // Paging Controls
@@ -882,8 +882,8 @@
 
     footerNextBtn.addEventListener('click', goNext);
     footerPrevBtn.addEventListener('click', goPrev);
-    navRightBtn.addEventListener('click', goNext);
-    navLeftBtn.addEventListener('click', goPrev);
+    navLeftBtn.addEventListener('click', goNext);
+    navRightBtn.addEventListener('click', goPrev);
 
     // Slider
     pageSlider.addEventListener('input', (e) => {
