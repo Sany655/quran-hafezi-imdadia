@@ -274,6 +274,9 @@
     #indexDrawerBackdrop.startup-index #indexDrawerContent {
       max-width: none;
     }
+    #indexDrawerBackdrop.startup-index #closeIndexBtn {
+      display: none;
+    }
   </style>
 </head>
 <body class="h-full bg-parchment-paper dark:bg-parchment-dark text-slate-800 dark:text-slate-100 font-sans flex flex-col overflow-hidden transition-colors duration-200">
@@ -281,15 +284,10 @@
   <!-- Top App Bar -->
   <header id="topAppBar" class="flex-none bg-emerald-900/95 dark:bg-slate-950/95 text-white backdrop-blur border-b border-emerald-800/80 px-2 sm:px-6 py-2 sm:py-2.5 flex items-center justify-between z-30 transition-transform duration-300 gap-1 sm:gap-2">
     
-    <!-- Left: Back & Index -->
+    <!-- Left: Index & Search -->
     <div class="flex items-center gap-1 sm:gap-2 shrink-0">
-      <button id="backToIndexBtn" class="p-1.5 sm:p-2 rounded-lg sm:rounded-xl hover:bg-emerald-800 dark:hover:bg-slate-800 transition text-emerald-100" title="সূচীপত্রে ফিরে যান" aria-label="সূচীপত্রে ফিরে যান">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-      </button>
-
-      <button id="openIndexBtn" class="flex items-center gap-1 sm:gap-1.5 p-1.5 sm:px-3 sm:py-1.5 rounded-lg sm:rounded-xl bg-emerald-800/80 hover:bg-emerald-700 dark:bg-slate-800 text-xs sm:text-sm font-bengali font-semibold border border-emerald-700/60 transition shadow-sm" title="কুরআন সূচীপত্র">
+      <button id="openIndexBtn" class="w-10 h-10 flex items-center justify-center rounded-xl bg-emerald-800/80 hover:bg-emerald-700 dark:bg-slate-800 border border-emerald-700/60 transition shadow-sm" title="কুরআন সূচীপত্র" aria-label="কুরআন সূচীপত্র খুলুন">
         <svg class="w-4 h-4 text-gold-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/></svg>
-        <span class="hidden sm:inline">সূচীপত্র</span>
       </button>
 
       <!-- Global Search Button -->
@@ -342,7 +340,7 @@
       </button>
 
       <!-- PWA Install Button (Mobile & Desktop) -->
-      <button id="headerPwaInstallBtn" class="p-1.5 sm:px-2.5 sm:py-1 rounded-lg sm:rounded-xl bg-gold-500/90 hover:bg-gold-400 text-slate-950 font-bold transition flex items-center gap-1 shadow-sm" title="হোম স্ক্রিনে ইনস্টল করুন">
+      <button id="headerPwaInstallBtn" class="hidden p-1.5 sm:px-2.5 sm:py-1 rounded-lg sm:rounded-xl bg-gold-500/90 hover:bg-gold-400 text-slate-950 font-bold transition items-center gap-1 shadow-sm" title="হোম স্ক্রিনে ইনস্টল করুন" aria-label="হোম স্ক্রিনে ইনস্টল করুন">
         <svg class="w-4 h-4 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
         <span class="text-[11px] sm:text-xs font-bengali hidden sm:inline">ইনস্টল</span>
       </button>
@@ -486,6 +484,11 @@
           চালিয়ে যান →
         </button>
       </div>
+      <div id="sharedPageCard" class="hidden mx-3 mb-2 p-3 rounded-2xl bg-emerald-50 dark:bg-slate-800 border border-emerald-200 dark:border-slate-700 font-bengali">
+        <div class="text-[11px] text-slate-500 dark:text-slate-400">শেয়ার করা পৃষ্ঠা</div>
+        <div id="sharedPageText" class="text-sm font-bold text-emerald-800 dark:text-emerald-300"></div>
+        <button id="openSharedPageBtn" class="mt-2 px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs">এই পাতায় যান</button>
+      </div>
 
       <!-- Search Bar -->
       <div class="px-3 pb-2">
@@ -624,6 +627,7 @@
     let hasRenderedPage = false;
     let pageLoadRequest = 0;
     let startupIndexOpened = false;
+    let requestedPage = null;
     let bookmarks = JSON.parse(localStorage.getItem('quran_bookmarks') || '[]');
     let currentTabIndex = 'surahs';
 
@@ -670,6 +674,10 @@
     const installPwaBtn = document.getElementById('installPwaBtn');
     const closePwaBannerBtn = document.getElementById('closePwaBannerBtn');
     const headerPwaInstallBtn = document.getElementById('headerPwaInstallBtn');
+    function setHeaderInstallVisibility(visible) {
+      headerPwaInstallBtn.classList.toggle('hidden', !visible);
+      headerPwaInstallBtn.classList.toggle('flex', visible);
+    }
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
@@ -680,21 +688,23 @@
     }
 
     const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+    const isStandalone = window.navigator.standalone === true ||
+      ['standalone', 'minimal-ui', 'fullscreen', 'window-controls-overlay']
+        .some(mode => window.matchMedia(`(display-mode: ${mode})`).matches);
 
     // Capture Chrome / Edge beforeinstallprompt on mobile & desktop
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
-      if (headerPwaInstallBtn) headerPwaInstallBtn.classList.remove('hidden');
-      if (pwaInstallBanner && !localStorage.getItem('pwa_banner_dismissed')) {
+      if (!isStandalone) setHeaderInstallVisibility(true);
+      if (!isStandalone && pwaInstallBanner && !localStorage.getItem('pwa_banner_dismissed')) {
         pwaInstallBanner.classList.remove('hidden');
       }
     });
 
     // If not in standalone mode, show header install button
     if (!isStandalone) {
-      if (headerPwaInstallBtn) headerPwaInstallBtn.classList.remove('hidden');
+      setHeaderInstallVisibility(true);
       if (isIos && !localStorage.getItem('ios_banner_dismissed')) {
         document.getElementById('iosPwaBanner').classList.remove('hidden');
       } else if (!localStorage.getItem('pwa_banner_dismissed')) {
@@ -710,7 +720,7 @@
         const { outcome } = await deferredPrompt.userChoice;
         if (outcome === 'accepted') {
           if (pwaInstallBanner) pwaInstallBanner.classList.add('hidden');
-          if (headerPwaInstallBtn) headerPwaInstallBtn.classList.add('hidden');
+          setHeaderInstallVisibility(false);
           showToast('আল-কুরআন অ্যাপ সফলভাবে ইনস্টল হয়েছে!');
         }
         deferredPrompt = null;
@@ -737,7 +747,7 @@
     window.addEventListener('appinstalled', () => {
       deferredPrompt = null;
       if (pwaInstallBanner) pwaInstallBanner.classList.add('hidden');
-      if (headerPwaInstallBtn) headerPwaInstallBtn.classList.add('hidden');
+      setHeaderInstallVisibility(false);
       showToast('আল-কুরআন অ্যাপ ইনস্টল সম্পন্ন হয়েছে!');
     });
 
@@ -756,6 +766,9 @@
         console.log('Error fetching metadata, using fallbacks', err);
       }
 
+      const hashPage = window.location.hash.replace(/^#(?:page=)?/, '');
+      const linkedPage = parseInt(new URLSearchParams(window.location.search).get('page') || hashPage, 10);
+      requestedPage = linkedPage >= 1 && linkedPage <= totalPages ? linkedPage : null;
       const lastRead = parseInt(localStorage.getItem('quran_last_read_page') || '1');
       if (lastRead >= 1 && lastRead <= totalPages) currentPage = lastRead;
       updateResumeReadingBanner();
@@ -768,6 +781,7 @@
     function renderPage(pageNum, withAudio = true) {
       if (pageNum < 1) pageNum = 1;
       if (pageNum > totalPages) pageNum = totalPages;
+      if (pageNum !== currentPage) requestedPage = null;
       const previousPage = currentPage;
       currentPage = pageNum;
 
@@ -970,7 +984,6 @@
     const closeIndexBtn = document.getElementById('closeIndexBtn');
     const indexListContainer = document.getElementById('indexListContainer');
     const indexSearchInput = document.getElementById('indexSearchInput');
-    const backToIndexBtn = document.getElementById('backToIndexBtn');
     const tabSurahsBtn = document.getElementById('tabSurahsBtn');
     const tabJuzBtn = document.getElementById('tabJuzBtn');
     const tabBookmarksBtn = document.getElementById('tabBookmarksBtn');
@@ -986,6 +999,7 @@
     }
 
     function closeIndexDrawer() {
+      if (startupIndexOpened) return;
       indexDrawerBackdrop.classList.add('opacity-0');
       indexDrawerContent.classList.add('-translate-x-full');
       setTimeout(() => {
@@ -995,21 +1009,36 @@
     }
 
     openIndexBtn.addEventListener('click', openIndexDrawer);
-    backToIndexBtn.addEventListener('click', openIndexDrawer);
     closeIndexBtn.addEventListener('click', closeIndexDrawer);
     indexDrawerBackdrop.addEventListener('click', (e) => {
       if (e.target === indexDrawerBackdrop) closeIndexDrawer();
     });
 
     function updateResumeReadingBanner() {
-      const lastPage = parseInt(localStorage.getItem('quran_last_read_page') || '1');
+      const savedPage = parseInt(localStorage.getItem('quran_last_read_page') || '1');
+      const lastPage = savedPage >= 1 && savedPage <= totalPages ? savedPage : 1;
       const lastSurah = localStorage.getItem('quran_last_read_surah') || 'সূরা আল-ফাতিহা';
       document.getElementById('resumeSurahText').textContent = lastSurah;
       document.getElementById('resumePageText').textContent = `পৃষ্ঠা ${lastPage} এ ছিলেন`;
       document.getElementById('resumeReadingCard').onclick = () => {
+        startupIndexOpened = false;
         renderPage(lastPage, true);
         closeIndexDrawer();
       };
+      const sharedPageCard = document.getElementById('sharedPageCard');
+      if (requestedPage !== null && requestedPage !== lastPage) {
+        const sharedPageInfo = pageMap[requestedPage] || {};
+        document.getElementById('sharedPageText').textContent =
+          `পৃষ্ঠা ${requestedPage}${sharedPageInfo.sn ? ` • ${sharedPageInfo.sn}` : ''}`;
+        sharedPageCard.classList.remove('hidden');
+        document.getElementById('openSharedPageBtn').onclick = () => {
+          startupIndexOpened = false;
+          renderPage(requestedPage, true);
+          closeIndexDrawer();
+        };
+      } else {
+        sharedPageCard.classList.add('hidden');
+      }
     }
 
     function switchIndexTab(tab) {
@@ -1123,6 +1152,7 @@
     }
 
     window.selectSurah = function(page) {
+      startupIndexOpened = false;
       renderPage(page, true);
       closeIndexDrawer();
     };
@@ -1590,7 +1620,7 @@
                      `• পৃষ্ঠা: ${toBnNum(currentPage)}\n` +
                      `• পারা: ${toBnNum(info.j || 1)}\n` +
                      `• সূরা: ${info.sn || ''}\n\n` +
-                     `https://sany655.github.io/quran-hafezi-imdadia/reader.html#${currentPage}`;
+                     `https://sany655.github.io/quran-hafezi-imdadia/reader.html#page=${currentPage}`;
         executeOfflineShare({
           title: `আল-কুরআন - পৃষ্ঠা ${toBnNum(currentPage)}`,
           text: text
