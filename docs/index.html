@@ -1,16 +1,1008 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="bn" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="refresh" content="0; url=reader.html">
-  <link rel="canonical" href="reader.html">
-  <title>আল-কুরআন</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>আল-কুরআন | Al-Quran</title>
+  <meta name="description" content="১৫ লাইন হাফেজী কোরআন শরীফ, বাংলা অনুবাদ, শব্দে শব্দে অর্থ ও তাফসীর সহ একটি অলাভজনক ও উন্মুক্ত প্ল্যাটফর্ম। আমাদের একমাত্র লক্ষ্য মহান আল্লাহর সন্তুষ্টি।">
+  <meta name="keywords" content="Quran, Hafezi Quran, 15 Line Quran, Imdadia Quran, Bangla Quran, Word by word, Tafsir, Non-profit, Open Source, Sadaqah Jariyah, PWA">
+
+  <!-- PWA & Mobile Web App Meta -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#064e3b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="আল-কুরআন">
+  <link rel="apple-touch-icon" href="assets/app_icon.png">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:title" content="আল-কুরআন হাফেজী (১৫ লাইন) | Quran Hafezi Imdadia">
+  <meta property="og:description" content="সম্পূর্ণ বিজ্ঞাপনমুক্ত, অলাভজনক ও সাদাকায়ে জারিয়া প্রজেক্ট। আসুন কুরআনের খেদমতে একসাথে কাজ করি।">
+  <meta property="og:image" content="assets/app_icon.png">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/png" href="assets/app_icon.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Hind+Siliguri:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    window.location.replace(new URL('reader.html', window.location.href).href);
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            emerald: {
+              50: '#ecfdf5',
+              100: '#d1fae5',
+              200: '#a7f3d0',
+              300: '#6ee7b7',
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+              800: '#065f46',
+              900: '#064e3b',
+              950: '#022c22',
+            },
+            gold: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              200: '#fde68a',
+              300: '#fcd34d',
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+              700: '#b45309',
+              800: '#92400e',
+              900: '#78350f',
+            },
+            parchment: {
+              light: '#fdfbf7',
+              soft: '#f7f4ed',
+              dark: '#0f1719',
+              card: '#162327'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '"Hind Siliguri"', 'sans-serif'],
+            bengali: ['"Hind Siliguri"', 'sans-serif'],
+            arabic: ['"Amiri"', '"Scheherazade New"', 'serif'],
+          }
+        }
+      }
+    }
   </script>
+
+  <style>
+    /* Islamic Geometric Pattern Background */
+    .islamic-pattern {
+      background-color: transparent;
+      background-image: radial-gradient(rgba(16, 185, 129, 0.08) 1.5px, transparent 1.5px), radial-gradient(rgba(217, 119, 6, 0.07) 1.5px, transparent 1.5px);
+      background-size: 36px 36px;
+      background-position: 0 0, 18px 18px;
+    }
+    .dark .islamic-pattern {
+      background-image: radial-gradient(rgba(52, 211, 153, 0.07) 1.5px, transparent 1.5px), radial-gradient(rgba(245, 158, 11, 0.06) 1.5px, transparent 1.5px);
+    }
+    .page-shadow {
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(0,0,0,0.08);
+    }
+    .glow-gold {
+      box-shadow: 0 0 35px -5px rgba(217, 119, 6, 0.25);
+    }
+    .glow-emerald {
+      box-shadow: 0 0 35px -5px rgba(16, 185, 129, 0.2);
+    }
+    /* Arabic text rendering */
+    .arabic-text {
+      font-family: 'Amiri', 'Scheherazade New', serif;
+      direction: rtl;
+    }
+  </style>
 </head>
-<body>
-  <p>রিডার খোলা হচ্ছে… <a href="reader.html">এখানে চাপুন</a>।</p>
+<body class="bg-parchment-light dark:bg-parchment-dark text-slate-800 dark:text-slate-100 font-sans antialiased selection:bg-emerald-500 selection:text-white transition-colors duration-300">
+
+  <!-- Islamic Geometric Ambient Header Strip -->
+  <div class="h-2 w-full bg-gradient-to-r from-emerald-800 via-gold-500 to-emerald-800"></div>
+
+  <!-- Top Announcement: Divine Purpose / Non-Profit Pledge -->
+  <div class="bg-emerald-950 text-emerald-100 text-xs sm:text-sm py-2 px-4 border-b border-emerald-800/40">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-gold-500/20 text-gold-300 border border-gold-400/30">
+          সাদাকায়ে জারিয়া
+        </span>
+        <span class="font-bengali">১০০% অলাভজনক, সম্পূর্ণ বিজ্ঞাপনহীন ও উন্মুক্ত কোড প্রজেক্ট। একমাত্র লক্ষ্য আল্লাহর সন্তুষ্টি।</span>
+      </div>
+      <div class="flex items-center text-xs">
+        <button id="themeToggle" class="hover:text-gold-300 transition flex items-center gap-1" aria-label="Toggle Theme">
+          <span id="themeIcon">🌙</span> <span id="themeText">ডার্ক মোড</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-parchment-light/90 dark:bg-parchment-dark/90 border-b border-slate-200/80 dark:border-slate-800/80 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+
+      <!-- Brand Logo & Title -->
+      <a href="#" class="flex items-center gap-3 group shrink-0">
+        <div class="w-11 h-11 rounded-xl overflow-hidden shadow-md ring-2 ring-emerald-600/30 group-hover:ring-emerald-500 transition shrink-0">
+          <img src="assets/app_icon.png" alt="Quran App Icon" class="w-full h-full object-cover">
+        </div>
+        <div>
+          <span class="font-bengali font-bold text-xl sm:text-2xl text-emerald-900 dark:text-emerald-300 block leading-tight">আল-কুরআন</span>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">বাংলা অর্থ, শব্দার্থ ও তাফসীর</p>
+        </div>
+      </a>
+
+      <!-- Desktop Nav Links -->
+      <nav class="hidden lg:flex items-center gap-4 xl:gap-6 text-sm font-medium font-bengali">
+        <a href="#aim" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition whitespace-nowrap">উদ্দেশ্য</a>
+        <a href="#features" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition whitespace-nowrap">বৈশিষ্ট্যসমূহ</a>
+
+        <a href="#collaborate" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition whitespace-nowrap">সহযোগিতা</a>
+        <a href="#authenticity" class="hover:text-emerald-600 dark:hover:text-emerald-400 transition whitespace-nowrap">সত্যতা ও সনদ</a>
+      </nav>
+
+      <!-- Action Buttons -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- Web Reader PWA (Desktop only) -->
+        <a href="reader.html" class="hidden lg:inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white font-bengali text-sm font-semibold shadow-md transition transform hover:-translate-y-0.5 border border-emerald-600/50">
+          <span class="text-gold-400">📖</span>
+          <span>ওয়েবে পড়ুন (PWA)</span>
+        </a>
+
+        <!-- GitHub (Desktop only) -->
+        <a href="https://github.com/Sany655/quran-hafezi-imdadia" target="_blank" class="hidden lg:inline-flex p-2.5 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition text-slate-700 dark:text-slate-300" title="GitHub Repository">
+          <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobileMenuBtn" class="lg:hidden p-2 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 transition text-slate-700 dark:text-slate-300" aria-label="মেনু খুলুন">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path id="mobileMenuIcon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Dropdown -->
+  <div id="mobileMenuDropdown" class="hidden lg:hidden border-b border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-4 py-4 space-y-2 font-bengali text-sm font-semibold transition-all shadow-xl sticky top-20 z-40 max-h-[calc(100dvh-5rem)] overflow-y-auto">
+    <a href="#aim" class="block py-2.5 px-3 rounded-xl hover:bg-emerald-50 dark:hover:bg-slate-800 hover:text-emerald-600 transition mobile-nav-link">উদ্দেশ্য</a>
+    <a href="#features" class="block py-2.5 px-3 rounded-xl hover:bg-emerald-50 dark:hover:bg-slate-800 hover:text-emerald-600 transition mobile-nav-link">বৈশিষ্ট্যসমূহ</a>
+
+    <a href="#collaborate" class="block py-2.5 px-3 rounded-xl hover:bg-emerald-50 dark:hover:bg-slate-800 hover:text-emerald-600 transition mobile-nav-link">সহযোগিতা</a>
+    <a href="#authenticity" class="block py-2.5 px-3 rounded-xl hover:bg-emerald-50 dark:hover:bg-slate-800 hover:text-emerald-600 transition mobile-nav-link">সত্যতা ও সনদ</a>
+
+    <!-- Action Links inside Mobile Dropdown -->
+    <div class="pt-3 border-t border-slate-200 dark:border-slate-800 flex flex-col gap-2.5">
+      <!-- 1. Android APK Download Link -->
+      <a id="mobileApkDownloadBtn" href="https://github.com/Sany655/quran-hafezi-imdadia/releases/latest/download/Quran-Hafezi-Imdadia.apk" class="flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white shadow-md transition font-bold text-sm">
+        <svg class="w-5 h-5 text-emerald-200" fill="currentColor" viewBox="0 0 24 24"><path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4483.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.996-3.4568a.416.416 0 00-.152-.5669.416.416 0 00-.568.1522L17.135 8.9416C15.617 8.2494 13.882 7.855 12 7.855c-1.882 0-3.617.3944-5.135 1.0866L4.8427 5.4499a.4161.4161 0 00-.568-.1522.416.416 0 00-.152.5669l1.996 3.4568C2.688 11.2386 0 14.887 0 19.145h24c0-4.258-2.688-7.9064-6.1185-9.8236"/></svg>
+        <span>অ্যান্ড্রয়েড অ্যাপ (APK ডাউনলোড)</span>
+      </a>
+
+      <!-- 2. Web Version (PWA) Link -->
+      <a href="reader.html" class="flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl bg-emerald-900 hover:bg-emerald-800 text-white shadow-md transition font-bold text-sm border border-emerald-700/60">
+        <span class="text-gold-400">📖</span>
+        <span>ওয়েব সংস্করণ (PWA পড়ুন)</span>
+      </a>
+
+      <!-- 3. GitHub Repository Link -->
+      <a href="https://github.com/Sany655/quran-hafezi-imdadia" target="_blank" class="flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition text-sm">
+        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <span>GitHub রিপোজিটরি</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="relative pt-12 pb-20 md:pt-20 md:pb-32 islamic-pattern overflow-hidden">
+
+    <!-- Decorative Islamic Aura Gradients -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-emerald-500/10 dark:bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute top-1/3 left-1/3 w-[450px] h-[350px] bg-gold-500/10 dark:bg-gold-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+      <!-- Quran Ayah Banner -->
+      <div class="max-w-3xl mx-auto text-center mb-8">
+        <div class="inline-flex flex-col items-center p-6 rounded-2xl bg-white/70 dark:bg-slate-900/70 backdrop-blur-md border border-emerald-200/60 dark:border-emerald-800/60 shadow-lg glow-emerald">
+          <p class="arabic-text text-2xl sm:text-3xl lg:text-4xl text-emerald-950 dark:text-emerald-200 font-bold mb-3 tracking-wide leading-relaxed">
+            وَتَعَاوَنُوا عَلَى الْبِرِّ وَالتَّقْوَىٰ
+          </p>
+          <p class="font-bengali text-slate-700 dark:text-slate-300 text-sm sm:text-base font-medium">
+            “তোমরা সৎকাজ ও তাকওয়ার ক্ষেত্রে একে অপরকে সহযোগিতা কর...”
+          </p>
+          <span class="text-xs text-gold-700 dark:text-gold-400 mt-1 font-semibold">(সূরা আল-মায়িদাহ ৫:২)</span>
+        </div>
+      </div>
+
+      <!-- Main Headline -->
+      <div class="text-center max-w-4xl mx-auto">
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-bengali text-slate-900 dark:text-white tracking-tight leading-tight sm:leading-tight">
+          কুরআনের খেদমতে আমাদের সম্মিলিত প্রয়াস, <br class="hidden sm:inline">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-700 via-emerald-600 to-gold-600 dark:from-emerald-400 dark:via-emerald-300 dark:to-gold-400">
+            একমাত্র আল্লাহর সন্তুষ্টির উদ্দেশ্যে
+          </span>
+        </h1>
+
+        <p class="mt-6 text-base sm:text-xl text-slate-600 dark:text-slate-300 font-bengali max-w-3xl mx-auto leading-relaxed">
+          হাফেজদের জন্য নিখুঁত <strong>১৫ লাইনের ইমদাদিয়া হাফেজী কোরআন</strong>, সাথে নির্ভরযোগ্য বাংলা অনুবাদ, শব্দে শব্দে অর্থ ও বিস্তারিত তাফসীর।
+          কোনো বিজ্ঞাপন নেই, কোনো পেইড ফিচার নেই, কোনো ট্র্যাকিং নেই; এটি সম্পূর্ণ উন্মুক্ত ও সার্বজনীন সাদাকায়ে জারিয়া।
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="mt-10 flex flex-wrap items-center justify-center gap-4 font-bengali">
+          <button id="heroPwaInstallBtn" class="px-7 py-4 rounded-xl bg-gold-600 hover:bg-gold-500 text-white font-semibold text-lg shadow-xl shadow-gold-700/25 transition transform hover:-translate-y-0.5 flex items-center gap-2.5">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <span>PWA অ্যাপ ইনস্টল করুন</span>
+          </button>
+
+          <a href="reader.html" class="px-7 py-4 rounded-xl bg-emerald-800 hover:bg-emerald-700 text-white font-semibold text-lg shadow-xl shadow-emerald-900/25 transition transform hover:-translate-y-0.5 flex items-center gap-2.5">
+            <span class="text-xl">📖</span>
+            <span>ওয়েবে সরাসরি পড়ুন</span>
+          </a>
+
+          <a href="#download" class="px-7 py-4 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-semibold text-lg shadow-xl shadow-emerald-800/25 transition transform hover:-translate-y-0.5 flex items-center gap-2.5">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+            <span>অ্যান্ড্রয়েড APK</span>
+          </a>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="mt-12 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto font-bengali text-xs sm:text-sm">
+          <div class="p-3 rounded-xl bg-white/60 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60 flex items-center justify-center gap-2">
+            <span class="text-emerald-500 text-lg">✦</span>
+            <span>১০০% বিজ্ঞাপনহীন ও ফ্রি</span>
+          </div>
+          <div class="p-3 rounded-xl bg-white/60 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60 flex items-center justify-center gap-2">
+            <span class="text-gold-500 text-lg">✦</span>
+            <span>পূর্ণাঙ্গ অফলাইন SQLite</span>
+          </div>
+          <div class="p-3 rounded-xl bg-white/60 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60 flex items-center justify-center gap-2">
+            <span class="text-emerald-500 text-lg">✦</span>
+            <span>প্রমাণিত মূল ও সনদপ্রাপ্ত</span>
+          </div>
+          <div class="p-3 rounded-xl bg-white/60 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-700/60 flex items-center justify-center gap-2">
+            <span class="text-gold-500 text-lg">✦</span>
+            <span>ওপেন সোর্স ও যৌথ খেদমত</span>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 1: Our Aim & Islamic Purpose (আল্লাহর সন্তুষ্টি ও লক্ষ্য) -->
+  <section id="aim" class="py-20 bg-white dark:bg-slate-900 border-y border-slate-200 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-emerald-600 dark:text-emerald-400 font-semibold font-bengali text-sm tracking-wider uppercase">আমাদের মূল দর্শন ও অঙ্গীকার</span>
+        <h2 class="text-3xl sm:text-4xl font-bold font-bengali text-slate-900 dark:text-white mt-2">
+          আল্লাহর সন্তুষ্টির জন্য অলাভজনক সম্মিলিত উদ্যোগ
+        </h2>
+        <div class="w-20 h-1 bg-gold-500 mx-auto mt-4 rounded-full"></div>
+      </div>
+
+      <!-- Ayah Highlight Card -->
+      <div class="max-w-4xl mx-auto bg-gradient-to-br from-emerald-900 to-emerald-950 text-white rounded-3xl p-8 sm:p-12 shadow-2xl relative overflow-hidden mb-16 border border-emerald-700/40">
+        <div class="absolute -right-10 -bottom-10 opacity-10 text-9xl font-serif">﷽</div>
+
+        <div class="relative z-10 text-center">
+          <p class="arabic-text text-2xl sm:text-3xl text-gold-300 font-bold mb-4 leading-loose">
+            إِنَّمَا نُطْعِمُكُمْ لِوَجْهِ اللَّهِ لَا نُرِيدُ مِنكُمْ جَزَاءً وَلَا شُكُورًا
+          </p>
+          <p class="font-bengali text-emerald-100 text-base sm:text-lg mb-2">
+            “আমরা তো কেবল আল্লাহর সন্তুষ্টির জন্যই তোমাদেরকে আহার্য দান করি; আমরা তোমাদের কাছ থেকে কোনো প্রতিদান ও কৃতজ্ঞতা চাই না।”
+          </p>
+          <span class="text-xs text-gold-400 font-semibold">(সূরা আল-ইনসান ৭৬:৯)</span>
+
+          <div class="mt-8 pt-8 border-t border-emerald-800/80 text-left grid sm:grid-cols-3 gap-6 font-bengali">
+            <div>
+              <h3 class="font-bold text-gold-400 text-lg mb-1">১. বিশুদ্ধ নিয়ত (ইখলাস)</h3>
+              <p class="text-xs sm:text-sm text-emerald-200/90 leading-relaxed">
+                কোনো বাণিজ্যিক ফায়দা বা ব্যক্তিকেন্দ্রিক প্রচার নয়। কুরআনের খেদমতকে একমাত্র আল্লাহর নৈকট্য ও আখিরাতের সঞ্চয় হিসেবে বিবেচনা করা।
+              </p>
+            </div>
+            <div>
+              <h3 class="font-bold text-gold-400 text-lg mb-1">২. কোনো বিজ্ঞাপন বা ট্র্যাকিং নয়</h3>
+              <p class="text-xs sm:text-sm text-emerald-200/90 leading-relaxed">
+                পবিত্র কালামুল্লাহ তিলাওয়াতের মাঝে কোনো অনাকাঙ্ক্ষিত বিজ্ঞাপন থাকবে না। ব্যবহারকারীর কোনো ব্যক্তিগত ডেটা ট্র্যাক বা বিক্রি করা হয় না।
+              </p>
+            </div>
+            <div>
+              <h3 class="font-bold text-gold-400 text-lg mb-1">৩. স্থায়ী সাদাকায়ে জারিয়া</h3>
+              <p class="text-xs sm:text-sm text-emerald-200/90 leading-relaxed">
+                যে কেউ কোড, অনুবাদ নিরীক্ষণ বা প্রচারণার মাধ্যমে অংশ নিতে পারেন। প্রতিটি আয়াত পাঠের সাওয়াব হবে আপনার অনন্তকালের পাথেয়।
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hadith Card -->
+      <div class="max-w-3xl mx-auto text-center font-bengali p-6 rounded-2xl bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/40">
+        <p class="arabic-text text-xl sm:text-2xl text-emerald-800 dark:text-emerald-300 font-bold mb-2">
+          خَيْرُكُمْ مَنْ تَعَلَّمَ الْقُرْآنَ وَعَلَّمَهُ
+        </p>
+        <p class="text-slate-700 dark:text-slate-300 text-sm sm:text-base font-medium">
+          রাসূলুল্লাহ ﷺ বলেছেন: “তোমাদের মধ্যে সর্বোত্তম ব্যক্তি সে, যে নিজে কুরআন শিখে এবং অন্যকে তা শেখায়।”
+        </p>
+        <span class="text-xs text-slate-500 dark:text-slate-400 mt-1 block">[সহীহ বুখারী: ৫০২৭]</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 3: Core Features (কুরআন সবার জন্য: তিলাওয়াত ও হিফজ) -->
+  <section id="features" class="py-20 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 font-bengali">
+
+      <!-- Section Header -->
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-emerald-600 dark:text-emerald-400 font-semibold text-sm tracking-wider uppercase">কুরআন সবার জন্য</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mt-2">
+          তিলাওয়াত হোক অন্তরের প্রশান্তি, হিফজ হোক সহজ
+        </h2>
+        <p class="text-sm sm:text-base text-slate-600 dark:text-slate-300 mt-3 max-w-2xl mx-auto leading-relaxed">
+          আপনি কুরআনের নিয়মিত পাঠক হোন কিংবা সম্মানিত হাফেজে কুরআন; আপনার প্রতিটি দিনের তিলাওয়াত ও হিফজকে শৃঙ্খলিত করার সার্বিক আয়োজন।
+        </p>
+        <div class="w-20 h-1 bg-emerald-500 mx-auto mt-4 rounded-full"></div>
+      </div>
+
+      <!-- Priority 1: For General Readers & Daily Reciters -->
+      <div class="mb-12">
+        <div class="flex items-center gap-2 mb-6">
+          <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+          <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+            সাধারণ পাঠক ও কুরআনপ্রেমীদের জন্য (সহজ শুরু ও নিয়মিত অভ্যাস)
+          </h3>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          <!-- Card 1: Khatam Routine -->
+          <div class="p-6 rounded-2xl bg-parchment-soft dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 hover:border-emerald-500 transition group shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-emerald-600/10 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">
+                🌿
+              </div>
+              <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">তিলাওয়াত ও খতম প্ল্যানার</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                দিনে মাত্র ৫ মিনিট বা ২ পৃষ্ঠা তিলাওয়াত দিয়ে শুরু করুন। মাসে কিংবা বছরে নিজের সুবিধামতো খতম সম্পন্ন করার নিয়মিত ট্র্যাকার।
+              </p>
+            </div>
+            <span class="text-[11px] font-bold text-emerald-700 dark:text-emerald-400 mt-4 block">✓ নিয়মিত অভ্যাসের অনুপ্রেরণা</span>
+          </div>
+
+          <!-- Card 2: Motivation to Memorize -->
+          <div class="p-6 rounded-2xl bg-parchment-soft dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 hover:border-emerald-500 transition group shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-gold-600/10 dark:bg-gold-500/20 text-gold-700 dark:text-gold-300 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">
+                🌱
+              </div>
+              <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">হিফজ শুরুর সহজ স্বপ্ন</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                বয়স বা ব্যস্ততা কোনো বাধা নয়। দিনে মাত্র ১ বা ২টি ছোট আয়াত অর্থসহ মুখস্ত করার সহজ ট্র্যাকার, যা সিনায় কুরআন ধারণের আত্মবিশ্বাস যোগায়।
+              </p>
+            </div>
+            <span class="text-[11px] font-bold text-gold-600 dark:text-gold-400 mt-4 block">✓ সবার জন্য উন্মুক্ত হিফজ</span>
+          </div>
+
+          <!-- Card 3: Tri-Calendar -->
+          <div class="p-6 rounded-2xl bg-parchment-soft dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 hover:border-emerald-500 transition group shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-emerald-600/10 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">
+                📅
+              </div>
+              <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">ঐতিহ্যবাহী ট্রাই-ক্যালেন্ডার</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                ইংরেজি তারিখের পাশাপাশি খাঁটি বাংলা সন এবং অফলাইন গাণিতিক হিজরি দিনপঞ্জি। আইয়ামে বীজের রোজা, জুমু'আ ও মাহে রমাদানের দিনগুলো চিহ্নিত।
+              </p>
+            </div>
+            <span class="text-[11px] font-bold text-emerald-700 dark:text-emerald-400 mt-4 block">✓ ১০০% অফলাইন দিনপঞ্জি</span>
+          </div>
+
+          <!-- Card 4: Offline Sharing -->
+          <div class="p-6 rounded-2xl bg-parchment-soft dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 hover:border-emerald-500 transition group shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-gold-600/10 dark:bg-gold-500/20 text-gold-700 dark:text-gold-300 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">
+                📲
+              </div>
+              <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">আলো ছড়ানোর অফলাইন শেয়ার</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                ইন্টারনেট ছাড়াই যেকোনো প্রিয় আয়াত, বিশুদ্ধ বাংলা অর্থ বা তাফসীর সুন্দর ফরম্যাটে এক ক্লিকে পরিবার ও প্রিয়জনের সাথে শেয়ার করার সুবিধা।
+              </p>
+            </div>
+            <span class="text-[11px] font-bold text-gold-600 dark:text-gold-400 mt-4 block">✓ সাদাকায়ে জারিয়া</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Priority 2: For Huffaz & Advanced Memorizers -->
+      <div class="mb-14">
+        <div class="flex items-center gap-2 mb-6">
+          <span class="w-2.5 h-2.5 rounded-full bg-gold-500"></span>
+          <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+            হুফ্ফাজ ও হিফজ শিক্ষার্থীদের জন্য (দাওর ও রিভিশন টুলস)
+          </h3>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          <!-- Card 5: Dour Cycle Generator -->
+          <div class="p-6 rounded-2xl bg-parchment-soft dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 hover:border-emerald-500 transition group shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-emerald-600/10 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">
+                🔄
+              </div>
+              <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">হুফ্ফাজ দাওর সাইকেল প্ল্যানার</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                ১০, ১৫, ২০ বা ৩০ দিনে পুরো কুরআন দাওর শেষ করার স্বয়ংক্রিয় শিডিউল। আজকের নির্ধারিত পারা ও সম্পন্ন হওয়ার নিখুঁত হিসাব।
+              </p>
+            </div>
+            <span class="text-[11px] font-bold text-emerald-700 dark:text-emerald-400 mt-4 block">✓ পেশাদার দাওর রুটিন</span>
+          </div>
+
+          <!-- Card 6: Mutashabihat & Self-Correction -->
+          <div class="p-6 rounded-2xl bg-parchment-soft dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 hover:border-emerald-500 transition group shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-gold-600/10 dark:bg-gold-500/20 text-gold-700 dark:text-gold-300 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">
+                📝
+              </div>
+              <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">মুতাশাবিহাত ও সেলফ-কারেকশন</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                যে আয়াতে আটকে যাবেন বা সুরার প্যাঁচ লাগবে, তা পৃষ্ঠাসহ লিখে রাখুন। নোটে ট্যাপ করলেই সরাসরি ১৫ লাইনের সেই মূল পৃষ্ঠায় চলে যাওয়া যায়।
+              </p>
+            </div>
+            <span class="text-[11px] font-bold text-gold-600 dark:text-gold-400 mt-4 block">✓ ১৫ লাইনের পেজ লিঙ্ক</span>
+          </div>
+
+          <!-- Card 7: 15-Line Mushaf -->
+          <div class="p-6 rounded-2xl bg-parchment-soft dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 hover:border-emerald-500 transition group shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-emerald-600/10 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">
+                📖
+              </div>
+              <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">১৫ লাইন খাঁটি ইমদাদিয়া কুরআন</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                উপমহাদেশের লক্ষ লক্ষ হাফেজের পরিচিত ফন্ট ও বিন্যাস। প্রতিটি পাতা আয়াত শেষ হওয়ার সাথে সমাপ্ত হয়, যা হিফজের জন্য অপরিহার্য।
+              </p>
+            </div>
+            <span class="text-[11px] font-bold text-emerald-700 dark:text-emerald-400 mt-4 block">✓ খাঁটি হিফজ বিন্যাস</span>
+          </div>
+
+          <!-- Card 8: Word-by-Word & Tafsir -->
+          <div class="p-6 rounded-2xl bg-parchment-soft dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-700/80 hover:border-emerald-500 transition group shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-xl bg-gold-600/10 dark:bg-gold-500/20 text-gold-700 dark:text-gold-300 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition">
+                🔍
+              </div>
+              <h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">শব্দার্থ ও বিশুদ্ধ তাফসীর</h4>
+              <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                প্রতিটি শব্দের পৃথক বাংলা অর্থ ও মূল। সাথে শায়খ তাইসীরুল কুরআন ও ড. আবু বকর যাকারিয়ার অনুবাদ এবং আহসানুল বায়ান তাফসীর।
+              </p>
+            </div>
+            <span class="text-[11px] font-bold text-gold-600 dark:text-gold-400 mt-4 block">✓ বিশুদ্ধ আকিদা ভিত্তিক</span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Inspirational Hadith Banner -->
+      <div class="max-w-3xl mx-auto p-6 sm:p-8 rounded-3xl bg-emerald-50/80 dark:bg-slate-800/80 border border-emerald-200/80 dark:border-emerald-800/60 shadow-sm text-center">
+        <p class="text-xs text-gold-600 dark:text-gold-400 font-bold mb-2">রাসুলুল্লাহ ﷺ ইরশাদ করেছেন:</p>
+        <p class="arabic-text text-xl sm:text-2xl text-emerald-800 dark:text-emerald-300 font-bold mb-2">
+          اقْرَءُوا الْقُرْآنَ فَإِنَّهُ يَأْتِي يَوْمَ الْقِيَامَةِ شَفِيعًا لِأَصْحَابِهِ
+        </p>
+        <p class="text-base sm:text-xl font-bold text-slate-900 dark:text-white leading-relaxed">
+          “তোমরা কুরআন তিলাওয়াত কর; কেননা কিয়ামতের দিন তা তার পাঠকের জন্য সুপারিশকারী হিসেবে আগমন করবে।”
+        </p>
+        <span class="text-xs text-slate-500 dark:text-slate-400 mt-2 block">[সহীহ মুসলিম: ৮০৪]</span>
+        <p class="text-xs sm:text-sm text-emerald-800 dark:text-emerald-300 font-medium mt-4">
+          প্রতিদিনের ব্যস্ততায় অল্প হলেও কুরআন তিলাওয়াত করুন এবং হিফজের নিয়ত রাখুন। আল্লাহ তাআলা আপনার তিলাওয়াতকে পরকালের মুক্তির অসিলা বানিয়ে দেবেন।
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 4: Collaborative Movement - Serve with us (কুরআনের খেদমতে আপনি কীভাবে যোগ দিতে পারেন) -->
+  <section id="collaborate" class="py-20 bg-emerald-950 text-white relative overflow-hidden">
+
+    <!-- Background Arabesque Pattern -->
+    <div class="absolute inset-0 islamic-pattern opacity-10"></div>
+    <div class="absolute -top-24 -right-24 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-gold-400 font-semibold font-bengali text-sm tracking-wider uppercase">ওপেন সোর্স ও যৌথ খিদমাহ</span>
+        <h2 class="text-3xl sm:text-5xl font-bold font-bengali mt-2">
+          আসুন, আল্লাহর কালামের খেদমতে হাত মেলাই
+        </h2>
+        <p class="text-emerald-200 font-bengali mt-4 text-base sm:text-lg leading-relaxed">
+          এই প্রজেক্টটি কোনো নির্দিষ্ট ব্যক্তি বা প্রতিষ্ঠানের নয়; এটি গোটা মুসলিম উম্মাহর খেদমত। আপনার মেধা ও দক্ষতাকে আল্লাহ তায়ালার রাস্তায় বিনিয়োগ করুন।
+        </p>
+        <div class="w-20 h-1 bg-gold-500 mx-auto mt-4 rounded-full"></div>
+      </div>
+
+      <!-- Ways to Contribute Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 font-bengali">
+
+        <!-- Role 1: Developers -->
+        <div class="bg-emerald-900/60 backdrop-blur-sm border border-emerald-700/60 rounded-2xl p-6 hover:border-gold-400 transition">
+          <div class="w-12 h-12 rounded-xl bg-gold-500/20 text-gold-300 flex items-center justify-center text-2xl mb-4">
+            💻
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">ডেভেলপার ও প্রকৌশলী</h3>
+          <p class="text-xs sm:text-sm text-emerald-200 leading-relaxed mb-4">
+            Flutter, Dart, SQLite, Rust বা Web প্রযুক্তিতে পারদর্শী হলে অ্যাপটির কার্যক্ষমতা বৃদ্ধি, ওয়েব সংস্করণ বা আইওএস সংস্করণে সহায়তা করুন।
+          </p>
+          <a href="https://github.com/Sany655/quran-hafezi-imdadia/issues" target="_blank" class="text-xs text-gold-400 hover:text-gold-300 font-semibold flex items-center gap-1">
+            <span>ওপেন ইস্যু দেখুন</span> &rarr;
+          </a>
+        </div>
+
+        <!-- Role 2: Huffaz & Scholars -->
+        <div class="bg-emerald-900/60 backdrop-blur-sm border border-emerald-700/60 rounded-2xl p-6 hover:border-gold-400 transition">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-2xl mb-4">
+            🕌
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">হাফেজ ও ওলামায়ে কেরাম</h3>
+          <p class="text-xs sm:text-sm text-emerald-200 leading-relaxed mb-4">
+            প্রতিটি অক্ষর, যের-যবর, ওয়াকফ চিহ্ন এবং অনুবাদের নির্ভুলতা নিরীক্ষা (Proofreading) করে শরয়ী বিশুদ্ধতা নিশ্চিত করুন।
+          </p>
+          <a href="https://github.com/Sany655/quran-hafezi-imdadia#scholarly-audit" target="_blank" class="text-xs text-gold-400 hover:text-gold-300 font-semibold flex items-center gap-1">
+            <span>নিরীক্ষা প্রক্রিয়া জানুন</span> &rarr;
+          </a>
+        </div>
+
+        <!-- Role 3: Designers & Calligraphers -->
+        <div class="bg-emerald-900/60 backdrop-blur-sm border border-emerald-700/60 rounded-2xl p-6 hover:border-gold-400 transition">
+          <div class="w-12 h-12 rounded-xl bg-gold-500/20 text-gold-300 flex items-center justify-center text-2xl mb-4">
+            🎨
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">ডিজাইনার ও ক্যালিগ্রাফার</h3>
+          <p class="text-xs sm:text-sm text-emerald-200 leading-relaxed mb-4">
+            বয়োবৃদ্ধ ও নতুন পাঠকদের পাঠযোগ্যতা বৃদ্ধি, সুন্দর ইসলামিক আর্টওয়ার্ক এবং আরও নান্দনিক ইউজার এক্সপেরিয়েন্স তৈরি করুন।
+          </p>
+          <a href="https://github.com/Sany655/quran-hafezi-imdadia" target="_blank" class="text-xs text-gold-400 hover:text-gold-300 font-semibold flex items-center gap-1">
+            <span>UI গাইডলাইন</span> &rarr;
+          </a>
+        </div>
+
+        <!-- Role 4: Promoters & Community -->
+        <div class="bg-emerald-900/60 backdrop-blur-sm border border-emerald-700/60 rounded-2xl p-6 hover:border-gold-400 transition">
+          <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-300 flex items-center justify-center text-2xl mb-4">
+            📢
+          </div>
+          <h3 class="text-lg font-bold text-white mb-2">দা'ওয়াহ ও প্রচারক</h3>
+          <p class="text-xs sm:text-sm text-emerald-200 leading-relaxed mb-4">
+            মাদরাসা, হিফজখানা, মসজিদ এবং দ্বীনি পরিবারগুলোর কাছে পৌঁছে দিন। কোনো বিজ্ঞাপনী খরচ ছাড়াই কেবল আন্তরিক শেয়ারের মাধ্যমে পৌঁছান।
+          </p>
+          <button onclick="navigator.clipboard.writeText(window.location.href); alert('লিংক কপি করা হয়েছে! জাযাকাল্লাহু খাইরান।');" class="text-xs text-gold-400 hover:text-gold-300 font-semibold flex items-center gap-1">
+            <span>লিংক কপি করে শেয়ার করুন</span> &rarr;
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Action Card with Contribution Workflow -->
+      <div class="mt-12 max-w-4xl mx-auto bg-emerald-900/90 rounded-3xl p-8 border border-gold-500/30 text-center font-bengali">
+        <h3 class="text-2xl font-bold text-gold-300 mb-3">কন্ট্রিবিউশন শুরু করার সহজ ৩ ধাপ</h3>
+
+        <div class="grid sm:grid-cols-3 gap-6 my-6 text-left">
+          <div class="p-4 rounded-xl bg-emerald-950/60 border border-emerald-800">
+            <span class="w-7 h-7 rounded-full bg-gold-500 text-slate-900 font-bold text-xs flex items-center justify-center mb-2">১</span>
+            <h4 class="font-bold text-white text-sm mb-1">গিটহাব রিপো ফর্ক করুন</h4>
+            <p class="text-xs text-emerald-200">
+              GitHub-এ গিয়ে রিপোজিটরিটি Fork করে আপনার কম্পিউটারে Clone করুন।
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-emerald-950/60 border border-emerald-800">
+            <span class="w-7 h-7 rounded-full bg-gold-500 text-slate-900 font-bold text-xs flex items-center justify-center mb-2">২</span>
+            <h4 class="font-bold text-white text-sm mb-1">কাজ বা বাগ নির্ধারণ করুন</h4>
+            <p class="text-xs text-emerald-200">
+              Issues ট্যাব থেকে পছন্দের টাস্ক বেছে নিন বা আপনার প্রস্তাবনা তুলে ধরুন।
+            </p>
+          </div>
+
+          <div class="p-4 rounded-xl bg-emerald-950/60 border border-emerald-800">
+            <span class="w-7 h-7 rounded-full bg-gold-500 text-slate-900 font-bold text-xs flex items-center justify-center mb-2">৩</span>
+            <h4 class="font-bold text-white text-sm mb-1">Pull Request পাঠান</h4>
+            <p class="text-xs text-emerald-200">
+              পরীক্ষা-নিরীক্ষা শেষে সাবমিট করুন। যাচাই শেষে মূল কোডে যুক্ত হবে ইনশাআল্লাহ।
+            </p>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-4 mt-6">
+          <a href="https://github.com/Sany655/quran-hafezi-imdadia" target="_blank" class="px-8 py-3.5 rounded-xl bg-gold-500 hover:bg-gold-400 text-slate-950 font-bold text-base shadow-lg transition flex items-center gap-2">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            <span>GitHub-এ প্রজেক্টটি দেখুন ও স্টার দিন</span>
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Section 5: Authenticity, Certification & Verification (সত্যতা ও সনদ) -->
+  <section id="authenticity" class="py-20 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 font-bengali">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-emerald-600 dark:text-emerald-400 font-semibold text-sm tracking-wider uppercase">নির্ভরযোগ্যতা ও শারঈ অবস্থান</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mt-2">
+          কুরআনিক তথ্যের বিশুদ্ধতা ও ফতোয়া
+        </h2>
+        <p class="text-slate-600 dark:text-slate-400 mt-3 text-sm sm:text-base">
+          কুরআনের সফটওয়্যারে বিন্দুমাত্র ভুল বা তাহরীফ (বিকৃতি) যাতে না ঘটে, সেজন্য প্রতিটি তথ্যসূত্র কঠোরভাবে যাচাইকৃত।
+        </p>
+        <div class="w-20 h-1 bg-gold-500 mx-auto mt-4 rounded-full"></div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+
+        <div class="p-6 rounded-2xl bg-parchment-soft dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+          <div class="text-emerald-600 dark:text-emerald-400 text-3xl mb-4 font-bold">০১.</div>
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">ইমদাদিয়া হাফেজী প্রিন্ট</h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            জাতীয় কুরআন বোর্ড, ইসলামিক ফাউন্ডেশন বাংলাদেশ এবং বেফাকুল মাদারিসিল আরাবিয়া বাংলাদেশের অভিজ্ঞ হাফেজ ও কারীগণের মাধ্যমে বহু বছর ধরে সত্যায়িত ও অনুমোদিত প্রিন্ট।
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-parchment-soft dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+          <div class="text-emerald-600 dark:text-emerald-400 text-3xl mb-4 font-bold">০২.</div>
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">তানজিল প্রজেক্ট (Tanzil Text)</h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            আন্তর্জাতিকভাবে সর্বজনস্বীকৃত তানজিল প্রজেক্ট এবং কুরআন.কম API ভেরিফায়েড কোর টেক্সট, যা কোটি কোটি মানুষের পর্যালোচনায় পরীক্ষিত এবং স্বয়ংক্রিয় চেকসাম অ্যালগরিদম দ্বারা সুরক্ষিত।
+          </p>
+        </div>
+
+        <div class="p-6 rounded-2xl bg-parchment-soft dark:bg-slate-800 border border-slate-200 dark:border-slate-700">
+          <div class="text-emerald-600 dark:text-emerald-400 text-3xl mb-4 font-bold">০৩.</div>
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white mb-2">দ্বীনি ওয়াকফ ও সাদাকা</h3>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            উম্মাহর সকল সদস্যের জন্য বিনা মূল্যে শিক্ষামূলক প্রচারের উদ্দেশ্যে উন্মুক্ত। কোনো প্রকার বাণিজ্যিক বিজ্ঞাপন প্রদর্শন না করার শর্তে ডিজিটাল প্রকাশ সম্পূর্ণ মুস্তাহাব।
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Community Gratitude & Dua Card -->
+      <div class="mt-8 p-6 rounded-2xl bg-emerald-900/10 dark:bg-emerald-950/40 border border-emerald-600/30 dark:border-emerald-700/40 text-slate-800 dark:text-emerald-100 flex flex-col sm:flex-row items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-emerald-700 text-gold-300 flex items-center justify-center text-2xl shrink-0 shadow-sm">
+          🤲
+        </div>
+        <div>
+          <h4 class="font-bold text-base text-emerald-900 dark:text-emerald-300 mb-1">কৃতজ্ঞতা ও দো’আ (Gratitude & Du'a)</h4>
+          <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-bengali">
+            এই ডিজিটাল কুরআন প্রজেক্টটি বাস্তবায়নে অনুপ্রেরণা, উন্মুক্ত তথ্য ও ডিজিটাল কুরআন সংরক্ষণে নিয়োজিত পূর্ববর্তী সকল নিষ্ঠাবান আলেম, ক্যালিগ্রাফার এবং মুসলিম ডেভেলপার ভাইদের প্রতি আমরা আন্তরিকভাবে কৃতজ্ঞ। মহান আল্লাহ তাআলা তাঁদের প্রত্যেকের এই দ্বীনি মেহনতকে কবুল করুন এবং এটিকে তাঁদের ও আমাদের জন্য সাদাকায়ে জারিয়া বানিয়ে দিন। আমীন।
+          </p>
+        </div>
+      </div>
+
+      <!-- Vulnerability / Bug Reporting Guarantee -->
+      <div class="mt-12 p-6 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-300/60 dark:border-amber-700/60 text-slate-800 dark:text-amber-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <span class="text-2xl">⚠️</span>
+          <div>
+            <h4 class="font-bold text-sm sm:text-base">কোথাও কোনো অসঙ্গতি বা টাইপিং ভুল চোখে পড়েছে?</h4>
+            <p class="text-xs sm:text-sm text-slate-600 dark:text-amber-300/80">আল্লাহর ওয়াস্তে তৎক্ষণাৎ আমাদের রিপোর্ট করুন, আমরা অগ্রাধিকারের সাথে সংশোধন করব।</p>
+          </div>
+        </div>
+        <a href="https://github.com/Sany655/quran-hafezi-imdadia/issues/new" target="_blank" class="px-5 py-2.5 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-semibold text-xs whitespace-nowrap shadow-sm transition">
+          রিপোর্ট জমা দিন
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Download & Roadmap Section -->
+  <section id="download" class="py-20 bg-parchment-soft dark:bg-parchment-dark">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center font-bengali">
+
+      <div class="max-w-3xl mx-auto mb-12">
+        <span class="text-emerald-600 dark:text-emerald-400 font-semibold text-sm tracking-wider uppercase">সংগ্রহ করুন ও ব্যবহার করুন</span>
+        <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mt-2">
+          আপনার ডিভাইসে কুরআন সংরক্ষণ করুন
+        </h2>
+        <p class="text-slate-600 dark:text-slate-400 mt-3 text-sm sm:text-base">
+          অ্যান্ড্রয়েড ফোন, ট্যাবলেট কিংবা ডেস্কটপে সহজেই রান করুন।
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-5 max-w-4xl mx-auto">
+
+        <!-- Option 1: Web PWA App (iPhone / Android / Desktop) -->
+        <div class="p-5 rounded-2xl bg-gold-600 hover:bg-gold-500 text-white shadow-xl shadow-gold-700/20 transition transform hover:-translate-y-1 flex flex-col items-center text-center group">
+          <div class="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition">
+            📱
+          </div>
+          <span class="text-[11px] text-gold-200 font-semibold uppercase">মোবাইল ও কম্পিউটার</span>
+          <h3 class="text-lg font-bold text-white mt-1">ওয়েব অ্যাপ (PWA)</h3>
+          <p class="text-xs text-gold-100 mt-1">হোম স্ক্রিনে ইনস্টল করে ব্রাউজার ছাড়াই সরাসরি পড়ুন।</p>
+          <div class="mt-4 flex flex-col sm:flex-row items-center gap-2 w-full justify-center">
+            <button id="pwaCardInstallBtn" class="w-full sm:w-auto px-3 py-1.5 rounded-lg bg-white text-gold-800 text-xs font-bold shadow flex items-center justify-center gap-1 hover:bg-gold-50 transition">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              <span>PWA ইনস্টল করুন</span>
+            </button>
+            <a href="reader.html" class="w-full sm:w-auto px-3 py-1.5 rounded-lg bg-gold-700 hover:bg-gold-800 text-white text-xs font-bold shadow transition text-center">
+              সরাসরি পড়ুন →
+            </a>
+          </div>
+        </div>
+
+        <!-- Option 2: Android APK -->
+        <a id="apkDownloadBtn" href="https://github.com/Sany655/quran-hafezi-imdadia/releases/latest/download/Quran-Hafezi-Imdadia.apk" class="p-5 rounded-2xl bg-emerald-700 hover:bg-emerald-600 text-white shadow-xl shadow-emerald-800/30 transition transform hover:-translate-y-1 flex flex-col items-center text-center group">
+          <div class="w-12 h-12 rounded-xl bg-emerald-800/80 flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition">
+            🤖
+          </div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-[11px] text-emerald-200">অ্যান্ড্রয়েড ফোন ও ট্যাব</span>
+            <span id="apkVersionBadge" class="text-[10px] px-1.5 py-0.2 rounded bg-gold-500 text-slate-950 font-bold">Latest</span>
+          </div>
+          <h3 id="apkDownloadText" class="text-lg font-bold text-white mt-1">অ্যান্ড্রয়েড APK</h3>
+          <p class="text-xs text-emerald-100 mt-1">পূর্ণাঙ্গ ৬০ MB অফলাইন SQLite ডাটাবেজ সহ সরাসরি ডাউনলোড।</p>
+          <div class="mt-4 px-4 py-1.5 rounded-lg bg-emerald-900 text-emerald-100 text-xs font-bold shadow flex items-center gap-1">
+            <span>ডাউনলোড APK</span>
+            <span id="apkSizeBadge" class="text-[10px] text-gold-300"></span>
+          </div>
+        </a>
+
+        <!-- Option 3: GitHub Open Source -->
+        <a href="https://github.com/Sany655/quran-hafezi-imdadia" target="_blank" class="p-5 rounded-2xl bg-white dark:bg-slate-800 border-2 border-slate-300 dark:border-slate-700 hover:border-emerald-500 text-slate-800 dark:text-slate-200 shadow-md transition transform hover:-translate-y-1 flex flex-col items-center text-center group">
+          <div class="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition text-slate-700 dark:text-slate-300">
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          </div>
+          <span class="text-[11px] text-slate-400 font-semibold uppercase">উন্মুক্ত সাদাকায়ে জারিয়া</span>
+          <h3 class="text-lg font-bold text-slate-900 dark:text-white mt-1">সোর্স কোড</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Flutter ও Web কোডবেস সরাসরি গিটহাবে দেখুন ও অবদান রাখুন।</p>
+          <div class="mt-4 px-4 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-bold shadow">GitHub দেখুন →</div>
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Final Spiritual Prayer & Footer -->
+  <footer class="bg-emerald-950 text-white border-t border-emerald-900 pt-16 pb-12 font-bengali">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+
+      <!-- Du'a -->
+      <div class="max-w-2xl mx-auto mb-10">
+        <p class="arabic-text text-2xl sm:text-3xl text-gold-400 font-bold mb-3">
+          رَبَّنَا تَقَبَّلْ مِنَّا إِنَّكَ أَنتَ السَّمِيعُ الْعَلِيمُ
+        </p>
+        <p class="text-emerald-200 text-sm sm:text-base">
+          “হে আমাদের প্রতিপালক! আমাদের পক্ষ থেকে এটি কবুল করে নিন। নিশ্চয়ই আপনি সর্বশ্রোতা, সর্বজ্ঞ।”
+        </p>
+        <span class="text-xs text-gold-500 font-medium">(সূরা আল-বাকারাহ ২:১২৭)</span>
+      </div>
+
+      <div class="w-16 h-0.5 bg-emerald-800 mx-auto mb-8"></div>
+
+      <!-- Footer Nav & Links -->
+      <div class="flex flex-wrap items-center justify-center gap-6 text-sm text-emerald-200/80 mb-8">
+        <a href="#aim" class="hover:text-gold-300 transition">আমাদের উদ্দেশ্য</a>
+        <a href="#features" class="hover:text-gold-300 transition">বৈশিষ্ট্যসমূহ</a>
+
+        <a href="#collaborate" class="hover:text-gold-300 transition">সহযোগিতা</a>
+        <a href="#authenticity" class="hover:text-gold-300 transition">সনদ ও নীতিমালা</a>
+        <a href="https://github.com/Sany655/quran-hafezi-imdadia" target="_blank" class="hover:text-gold-300 transition">GitHub</a>
+      </div>
+
+      <div class="text-xs text-emerald-400/60 leading-relaxed max-w-xl mx-auto">
+        এই প্রজেক্টটি কোনো কপিরাইট বা ব্যবসায়িক স্বার্থে আবদ্ধ নয়। এটি উম্মাহর জন্য একটি সম্মিলিত উন্মুক্ত আমানত (Sadaqah Jariyah)। আল্লাহ আমাদের সকলের প্রচেষ্টা কবুল করুন। আমীন।
+      </div>
+
+      <div class="mt-6 text-[11px] text-emerald-500/50">
+        &copy; 2026 Quran Hafezi Imdadia • Free & Open Source for the Pleasure of Allah
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Interactive JavaScript Logic -->
+  <script>
+    // Theme Switcher Logic
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const themeText = document.getElementById('themeText');
+
+    function initTheme() {
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        themeIcon.textContent = '☀️';
+        themeText.textContent = 'লাইট মোড';
+      } else {
+        document.documentElement.classList.remove('dark');
+        themeIcon.textContent = '🌙';
+        themeText.textContent = 'ডার্ক মোড';
+      }
+    }
+    initTheme();
+
+    themeToggle.addEventListener('click', () => {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.theme = 'light';
+        themeIcon.textContent = '🌙';
+        themeText.textContent = 'ডার্ক মোড';
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.theme = 'dark';
+        themeIcon.textContent = '☀️';
+        themeText.textContent = 'লাইট মোড';
+      }
+    });
+
+    // Mobile Navigation Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenuDropdown = document.getElementById('mobileMenuDropdown');
+    const mobileMenuIcon = document.getElementById('mobileMenuIcon');
+    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+    if (mobileMenuBtn && mobileMenuDropdown) {
+      mobileMenuBtn.addEventListener('click', () => {
+        const isHidden = mobileMenuDropdown.classList.contains('hidden');
+        if (isHidden) {
+          mobileMenuDropdown.classList.remove('hidden');
+          mobileMenuIcon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+        } else {
+          mobileMenuDropdown.classList.add('hidden');
+          mobileMenuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+        }
+      });
+
+      mobileNavLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenuDropdown.classList.add('hidden');
+          mobileMenuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+        });
+      });
+    }
+
+    // Dynamic GitHub Release Fetcher
+    async function updateLatestReleaseInfo() {
+      const repo = 'Sany655/quran-hafezi-imdadia';
+      const downloadBtn = document.getElementById('apkDownloadBtn');
+      const versionBadge = document.getElementById('apkVersionBadge');
+      const sizeBadge = document.getElementById('apkSizeBadge');
+      const downloadText = document.getElementById('apkDownloadText');
+
+      try {
+        const response = await fetch(`https://api.github.com/repos/${repo}/releases/latest`);
+        if (!response.ok) return;
+        const data = await response.json();
+
+        if (data.tag_name) {
+          versionBadge.textContent = data.tag_name;
+        }
+
+        // Search for .apk asset
+        const apkAsset = data.assets && data.assets.find(asset => asset.name.endsWith('.apk'));
+        if (apkAsset) {
+          downloadBtn.href = apkAsset.browser_download_url;
+          const mobileApkBtn = document.getElementById('mobileApkDownloadBtn');
+          if (mobileApkBtn) mobileApkBtn.href = apkAsset.browser_download_url;
+          if (apkAsset.size) {
+            const sizeInMB = (apkAsset.size / (1024 * 1024)).toFixed(1);
+            sizeBadge.textContent = `• ${sizeInMB} MB`;
+          }
+          downloadText.textContent = `ডাউনলোড APK (${data.tag_name})`;
+        } else if (data.html_url) {
+          downloadBtn.href = data.html_url;
+        }
+      } catch (err) {
+        console.log('Using static release links:', err);
+      }
+    }
+    updateLatestReleaseInfo();
+
+    // PWA Service Worker Registration & Mobile Install Logic
+    let deferredPrompt = null;
+    const pwaInstallBanner = document.getElementById('pwaInstallBanner');
+    const installPwaBtn = document.getElementById('installPwaBtn');
+    const closePwaBannerBtn = document.getElementById('closePwaBannerBtn');
+    const pwaCardInstallBtn = document.getElementById('pwaCardInstallBtn');
+    const heroPwaInstallBtn = document.getElementById('heroPwaInstallBtn');
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').then((reg) => {
+          reg.update();
+        }).catch(() => {});
+      });
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      if (pwaInstallBanner && !localStorage.getItem('pwa_banner_dismissed')) {
+        pwaInstallBanner.classList.remove('hidden');
+      }
+    });
+
+    const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    const isStandalone = window.navigator.standalone || window.matchMedia('(display-mode: standalone)').matches;
+
+    if (!isStandalone && !localStorage.getItem('pwa_banner_dismissed')) {
+      setTimeout(() => {
+        if (pwaInstallBanner && !isStandalone) pwaInstallBanner.classList.remove('hidden');
+      }, 3000);
+    }
+
+    async function triggerPwaInstall() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          if (pwaInstallBanner) pwaInstallBanner.classList.add('hidden');
+        }
+        deferredPrompt = null;
+      } else if (isIos) {
+        alert('Safari ব্রাউজারে Share বাটনে চাপ দিয়ে "Add to Home Screen" বেছে নিন');
+      } else {
+        alert('ব্রাউজারের ৩-ডট মেনু থেকে "Install app" অথবা "Add to Home screen" চাপুন');
+      }
+    }
+
+    if (installPwaBtn) installPwaBtn.addEventListener('click', triggerPwaInstall);
+    if (pwaCardInstallBtn) pwaCardInstallBtn.addEventListener('click', triggerPwaInstall);
+    if (heroPwaInstallBtn) heroPwaInstallBtn.addEventListener('click', triggerPwaInstall);
+    if (closePwaBannerBtn) {
+      closePwaBannerBtn.addEventListener('click', () => {
+        if (pwaInstallBanner) pwaInstallBanner.classList.add('hidden');
+        localStorage.setItem('pwa_banner_dismissed', 'true');
+      });
+    }
+
+    window.addEventListener('appinstalled', () => {
+      deferredPrompt = null;
+      if (pwaInstallBanner) pwaInstallBanner.classList.add('hidden');
+    });
+  </script>
+
+  <!-- Floating PWA Install Banner -->
+  <div id="pwaInstallBanner" class="fixed bottom-4 left-4 right-4 max-w-md mx-auto bg-emerald-950/95 text-white p-3.5 rounded-2xl shadow-2xl border border-emerald-700/60 z-50 hidden flex-col gap-2.5 font-bengali transition-all duration-300">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-2.5">
+        <img src="assets/icon-192.png" alt="App Icon" class="w-10 h-10 rounded-xl shadow border border-emerald-600/40">
+        <div>
+          <h4 class="font-bold text-sm text-white">আল-কুরআন ওয়েব অ্যাপ</h4>
+          <p class="text-[11px] text-emerald-200/90">মোবাইলে ইনস্টল করে অফলাইনে পড়ুন</p>
+        </div>
+      </div>
+      <button id="closePwaBannerBtn" class="text-emerald-300 hover:text-white p-1">✕</button>
+    </div>
+    <div class="flex items-center gap-2 pt-1">
+      <button id="installPwaBtn" class="flex-1 py-2 px-3 bg-gold-500 hover:bg-gold-400 text-slate-950 font-bold text-xs rounded-xl shadow transition text-center flex items-center justify-center gap-1.5">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+        <span>হোম স্ক্রিনে ইনস্টল করুন</span>
+      </button>
+    </div>
+  </div>
+
 </body>
 </html>

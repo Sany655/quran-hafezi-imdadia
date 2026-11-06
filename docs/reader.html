@@ -265,16 +265,7 @@
       -ms-overflow-style: none !important;
       scrollbar-width: none !important;
     }
-    #indexDrawerBackdrop.startup-index {
-      background-color: #f5f5f4;
-    }
-    .dark #indexDrawerBackdrop.startup-index {
-      background-color: #020617;
-    }
-    #indexDrawerBackdrop.startup-index #indexDrawerContent {
-      max-width: none;
-    }
-    #indexDrawerBackdrop.startup-index #closeIndexBtn {
+    #indexPage.startup-index #closeIndexBtn {
       display: none;
     }
   </style>
@@ -286,8 +277,8 @@
     
     <!-- Left: Index & Search -->
     <div class="flex items-center gap-1 sm:gap-2 shrink-0">
-      <button id="openIndexBtn" class="w-10 h-10 flex items-center justify-center rounded-xl bg-emerald-800/80 hover:bg-emerald-700 dark:bg-slate-800 border border-emerald-700/60 transition shadow-sm" title="কুরআন সূচীপত্র" aria-label="কুরআন সূচীপত্র খুলুন">
-        <svg class="w-4 h-4 text-gold-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/></svg>
+      <button id="openIndexBtn" class="w-10 h-10 flex items-center justify-center rounded-xl bg-emerald-800/80 hover:bg-emerald-700 dark:bg-slate-800 border border-emerald-700/60 transition shadow-sm" title="সূচীপত্রে ফিরুন" aria-label="সূচীপত্রে ফিরুন">
+        <svg class="w-4 h-4 text-gold-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
       </button>
 
       <!-- Global Search Button -->
@@ -388,10 +379,10 @@
     </div>
 
     <!-- Zoom Container & Page Image -->
-    <div id="pageTransformContainer" class="relative w-full h-full flex items-center justify-center transition-transform duration-100 origin-center">
+    <div id="pageTransformContainer" class="relative w-full h-full flex items-center justify-center origin-center">
       
       <!-- Loading Spinner Placeholder -->
-      <div id="pageLoadingSpinner" class="absolute inset-0 flex flex-col items-center justify-center bg-stone-200/50 dark:bg-stone-900/50 backdrop-blur-sm z-10 transition-opacity duration-200">
+      <div id="pageLoadingSpinner" class="absolute inset-0 flex flex-col items-center justify-center bg-stone-200/50 dark:bg-stone-900/50 backdrop-blur-sm z-10">
         <div class="w-10 h-10 border-4 border-emerald-600 border-t-transparent rounded-full animate-spin"></div>
         <p class="mt-3 text-xs font-bengali text-slate-600 dark:text-slate-300 font-semibold">পাতা লোড হচ্ছে...</p>
       </div>
@@ -400,11 +391,8 @@
       <img id="mushafImage" 
            src="assets/page_001.jpg" 
            alt="15-Line Hafezi Mushaf Page" 
-           class="max-w-full max-h-full object-contain rounded-md mushaf-shadow bg-amber-50/10 cursor-grab active:cursor-grabbing transition-opacity duration-200 opacity-0"
+           class="max-w-full max-h-full object-contain rounded-md mushaf-shadow bg-amber-50/10 cursor-grab active:cursor-grabbing"
            draggable="false">
-
-      <!-- Page Flip Animation Flash Effect -->
-      <div id="flipFlash" class="absolute inset-0 bg-white/40 dark:bg-black/30 opacity-0 pointer-events-none transition-opacity duration-150"></div>
     </div>
 
     <!-- Touch Navigation Left & Right Overlays (Hidden on Desktop, accessible on touch) -->
@@ -460,17 +448,20 @@
 
   <!-- ==================== MODALS & DRAWERS ==================== -->
 
-  <!-- 1. Index Drawer (সূরা ও পারা সূচীপত্র) -->
-  <div id="indexDrawerBackdrop" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden opacity-0 transition-opacity duration-300">
-    <div id="indexDrawerContent" class="absolute inset-y-0 left-0 max-w-md w-full bg-white dark:bg-slate-900 shadow-2xl flex flex-col transform -translate-x-full transition-transform duration-300 font-bengali">
+  <!-- 1. Full-screen Table of Contents -->
+  <div id="indexPage" class="fixed inset-0 z-50 hidden flex-col bg-stone-100 dark:bg-slate-950 font-bengali">
+    <div class="flex h-full w-full flex-col bg-white dark:bg-slate-900">
       
-      <!-- Drawer Header -->
+      <!-- Table of Contents Header -->
       <div class="p-4 bg-emerald-900 text-white flex items-center justify-between">
         <div class="flex items-center gap-2.5">
           <img src="assets/app_icon.png" class="w-8 h-8 rounded-lg shadow" alt="Icon">
           <h2 class="font-bold text-lg">কুরআন সূচীপত্র</h2>
         </div>
-        <button id="closeIndexBtn" class="p-2 rounded-lg hover:bg-emerald-800 text-emerald-200">✕</button>
+        <button id="closeIndexBtn" class="flex items-center gap-2 p-2 rounded-lg hover:bg-emerald-800 text-emerald-200" title="পাঠে ফিরুন">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+          <span>পাঠে ফিরুন</span>
+        </button>
       </div>
 
       <!-- Resume Reading Card -->
@@ -624,7 +615,6 @@
     let surahsData = [];
     let juzData = [];
     let pageMap = {};
-    let hasRenderedPage = false;
     let pageLoadRequest = 0;
     let startupIndexOpened = false;
     let requestedPage = null;
@@ -634,7 +624,6 @@
     // DOM Elements
     const mushafImage = document.getElementById('mushafImage');
     const pageLoadingSpinner = document.getElementById('pageLoadingSpinner');
-    const flipFlash = document.getElementById('flipFlash');
     const goldenRibbon = document.getElementById('goldenRibbon');
     const bookmarkIcon = document.getElementById('bookmarkIcon');
     const headerSurahTitle = document.getElementById('headerSurahTitle');
@@ -815,15 +804,9 @@
       localStorage.setItem('quran_last_read_page', currentPage);
       localStorage.setItem('quran_last_read_surah', info.sn);
 
-      const direction = pageNum > previousPage ? 1 : pageNum < previousPage ? -1 : 0;
-      const shouldAnimatePageTurn = hasRenderedPage && direction !== 0;
       const requestId = ++pageLoadRequest;
 
-      // Flash & Image Loading
-      flipFlash.style.opacity = '0.5';
-      pageLoadingSpinner.style.opacity = '1';
-      mushafImage.style.opacity = '0.3';
-
+      // Load the target scan before replacing the current page.
       const pad = String(currentPage).padStart(3, '0');
       const targetSrc = `pages/page_${pad}.jpg`;
       const fallbackSrc = `assets/page_${pad}.jpg`;
@@ -831,20 +814,7 @@
       function showPageImage(src) {
         if (requestId !== pageLoadRequest) return;
         mushafImage.src = src;
-        pageLoadingSpinner.style.opacity = '0';
-        mushafImage.style.opacity = '1';
-        flipFlash.style.opacity = '0';
-        if (shouldAnimatePageTurn && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          const offset = direction > 0 ? 100 : -100;
-          mushafImage.animate(
-            [
-              { transform: `translateX(${offset}vw)`, opacity: 0.7 },
-              { transform: 'translateX(0)', opacity: 1 }
-            ],
-            { duration: 260, easing: 'ease-out' }
-          );
-        }
-        hasRenderedPage = true;
+        pageLoadingSpinner.classList.add('hidden');
       }
 
       const newImg = new Image();
@@ -977,9 +947,8 @@
       }
     });
 
-    // Index Drawer Logic
-    const indexDrawerBackdrop = document.getElementById('indexDrawerBackdrop');
-    const indexDrawerContent = document.getElementById('indexDrawerContent');
+    // Full-screen Table of Contents Logic
+    const indexPage = document.getElementById('indexPage');
     const openIndexBtn = document.getElementById('openIndexBtn');
     const closeIndexBtn = document.getElementById('closeIndexBtn');
     const indexListContainer = document.getElementById('indexListContainer');
@@ -988,31 +957,21 @@
     const tabJuzBtn = document.getElementById('tabJuzBtn');
     const tabBookmarksBtn = document.getElementById('tabBookmarksBtn');
 
-    function openIndexDrawer() {
-      indexDrawerBackdrop.classList.remove('hidden');
-      setTimeout(() => {
-        indexDrawerBackdrop.classList.remove('opacity-0');
-        indexDrawerContent.classList.remove('-translate-x-full');
-      }, 10);
+    function openIndexPage() {
+      indexPage.classList.remove('hidden');
+      indexPage.classList.add('flex');
       switchIndexTab('surahs');
       updateResumeReadingBanner();
     }
 
-    function closeIndexDrawer() {
+    function closeIndexPage() {
       if (startupIndexOpened) return;
-      indexDrawerBackdrop.classList.add('opacity-0');
-      indexDrawerContent.classList.add('-translate-x-full');
-      setTimeout(() => {
-        indexDrawerBackdrop.classList.add('hidden');
-        indexDrawerBackdrop.classList.remove('startup-index');
-      }, 300);
+      indexPage.classList.add('hidden');
+      indexPage.classList.remove('flex', 'startup-index');
     }
 
-    openIndexBtn.addEventListener('click', openIndexDrawer);
-    closeIndexBtn.addEventListener('click', closeIndexDrawer);
-    indexDrawerBackdrop.addEventListener('click', (e) => {
-      if (e.target === indexDrawerBackdrop) closeIndexDrawer();
-    });
+    openIndexBtn.addEventListener('click', openIndexPage);
+    closeIndexBtn.addEventListener('click', closeIndexPage);
 
     function updateResumeReadingBanner() {
       const savedPage = parseInt(localStorage.getItem('quran_last_read_page') || '1');
@@ -1023,7 +982,7 @@
       document.getElementById('resumeReadingCard').onclick = () => {
         startupIndexOpened = false;
         renderPage(lastPage, true);
-        closeIndexDrawer();
+        closeIndexPage();
       };
       const sharedPageCard = document.getElementById('sharedPageCard');
       if (requestedPage !== null && requestedPage !== lastPage) {
@@ -1034,7 +993,7 @@
         document.getElementById('openSharedPageBtn').onclick = () => {
           startupIndexOpened = false;
           renderPage(requestedPage, true);
-          closeIndexDrawer();
+          closeIndexPage();
         };
       } else {
         sharedPageCard.classList.add('hidden');
@@ -1154,7 +1113,7 @@
     window.selectSurah = function(page) {
       startupIndexOpened = false;
       renderPage(page, true);
-      closeIndexDrawer();
+      closeIndexPage();
     };
 
     window.removeBookmark = function(page) {
@@ -1798,8 +1757,8 @@
         modal.classList.add('opacity-0');
         modal.style.pointerEvents = 'none';
         startupIndexOpened = true;
-        indexDrawerBackdrop.classList.add('startup-index');
-        openIndexDrawer();
+        indexPage.classList.add('startup-index');
+        openIndexPage();
         setTimeout(() => {
           modal.classList.add('hidden');
         }, 350);
