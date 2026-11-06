@@ -1,7 +1,7 @@
 name: quran_hafezi_imdadia
 description: "আল-কুরআন (Al-Quran): 15-Line Hafezi Quran with Bengali Translation, Word-by-Word, and Tafsir"
 publish_to: 'none'
-version: 2.3.3+11
+version: 2.3.4+12
 
 environment:
   sdk: '>=3.3.0 <4.0.0'
@@ -14,9 +14,6 @@ dependencies:
   path: ^1.9.0
   google_fonts: ^6.2.1
   share_plus: ^10.0.0
-  flutter_local_notifications: ^19.4.0
-  flutter_timezone: ^4.1.1
-  timezone: ^0.10.1
 
 dev_dependencies:
   flutter_test:

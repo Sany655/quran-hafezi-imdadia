@@ -71,11 +71,6 @@ The website root is a non-commercial introduction to the project, its purpose, f
 - ⚡ **100% Offline SQLite Engine**: Blazing fast instant searches and zero latency even without an internet connection.
 - 🔊 **Page Turn Experience**: Realistic flipping audio for an authentic Mushaf feel.
 - 🔖 **Smart Bookmarks & Navigation**: Jump seamlessly between Surahs, Juz (Paras), Pages, and Ayahs.
-- 🗓️ **Offline Quran Planner**: Store planner state locally in SQLite, create a reading plan by target duration or daily page capacity, divide pages into timed sessions with optional daily reminders, and retain JSON backup compatibility.
-- 📖 **Hifz Student Routine**: Maintain a separate memorization inventory, generate Sabaq/Sabqi/Manzil from its lifecycle, set separate reminders and available weekdays for each routine, and record personal recitation assessments, mistakes, repetitions, notes, and actual ranges.
-- 🔁 **Hafez Daur Tracker**: Configure full-Quran or ordered custom-range rotation, select available weekdays, track rotating Daur assignments, and schedule weak portions for extra review without removing them from the regular cycle.
-- ↪️ **Optional missed-task carry-forward**: Copy unfinished reader, student-Hifz, and Hafez assignments to a later eligible day while retaining the original date and history; tasks are never auto-completed.
-- ✅ **Self-taught tracking**: Completion, assessments, mistakes, and notes are recorded by the user; the app does not require teacher accounts or automatically verify memorization or recitation.
 
 ---
 

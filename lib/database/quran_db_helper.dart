@@ -88,37 +88,7 @@ class QuranDbHelper {
       );
     ''');
 
-    await db.execute('''
-      CREATE TABLE IF NOT EXISTS planner_state (
-        id INTEGER PRIMARY KEY CHECK (id = 1),
-        data TEXT NOT NULL
-      );
-    ''');
-
     return db;
-  }
-
-  Future<String?> getPlannerStateJson() async {
-    final db = await database;
-    final rows = await db.query(
-      'planner_state',
-      columns: ['data'],
-      where: 'id = ?',
-      whereArgs: [1],
-      limit: 1,
-    );
-    return rows.isEmpty ? null : rows.first['data'] as String?;
-  }
-
-  Future<void> savePlannerStateJson(String json) async {
-    final db = await database;
-    await db.transaction((transaction) async {
-      await transaction.insert(
-        'planner_state',
-        {'id': 1, 'data': json},
-        conflictAlgorithm: ConflictAlgorithm.replace,
-      );
-    });
   }
 
   // 1. Fetch all Surahs (with in-memory cache)
