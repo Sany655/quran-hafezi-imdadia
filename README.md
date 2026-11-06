@@ -47,6 +47,7 @@ Every line of code, every proofread word, every UI enhancement, and every share 
 
 * 📖 **লাইভ ওয়েব রিডার**: [https://sany655.github.io/quran-hafezi-imdadia/reader.html](https://sany655.github.io/quran-hafezi-imdadia/reader.html)
 * 🌐 **প্রজেক্ট ল্যান্ডিং পেজ**: [https://sany655.github.io/quran-hafezi-imdadia/](https://sany655.github.io/quran-hafezi-imdadia/)
+* 🔁 **অ্যাপ চালুর ধাপ**: ইনস্টল করা অ্যাপের scope শুধু রিডার; এটি সরাসরি রিডার খুলবে, প্রতিবার স্লাইড-টু-এন্টার গেটওয়ের পর সূচীপত্র ও সর্বশেষ পড়া পাতায় ফেরার বাটন দেখাবে। পাতা ডান থেকে বামে এগোয়।
 * 📲 **আইফোনে অ্যাপ হিসেবে সেভ করার নিয়ম**: Safari ব্রাউজারে লিংকটি খুলে নিচে Share (শেয়ার) বাটনে চাপ দিন এবং **"Add to Home Screen"** নির্বাচন করুন। এটি আপনার ফোনে সম্পূর্ণ হোম স্ক্রিন অ্যাপ হিসেবে যুক্ত হবে এবং অফলাইনে কাজ করবে।
 
 ---
