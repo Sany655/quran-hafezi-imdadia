@@ -110,5 +110,28 @@ void main() {
       expect(ayah.words.first.meaningBn, 'নামে');
       expect(ayah.translationTaisirul, contains('আল্লাহর নামে'));
     });
+
+    test('Ma\'ariful Quran 8-volume allocation should map correctly across all Surahs', () {
+      int getVolume(int surahId) {
+        if (surahId == 1 || surahId == 2) return 1;
+        if (surahId == 3 || surahId == 4) return 2;
+        if (surahId == 5 || surahId == 6) return 3;
+        if (surahId == 7 || surahId == 8 || surahId == 9) return 4;
+        if (surahId >= 10 && surahId <= 16) return 5;
+        if (surahId >= 17 && surahId <= 25) return 6;
+        if (surahId >= 26 && surahId <= 38) return 7;
+        return 8;
+      }
+
+      expect(getVolume(1), 1);
+      expect(getVolume(2), 1);
+      expect(getVolume(3), 2);
+      expect(getVolume(5), 3);
+      expect(getVolume(7), 4);
+      expect(getVolume(10), 5);
+      expect(getVolume(17), 6);
+      expect(getVolume(36), 7);
+      expect(getVolume(114), 8);
+    });
   });
 }

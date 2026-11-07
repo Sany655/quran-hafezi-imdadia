@@ -238,8 +238,39 @@ for sid in range(1, 115):
             })
 
 for folder in ['landing/data', 'docs/data']:
+    os.makedirs(folder, exist_ok=True)
     with open(os.path.join(folder, 'search_index.json'), 'w', encoding='utf-8') as f:
         json.dump(search_index, f, ensure_ascii=False, separators=(',', ':'))
 
-print('All web data generated successfully with synced page-verse mapping, Tafsir, and Search Index!')
+# 8. Export Ma'ariful Quran Mapping for Web
+print('Exporting Ma\'ariful Quran mapping...')
+mq_rows = cur.execute("""
+    SELECT mushaf_page, volume, volume_title_bn, surah_name_bn, 
+           verse_range, leaf_number, printed_page, printed_page_bn, 
+           reader_url, pdf_filename 
+    FROM maariful_quran_map 
+    ORDER BY mushaf_page ASC
+""").fetchall()
+
+mq_list = []
+for r in mq_rows:
+    mq_list.append({
+        'mushaf_page': r[0],
+        'volume': r[1],
+        'volume_title_bn': r[2],
+        'surah_name_bn': r[3],
+        'verse_range': r[4],
+        'leaf_number': r[5],
+        'printed_page': r[6],
+        'printed_page_bn': r[7],
+        'reader_url': r[8],
+        'pdf_filename': r[9]
+    })
+
+for folder in ['landing/data', 'docs/data']:
+    os.makedirs(folder, exist_ok=True)
+    with open(os.path.join(folder, 'maariful_quran_map.json'), 'w', encoding='utf-8') as f:
+        json.dump(mq_list, f, ensure_ascii=False)
+
+print('All web data generated successfully with synced page-verse mapping, Tafsir, Search Index, and Ma\'ariful Quran Map!')
 con.close()

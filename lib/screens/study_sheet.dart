@@ -40,6 +40,7 @@ class _StudySheetState extends State<StudySheet> {
       ayah.surahId,
       ayah.ayahNumber,
     );
+    final maarifulRef = await QuranDbHelper.instance.getMaarifulQuranRef(widget.pageNumber);
 
     if (!context.mounted) return;
 
@@ -54,7 +55,7 @@ class _StudySheetState extends State<StudySheet> {
       ),
       builder: (ctx) {
         return DefaultTabController(
-          length: 3,
+          length: 4,
           child: DraggableScrollableSheet(
             initialChildSize: 0.75,
             maxChildSize: 0.95,
@@ -111,6 +112,7 @@ class _StudySheetState extends State<StudySheet> {
                     ),
                     tabs: const [
                       Tab(text: 'তাওযীহুল কুরআন'),
+                      Tab(text: 'মা\'আরিফুল কুরআন (৮ খণ্ড)'),
                       Tab(text: 'আহসানুল বায়ান'),
                       Tab(text: 'ইবনে কাসীর'),
                     ],
@@ -119,6 +121,7 @@ class _StudySheetState extends State<StudySheet> {
                     child: TabBarView(
                       children: [
                         _buildTafsirContent(tafsirs['tawzeehul_quran'], scrollController),
+                        _buildMaarifulQuranTab(maarifulRef, ayah, scrollController),
                         _buildTafsirContent(tafsirs['ahsanul_bayan'], scrollController),
                         _buildTafsirContent(tafsirs['ibn_kathir'], scrollController),
                       ],
@@ -130,6 +133,183 @@ class _StudySheetState extends State<StudySheet> {
           ),
         );
       },
+    );
+  }
+
+  Widget _buildMaarifulQuranTab(
+    Map<String, dynamic>? ref,
+    Ayah ayah,
+    ScrollController scrollController,
+  ) {
+    if (ref == null) {
+      return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Text(
+            'এই পৃষ্ঠার জন্য মা\'আরিফুল কুরআনের রেফারেন্স পাওয়া যায়নি।',
+            style: GoogleFonts.notoSansBengali(color: Colors.grey[600], fontSize: 14),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    }
+
+    final volTitle = ref['volume_title_bn'] ?? 'মা\'আরিফুল কুরআন';
+    final printedPageBn = ref['printed_page_bn'] ?? '';
+    final verseRange = ref['verse_range'] ?? '';
+    final surahName = ref['surah_name_bn'] ?? '';
+    final readerUrl = ref['reader_url'] ?? '';
+
+    return ListView(
+      controller: scrollController,
+      padding: const EdgeInsets.all(18),
+      children: [
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: const Color(0xFFF4F9F5),
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: const Color(0xFFD1E7DD)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Icon(Icons.menu_book, color: Color(0xFF0F5132), size: 24),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      'তাফসীরে মা\'আরিফুল কুরআন (মূল ৮ খণ্ড)',
+                      style: GoogleFonts.notoSansBengali(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xFF0F5132),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 6),
+              Text(
+                'রচয়িতা: হযরত মাওলানা মুফতী মুহাম্মাদ শফী (রহ.)\nঅনুবাদ: মাওলানা মুহিউদ্দীন খান (ইসলামিক ফাউন্ডেশন সংস্করণ)',
+                style: GoogleFonts.notoSansBengali(
+                  fontSize: 12,
+                  color: Colors.grey[700],
+                  height: 1.4,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 16),
+        Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: Colors.grey[200]!),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.04),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildRefRow('📚 খণ্ড:', volTitle),
+              const Divider(height: 18),
+              _buildRefRow('📖 মূল মুদ্রিত পৃষ্ঠা:', 'পৃষ্ঠা $printedPageBn'),
+              const Divider(height: 18),
+              _buildRefRow('🔍 সূরা ও আয়াত পরিসর:', '$surahName ($verseRange)'),
+              const Divider(height: 18),
+              _buildRefRow('📄 বর্তমান হাফেজী পৃষ্ঠা:', 'পৃষ্ঠা ${TriCalendarHelper.toBnNum(widget.pageNumber)}'),
+            ],
+          ),
+        ),
+        const SizedBox(height: 18),
+        Container(
+          padding: const EdgeInsets.all(14),
+          decoration: BoxDecoration(
+            color: const Color(0xFFFFFBEA),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: const Color(0xFFF7E6A1)),
+          ),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Icon(Icons.info_outline, color: Color(0xFFB45309), size: 20),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  'মা\'আরিফুল কুরআনের মূল মুদ্রিত ৮ খণ্ডের কিতাবে এই আয়াতের বিস্তারিত শানে নুযূল, তাফসীর ও ফিকহী মাসায়েল উপরে উল্লেখিত খণ্ড ও পৃষ্ঠায় সন্নিবেশিত রয়েছে।',
+                  style: GoogleFonts.notoSansBengali(
+                    fontSize: 12.5,
+                    color: const Color(0xFF78350F),
+                    height: 1.5,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 20),
+        OutlinedButton.icon(
+          onPressed: () {
+            Share.share(
+              '📖 তাফসীরে মা\'আরিফুল কুরআন রেফারেন্স:\n'
+              '$volTitle\n'
+              'মূল কিতাবের পৃষ্ঠা: $printedPageBn\n'
+              'সূরা ও আয়াত: $surahName ($verseRange)\n'
+              'হাফেজী কুরআন পৃষ্ঠা: ${TriCalendarHelper.toBnNum(widget.pageNumber)}\n\n'
+              'অনলাইন রিডার: $readerUrl',
+            );
+          },
+          icon: const Icon(Icons.share, size: 18),
+          label: Text(
+            'রেফারেন্স শেয়ার / কপি করুন',
+            style: GoogleFonts.notoSansBengali(fontWeight: FontWeight.bold, fontSize: 13),
+          ),
+          style: OutlinedButton.styleFrom(
+            foregroundColor: const Color(0xFF0F5132),
+            side: const BorderSide(color: Color(0xFF0F5132)),
+            padding: const EdgeInsets.symmetric(vertical: 12),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRefRow(String label, String value) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SizedBox(
+          width: 130,
+          child: Text(
+            label,
+            style: GoogleFonts.notoSansBengali(
+              fontSize: 13,
+              fontWeight: FontWeight.w600,
+              color: Colors.grey[800],
+            ),
+          ),
+        ),
+        Expanded(
+          child: Text(
+            value,
+            style: GoogleFonts.notoSansBengali(
+              fontSize: 13,
+              fontWeight: FontWeight.bold,
+              color: const Color(0xFF0F5132),
+            ),
+          ),
+        ),
+      ],
     );
   }
 

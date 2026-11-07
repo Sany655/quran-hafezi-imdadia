@@ -64,10 +64,15 @@ The website root is a non-commercial introduction to the project, its purpose, f
 
 - 📖 **Authentic 15-Line Imdadia Hafezi Mushaf**: High-resolution 612 page scans matching the standard South Asian Hifz curriculum where every page begins and ends with an Ayah.
 - 🔤 **Word-by-Word Bengali Vocabulary**: Understand Quranic vocabulary directly with grammatical breakdown.
-- 📚 **Dual Bengali Translations**:
-  - *Taisirul Quran* (তাইসীরুল কুরআন - Tawheed Publication)
-  - *Mawlana Mujibur Rahman* (মাওলানা মুজিবুর রহমান)
-- 💡 **Authentic Tafsir**: Integrated explanation without doctrinal distortions.
+- 📚 **Bengali Translations**:
+  - *Tawzeehul Quran* (তাওযীহুল কুরআন - মুফতী মুহাম্মাদ তাকী উসমানী)
+  - *Ma'ariful Quran Translation* (মা'আরিফুল কুরআন তরজমা - মুফতী মুহাম্মাদ শফী রহ., অনুবাদ: মাওলানা মুহিউদ্দীন খান)
+  - *Taisirul Quran* (তাইসীরুল কুরআন - তাওহীদ পাবলিকেশন্স)
+- 💡 **Multi-Source Authentic Tafsir & Commentary**:
+  - *Tafsir Tawzeehul Quran* (তাওযীহুল কুরআন তাফসীর টীকা)
+  - *Tafsir Ma'ariful Quran 8-Volume Reference* (তাফসীরে মা'আরিফুল কুরআন ৮ খণ্ড - পৃষ্ঠা ও আয়াত ভিত্তিক রেফারেন্স ম্যাপিং)
+  - *Tafsir Ahsanul Bayan* (তাফসীর আহসানুল বায়ান)
+  - *Tafsir Ibn Kathir* (তাফসীরে ইবনে কাসীর)
 - ⚡ **100% Offline SQLite Engine**: Blazing fast instant searches and zero latency even without an internet connection.
 - 🔊 **Page Turn Experience**: Realistic flipping audio for an authentic Mushaf feel.
 - 🔖 **Smart Bookmarks & Navigation**: Jump seamlessly between Surahs, Juz (Paras), Pages, and Ayahs.

@@ -565,4 +565,19 @@ class QuranDbHelper {
     }
     return null;
   }
+
+  // 9. Ma'ariful Quran Reference Map (8 Volumes)
+  Future<Map<String, dynamic>?> getMaarifulQuranRef(int pageNumber) async {
+    final db = await database;
+    final maps = await db.query(
+      'maariful_quran_map',
+      where: 'mushaf_page = ?',
+      whereArgs: [pageNumber],
+      limit: 1,
+    );
+    if (maps.isNotEmpty) {
+      return maps.first;
+    }
+    return null;
+  }
 }
