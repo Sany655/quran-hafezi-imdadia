@@ -4,7 +4,7 @@
 build/
 .flutter-plugins
 .flutter-plugins-dependencies
-
+/data/tafsir/maariful_short
 # Android
 android/**/gradle-wrapper.jar
 android/.gradle
@@ -47,6 +47,8 @@ landing/data/tafsir/
 
 # Scratch samples
 sample_*
+__pycache__/
+*.pyc
 
 *.apk
 drafts/ashraf_db/

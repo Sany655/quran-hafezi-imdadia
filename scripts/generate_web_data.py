@@ -198,6 +198,7 @@ for p in range(2, 612):
             's': s_id,
             'a': a_num,
             'tq': tafsir_cache.get((s_id, a_num, 170), ''),
+            'mqs': tafsir_cache.get((s_id, a_num, 200), ''),
             'ik': tafsir_cache.get((s_id, a_num, 164), ''),
             'ab': tafsir_cache.get((s_id, a_num, 165), '')
         }

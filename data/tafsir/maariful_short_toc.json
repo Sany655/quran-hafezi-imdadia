@@ -1,0 +1,8837 @@
+{
+  "pdf_path": "reference_books/maariful_quran_bangla/Maariful_Quran_Short_Complete.pdf",
+  "total_pdf_pages": 1492,
+  "page_offset": 3,
+  "surahs": {
+    "1": {
+      "surah_id": 1,
+      "name_bn": "আল-ফাতিহা",
+      "name_en": "Al-Fatihah",
+      "name_ar": "الفاتحة",
+      "total_ayahs": 7,
+      "mushaf_page": 2,
+      "printed_tafsir_page_start": 1,
+      "pdf_page_start": 3,
+      "pdf_page_end": 13,
+      "total_pdf_pages": 11
+    },
+    "2": {
+      "surah_id": 2,
+      "name_bn": "আল-বাকারাহ",
+      "name_en": "Al-Baqarah",
+      "name_ar": "البقرة",
+      "total_ayahs": 286,
+      "mushaf_page": 3,
+      "printed_tafsir_page_start": 11,
+      "pdf_page_start": 13,
+      "pdf_page_end": 165,
+      "total_pdf_pages": 153
+    },
+    "3": {
+      "surah_id": 3,
+      "name_bn": "আলে ইমরান",
+      "name_en": "Ali 'Imran",
+      "name_ar": "آل عمران",
+      "total_ayahs": 200,
+      "mushaf_page": 51,
+      "printed_tafsir_page_start": 163,
+      "pdf_page_start": 165,
+      "pdf_page_end": 229,
+      "total_pdf_pages": 65
+    },
+    "4": {
+      "surah_id": 4,
+      "name_bn": "আন-নিসা",
+      "name_en": "An-Nisa",
+      "name_ar": "النساء",
+      "total_ayahs": 176,
+      "mushaf_page": 78,
+      "printed_tafsir_page_start": 227,
+      "pdf_page_start": 229,
+      "pdf_page_end": 304,
+      "total_pdf_pages": 76
+    },
+    "5": {
+      "surah_id": 5,
+      "name_bn": "আল-মায়িদাহ",
+      "name_en": "Al-Ma'idah",
+      "name_ar": "المائدة",
+      "total_ayahs": 120,
+      "mushaf_page": 107,
+      "printed_tafsir_page_start": 302,
+      "pdf_page_start": 304,
+      "pdf_page_end": 368,
+      "total_pdf_pages": 65
+    },
+    "6": {
+      "surah_id": 6,
+      "name_bn": "আল-আনআম",
+      "name_en": "Al-An'am",
+      "name_ar": "الأنعام",
+      "total_ayahs": 165,
+      "mushaf_page": 129,
+      "printed_tafsir_page_start": 366,
+      "pdf_page_start": 368,
+      "pdf_page_end": 431,
+      "total_pdf_pages": 64
+    },
+    "7": {
+      "surah_id": 7,
+      "name_bn": "আল-আরাফ",
+      "name_en": "Al-A'raf",
+      "name_ar": "الأعراف",
+      "total_ayahs": 206,
+      "mushaf_page": 152,
+      "printed_tafsir_page_start": 429,
+      "pdf_page_start": 431,
+      "pdf_page_end": 516,
+      "total_pdf_pages": 86
+    },
+    "8": {
+      "surah_id": 8,
+      "name_bn": "আল-আনফাল",
+      "name_en": "Al-Anfal",
+      "name_ar": "الأنفال",
+      "total_ayahs": 75,
+      "mushaf_page": 178,
+      "printed_tafsir_page_start": 514,
+      "pdf_page_start": 516,
+      "pdf_page_end": 554,
+      "total_pdf_pages": 39
+    },
+    "9": {
+      "surah_id": 9,
+      "name_bn": "আত-তাওবাহ",
+      "name_en": "At-Tawbah",
+      "name_ar": "التوبة",
+      "total_ayahs": 129,
+      "mushaf_page": 188,
+      "printed_tafsir_page_start": 552,
+      "pdf_page_start": 554,
+      "pdf_page_end": 601,
+      "total_pdf_pages": 48
+    },
+    "10": {
+      "surah_id": 10,
+      "name_bn": "ইউনুস",
+      "name_en": "Yunus",
+      "name_ar": "يونس",
+      "total_ayahs": 109,
+      "mushaf_page": 209,
+      "printed_tafsir_page_start": 599,
+      "pdf_page_start": 601,
+      "pdf_page_end": 621,
+      "total_pdf_pages": 21
+    },
+    "11": {
+      "surah_id": 11,
+      "name_bn": "হুদ",
+      "name_en": "Hud",
+      "name_ar": "هود",
+      "total_ayahs": 123,
+      "mushaf_page": 222,
+      "printed_tafsir_page_start": 619,
+      "pdf_page_start": 621,
+      "pdf_page_end": 652,
+      "total_pdf_pages": 32
+    },
+    "12": {
+      "surah_id": 12,
+      "name_bn": "ইউসুফ",
+      "name_en": "Yusuf",
+      "name_ar": "يوسف",
+      "total_ayahs": 111,
+      "mushaf_page": 236,
+      "printed_tafsir_page_start": 650,
+      "pdf_page_start": 652,
+      "pdf_page_end": 698,
+      "total_pdf_pages": 47
+    },
+    "13": {
+      "surah_id": 13,
+      "name_bn": "আর-রাদ",
+      "name_en": "Ar-Ra'd",
+      "name_ar": "الرعد",
+      "total_ayahs": 43,
+      "mushaf_page": 250,
+      "printed_tafsir_page_start": 696,
+      "pdf_page_start": 698,
+      "pdf_page_end": 712,
+      "total_pdf_pages": 15
+    },
+    "14": {
+      "surah_id": 14,
+      "name_bn": "ইবরাহীম",
+      "name_en": "Ibrahim",
+      "name_ar": "ابراهيم",
+      "total_ayahs": 52,
+      "mushaf_page": 256,
+      "printed_tafsir_page_start": 710,
+      "pdf_page_start": 712,
+      "pdf_page_end": 722,
+      "total_pdf_pages": 11
+    },
+    "15": {
+      "surah_id": 15,
+      "name_bn": "আল-হিজর",
+      "name_en": "Al-Hijr",
+      "name_ar": "الحجر",
+      "total_ayahs": 99,
+      "mushaf_page": 262,
+      "printed_tafsir_page_start": 720,
+      "pdf_page_start": 722,
+      "pdf_page_end": 735,
+      "total_pdf_pages": 14
+    },
+    "16": {
+      "surah_id": 16,
+      "name_bn": "আন-নাহল",
+      "name_en": "An-Nahl",
+      "name_ar": "النحل",
+      "total_ayahs": 128,
+      "mushaf_page": 268,
+      "printed_tafsir_page_start": 733,
+      "pdf_page_start": 735,
+      "pdf_page_end": 765,
+      "total_pdf_pages": 31
+    },
+    "17": {
+      "surah_id": 17,
+      "name_bn": "বনী ইসরাঈল",
+      "name_en": "Al-Isra",
+      "name_ar": "الإسراء",
+      "total_ayahs": 111,
+      "mushaf_page": 283,
+      "printed_tafsir_page_start": 763,
+      "pdf_page_start": 765,
+      "pdf_page_end": 798,
+      "total_pdf_pages": 34
+    },
+    "18": {
+      "surah_id": 18,
+      "name_bn": "আল-কাহফ",
+      "name_en": "Al-Kahf",
+      "name_ar": "الكهف",
+      "total_ayahs": 110,
+      "mushaf_page": 294,
+      "printed_tafsir_page_start": 796,
+      "pdf_page_start": 798,
+      "pdf_page_end": 831,
+      "total_pdf_pages": 34
+    },
+    "19": {
+      "surah_id": 19,
+      "name_bn": "মারিয়াম",
+      "name_en": "Maryam",
+      "name_ar": "مريم",
+      "total_ayahs": 98,
+      "mushaf_page": 306,
+      "printed_tafsir_page_start": 829,
+      "pdf_page_start": 831,
+      "pdf_page_end": 845,
+      "total_pdf_pages": 15
+    },
+    "20": {
+      "surah_id": 20,
+      "name_bn": "ত্বা-হা",
+      "name_en": "Taha",
+      "name_ar": "طه",
+      "total_ayahs": 135,
+      "mushaf_page": 313,
+      "printed_tafsir_page_start": 843,
+      "pdf_page_start": 845,
+      "pdf_page_end": 871,
+      "total_pdf_pages": 27
+    },
+    "21": {
+      "surah_id": 21,
+      "name_bn": "আল-আম্বিয়া",
+      "name_en": "Al-Anbya",
+      "name_ar": "الأنبياء",
+      "total_ayahs": 112,
+      "mushaf_page": 323,
+      "printed_tafsir_page_start": 869,
+      "pdf_page_start": 871,
+      "pdf_page_end": 893,
+      "total_pdf_pages": 23
+    },
+    "22": {
+      "surah_id": 22,
+      "name_bn": "আল-হাজ্জ",
+      "name_en": "Al-Hajj",
+      "name_ar": "الحج",
+      "total_ayahs": 78,
+      "mushaf_page": 332,
+      "printed_tafsir_page_start": 891,
+      "pdf_page_start": 893,
+      "pdf_page_end": 913,
+      "total_pdf_pages": 21
+    },
+    "23": {
+      "surah_id": 23,
+      "name_bn": "আল-মুমিনূন",
+      "name_en": "Al-Mu'minun",
+      "name_ar": "المؤمنون",
+      "total_ayahs": 118,
+      "mushaf_page": 343,
+      "printed_tafsir_page_start": 911,
+      "pdf_page_start": 913,
+      "pdf_page_end": 926,
+      "total_pdf_pages": 14
+    },
+    "24": {
+      "surah_id": 24,
+      "name_bn": "আন-নূর",
+      "name_en": "An-Nur",
+      "name_ar": "النور",
+      "total_ayahs": 64,
+      "mushaf_page": 351,
+      "printed_tafsir_page_start": 924,
+      "pdf_page_start": 926,
+      "pdf_page_end": 956,
+      "total_pdf_pages": 31
+    },
+    "25": {
+      "surah_id": 25,
+      "name_bn": "আল-ফুরকান",
+      "name_en": "Al-Furqan",
+      "name_ar": "الفرقان",
+      "total_ayahs": 77,
+      "mushaf_page": 360,
+      "printed_tafsir_page_start": 954,
+      "pdf_page_start": 956,
+      "pdf_page_end": 973,
+      "total_pdf_pages": 18
+    },
+    "26": {
+      "surah_id": 26,
+      "name_bn": "আশ-শুআরা",
+      "name_en": "Ash-Shu'ara",
+      "name_ar": "الشعراء",
+      "total_ayahs": 227,
+      "mushaf_page": 367,
+      "printed_tafsir_page_start": 971,
+      "pdf_page_start": 973,
+      "pdf_page_end": 988,
+      "total_pdf_pages": 16
+    },
+    "27": {
+      "surah_id": 27,
+      "name_bn": "আন-নামল",
+      "name_en": "An-Naml",
+      "name_ar": "النمل",
+      "total_ayahs": 93,
+      "mushaf_page": 377,
+      "printed_tafsir_page_start": 986,
+      "pdf_page_start": 988,
+      "pdf_page_end": 1007,
+      "total_pdf_pages": 20
+    },
+    "28": {
+      "surah_id": 28,
+      "name_bn": "আল-কাসাস",
+      "name_en": "Al-Qasas",
+      "name_ar": "القصص",
+      "total_ayahs": 88,
+      "mushaf_page": 386,
+      "printed_tafsir_page_start": 1005,
+      "pdf_page_start": 1007,
+      "pdf_page_end": 1025,
+      "total_pdf_pages": 19
+    },
+    "29": {
+      "surah_id": 29,
+      "name_bn": "আল-আনকাবূত",
+      "name_en": "Al-'Ankabut",
+      "name_ar": "العنكبوت",
+      "total_ayahs": 69,
+      "mushaf_page": 397,
+      "printed_tafsir_page_start": 1023,
+      "pdf_page_start": 1025,
+      "pdf_page_end": 1037,
+      "total_pdf_pages": 13
+    },
+    "30": {
+      "surah_id": 30,
+      "name_bn": "আর-রূম",
+      "name_en": "Ar-Rum",
+      "name_ar": "الروم",
+      "total_ayahs": 60,
+      "mushaf_page": 405,
+      "printed_tafsir_page_start": 1035,
+      "pdf_page_start": 1037,
+      "pdf_page_end": 1053,
+      "total_pdf_pages": 17
+    },
+    "31": {
+      "surah_id": 31,
+      "name_bn": "লুকমান",
+      "name_en": "Luqman",
+      "name_ar": "لقمان",
+      "total_ayahs": 34,
+      "mushaf_page": 412,
+      "printed_tafsir_page_start": 1051,
+      "pdf_page_start": 1053,
+      "pdf_page_end": 1064,
+      "total_pdf_pages": 12
+    },
+    "32": {
+      "surah_id": 32,
+      "name_bn": "আস-সাজদাহ",
+      "name_en": "As-Sajdah",
+      "name_ar": "السجدة",
+      "total_ayahs": 30,
+      "mushaf_page": 416,
+      "printed_tafsir_page_start": 1062,
+      "pdf_page_start": 1064,
+      "pdf_page_end": 1070,
+      "total_pdf_pages": 7
+    },
+    "33": {
+      "surah_id": 33,
+      "name_bn": "আল-আহযাব",
+      "name_en": "Al-Ahzab",
+      "name_ar": "الأحزاب",
+      "total_ayahs": 73,
+      "mushaf_page": 419,
+      "printed_tafsir_page_start": 1068,
+      "pdf_page_start": 1070,
+      "pdf_page_end": 1104,
+      "total_pdf_pages": 35
+    },
+    "34": {
+      "surah_id": 34,
+      "name_bn": "সাবা",
+      "name_en": "Saba",
+      "name_ar": "سبإ",
+      "total_ayahs": 54,
+      "mushaf_page": 429,
+      "printed_tafsir_page_start": 1102,
+      "pdf_page_start": 1104,
+      "pdf_page_end": 1118,
+      "total_pdf_pages": 15
+    },
+    "35": {
+      "surah_id": 35,
+      "name_bn": "ফাতির",
+      "name_en": "Fatir",
+      "name_ar": "فاطر",
+      "total_ayahs": 45,
+      "mushaf_page": 435,
+      "printed_tafsir_page_start": 1116,
+      "pdf_page_start": 1118,
+      "pdf_page_end": 1128,
+      "total_pdf_pages": 11
+    },
+    "36": {
+      "surah_id": 36,
+      "name_bn": "ইয়াসীন",
+      "name_en": "Ya-Sin",
+      "name_ar": "يس",
+      "total_ayahs": 83,
+      "mushaf_page": 441,
+      "printed_tafsir_page_start": 1126,
+      "pdf_page_start": 1128,
+      "pdf_page_end": 1140,
+      "total_pdf_pages": 13
+    },
+    "37": {
+      "surah_id": 37,
+      "name_bn": "আস-সাফফাত",
+      "name_en": "As-Saffat",
+      "name_ar": "الصافات",
+      "total_ayahs": 182,
+      "mushaf_page": 446,
+      "printed_tafsir_page_start": 1138,
+      "pdf_page_start": 1140,
+      "pdf_page_end": 1160,
+      "total_pdf_pages": 21
+    },
+    "38": {
+      "surah_id": 38,
+      "name_bn": "সোয়াদ",
+      "name_en": "Sad",
+      "name_ar": "ص",
+      "total_ayahs": 88,
+      "mushaf_page": 453,
+      "printed_tafsir_page_start": 1158,
+      "pdf_page_start": 1160,
+      "pdf_page_end": 1174,
+      "total_pdf_pages": 15
+    },
+    "39": {
+      "surah_id": 39,
+      "name_bn": "আয-যুমার",
+      "name_en": "Az-Zumar",
+      "name_ar": "الزمر",
+      "total_ayahs": 75,
+      "mushaf_page": 459,
+      "printed_tafsir_page_start": 1172,
+      "pdf_page_start": 1174,
+      "pdf_page_end": 1186,
+      "total_pdf_pages": 13
+    },
+    "40": {
+      "surah_id": 40,
+      "name_bn": "গাফির",
+      "name_en": "Ghafir",
+      "name_ar": "غافر",
+      "total_ayahs": 85,
+      "mushaf_page": 468,
+      "printed_tafsir_page_start": 1184,
+      "pdf_page_start": 1186,
+      "pdf_page_end": 1199,
+      "total_pdf_pages": 14
+    },
+    "41": {
+      "surah_id": 41,
+      "name_bn": "ফুসসিলাত",
+      "name_en": "Fussilat",
+      "name_ar": "فصلت",
+      "total_ayahs": 54,
+      "mushaf_page": 478,
+      "printed_tafsir_page_start": 1197,
+      "pdf_page_start": 1199,
+      "pdf_page_end": 1212,
+      "total_pdf_pages": 14
+    },
+    "42": {
+      "surah_id": 42,
+      "name_bn": "আশ-শূরা",
+      "name_en": "Ash-Shuraa",
+      "name_ar": "الشورى",
+      "total_ayahs": 53,
+      "mushaf_page": 484,
+      "printed_tafsir_page_start": 1210,
+      "pdf_page_start": 1212,
+      "pdf_page_end": 1225,
+      "total_pdf_pages": 14
+    },
+    "43": {
+      "surah_id": 43,
+      "name_bn": "আয-যুখরুফ",
+      "name_en": "Az-Zukhruf",
+      "name_ar": "الزخرف",
+      "total_ayahs": 89,
+      "mushaf_page": 490,
+      "printed_tafsir_page_start": 1223,
+      "pdf_page_start": 1225,
+      "pdf_page_end": 1236,
+      "total_pdf_pages": 12
+    },
+    "44": {
+      "surah_id": 44,
+      "name_bn": "আদ-দুখান",
+      "name_en": "Ad-Dukhan",
+      "name_ar": "الدخان",
+      "total_ayahs": 59,
+      "mushaf_page": 496,
+      "printed_tafsir_page_start": 1234,
+      "pdf_page_start": 1236,
+      "pdf_page_end": 1242,
+      "total_pdf_pages": 7
+    },
+    "45": {
+      "surah_id": 45,
+      "name_bn": "আল-জাসিয়াহ",
+      "name_en": "Al-Jathiyah",
+      "name_ar": "الجاثية",
+      "total_ayahs": 37,
+      "mushaf_page": 499,
+      "printed_tafsir_page_start": 1240,
+      "pdf_page_start": 1242,
+      "pdf_page_end": 1248,
+      "total_pdf_pages": 7
+    },
+    "46": {
+      "surah_id": 46,
+      "name_bn": "আল-আহকাফ",
+      "name_en": "Al-Ahqaf",
+      "name_ar": "الأحقاف",
+      "total_ayahs": 35,
+      "mushaf_page": 503,
+      "printed_tafsir_page_start": 1246,
+      "pdf_page_start": 1248,
+      "pdf_page_end": 1255,
+      "total_pdf_pages": 8
+    },
+    "47": {
+      "surah_id": 47,
+      "name_bn": "মুহাম্মদ",
+      "name_en": "Muhammad",
+      "name_ar": "محمد",
+      "total_ayahs": 38,
+      "mushaf_page": 507,
+      "printed_tafsir_page_start": 1253,
+      "pdf_page_start": 1255,
+      "pdf_page_end": 1266,
+      "total_pdf_pages": 12
+    },
+    "48": {
+      "surah_id": 48,
+      "name_bn": "আল-ফাতহ",
+      "name_en": "Al-Fath",
+      "name_ar": "الفتح",
+      "total_ayahs": 29,
+      "mushaf_page": 512,
+      "printed_tafsir_page_start": 1264,
+      "pdf_page_start": 1266,
+      "pdf_page_end": 1275,
+      "total_pdf_pages": 10
+    },
+    "49": {
+      "surah_id": 49,
+      "name_bn": "আল-হুজুরাত",
+      "name_en": "Al-Hujurat",
+      "name_ar": "الحجرات",
+      "total_ayahs": 18,
+      "mushaf_page": 516,
+      "printed_tafsir_page_start": 1273,
+      "pdf_page_start": 1275,
+      "pdf_page_end": 1289,
+      "total_pdf_pages": 15
+    },
+    "50": {
+      "surah_id": 50,
+      "name_bn": "ক্বাফ",
+      "name_en": "Qaf",
+      "name_ar": "ق",
+      "total_ayahs": 45,
+      "mushaf_page": 519,
+      "printed_tafsir_page_start": 1287,
+      "pdf_page_start": 1289,
+      "pdf_page_end": 1294,
+      "total_pdf_pages": 6
+    },
+    "51": {
+      "surah_id": 51,
+      "name_bn": "আয-যারিয়াত",
+      "name_en": "Adh-Dhariyat",
+      "name_ar": "الذاريات",
+      "total_ayahs": 60,
+      "mushaf_page": 521,
+      "printed_tafsir_page_start": 1292,
+      "pdf_page_start": 1294,
+      "pdf_page_end": 1300,
+      "total_pdf_pages": 7
+    },
+    "52": {
+      "surah_id": 52,
+      "name_bn": "আত-তূর",
+      "name_en": "At-Tur",
+      "name_ar": "الطور",
+      "total_ayahs": 49,
+      "mushaf_page": 524,
+      "printed_tafsir_page_start": 1298,
+      "pdf_page_start": 1300,
+      "pdf_page_end": 1304,
+      "total_pdf_pages": 5
+    },
+    "53": {
+      "surah_id": 53,
+      "name_bn": "আন-নাজম",
+      "name_en": "An-Najm",
+      "name_ar": "النجم",
+      "total_ayahs": 62,
+      "mushaf_page": 527,
+      "printed_tafsir_page_start": 1302,
+      "pdf_page_start": 1304,
+      "pdf_page_end": 1312,
+      "total_pdf_pages": 9
+    },
+    "54": {
+      "surah_id": 54,
+      "name_bn": "আল-কামার",
+      "name_en": "Al-Qamar",
+      "name_ar": "القمر",
+      "total_ayahs": 55,
+      "mushaf_page": 529,
+      "printed_tafsir_page_start": 1310,
+      "pdf_page_start": 1312,
+      "pdf_page_end": 1317,
+      "total_pdf_pages": 6
+    },
+    "55": {
+      "surah_id": 55,
+      "name_bn": "আর-রাহমান",
+      "name_en": "Ar-Rahman",
+      "name_ar": "الرحمن",
+      "total_ayahs": 78,
+      "mushaf_page": 532,
+      "printed_tafsir_page_start": 1315,
+      "pdf_page_start": 1317,
+      "pdf_page_end": 1325,
+      "total_pdf_pages": 9
+    },
+    "56": {
+      "surah_id": 56,
+      "name_bn": "আল-ওয়াকিয়াহ",
+      "name_en": "Al-Waqi'ah",
+      "name_ar": "الواقعة",
+      "total_ayahs": 96,
+      "mushaf_page": 535,
+      "printed_tafsir_page_start": 1323,
+      "pdf_page_start": 1325,
+      "pdf_page_end": 1332,
+      "total_pdf_pages": 8
+    },
+    "57": {
+      "surah_id": 57,
+      "name_bn": "আল-হাদীদ",
+      "name_en": "Al-Hadid",
+      "name_ar": "الحديد",
+      "total_ayahs": 29,
+      "mushaf_page": 538,
+      "printed_tafsir_page_start": 1330,
+      "pdf_page_start": 1332,
+      "pdf_page_end": 1345,
+      "total_pdf_pages": 14
+    },
+    "58": {
+      "surah_id": 58,
+      "name_bn": "আল-মুজাদালাহ",
+      "name_en": "Al-Mujadila",
+      "name_ar": "المجادلة",
+      "total_ayahs": 22,
+      "mushaf_page": 543,
+      "printed_tafsir_page_start": 1343,
+      "pdf_page_start": 1345,
+      "pdf_page_end": 1350,
+      "total_pdf_pages": 6
+    },
+    "59": {
+      "surah_id": 59,
+      "name_bn": "আল-হাশর",
+      "name_en": "Al-Hashr",
+      "name_ar": "الحشر",
+      "total_ayahs": 24,
+      "mushaf_page": 546,
+      "printed_tafsir_page_start": 1348,
+      "pdf_page_start": 1350,
+      "pdf_page_end": 1360,
+      "total_pdf_pages": 11
+    },
+    "60": {
+      "surah_id": 60,
+      "name_bn": "আল-মুমতাহিনাহ",
+      "name_en": "Al-Mumtahanah",
+      "name_ar": "الممتحنة",
+      "total_ayahs": 13,
+      "mushaf_page": 550,
+      "printed_tafsir_page_start": 1358,
+      "pdf_page_start": 1360,
+      "pdf_page_end": 1366,
+      "total_pdf_pages": 7
+    },
+    "61": {
+      "surah_id": 61,
+      "name_bn": "আস-সফ",
+      "name_en": "As-Saf",
+      "name_ar": "الصف",
+      "total_ayahs": 14,
+      "mushaf_page": 552,
+      "printed_tafsir_page_start": 1364,
+      "pdf_page_start": 1366,
+      "pdf_page_end": 1370,
+      "total_pdf_pages": 5
+    },
+    "62": {
+      "surah_id": 62,
+      "name_bn": "আল-জুমুআহ",
+      "name_en": "Al-Jumu'ah",
+      "name_ar": "الجمعة",
+      "total_ayahs": 11,
+      "mushaf_page": 554,
+      "printed_tafsir_page_start": 1368,
+      "pdf_page_start": 1370,
+      "pdf_page_end": 1372,
+      "total_pdf_pages": 3
+    },
+    "63": {
+      "surah_id": 63,
+      "name_bn": "আল-মুনাফিকূন",
+      "name_en": "Al-Munafiqun",
+      "name_ar": "المنافقون",
+      "total_ayahs": 11,
+      "mushaf_page": 555,
+      "printed_tafsir_page_start": 1370,
+      "pdf_page_start": 1372,
+      "pdf_page_end": 1378,
+      "total_pdf_pages": 7
+    },
+    "64": {
+      "surah_id": 64,
+      "name_bn": "আত-তাগাবুন",
+      "name_en": "At-Taghabun",
+      "name_ar": "التغابن",
+      "total_ayahs": 18,
+      "mushaf_page": 557,
+      "printed_tafsir_page_start": 1376,
+      "pdf_page_start": 1378,
+      "pdf_page_end": 1381,
+      "total_pdf_pages": 4
+    },
+    "65": {
+      "surah_id": 65,
+      "name_bn": "আত-ত্বালাক",
+      "name_en": "At-Talaq",
+      "name_ar": "الطلاق",
+      "total_ayahs": 12,
+      "mushaf_page": 559,
+      "printed_tafsir_page_start": 1379,
+      "pdf_page_start": 1381,
+      "pdf_page_end": 1385,
+      "total_pdf_pages": 5
+    },
+    "66": {
+      "surah_id": 66,
+      "name_bn": "আত-তাহরীম",
+      "name_en": "At-Tahrim",
+      "name_ar": "التحريم",
+      "total_ayahs": 12,
+      "mushaf_page": 561,
+      "printed_tafsir_page_start": 1383,
+      "pdf_page_start": 1385,
+      "pdf_page_end": 1392,
+      "total_pdf_pages": 8
+    },
+    "67": {
+      "surah_id": 67,
+      "name_bn": "আল-মুলক",
+      "name_en": "Al-Mulk",
+      "name_ar": "الملك",
+      "total_ayahs": 30,
+      "mushaf_page": 563,
+      "printed_tafsir_page_start": 1390,
+      "pdf_page_start": 1392,
+      "pdf_page_end": 1396,
+      "total_pdf_pages": 5
+    },
+    "68": {
+      "surah_id": 68,
+      "name_bn": "আল-কলম",
+      "name_en": "Al-Qalam",
+      "name_ar": "القلم",
+      "total_ayahs": 52,
+      "mushaf_page": 565,
+      "printed_tafsir_page_start": 1394,
+      "pdf_page_start": 1396,
+      "pdf_page_end": 1401,
+      "total_pdf_pages": 6
+    },
+    "69": {
+      "surah_id": 69,
+      "name_bn": "আল-হাক্কাহ",
+      "name_en": "Al-Haqqah",
+      "name_ar": "الحاقة",
+      "total_ayahs": 52,
+      "mushaf_page": 568,
+      "printed_tafsir_page_start": 1399,
+      "pdf_page_start": 1401,
+      "pdf_page_end": 1403,
+      "total_pdf_pages": 3
+    },
+    "70": {
+      "surah_id": 70,
+      "name_bn": "আল-মাআরিজ",
+      "name_en": "Al-Ma'arij",
+      "name_ar": "المعارج",
+      "total_ayahs": 44,
+      "mushaf_page": 570,
+      "printed_tafsir_page_start": 1401,
+      "pdf_page_start": 1403,
+      "pdf_page_end": 1407,
+      "total_pdf_pages": 5
+    },
+    "71": {
+      "surah_id": 71,
+      "name_bn": "নূহ",
+      "name_en": "Nuh",
+      "name_ar": "نوح",
+      "total_ayahs": 28,
+      "mushaf_page": 572,
+      "printed_tafsir_page_start": 1405,
+      "pdf_page_start": 1407,
+      "pdf_page_end": 1410,
+      "total_pdf_pages": 4
+    },
+    "72": {
+      "surah_id": 72,
+      "name_bn": "আল-জিন",
+      "name_en": "Al-Jinn",
+      "name_ar": "الجن",
+      "total_ayahs": 28,
+      "mushaf_page": 574,
+      "printed_tafsir_page_start": 1408,
+      "pdf_page_start": 1410,
+      "pdf_page_end": 1415,
+      "total_pdf_pages": 6
+    },
+    "73": {
+      "surah_id": 73,
+      "name_bn": "আল-মুযযাম্মিল",
+      "name_en": "Al-Muzzammil",
+      "name_ar": "المزمل",
+      "total_ayahs": 20,
+      "mushaf_page": 577,
+      "printed_tafsir_page_start": 1413,
+      "pdf_page_start": 1415,
+      "pdf_page_end": 1421,
+      "total_pdf_pages": 7
+    },
+    "74": {
+      "surah_id": 74,
+      "name_bn": "আল-মুদ্দাসসির",
+      "name_en": "Al-Muddaththir",
+      "name_ar": "المدثر",
+      "total_ayahs": 56,
+      "mushaf_page": 579,
+      "printed_tafsir_page_start": 1419,
+      "pdf_page_start": 1421,
+      "pdf_page_end": 1424,
+      "total_pdf_pages": 4
+    },
+    "75": {
+      "surah_id": 75,
+      "name_bn": "আল-কিয়ামাহ",
+      "name_en": "Al-Qiyamah",
+      "name_ar": "القيامة",
+      "total_ayahs": 40,
+      "mushaf_page": 581,
+      "printed_tafsir_page_start": 1422,
+      "pdf_page_start": 1424,
+      "pdf_page_end": 1428,
+      "total_pdf_pages": 5
+    },
+    "76": {
+      "surah_id": 76,
+      "name_bn": "আল-ইনসান",
+      "name_en": "Al-Insan",
+      "name_ar": "الانسان",
+      "total_ayahs": 31,
+      "mushaf_page": 583,
+      "printed_tafsir_page_start": 1426,
+      "pdf_page_start": 1428,
+      "pdf_page_end": 1431,
+      "total_pdf_pages": 4
+    },
+    "77": {
+      "surah_id": 77,
+      "name_bn": "আল-মুরসালাত",
+      "name_en": "Al-Mursalat",
+      "name_ar": "المرسلات",
+      "total_ayahs": 50,
+      "mushaf_page": 585,
+      "printed_tafsir_page_start": 1429,
+      "pdf_page_start": 1431,
+      "pdf_page_end": 1433,
+      "total_pdf_pages": 3
+    },
+    "78": {
+      "surah_id": 78,
+      "name_bn": "আন-নাবা",
+      "name_en": "An-Naba",
+      "name_ar": "النبإ",
+      "total_ayahs": 40,
+      "mushaf_page": 587,
+      "printed_tafsir_page_start": 1431,
+      "pdf_page_start": 1433,
+      "pdf_page_end": 1435,
+      "total_pdf_pages": 3
+    },
+    "79": {
+      "surah_id": 79,
+      "name_bn": "আন-নাযিআত",
+      "name_en": "An-Nazi'at",
+      "name_ar": "النازعات",
+      "total_ayahs": 46,
+      "mushaf_page": 588,
+      "printed_tafsir_page_start": 1433,
+      "pdf_page_start": 1435,
+      "pdf_page_end": 1438,
+      "total_pdf_pages": 4
+    },
+    "80": {
+      "surah_id": 80,
+      "name_bn": "আবাসা",
+      "name_en": "'Abasa",
+      "name_ar": "عبس",
+      "total_ayahs": 42,
+      "mushaf_page": 590,
+      "printed_tafsir_page_start": 1436,
+      "pdf_page_start": 1438,
+      "pdf_page_end": 1440,
+      "total_pdf_pages": 3
+    },
+    "81": {
+      "surah_id": 81,
+      "name_bn": "আত-তাকবীর",
+      "name_en": "At-Takwir",
+      "name_ar": "التكوير",
+      "total_ayahs": 29,
+      "mushaf_page": 591,
+      "printed_tafsir_page_start": 1438,
+      "pdf_page_start": 1440,
+      "pdf_page_end": 1442,
+      "total_pdf_pages": 3
+    },
+    "82": {
+      "surah_id": 82,
+      "name_bn": "আল-ইনফিতার",
+      "name_en": "Al-Infitar",
+      "name_ar": "الإنفطار",
+      "total_ayahs": 19,
+      "mushaf_page": 592,
+      "printed_tafsir_page_start": 1440,
+      "pdf_page_start": 1442,
+      "pdf_page_end": 1443,
+      "total_pdf_pages": 2
+    },
+    "83": {
+      "surah_id": 83,
+      "name_bn": "আল-মুতাফফিফীন",
+      "name_en": "Al-Mutaffifin",
+      "name_ar": "المطففين",
+      "total_ayahs": 36,
+      "mushaf_page": 593,
+      "printed_tafsir_page_start": 1441,
+      "pdf_page_start": 1443,
+      "pdf_page_end": 1446,
+      "total_pdf_pages": 4
+    },
+    "84": {
+      "surah_id": 84,
+      "name_bn": "আল-ইনশিকাক",
+      "name_en": "Al-Inshiqaq",
+      "name_ar": "الإنشقاق",
+      "total_ayahs": 25,
+      "mushaf_page": 595,
+      "printed_tafsir_page_start": 1444,
+      "pdf_page_start": 1446,
+      "pdf_page_end": 1448,
+      "total_pdf_pages": 3
+    },
+    "85": {
+      "surah_id": 85,
+      "name_bn": "আল-বুরূজ",
+      "name_en": "Al-Buruj",
+      "name_ar": "البروج",
+      "total_ayahs": 22,
+      "mushaf_page": 596,
+      "printed_tafsir_page_start": 1446,
+      "pdf_page_start": 1448,
+      "pdf_page_end": 1449,
+      "total_pdf_pages": 2
+    },
+    "86": {
+      "surah_id": 86,
+      "name_bn": "আত-তারিক",
+      "name_en": "At-Tariq",
+      "name_ar": "الطارق",
+      "total_ayahs": 17,
+      "mushaf_page": 597,
+      "printed_tafsir_page_start": 1447,
+      "pdf_page_start": 1449,
+      "pdf_page_end": 1451,
+      "total_pdf_pages": 3
+    },
+    "87": {
+      "surah_id": 87,
+      "name_bn": "আল-আলা",
+      "name_en": "Al-A'la",
+      "name_ar": "الأعلى",
+      "total_ayahs": 19,
+      "mushaf_page": 598,
+      "printed_tafsir_page_start": 1449,
+      "pdf_page_start": 1451,
+      "pdf_page_end": 1451,
+      "total_pdf_pages": 1
+    },
+    "88": {
+      "surah_id": 88,
+      "name_bn": "আল-গাশিয়াহ",
+      "name_en": "Al-Ghashiyah",
+      "name_ar": "الغاشية",
+      "total_ayahs": 26,
+      "mushaf_page": 598,
+      "printed_tafsir_page_start": 1449,
+      "pdf_page_start": 1451,
+      "pdf_page_end": 1454,
+      "total_pdf_pages": 4
+    },
+    "89": {
+      "surah_id": 89,
+      "name_bn": "আল-ফজর",
+      "name_en": "Al-Fajr",
+      "name_ar": "الفجر",
+      "total_ayahs": 30,
+      "mushaf_page": 599,
+      "printed_tafsir_page_start": 1452,
+      "pdf_page_start": 1454,
+      "pdf_page_end": 1459,
+      "total_pdf_pages": 6
+    },
+    "90": {
+      "surah_id": 90,
+      "name_bn": "আল-বালাদ",
+      "name_en": "Al-Balad",
+      "name_ar": "البلد",
+      "total_ayahs": 20,
+      "mushaf_page": 601,
+      "printed_tafsir_page_start": 1457,
+      "pdf_page_start": 1459,
+      "pdf_page_end": 1459,
+      "total_pdf_pages": 1
+    },
+    "91": {
+      "surah_id": 91,
+      "name_bn": "আশ-শামস",
+      "name_en": "Ash-Shams",
+      "name_ar": "الشمس",
+      "total_ayahs": 15,
+      "mushaf_page": 601,
+      "printed_tafsir_page_start": 1457,
+      "pdf_page_start": 1459,
+      "pdf_page_end": 1461,
+      "total_pdf_pages": 3
+    },
+    "92": {
+      "surah_id": 92,
+      "name_bn": "আল-লাইল",
+      "name_en": "Al-Layl",
+      "name_ar": "الليل",
+      "total_ayahs": 21,
+      "mushaf_page": 602,
+      "printed_tafsir_page_start": 1459,
+      "pdf_page_start": 1461,
+      "pdf_page_end": 1463,
+      "total_pdf_pages": 3
+    },
+    "93": {
+      "surah_id": 93,
+      "name_bn": "আদ-দুহা",
+      "name_en": "Ad-Duhaa",
+      "name_ar": "الضحى",
+      "total_ayahs": 11,
+      "mushaf_page": 603,
+      "printed_tafsir_page_start": 1461,
+      "pdf_page_start": 1463,
+      "pdf_page_end": 1463,
+      "total_pdf_pages": 1
+    },
+    "94": {
+      "surah_id": 94,
+      "name_bn": "আল-ইনশিরাহ",
+      "name_en": "Ash-Sharh",
+      "name_ar": "الشرح",
+      "total_ayahs": 8,
+      "mushaf_page": 603,
+      "printed_tafsir_page_start": 1461,
+      "pdf_page_start": 1463,
+      "pdf_page_end": 1466,
+      "total_pdf_pages": 4
+    },
+    "95": {
+      "surah_id": 95,
+      "name_bn": "আত-তীন",
+      "name_en": "At-Tin",
+      "name_ar": "التين",
+      "total_ayahs": 8,
+      "mushaf_page": 604,
+      "printed_tafsir_page_start": 1464,
+      "pdf_page_start": 1466,
+      "pdf_page_end": 1466,
+      "total_pdf_pages": 1
+    },
+    "96": {
+      "surah_id": 96,
+      "name_bn": "আল-আলাক",
+      "name_en": "Al-'Alaq",
+      "name_ar": "العلق",
+      "total_ayahs": 19,
+      "mushaf_page": 604,
+      "printed_tafsir_page_start": 1464,
+      "pdf_page_start": 1466,
+      "pdf_page_end": 1469,
+      "total_pdf_pages": 4
+    },
+    "97": {
+      "surah_id": 97,
+      "name_bn": "আল-কদর",
+      "name_en": "Al-Qadr",
+      "name_ar": "القدر",
+      "total_ayahs": 5,
+      "mushaf_page": 605,
+      "printed_tafsir_page_start": 1467,
+      "pdf_page_start": 1469,
+      "pdf_page_end": 1469,
+      "total_pdf_pages": 1
+    },
+    "98": {
+      "surah_id": 98,
+      "name_bn": "আল-বাইয়িনাহ",
+      "name_en": "Al-Bayyinah",
+      "name_ar": "البينة",
+      "total_ayahs": 8,
+      "mushaf_page": 605,
+      "printed_tafsir_page_start": 1467,
+      "pdf_page_start": 1469,
+      "pdf_page_end": 1472,
+      "total_pdf_pages": 4
+    },
+    "99": {
+      "surah_id": 99,
+      "name_bn": "আল-যিলযাল",
+      "name_en": "Az-Zalzalah",
+      "name_ar": "الزلزلة",
+      "total_ayahs": 8,
+      "mushaf_page": 606,
+      "printed_tafsir_page_start": 1470,
+      "pdf_page_start": 1472,
+      "pdf_page_end": 1472,
+      "total_pdf_pages": 1
+    },
+    "100": {
+      "surah_id": 100,
+      "name_bn": "আল-আদিয়াত",
+      "name_en": "Al-'Adiyat",
+      "name_ar": "العاديات",
+      "total_ayahs": 11,
+      "mushaf_page": 606,
+      "printed_tafsir_page_start": 1470,
+      "pdf_page_start": 1472,
+      "pdf_page_end": 1474,
+      "total_pdf_pages": 3
+    },
+    "101": {
+      "surah_id": 101,
+      "name_bn": "আল-কারিআহ",
+      "name_en": "Al-Qari'ah",
+      "name_ar": "القارعة",
+      "total_ayahs": 11,
+      "mushaf_page": 607,
+      "printed_tafsir_page_start": 1472,
+      "pdf_page_start": 1474,
+      "pdf_page_end": 1474,
+      "total_pdf_pages": 1
+    },
+    "102": {
+      "surah_id": 102,
+      "name_bn": "আত-তাকাসুর",
+      "name_en": "At-Takathur",
+      "name_ar": "التكاثر",
+      "total_ayahs": 8,
+      "mushaf_page": 607,
+      "printed_tafsir_page_start": 1472,
+      "pdf_page_start": 1474,
+      "pdf_page_end": 1476,
+      "total_pdf_pages": 3
+    },
+    "103": {
+      "surah_id": 103,
+      "name_bn": "আল-আসর",
+      "name_en": "Al-'Asr",
+      "name_ar": "العصر",
+      "total_ayahs": 3,
+      "mushaf_page": 608,
+      "printed_tafsir_page_start": 1474,
+      "pdf_page_start": 1476,
+      "pdf_page_end": 1476,
+      "total_pdf_pages": 1
+    },
+    "104": {
+      "surah_id": 104,
+      "name_bn": "আল-হুমাযাহ",
+      "name_en": "Al-Humazah",
+      "name_ar": "الهمزة",
+      "total_ayahs": 9,
+      "mushaf_page": 608,
+      "printed_tafsir_page_start": 1474,
+      "pdf_page_start": 1476,
+      "pdf_page_end": 1476,
+      "total_pdf_pages": 1
+    },
+    "105": {
+      "surah_id": 105,
+      "name_bn": "আল-ফীল",
+      "name_en": "Al-Fil",
+      "name_ar": "الفيل",
+      "total_ayahs": 5,
+      "mushaf_page": 608,
+      "printed_tafsir_page_start": 1474,
+      "pdf_page_start": 1476,
+      "pdf_page_end": 1478,
+      "total_pdf_pages": 3
+    },
+    "106": {
+      "surah_id": 106,
+      "name_bn": "কুরাইশ",
+      "name_en": "Quraysh",
+      "name_ar": "قريش",
+      "total_ayahs": 4,
+      "mushaf_page": 609,
+      "printed_tafsir_page_start": 1476,
+      "pdf_page_start": 1478,
+      "pdf_page_end": 1478,
+      "total_pdf_pages": 1
+    },
+    "107": {
+      "surah_id": 107,
+      "name_bn": "আল-মাউন",
+      "name_en": "Al-Ma'un",
+      "name_ar": "الماعون",
+      "total_ayahs": 7,
+      "mushaf_page": 609,
+      "printed_tafsir_page_start": 1476,
+      "pdf_page_start": 1478,
+      "pdf_page_end": 1478,
+      "total_pdf_pages": 1
+    },
+    "108": {
+      "surah_id": 108,
+      "name_bn": "আল-কাওসার",
+      "name_en": "Al-Kawthar",
+      "name_ar": "الكوثر",
+      "total_ayahs": 3,
+      "mushaf_page": 609,
+      "printed_tafsir_page_start": 1476,
+      "pdf_page_start": 1478,
+      "pdf_page_end": 1478,
+      "total_pdf_pages": 1
+    },
+    "109": {
+      "surah_id": 109,
+      "name_bn": "আল-কাফিরূন",
+      "name_en": "Al-Kafirun",
+      "name_ar": "الكافرون",
+      "total_ayahs": 6,
+      "mushaf_page": 609,
+      "printed_tafsir_page_start": 1476,
+      "pdf_page_start": 1478,
+      "pdf_page_end": 1482,
+      "total_pdf_pages": 5
+    },
+    "110": {
+      "surah_id": 110,
+      "name_bn": "আন-নাসর",
+      "name_en": "An-Nasr",
+      "name_ar": "النصر",
+      "total_ayahs": 3,
+      "mushaf_page": 610,
+      "printed_tafsir_page_start": 1480,
+      "pdf_page_start": 1482,
+      "pdf_page_end": 1482,
+      "total_pdf_pages": 1
+    },
+    "111": {
+      "surah_id": 111,
+      "name_bn": "আল-লাহাব",
+      "name_en": "Al-Masad",
+      "name_ar": "المسد",
+      "total_ayahs": 5,
+      "mushaf_page": 610,
+      "printed_tafsir_page_start": 1480,
+      "pdf_page_start": 1482,
+      "pdf_page_end": 1482,
+      "total_pdf_pages": 1
+    },
+    "112": {
+      "surah_id": 112,
+      "name_bn": "আল-ইখলাস",
+      "name_en": "Al-Ikhlas",
+      "name_ar": "الإخلاص",
+      "total_ayahs": 4,
+      "mushaf_page": 610,
+      "printed_tafsir_page_start": 1480,
+      "pdf_page_start": 1482,
+      "pdf_page_end": 1486,
+      "total_pdf_pages": 5
+    },
+    "113": {
+      "surah_id": 113,
+      "name_bn": "আল-ফালাক",
+      "name_en": "Al-Falaq",
+      "name_ar": "الفلق",
+      "total_ayahs": 5,
+      "mushaf_page": 611,
+      "printed_tafsir_page_start": 1484,
+      "pdf_page_start": 1486,
+      "pdf_page_end": 1486,
+      "total_pdf_pages": 1
+    },
+    "114": {
+      "surah_id": 114,
+      "name_bn": "আন-নাস",
+      "name_en": "An-Nas",
+      "name_ar": "الناس",
+      "total_ayahs": 6,
+      "mushaf_page": 611,
+      "printed_tafsir_page_start": 1484,
+      "pdf_page_start": 1486,
+      "pdf_page_end": 1491,
+      "total_pdf_pages": 6
+    }
+  },
+  "page_to_surah": [
+    {
+      "pdf_page": 0,
+      "surah_id": 0,
+      "surah_name_bn": "ভূমিকা ও সূচীপত্র"
+    },
+    {
+      "pdf_page": 1,
+      "surah_id": 0,
+      "surah_name_bn": "ভূমিকা ও সূচীপত্র"
+    },
+    {
+      "pdf_page": 2,
+      "surah_id": 0,
+      "surah_name_bn": "ভূমিকা ও সূচীপত্র"
+    },
+    {
+      "pdf_page": 3,
+      "surah_id": 1,
+      "surah_name_bn": "আল-ফাতিহা"
+    },
+    {
+      "pdf_page": 4,
+      "surah_id": 1,
+      "surah_name_bn": "আল-ফাতিহা"
+    },
+    {
+      "pdf_page": 5,
+      "surah_id": 1,
+      "surah_name_bn": "আল-ফাতিহা"
+    },
+    {
+      "pdf_page": 6,
+      "surah_id": 1,
+      "surah_name_bn": "আল-ফাতিহা"
+    },
+    {
+      "pdf_page": 7,
+      "surah_id": 1,
+      "surah_name_bn": "আল-ফাতিহা"
+    },
+    {
+      "pdf_page": 8,
+      "surah_id": 1,
+      "surah_name_bn": "আল-ফাতিহা"
+    },
+    {
+      "pdf_page": 9,
+      "surah_id": 1,
+      "surah_name_bn": "আল-ফাতিহা"
+    },
+    {
+      "pdf_page": 10,
+      "surah_id": 1,
+      "surah_name_bn": "আল-ফাতিহা"
+    },
+    {
+      "pdf_page": 11,
+      "surah_id": 1,
+      "surah_name_bn": "আল-ফাতিহা"
+    },
+    {
+      "pdf_page": 12,
+      "surah_id": 1,
+      "surah_name_bn": "আল-ফাতিহা"
+    },
+    {
+      "pdf_page": 13,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 14,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 15,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 16,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 17,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 18,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 19,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 20,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 21,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 22,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 23,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 24,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 25,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 26,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 27,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 28,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 29,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 30,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 31,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 32,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 33,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 34,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 35,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 36,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 37,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 38,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 39,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 40,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 41,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 42,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 43,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 44,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 45,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 46,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 47,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 48,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 49,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 50,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 51,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 52,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 53,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 54,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 55,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 56,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 57,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 58,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 59,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 60,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 61,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 62,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 63,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 64,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 65,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 66,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 67,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 68,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 69,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 70,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 71,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 72,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 73,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 74,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 75,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 76,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 77,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 78,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 79,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 80,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 81,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 82,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 83,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 84,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 85,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 86,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 87,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 88,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 89,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 90,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 91,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 92,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 93,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 94,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 95,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 96,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 97,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 98,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 99,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 100,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 101,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 102,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 103,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 104,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 105,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 106,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 107,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 108,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 109,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 110,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 111,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 112,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 113,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 114,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 115,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 116,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 117,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 118,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 119,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 120,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 121,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 122,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 123,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 124,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 125,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 126,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 127,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 128,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 129,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 130,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 131,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 132,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 133,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 134,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 135,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 136,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 137,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 138,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 139,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 140,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 141,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 142,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 143,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 144,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 145,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 146,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 147,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 148,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 149,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 150,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 151,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 152,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 153,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 154,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 155,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 156,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 157,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 158,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 159,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 160,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 161,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 162,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 163,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 164,
+      "surah_id": 2,
+      "surah_name_bn": "আল-বাকারাহ"
+    },
+    {
+      "pdf_page": 165,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 166,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 167,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 168,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 169,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 170,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 171,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 172,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 173,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 174,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 175,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 176,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 177,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 178,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 179,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 180,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 181,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 182,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 183,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 184,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 185,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 186,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 187,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 188,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 189,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 190,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 191,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 192,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 193,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 194,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 195,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 196,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 197,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 198,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 199,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 200,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 201,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 202,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 203,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 204,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 205,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 206,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 207,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 208,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 209,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 210,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 211,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 212,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 213,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 214,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 215,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 216,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 217,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 218,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 219,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 220,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 221,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 222,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 223,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 224,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 225,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 226,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 227,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 228,
+      "surah_id": 3,
+      "surah_name_bn": "আলে ইমরান"
+    },
+    {
+      "pdf_page": 229,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 230,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 231,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 232,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 233,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 234,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 235,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 236,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 237,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 238,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 239,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 240,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 241,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 242,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 243,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 244,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 245,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 246,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 247,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 248,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 249,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 250,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 251,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 252,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 253,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 254,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 255,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 256,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 257,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 258,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 259,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 260,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 261,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 262,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 263,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 264,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 265,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 266,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 267,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 268,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 269,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 270,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 271,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 272,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 273,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 274,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 275,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 276,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 277,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 278,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 279,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 280,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 281,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 282,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 283,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 284,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 285,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 286,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 287,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 288,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 289,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 290,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 291,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 292,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 293,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 294,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 295,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 296,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 297,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 298,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 299,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 300,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 301,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 302,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 303,
+      "surah_id": 4,
+      "surah_name_bn": "আন-নিসা"
+    },
+    {
+      "pdf_page": 304,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 305,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 306,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 307,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 308,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 309,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 310,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 311,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 312,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 313,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 314,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 315,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 316,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 317,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 318,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 319,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 320,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 321,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 322,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 323,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 324,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 325,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 326,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 327,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 328,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 329,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 330,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 331,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 332,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 333,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 334,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 335,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 336,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 337,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 338,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 339,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 340,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 341,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 342,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 343,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 344,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 345,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 346,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 347,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 348,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 349,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 350,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 351,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 352,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 353,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 354,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 355,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 356,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 357,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 358,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 359,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 360,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 361,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 362,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 363,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 364,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 365,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 366,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 367,
+      "surah_id": 5,
+      "surah_name_bn": "আল-মায়িদাহ"
+    },
+    {
+      "pdf_page": 368,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 369,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 370,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 371,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 372,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 373,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 374,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 375,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 376,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 377,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 378,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 379,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 380,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 381,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 382,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 383,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 384,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 385,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 386,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 387,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 388,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 389,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 390,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 391,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 392,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 393,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 394,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 395,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 396,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 397,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 398,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 399,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 400,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 401,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 402,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 403,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 404,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 405,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 406,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 407,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 408,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 409,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 410,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 411,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 412,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 413,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 414,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 415,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 416,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 417,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 418,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 419,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 420,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 421,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 422,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 423,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 424,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 425,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 426,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 427,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 428,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 429,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 430,
+      "surah_id": 6,
+      "surah_name_bn": "আল-আনআম"
+    },
+    {
+      "pdf_page": 431,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 432,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 433,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 434,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 435,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 436,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 437,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 438,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 439,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 440,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 441,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 442,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 443,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 444,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 445,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 446,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 447,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 448,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 449,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 450,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 451,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 452,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 453,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 454,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 455,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 456,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 457,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 458,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 459,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 460,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 461,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 462,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 463,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 464,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 465,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 466,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 467,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 468,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 469,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 470,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 471,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 472,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 473,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 474,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 475,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 476,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 477,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 478,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 479,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 480,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 481,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 482,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 483,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 484,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 485,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 486,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 487,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 488,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 489,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 490,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 491,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 492,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 493,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 494,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 495,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 496,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 497,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 498,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 499,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 500,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 501,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 502,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 503,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 504,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 505,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 506,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 507,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 508,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 509,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 510,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 511,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 512,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 513,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 514,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 515,
+      "surah_id": 7,
+      "surah_name_bn": "আল-আরাফ"
+    },
+    {
+      "pdf_page": 516,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 517,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 518,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 519,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 520,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 521,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 522,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 523,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 524,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 525,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 526,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 527,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 528,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 529,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 530,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 531,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 532,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 533,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 534,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 535,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 536,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 537,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 538,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 539,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 540,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 541,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 542,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 543,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 544,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 545,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 546,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 547,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 548,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 549,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 550,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 551,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 552,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 553,
+      "surah_id": 8,
+      "surah_name_bn": "আল-আনফাল"
+    },
+    {
+      "pdf_page": 554,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 555,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 556,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 557,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 558,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 559,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 560,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 561,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 562,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 563,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 564,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 565,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 566,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 567,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 568,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 569,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 570,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 571,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 572,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 573,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 574,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 575,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 576,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 577,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 578,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 579,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 580,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 581,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 582,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 583,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 584,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 585,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 586,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 587,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 588,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 589,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 590,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 591,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 592,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 593,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 594,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 595,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 596,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 597,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 598,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 599,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 600,
+      "surah_id": 9,
+      "surah_name_bn": "আত-তাওবাহ"
+    },
+    {
+      "pdf_page": 601,
+      "surah_id": 10,
+      "surah_name_bn": "ইউনুস"
+    },
+    {
+      "pdf_page": 602,
+      "surah_id": 10,
+      "surah_name_bn": "ইউনুস"
+    },
+    {
+      "pdf_page": 603,
+      "surah_id": 10,
+      "surah_name_bn": "ইউনুস"
+    },
+    {
+      "pdf_page": 604,
+      "surah_id": 10,
+      "surah_name_bn": "ইউনুস"
+    },
+    {
+      "pdf_page": 605,
+      "surah_id": 10,
+      "surah_name_bn": "ইউনুস"
+    },
+    {
+      "pdf_page": 606,
+      "surah_id": 10,
+      "surah_name_bn": "ইউনুস"
+    },
+    {
+      "pdf_page": 607,
+      "surah_id": 10,
+      "surah_name_bn": "ইউনুস"
+    },
+    {
+      "pdf_page": 608,
+      "surah_id": 10,
+      "surah_name_bn": "ইউনুস"
+    },
+    {
+      "pdf_page": 609,
+      "surah_id": 10,
+      "surah_name_bn": "ইউনুস"
+    },
+    {
+      "pdf_page": 610,
+      "surah_id": 10,
+      "surah_name_bn": "ইউনুস"
+    },
+    {
+      "pdf_page": 611,
+      "surah_id": 10,
+      "surah_name_bn": "ইউনুস"
+    },
+    {
+      "pdf_page": 612,
+      "surah_id": 10,
+      "surah_name_bn": "ইউনুস"
+    },
+    {
+      "pdf_page": 613,
+      "surah_id": 10,
+      "surah_name_bn": "ইউনুস"
+    },
+    {
+      "pdf_page": 614,
+      "surah_id": 10,
+      "surah_name_bn": "ইউনুস"
+    },
+    {
+      "pdf_page": 615,
+      "surah_id": 10,
+      "surah_name_bn": "ইউনুস"
+    },
+    {
+      "pdf_page": 616,
+      "surah_id": 10,
+      "surah_name_bn": "ইউনুস"
+    },
+    {
+      "pdf_page": 617,
+      "surah_id": 10,
+      "surah_name_bn": "ইউনুস"
+    },
+    {
+      "pdf_page": 618,
+      "surah_id": 10,
+      "surah_name_bn": "ইউনুস"
+    },
+    {
+      "pdf_page": 619,
+      "surah_id": 10,
+      "surah_name_bn": "ইউনুস"
+    },
+    {
+      "pdf_page": 620,
+      "surah_id": 10,
+      "surah_name_bn": "ইউনুস"
+    },
+    {
+      "pdf_page": 621,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 622,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 623,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 624,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 625,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 626,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 627,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 628,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 629,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 630,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 631,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 632,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 633,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 634,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 635,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 636,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 637,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 638,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 639,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 640,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 641,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 642,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 643,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 644,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 645,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 646,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 647,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 648,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 649,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 650,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 651,
+      "surah_id": 11,
+      "surah_name_bn": "হুদ"
+    },
+    {
+      "pdf_page": 652,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 653,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 654,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 655,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 656,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 657,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 658,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 659,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 660,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 661,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 662,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 663,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 664,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 665,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 666,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 667,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 668,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 669,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 670,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 671,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 672,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 673,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 674,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 675,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 676,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 677,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 678,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 679,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 680,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 681,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 682,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 683,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 684,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 685,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 686,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 687,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 688,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 689,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 690,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 691,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 692,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 693,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 694,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 695,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 696,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 697,
+      "surah_id": 12,
+      "surah_name_bn": "ইউসুফ"
+    },
+    {
+      "pdf_page": 698,
+      "surah_id": 13,
+      "surah_name_bn": "আর-রাদ"
+    },
+    {
+      "pdf_page": 699,
+      "surah_id": 13,
+      "surah_name_bn": "আর-রাদ"
+    },
+    {
+      "pdf_page": 700,
+      "surah_id": 13,
+      "surah_name_bn": "আর-রাদ"
+    },
+    {
+      "pdf_page": 701,
+      "surah_id": 13,
+      "surah_name_bn": "আর-রাদ"
+    },
+    {
+      "pdf_page": 702,
+      "surah_id": 13,
+      "surah_name_bn": "আর-রাদ"
+    },
+    {
+      "pdf_page": 703,
+      "surah_id": 13,
+      "surah_name_bn": "আর-রাদ"
+    },
+    {
+      "pdf_page": 704,
+      "surah_id": 13,
+      "surah_name_bn": "আর-রাদ"
+    },
+    {
+      "pdf_page": 705,
+      "surah_id": 13,
+      "surah_name_bn": "আর-রাদ"
+    },
+    {
+      "pdf_page": 706,
+      "surah_id": 13,
+      "surah_name_bn": "আর-রাদ"
+    },
+    {
+      "pdf_page": 707,
+      "surah_id": 13,
+      "surah_name_bn": "আর-রাদ"
+    },
+    {
+      "pdf_page": 708,
+      "surah_id": 13,
+      "surah_name_bn": "আর-রাদ"
+    },
+    {
+      "pdf_page": 709,
+      "surah_id": 13,
+      "surah_name_bn": "আর-রাদ"
+    },
+    {
+      "pdf_page": 710,
+      "surah_id": 13,
+      "surah_name_bn": "আর-রাদ"
+    },
+    {
+      "pdf_page": 711,
+      "surah_id": 13,
+      "surah_name_bn": "আর-রাদ"
+    },
+    {
+      "pdf_page": 712,
+      "surah_id": 14,
+      "surah_name_bn": "ইবরাহীম"
+    },
+    {
+      "pdf_page": 713,
+      "surah_id": 14,
+      "surah_name_bn": "ইবরাহীম"
+    },
+    {
+      "pdf_page": 714,
+      "surah_id": 14,
+      "surah_name_bn": "ইবরাহীম"
+    },
+    {
+      "pdf_page": 715,
+      "surah_id": 14,
+      "surah_name_bn": "ইবরাহীম"
+    },
+    {
+      "pdf_page": 716,
+      "surah_id": 14,
+      "surah_name_bn": "ইবরাহীম"
+    },
+    {
+      "pdf_page": 717,
+      "surah_id": 14,
+      "surah_name_bn": "ইবরাহীম"
+    },
+    {
+      "pdf_page": 718,
+      "surah_id": 14,
+      "surah_name_bn": "ইবরাহীম"
+    },
+    {
+      "pdf_page": 719,
+      "surah_id": 14,
+      "surah_name_bn": "ইবরাহীম"
+    },
+    {
+      "pdf_page": 720,
+      "surah_id": 14,
+      "surah_name_bn": "ইবরাহীম"
+    },
+    {
+      "pdf_page": 721,
+      "surah_id": 14,
+      "surah_name_bn": "ইবরাহীম"
+    },
+    {
+      "pdf_page": 722,
+      "surah_id": 15,
+      "surah_name_bn": "আল-হিজর"
+    },
+    {
+      "pdf_page": 723,
+      "surah_id": 15,
+      "surah_name_bn": "আল-হিজর"
+    },
+    {
+      "pdf_page": 724,
+      "surah_id": 15,
+      "surah_name_bn": "আল-হিজর"
+    },
+    {
+      "pdf_page": 725,
+      "surah_id": 15,
+      "surah_name_bn": "আল-হিজর"
+    },
+    {
+      "pdf_page": 726,
+      "surah_id": 15,
+      "surah_name_bn": "আল-হিজর"
+    },
+    {
+      "pdf_page": 727,
+      "surah_id": 15,
+      "surah_name_bn": "আল-হিজর"
+    },
+    {
+      "pdf_page": 728,
+      "surah_id": 15,
+      "surah_name_bn": "আল-হিজর"
+    },
+    {
+      "pdf_page": 729,
+      "surah_id": 15,
+      "surah_name_bn": "আল-হিজর"
+    },
+    {
+      "pdf_page": 730,
+      "surah_id": 15,
+      "surah_name_bn": "আল-হিজর"
+    },
+    {
+      "pdf_page": 731,
+      "surah_id": 15,
+      "surah_name_bn": "আল-হিজর"
+    },
+    {
+      "pdf_page": 732,
+      "surah_id": 15,
+      "surah_name_bn": "আল-হিজর"
+    },
+    {
+      "pdf_page": 733,
+      "surah_id": 15,
+      "surah_name_bn": "আল-হিজর"
+    },
+    {
+      "pdf_page": 734,
+      "surah_id": 15,
+      "surah_name_bn": "আল-হিজর"
+    },
+    {
+      "pdf_page": 735,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 736,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 737,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 738,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 739,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 740,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 741,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 742,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 743,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 744,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 745,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 746,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 747,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 748,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 749,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 750,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 751,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 752,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 753,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 754,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 755,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 756,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 757,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 758,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 759,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 760,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 761,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 762,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 763,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 764,
+      "surah_id": 16,
+      "surah_name_bn": "আন-নাহল"
+    },
+    {
+      "pdf_page": 765,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 766,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 767,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 768,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 769,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 770,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 771,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 772,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 773,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 774,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 775,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 776,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 777,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 778,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 779,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 780,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 781,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 782,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 783,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 784,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 785,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 786,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 787,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 788,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 789,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 790,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 791,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 792,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 793,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 794,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 795,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 796,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 797,
+      "surah_id": 17,
+      "surah_name_bn": "বনী ইসরাঈল"
+    },
+    {
+      "pdf_page": 798,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 799,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 800,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 801,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 802,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 803,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 804,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 805,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 806,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 807,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 808,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 809,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 810,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 811,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 812,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 813,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 814,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 815,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 816,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 817,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 818,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 819,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 820,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 821,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 822,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 823,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 824,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 825,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 826,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 827,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 828,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 829,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 830,
+      "surah_id": 18,
+      "surah_name_bn": "আল-কাহফ"
+    },
+    {
+      "pdf_page": 831,
+      "surah_id": 19,
+      "surah_name_bn": "মারিয়াম"
+    },
+    {
+      "pdf_page": 832,
+      "surah_id": 19,
+      "surah_name_bn": "মারিয়াম"
+    },
+    {
+      "pdf_page": 833,
+      "surah_id": 19,
+      "surah_name_bn": "মারিয়াম"
+    },
+    {
+      "pdf_page": 834,
+      "surah_id": 19,
+      "surah_name_bn": "মারিয়াম"
+    },
+    {
+      "pdf_page": 835,
+      "surah_id": 19,
+      "surah_name_bn": "মারিয়াম"
+    },
+    {
+      "pdf_page": 836,
+      "surah_id": 19,
+      "surah_name_bn": "মারিয়াম"
+    },
+    {
+      "pdf_page": 837,
+      "surah_id": 19,
+      "surah_name_bn": "মারিয়াম"
+    },
+    {
+      "pdf_page": 838,
+      "surah_id": 19,
+      "surah_name_bn": "মারিয়াম"
+    },
+    {
+      "pdf_page": 839,
+      "surah_id": 19,
+      "surah_name_bn": "মারিয়াম"
+    },
+    {
+      "pdf_page": 840,
+      "surah_id": 19,
+      "surah_name_bn": "মারিয়াম"
+    },
+    {
+      "pdf_page": 841,
+      "surah_id": 19,
+      "surah_name_bn": "মারিয়াম"
+    },
+    {
+      "pdf_page": 842,
+      "surah_id": 19,
+      "surah_name_bn": "মারিয়াম"
+    },
+    {
+      "pdf_page": 843,
+      "surah_id": 19,
+      "surah_name_bn": "মারিয়াম"
+    },
+    {
+      "pdf_page": 844,
+      "surah_id": 19,
+      "surah_name_bn": "মারিয়াম"
+    },
+    {
+      "pdf_page": 845,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 846,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 847,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 848,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 849,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 850,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 851,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 852,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 853,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 854,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 855,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 856,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 857,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 858,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 859,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 860,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 861,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 862,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 863,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 864,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 865,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 866,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 867,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 868,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 869,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 870,
+      "surah_id": 20,
+      "surah_name_bn": "ত্বা-হা"
+    },
+    {
+      "pdf_page": 871,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 872,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 873,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 874,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 875,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 876,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 877,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 878,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 879,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 880,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 881,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 882,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 883,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 884,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 885,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 886,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 887,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 888,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 889,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 890,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 891,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 892,
+      "surah_id": 21,
+      "surah_name_bn": "আল-আম্বিয়া"
+    },
+    {
+      "pdf_page": 893,
+      "surah_id": 22,
+      "surah_name_bn": "আল-হাজ্জ"
+    },
+    {
+      "pdf_page": 894,
+      "surah_id": 22,
+      "surah_name_bn": "আল-হাজ্জ"
+    },
+    {
+      "pdf_page": 895,
+      "surah_id": 22,
+      "surah_name_bn": "আল-হাজ্জ"
+    },
+    {
+      "pdf_page": 896,
+      "surah_id": 22,
+      "surah_name_bn": "আল-হাজ্জ"
+    },
+    {
+      "pdf_page": 897,
+      "surah_id": 22,
+      "surah_name_bn": "আল-হাজ্জ"
+    },
+    {
+      "pdf_page": 898,
+      "surah_id": 22,
+      "surah_name_bn": "আল-হাজ্জ"
+    },
+    {
+      "pdf_page": 899,
+      "surah_id": 22,
+      "surah_name_bn": "আল-হাজ্জ"
+    },
+    {
+      "pdf_page": 900,
+      "surah_id": 22,
+      "surah_name_bn": "আল-হাজ্জ"
+    },
+    {
+      "pdf_page": 901,
+      "surah_id": 22,
+      "surah_name_bn": "আল-হাজ্জ"
+    },
+    {
+      "pdf_page": 902,
+      "surah_id": 22,
+      "surah_name_bn": "আল-হাজ্জ"
+    },
+    {
+      "pdf_page": 903,
+      "surah_id": 22,
+      "surah_name_bn": "আল-হাজ্জ"
+    },
+    {
+      "pdf_page": 904,
+      "surah_id": 22,
+      "surah_name_bn": "আল-হাজ্জ"
+    },
+    {
+      "pdf_page": 905,
+      "surah_id": 22,
+      "surah_name_bn": "আল-হাজ্জ"
+    },
+    {
+      "pdf_page": 906,
+      "surah_id": 22,
+      "surah_name_bn": "আল-হাজ্জ"
+    },
+    {
+      "pdf_page": 907,
+      "surah_id": 22,
+      "surah_name_bn": "আল-হাজ্জ"
+    },
+    {
+      "pdf_page": 908,
+      "surah_id": 22,
+      "surah_name_bn": "আল-হাজ্জ"
+    },
+    {
+      "pdf_page": 909,
+      "surah_id": 22,
+      "surah_name_bn": "আল-হাজ্জ"
+    },
+    {
+      "pdf_page": 910,
+      "surah_id": 22,
+      "surah_name_bn": "আল-হাজ্জ"
+    },
+    {
+      "pdf_page": 911,
+      "surah_id": 22,
+      "surah_name_bn": "আল-হাজ্জ"
+    },
+    {
+      "pdf_page": 912,
+      "surah_id": 22,
+      "surah_name_bn": "আল-হাজ্জ"
+    },
+    {
+      "pdf_page": 913,
+      "surah_id": 23,
+      "surah_name_bn": "আল-মুমিনূন"
+    },
+    {
+      "pdf_page": 914,
+      "surah_id": 23,
+      "surah_name_bn": "আল-মুমিনূন"
+    },
+    {
+      "pdf_page": 915,
+      "surah_id": 23,
+      "surah_name_bn": "আল-মুমিনূন"
+    },
+    {
+      "pdf_page": 916,
+      "surah_id": 23,
+      "surah_name_bn": "আল-মুমিনূন"
+    },
+    {
+      "pdf_page": 917,
+      "surah_id": 23,
+      "surah_name_bn": "আল-মুমিনূন"
+    },
+    {
+      "pdf_page": 918,
+      "surah_id": 23,
+      "surah_name_bn": "আল-মুমিনূন"
+    },
+    {
+      "pdf_page": 919,
+      "surah_id": 23,
+      "surah_name_bn": "আল-মুমিনূন"
+    },
+    {
+      "pdf_page": 920,
+      "surah_id": 23,
+      "surah_name_bn": "আল-মুমিনূন"
+    },
+    {
+      "pdf_page": 921,
+      "surah_id": 23,
+      "surah_name_bn": "আল-মুমিনূন"
+    },
+    {
+      "pdf_page": 922,
+      "surah_id": 23,
+      "surah_name_bn": "আল-মুমিনূন"
+    },
+    {
+      "pdf_page": 923,
+      "surah_id": 23,
+      "surah_name_bn": "আল-মুমিনূন"
+    },
+    {
+      "pdf_page": 924,
+      "surah_id": 23,
+      "surah_name_bn": "আল-মুমিনূন"
+    },
+    {
+      "pdf_page": 925,
+      "surah_id": 23,
+      "surah_name_bn": "আল-মুমিনূন"
+    },
+    {
+      "pdf_page": 926,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 927,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 928,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 929,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 930,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 931,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 932,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 933,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 934,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 935,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 936,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 937,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 938,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 939,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 940,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 941,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 942,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 943,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 944,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 945,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 946,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 947,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 948,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 949,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 950,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 951,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 952,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 953,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 954,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 955,
+      "surah_id": 24,
+      "surah_name_bn": "আন-নূর"
+    },
+    {
+      "pdf_page": 956,
+      "surah_id": 25,
+      "surah_name_bn": "আল-ফুরকান"
+    },
+    {
+      "pdf_page": 957,
+      "surah_id": 25,
+      "surah_name_bn": "আল-ফুরকান"
+    },
+    {
+      "pdf_page": 958,
+      "surah_id": 25,
+      "surah_name_bn": "আল-ফুরকান"
+    },
+    {
+      "pdf_page": 959,
+      "surah_id": 25,
+      "surah_name_bn": "আল-ফুরকান"
+    },
+    {
+      "pdf_page": 960,
+      "surah_id": 25,
+      "surah_name_bn": "আল-ফুরকান"
+    },
+    {
+      "pdf_page": 961,
+      "surah_id": 25,
+      "surah_name_bn": "আল-ফুরকান"
+    },
+    {
+      "pdf_page": 962,
+      "surah_id": 25,
+      "surah_name_bn": "আল-ফুরকান"
+    },
+    {
+      "pdf_page": 963,
+      "surah_id": 25,
+      "surah_name_bn": "আল-ফুরকান"
+    },
+    {
+      "pdf_page": 964,
+      "surah_id": 25,
+      "surah_name_bn": "আল-ফুরকান"
+    },
+    {
+      "pdf_page": 965,
+      "surah_id": 25,
+      "surah_name_bn": "আল-ফুরকান"
+    },
+    {
+      "pdf_page": 966,
+      "surah_id": 25,
+      "surah_name_bn": "আল-ফুরকান"
+    },
+    {
+      "pdf_page": 967,
+      "surah_id": 25,
+      "surah_name_bn": "আল-ফুরকান"
+    },
+    {
+      "pdf_page": 968,
+      "surah_id": 25,
+      "surah_name_bn": "আল-ফুরকান"
+    },
+    {
+      "pdf_page": 969,
+      "surah_id": 25,
+      "surah_name_bn": "আল-ফুরকান"
+    },
+    {
+      "pdf_page": 970,
+      "surah_id": 25,
+      "surah_name_bn": "আল-ফুরকান"
+    },
+    {
+      "pdf_page": 971,
+      "surah_id": 25,
+      "surah_name_bn": "আল-ফুরকান"
+    },
+    {
+      "pdf_page": 972,
+      "surah_id": 25,
+      "surah_name_bn": "আল-ফুরকান"
+    },
+    {
+      "pdf_page": 973,
+      "surah_id": 26,
+      "surah_name_bn": "আশ-শুআরা"
+    },
+    {
+      "pdf_page": 974,
+      "surah_id": 26,
+      "surah_name_bn": "আশ-শুআরা"
+    },
+    {
+      "pdf_page": 975,
+      "surah_id": 26,
+      "surah_name_bn": "আশ-শুআরা"
+    },
+    {
+      "pdf_page": 976,
+      "surah_id": 26,
+      "surah_name_bn": "আশ-শুআরা"
+    },
+    {
+      "pdf_page": 977,
+      "surah_id": 26,
+      "surah_name_bn": "আশ-শুআরা"
+    },
+    {
+      "pdf_page": 978,
+      "surah_id": 26,
+      "surah_name_bn": "আশ-শুআরা"
+    },
+    {
+      "pdf_page": 979,
+      "surah_id": 26,
+      "surah_name_bn": "আশ-শুআরা"
+    },
+    {
+      "pdf_page": 980,
+      "surah_id": 26,
+      "surah_name_bn": "আশ-শুআরা"
+    },
+    {
+      "pdf_page": 981,
+      "surah_id": 26,
+      "surah_name_bn": "আশ-শুআরা"
+    },
+    {
+      "pdf_page": 982,
+      "surah_id": 26,
+      "surah_name_bn": "আশ-শুআরা"
+    },
+    {
+      "pdf_page": 983,
+      "surah_id": 26,
+      "surah_name_bn": "আশ-শুআরা"
+    },
+    {
+      "pdf_page": 984,
+      "surah_id": 26,
+      "surah_name_bn": "আশ-শুআরা"
+    },
+    {
+      "pdf_page": 985,
+      "surah_id": 26,
+      "surah_name_bn": "আশ-শুআরা"
+    },
+    {
+      "pdf_page": 986,
+      "surah_id": 26,
+      "surah_name_bn": "আশ-শুআরা"
+    },
+    {
+      "pdf_page": 987,
+      "surah_id": 26,
+      "surah_name_bn": "আশ-শুআরা"
+    },
+    {
+      "pdf_page": 988,
+      "surah_id": 27,
+      "surah_name_bn": "আন-নামল"
+    },
+    {
+      "pdf_page": 989,
+      "surah_id": 27,
+      "surah_name_bn": "আন-নামল"
+    },
+    {
+      "pdf_page": 990,
+      "surah_id": 27,
+      "surah_name_bn": "আন-নামল"
+    },
+    {
+      "pdf_page": 991,
+      "surah_id": 27,
+      "surah_name_bn": "আন-নামল"
+    },
+    {
+      "pdf_page": 992,
+      "surah_id": 27,
+      "surah_name_bn": "আন-নামল"
+    },
+    {
+      "pdf_page": 993,
+      "surah_id": 27,
+      "surah_name_bn": "আন-নামল"
+    },
+    {
+      "pdf_page": 994,
+      "surah_id": 27,
+      "surah_name_bn": "আন-নামল"
+    },
+    {
+      "pdf_page": 995,
+      "surah_id": 27,
+      "surah_name_bn": "আন-নামল"
+    },
+    {
+      "pdf_page": 996,
+      "surah_id": 27,
+      "surah_name_bn": "আন-নামল"
+    },
+    {
+      "pdf_page": 997,
+      "surah_id": 27,
+      "surah_name_bn": "আন-নামল"
+    },
+    {
+      "pdf_page": 998,
+      "surah_id": 27,
+      "surah_name_bn": "আন-নামল"
+    },
+    {
+      "pdf_page": 999,
+      "surah_id": 27,
+      "surah_name_bn": "আন-নামল"
+    },
+    {
+      "pdf_page": 1000,
+      "surah_id": 27,
+      "surah_name_bn": "আন-নামল"
+    },
+    {
+      "pdf_page": 1001,
+      "surah_id": 27,
+      "surah_name_bn": "আন-নামল"
+    },
+    {
+      "pdf_page": 1002,
+      "surah_id": 27,
+      "surah_name_bn": "আন-নামল"
+    },
+    {
+      "pdf_page": 1003,
+      "surah_id": 27,
+      "surah_name_bn": "আন-নামল"
+    },
+    {
+      "pdf_page": 1004,
+      "surah_id": 27,
+      "surah_name_bn": "আন-নামল"
+    },
+    {
+      "pdf_page": 1005,
+      "surah_id": 27,
+      "surah_name_bn": "আন-নামল"
+    },
+    {
+      "pdf_page": 1006,
+      "surah_id": 27,
+      "surah_name_bn": "আন-নামল"
+    },
+    {
+      "pdf_page": 1007,
+      "surah_id": 28,
+      "surah_name_bn": "আল-কাসাস"
+    },
+    {
+      "pdf_page": 1008,
+      "surah_id": 28,
+      "surah_name_bn": "আল-কাসাস"
+    },
+    {
+      "pdf_page": 1009,
+      "surah_id": 28,
+      "surah_name_bn": "আল-কাসাস"
+    },
+    {
+      "pdf_page": 1010,
+      "surah_id": 28,
+      "surah_name_bn": "আল-কাসাস"
+    },
+    {
+      "pdf_page": 1011,
+      "surah_id": 28,
+      "surah_name_bn": "আল-কাসাস"
+    },
+    {
+      "pdf_page": 1012,
+      "surah_id": 28,
+      "surah_name_bn": "আল-কাসাস"
+    },
+    {
+      "pdf_page": 1013,
+      "surah_id": 28,
+      "surah_name_bn": "আল-কাসাস"
+    },
+    {
+      "pdf_page": 1014,
+      "surah_id": 28,
+      "surah_name_bn": "আল-কাসাস"
+    },
+    {
+      "pdf_page": 1015,
+      "surah_id": 28,
+      "surah_name_bn": "আল-কাসাস"
+    },
+    {
+      "pdf_page": 1016,
+      "surah_id": 28,
+      "surah_name_bn": "আল-কাসাস"
+    },
+    {
+      "pdf_page": 1017,
+      "surah_id": 28,
+      "surah_name_bn": "আল-কাসাস"
+    },
+    {
+      "pdf_page": 1018,
+      "surah_id": 28,
+      "surah_name_bn": "আল-কাসাস"
+    },
+    {
+      "pdf_page": 1019,
+      "surah_id": 28,
+      "surah_name_bn": "আল-কাসাস"
+    },
+    {
+      "pdf_page": 1020,
+      "surah_id": 28,
+      "surah_name_bn": "আল-কাসাস"
+    },
+    {
+      "pdf_page": 1021,
+      "surah_id": 28,
+      "surah_name_bn": "আল-কাসাস"
+    },
+    {
+      "pdf_page": 1022,
+      "surah_id": 28,
+      "surah_name_bn": "আল-কাসাস"
+    },
+    {
+      "pdf_page": 1023,
+      "surah_id": 28,
+      "surah_name_bn": "আল-কাসাস"
+    },
+    {
+      "pdf_page": 1024,
+      "surah_id": 28,
+      "surah_name_bn": "আল-কাসাস"
+    },
+    {
+      "pdf_page": 1025,
+      "surah_id": 29,
+      "surah_name_bn": "আল-আনকাবূত"
+    },
+    {
+      "pdf_page": 1026,
+      "surah_id": 29,
+      "surah_name_bn": "আল-আনকাবূত"
+    },
+    {
+      "pdf_page": 1027,
+      "surah_id": 29,
+      "surah_name_bn": "আল-আনকাবূত"
+    },
+    {
+      "pdf_page": 1028,
+      "surah_id": 29,
+      "surah_name_bn": "আল-আনকাবূত"
+    },
+    {
+      "pdf_page": 1029,
+      "surah_id": 29,
+      "surah_name_bn": "আল-আনকাবূত"
+    },
+    {
+      "pdf_page": 1030,
+      "surah_id": 29,
+      "surah_name_bn": "আল-আনকাবূত"
+    },
+    {
+      "pdf_page": 1031,
+      "surah_id": 29,
+      "surah_name_bn": "আল-আনকাবূত"
+    },
+    {
+      "pdf_page": 1032,
+      "surah_id": 29,
+      "surah_name_bn": "আল-আনকাবূত"
+    },
+    {
+      "pdf_page": 1033,
+      "surah_id": 29,
+      "surah_name_bn": "আল-আনকাবূত"
+    },
+    {
+      "pdf_page": 1034,
+      "surah_id": 29,
+      "surah_name_bn": "আল-আনকাবূত"
+    },
+    {
+      "pdf_page": 1035,
+      "surah_id": 29,
+      "surah_name_bn": "আল-আনকাবূত"
+    },
+    {
+      "pdf_page": 1036,
+      "surah_id": 29,
+      "surah_name_bn": "আল-আনকাবূত"
+    },
+    {
+      "pdf_page": 1037,
+      "surah_id": 30,
+      "surah_name_bn": "আর-রূম"
+    },
+    {
+      "pdf_page": 1038,
+      "surah_id": 30,
+      "surah_name_bn": "আর-রূম"
+    },
+    {
+      "pdf_page": 1039,
+      "surah_id": 30,
+      "surah_name_bn": "আর-রূম"
+    },
+    {
+      "pdf_page": 1040,
+      "surah_id": 30,
+      "surah_name_bn": "আর-রূম"
+    },
+    {
+      "pdf_page": 1041,
+      "surah_id": 30,
+      "surah_name_bn": "আর-রূম"
+    },
+    {
+      "pdf_page": 1042,
+      "surah_id": 30,
+      "surah_name_bn": "আর-রূম"
+    },
+    {
+      "pdf_page": 1043,
+      "surah_id": 30,
+      "surah_name_bn": "আর-রূম"
+    },
+    {
+      "pdf_page": 1044,
+      "surah_id": 30,
+      "surah_name_bn": "আর-রূম"
+    },
+    {
+      "pdf_page": 1045,
+      "surah_id": 30,
+      "surah_name_bn": "আর-রূম"
+    },
+    {
+      "pdf_page": 1046,
+      "surah_id": 30,
+      "surah_name_bn": "আর-রূম"
+    },
+    {
+      "pdf_page": 1047,
+      "surah_id": 30,
+      "surah_name_bn": "আর-রূম"
+    },
+    {
+      "pdf_page": 1048,
+      "surah_id": 30,
+      "surah_name_bn": "আর-রূম"
+    },
+    {
+      "pdf_page": 1049,
+      "surah_id": 30,
+      "surah_name_bn": "আর-রূম"
+    },
+    {
+      "pdf_page": 1050,
+      "surah_id": 30,
+      "surah_name_bn": "আর-রূম"
+    },
+    {
+      "pdf_page": 1051,
+      "surah_id": 30,
+      "surah_name_bn": "আর-রূম"
+    },
+    {
+      "pdf_page": 1052,
+      "surah_id": 30,
+      "surah_name_bn": "আর-রূম"
+    },
+    {
+      "pdf_page": 1053,
+      "surah_id": 31,
+      "surah_name_bn": "লুকমান"
+    },
+    {
+      "pdf_page": 1054,
+      "surah_id": 31,
+      "surah_name_bn": "লুকমান"
+    },
+    {
+      "pdf_page": 1055,
+      "surah_id": 31,
+      "surah_name_bn": "লুকমান"
+    },
+    {
+      "pdf_page": 1056,
+      "surah_id": 31,
+      "surah_name_bn": "লুকমান"
+    },
+    {
+      "pdf_page": 1057,
+      "surah_id": 31,
+      "surah_name_bn": "লুকমান"
+    },
+    {
+      "pdf_page": 1058,
+      "surah_id": 31,
+      "surah_name_bn": "লুকমান"
+    },
+    {
+      "pdf_page": 1059,
+      "surah_id": 31,
+      "surah_name_bn": "লুকমান"
+    },
+    {
+      "pdf_page": 1060,
+      "surah_id": 31,
+      "surah_name_bn": "লুকমান"
+    },
+    {
+      "pdf_page": 1061,
+      "surah_id": 31,
+      "surah_name_bn": "লুকমান"
+    },
+    {
+      "pdf_page": 1062,
+      "surah_id": 31,
+      "surah_name_bn": "লুকমান"
+    },
+    {
+      "pdf_page": 1063,
+      "surah_id": 31,
+      "surah_name_bn": "লুকমান"
+    },
+    {
+      "pdf_page": 1064,
+      "surah_id": 32,
+      "surah_name_bn": "আস-সাজদাহ"
+    },
+    {
+      "pdf_page": 1065,
+      "surah_id": 32,
+      "surah_name_bn": "আস-সাজদাহ"
+    },
+    {
+      "pdf_page": 1066,
+      "surah_id": 32,
+      "surah_name_bn": "আস-সাজদাহ"
+    },
+    {
+      "pdf_page": 1067,
+      "surah_id": 32,
+      "surah_name_bn": "আস-সাজদাহ"
+    },
+    {
+      "pdf_page": 1068,
+      "surah_id": 32,
+      "surah_name_bn": "আস-সাজদাহ"
+    },
+    {
+      "pdf_page": 1069,
+      "surah_id": 32,
+      "surah_name_bn": "আস-সাজদাহ"
+    },
+    {
+      "pdf_page": 1070,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1071,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1072,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1073,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1074,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1075,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1076,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1077,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1078,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1079,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1080,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1081,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1082,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1083,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1084,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1085,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1086,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1087,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1088,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1089,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1090,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1091,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1092,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1093,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1094,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1095,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1096,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1097,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1098,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1099,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1100,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1101,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1102,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1103,
+      "surah_id": 33,
+      "surah_name_bn": "আল-আহযাব"
+    },
+    {
+      "pdf_page": 1104,
+      "surah_id": 34,
+      "surah_name_bn": "সাবা"
+    },
+    {
+      "pdf_page": 1105,
+      "surah_id": 34,
+      "surah_name_bn": "সাবা"
+    },
+    {
+      "pdf_page": 1106,
+      "surah_id": 34,
+      "surah_name_bn": "সাবা"
+    },
+    {
+      "pdf_page": 1107,
+      "surah_id": 34,
+      "surah_name_bn": "সাবা"
+    },
+    {
+      "pdf_page": 1108,
+      "surah_id": 34,
+      "surah_name_bn": "সাবা"
+    },
+    {
+      "pdf_page": 1109,
+      "surah_id": 34,
+      "surah_name_bn": "সাবা"
+    },
+    {
+      "pdf_page": 1110,
+      "surah_id": 34,
+      "surah_name_bn": "সাবা"
+    },
+    {
+      "pdf_page": 1111,
+      "surah_id": 34,
+      "surah_name_bn": "সাবা"
+    },
+    {
+      "pdf_page": 1112,
+      "surah_id": 34,
+      "surah_name_bn": "সাবা"
+    },
+    {
+      "pdf_page": 1113,
+      "surah_id": 34,
+      "surah_name_bn": "সাবা"
+    },
+    {
+      "pdf_page": 1114,
+      "surah_id": 34,
+      "surah_name_bn": "সাবা"
+    },
+    {
+      "pdf_page": 1115,
+      "surah_id": 34,
+      "surah_name_bn": "সাবা"
+    },
+    {
+      "pdf_page": 1116,
+      "surah_id": 34,
+      "surah_name_bn": "সাবা"
+    },
+    {
+      "pdf_page": 1117,
+      "surah_id": 34,
+      "surah_name_bn": "সাবা"
+    },
+    {
+      "pdf_page": 1118,
+      "surah_id": 35,
+      "surah_name_bn": "ফাতির"
+    },
+    {
+      "pdf_page": 1119,
+      "surah_id": 35,
+      "surah_name_bn": "ফাতির"
+    },
+    {
+      "pdf_page": 1120,
+      "surah_id": 35,
+      "surah_name_bn": "ফাতির"
+    },
+    {
+      "pdf_page": 1121,
+      "surah_id": 35,
+      "surah_name_bn": "ফাতির"
+    },
+    {
+      "pdf_page": 1122,
+      "surah_id": 35,
+      "surah_name_bn": "ফাতির"
+    },
+    {
+      "pdf_page": 1123,
+      "surah_id": 35,
+      "surah_name_bn": "ফাতির"
+    },
+    {
+      "pdf_page": 1124,
+      "surah_id": 35,
+      "surah_name_bn": "ফাতির"
+    },
+    {
+      "pdf_page": 1125,
+      "surah_id": 35,
+      "surah_name_bn": "ফাতির"
+    },
+    {
+      "pdf_page": 1126,
+      "surah_id": 35,
+      "surah_name_bn": "ফাতির"
+    },
+    {
+      "pdf_page": 1127,
+      "surah_id": 35,
+      "surah_name_bn": "ফাতির"
+    },
+    {
+      "pdf_page": 1128,
+      "surah_id": 36,
+      "surah_name_bn": "ইয়াসীন"
+    },
+    {
+      "pdf_page": 1129,
+      "surah_id": 36,
+      "surah_name_bn": "ইয়াসীন"
+    },
+    {
+      "pdf_page": 1130,
+      "surah_id": 36,
+      "surah_name_bn": "ইয়াসীন"
+    },
+    {
+      "pdf_page": 1131,
+      "surah_id": 36,
+      "surah_name_bn": "ইয়াসীন"
+    },
+    {
+      "pdf_page": 1132,
+      "surah_id": 36,
+      "surah_name_bn": "ইয়াসীন"
+    },
+    {
+      "pdf_page": 1133,
+      "surah_id": 36,
+      "surah_name_bn": "ইয়াসীন"
+    },
+    {
+      "pdf_page": 1134,
+      "surah_id": 36,
+      "surah_name_bn": "ইয়াসীন"
+    },
+    {
+      "pdf_page": 1135,
+      "surah_id": 36,
+      "surah_name_bn": "ইয়াসীন"
+    },
+    {
+      "pdf_page": 1136,
+      "surah_id": 36,
+      "surah_name_bn": "ইয়াসীন"
+    },
+    {
+      "pdf_page": 1137,
+      "surah_id": 36,
+      "surah_name_bn": "ইয়াসীন"
+    },
+    {
+      "pdf_page": 1138,
+      "surah_id": 36,
+      "surah_name_bn": "ইয়াসীন"
+    },
+    {
+      "pdf_page": 1139,
+      "surah_id": 36,
+      "surah_name_bn": "ইয়াসীন"
+    },
+    {
+      "pdf_page": 1140,
+      "surah_id": 37,
+      "surah_name_bn": "আস-সাফফাত"
+    },
+    {
+      "pdf_page": 1141,
+      "surah_id": 37,
+      "surah_name_bn": "আস-সাফফাত"
+    },
+    {
+      "pdf_page": 1142,
+      "surah_id": 37,
+      "surah_name_bn": "আস-সাফফাত"
+    },
+    {
+      "pdf_page": 1143,
+      "surah_id": 37,
+      "surah_name_bn": "আস-সাফফাত"
+    },
+    {
+      "pdf_page": 1144,
+      "surah_id": 37,
+      "surah_name_bn": "আস-সাফফাত"
+    },
+    {
+      "pdf_page": 1145,
+      "surah_id": 37,
+      "surah_name_bn": "আস-সাফফাত"
+    },
+    {
+      "pdf_page": 1146,
+      "surah_id": 37,
+      "surah_name_bn": "আস-সাফফাত"
+    },
+    {
+      "pdf_page": 1147,
+      "surah_id": 37,
+      "surah_name_bn": "আস-সাফফাত"
+    },
+    {
+      "pdf_page": 1148,
+      "surah_id": 37,
+      "surah_name_bn": "আস-সাফফাত"
+    },
+    {
+      "pdf_page": 1149,
+      "surah_id": 37,
+      "surah_name_bn": "আস-সাফফাত"
+    },
+    {
+      "pdf_page": 1150,
+      "surah_id": 37,
+      "surah_name_bn": "আস-সাফফাত"
+    },
+    {
+      "pdf_page": 1151,
+      "surah_id": 37,
+      "surah_name_bn": "আস-সাফফাত"
+    },
+    {
+      "pdf_page": 1152,
+      "surah_id": 37,
+      "surah_name_bn": "আস-সাফফাত"
+    },
+    {
+      "pdf_page": 1153,
+      "surah_id": 37,
+      "surah_name_bn": "আস-সাফফাত"
+    },
+    {
+      "pdf_page": 1154,
+      "surah_id": 37,
+      "surah_name_bn": "আস-সাফফাত"
+    },
+    {
+      "pdf_page": 1155,
+      "surah_id": 37,
+      "surah_name_bn": "আস-সাফফাত"
+    },
+    {
+      "pdf_page": 1156,
+      "surah_id": 37,
+      "surah_name_bn": "আস-সাফফাত"
+    },
+    {
+      "pdf_page": 1157,
+      "surah_id": 37,
+      "surah_name_bn": "আস-সাফফাত"
+    },
+    {
+      "pdf_page": 1158,
+      "surah_id": 37,
+      "surah_name_bn": "আস-সাফফাত"
+    },
+    {
+      "pdf_page": 1159,
+      "surah_id": 37,
+      "surah_name_bn": "আস-সাফফাত"
+    },
+    {
+      "pdf_page": 1160,
+      "surah_id": 38,
+      "surah_name_bn": "সোয়াদ"
+    },
+    {
+      "pdf_page": 1161,
+      "surah_id": 38,
+      "surah_name_bn": "সোয়াদ"
+    },
+    {
+      "pdf_page": 1162,
+      "surah_id": 38,
+      "surah_name_bn": "সোয়াদ"
+    },
+    {
+      "pdf_page": 1163,
+      "surah_id": 38,
+      "surah_name_bn": "সোয়াদ"
+    },
+    {
+      "pdf_page": 1164,
+      "surah_id": 38,
+      "surah_name_bn": "সোয়াদ"
+    },
+    {
+      "pdf_page": 1165,
+      "surah_id": 38,
+      "surah_name_bn": "সোয়াদ"
+    },
+    {
+      "pdf_page": 1166,
+      "surah_id": 38,
+      "surah_name_bn": "সোয়াদ"
+    },
+    {
+      "pdf_page": 1167,
+      "surah_id": 38,
+      "surah_name_bn": "সোয়াদ"
+    },
+    {
+      "pdf_page": 1168,
+      "surah_id": 38,
+      "surah_name_bn": "সোয়াদ"
+    },
+    {
+      "pdf_page": 1169,
+      "surah_id": 38,
+      "surah_name_bn": "সোয়াদ"
+    },
+    {
+      "pdf_page": 1170,
+      "surah_id": 38,
+      "surah_name_bn": "সোয়াদ"
+    },
+    {
+      "pdf_page": 1171,
+      "surah_id": 38,
+      "surah_name_bn": "সোয়াদ"
+    },
+    {
+      "pdf_page": 1172,
+      "surah_id": 38,
+      "surah_name_bn": "সোয়াদ"
+    },
+    {
+      "pdf_page": 1173,
+      "surah_id": 38,
+      "surah_name_bn": "সোয়াদ"
+    },
+    {
+      "pdf_page": 1174,
+      "surah_id": 39,
+      "surah_name_bn": "আয-যুমার"
+    },
+    {
+      "pdf_page": 1175,
+      "surah_id": 39,
+      "surah_name_bn": "আয-যুমার"
+    },
+    {
+      "pdf_page": 1176,
+      "surah_id": 39,
+      "surah_name_bn": "আয-যুমার"
+    },
+    {
+      "pdf_page": 1177,
+      "surah_id": 39,
+      "surah_name_bn": "আয-যুমার"
+    },
+    {
+      "pdf_page": 1178,
+      "surah_id": 39,
+      "surah_name_bn": "আয-যুমার"
+    },
+    {
+      "pdf_page": 1179,
+      "surah_id": 39,
+      "surah_name_bn": "আয-যুমার"
+    },
+    {
+      "pdf_page": 1180,
+      "surah_id": 39,
+      "surah_name_bn": "আয-যুমার"
+    },
+    {
+      "pdf_page": 1181,
+      "surah_id": 39,
+      "surah_name_bn": "আয-যুমার"
+    },
+    {
+      "pdf_page": 1182,
+      "surah_id": 39,
+      "surah_name_bn": "আয-যুমার"
+    },
+    {
+      "pdf_page": 1183,
+      "surah_id": 39,
+      "surah_name_bn": "আয-যুমার"
+    },
+    {
+      "pdf_page": 1184,
+      "surah_id": 39,
+      "surah_name_bn": "আয-যুমার"
+    },
+    {
+      "pdf_page": 1185,
+      "surah_id": 39,
+      "surah_name_bn": "আয-যুমার"
+    },
+    {
+      "pdf_page": 1186,
+      "surah_id": 40,
+      "surah_name_bn": "গাফির"
+    },
+    {
+      "pdf_page": 1187,
+      "surah_id": 40,
+      "surah_name_bn": "গাফির"
+    },
+    {
+      "pdf_page": 1188,
+      "surah_id": 40,
+      "surah_name_bn": "গাফির"
+    },
+    {
+      "pdf_page": 1189,
+      "surah_id": 40,
+      "surah_name_bn": "গাফির"
+    },
+    {
+      "pdf_page": 1190,
+      "surah_id": 40,
+      "surah_name_bn": "গাফির"
+    },
+    {
+      "pdf_page": 1191,
+      "surah_id": 40,
+      "surah_name_bn": "গাফির"
+    },
+    {
+      "pdf_page": 1192,
+      "surah_id": 40,
+      "surah_name_bn": "গাফির"
+    },
+    {
+      "pdf_page": 1193,
+      "surah_id": 40,
+      "surah_name_bn": "গাফির"
+    },
+    {
+      "pdf_page": 1194,
+      "surah_id": 40,
+      "surah_name_bn": "গাফির"
+    },
+    {
+      "pdf_page": 1195,
+      "surah_id": 40,
+      "surah_name_bn": "গাফির"
+    },
+    {
+      "pdf_page": 1196,
+      "surah_id": 40,
+      "surah_name_bn": "গাফির"
+    },
+    {
+      "pdf_page": 1197,
+      "surah_id": 40,
+      "surah_name_bn": "গাফির"
+    },
+    {
+      "pdf_page": 1198,
+      "surah_id": 40,
+      "surah_name_bn": "গাফির"
+    },
+    {
+      "pdf_page": 1199,
+      "surah_id": 41,
+      "surah_name_bn": "ফুসসিলাত"
+    },
+    {
+      "pdf_page": 1200,
+      "surah_id": 41,
+      "surah_name_bn": "ফুসসিলাত"
+    },
+    {
+      "pdf_page": 1201,
+      "surah_id": 41,
+      "surah_name_bn": "ফুসসিলাত"
+    },
+    {
+      "pdf_page": 1202,
+      "surah_id": 41,
+      "surah_name_bn": "ফুসসিলাত"
+    },
+    {
+      "pdf_page": 1203,
+      "surah_id": 41,
+      "surah_name_bn": "ফুসসিলাত"
+    },
+    {
+      "pdf_page": 1204,
+      "surah_id": 41,
+      "surah_name_bn": "ফুসসিলাত"
+    },
+    {
+      "pdf_page": 1205,
+      "surah_id": 41,
+      "surah_name_bn": "ফুসসিলাত"
+    },
+    {
+      "pdf_page": 1206,
+      "surah_id": 41,
+      "surah_name_bn": "ফুসসিলাত"
+    },
+    {
+      "pdf_page": 1207,
+      "surah_id": 41,
+      "surah_name_bn": "ফুসসিলাত"
+    },
+    {
+      "pdf_page": 1208,
+      "surah_id": 41,
+      "surah_name_bn": "ফুসসিলাত"
+    },
+    {
+      "pdf_page": 1209,
+      "surah_id": 41,
+      "surah_name_bn": "ফুসসিলাত"
+    },
+    {
+      "pdf_page": 1210,
+      "surah_id": 41,
+      "surah_name_bn": "ফুসসিলাত"
+    },
+    {
+      "pdf_page": 1211,
+      "surah_id": 41,
+      "surah_name_bn": "ফুসসিলাত"
+    },
+    {
+      "pdf_page": 1212,
+      "surah_id": 42,
+      "surah_name_bn": "আশ-শূরা"
+    },
+    {
+      "pdf_page": 1213,
+      "surah_id": 42,
+      "surah_name_bn": "আশ-শূরা"
+    },
+    {
+      "pdf_page": 1214,
+      "surah_id": 42,
+      "surah_name_bn": "আশ-শূরা"
+    },
+    {
+      "pdf_page": 1215,
+      "surah_id": 42,
+      "surah_name_bn": "আশ-শূরা"
+    },
+    {
+      "pdf_page": 1216,
+      "surah_id": 42,
+      "surah_name_bn": "আশ-শূরা"
+    },
+    {
+      "pdf_page": 1217,
+      "surah_id": 42,
+      "surah_name_bn": "আশ-শূরা"
+    },
+    {
+      "pdf_page": 1218,
+      "surah_id": 42,
+      "surah_name_bn": "আশ-শূরা"
+    },
+    {
+      "pdf_page": 1219,
+      "surah_id": 42,
+      "surah_name_bn": "আশ-শূরা"
+    },
+    {
+      "pdf_page": 1220,
+      "surah_id": 42,
+      "surah_name_bn": "আশ-শূরা"
+    },
+    {
+      "pdf_page": 1221,
+      "surah_id": 42,
+      "surah_name_bn": "আশ-শূরা"
+    },
+    {
+      "pdf_page": 1222,
+      "surah_id": 42,
+      "surah_name_bn": "আশ-শূরা"
+    },
+    {
+      "pdf_page": 1223,
+      "surah_id": 42,
+      "surah_name_bn": "আশ-শূরা"
+    },
+    {
+      "pdf_page": 1224,
+      "surah_id": 42,
+      "surah_name_bn": "আশ-শূরা"
+    },
+    {
+      "pdf_page": 1225,
+      "surah_id": 43,
+      "surah_name_bn": "আয-যুখরুফ"
+    },
+    {
+      "pdf_page": 1226,
+      "surah_id": 43,
+      "surah_name_bn": "আয-যুখরুফ"
+    },
+    {
+      "pdf_page": 1227,
+      "surah_id": 43,
+      "surah_name_bn": "আয-যুখরুফ"
+    },
+    {
+      "pdf_page": 1228,
+      "surah_id": 43,
+      "surah_name_bn": "আয-যুখরুফ"
+    },
+    {
+      "pdf_page": 1229,
+      "surah_id": 43,
+      "surah_name_bn": "আয-যুখরুফ"
+    },
+    {
+      "pdf_page": 1230,
+      "surah_id": 43,
+      "surah_name_bn": "আয-যুখরুফ"
+    },
+    {
+      "pdf_page": 1231,
+      "surah_id": 43,
+      "surah_name_bn": "আয-যুখরুফ"
+    },
+    {
+      "pdf_page": 1232,
+      "surah_id": 43,
+      "surah_name_bn": "আয-যুখরুফ"
+    },
+    {
+      "pdf_page": 1233,
+      "surah_id": 43,
+      "surah_name_bn": "আয-যুখরুফ"
+    },
+    {
+      "pdf_page": 1234,
+      "surah_id": 43,
+      "surah_name_bn": "আয-যুখরুফ"
+    },
+    {
+      "pdf_page": 1235,
+      "surah_id": 43,
+      "surah_name_bn": "আয-যুখরুফ"
+    },
+    {
+      "pdf_page": 1236,
+      "surah_id": 44,
+      "surah_name_bn": "আদ-দুখান"
+    },
+    {
+      "pdf_page": 1237,
+      "surah_id": 44,
+      "surah_name_bn": "আদ-দুখান"
+    },
+    {
+      "pdf_page": 1238,
+      "surah_id": 44,
+      "surah_name_bn": "আদ-দুখান"
+    },
+    {
+      "pdf_page": 1239,
+      "surah_id": 44,
+      "surah_name_bn": "আদ-দুখান"
+    },
+    {
+      "pdf_page": 1240,
+      "surah_id": 44,
+      "surah_name_bn": "আদ-দুখান"
+    },
+    {
+      "pdf_page": 1241,
+      "surah_id": 44,
+      "surah_name_bn": "আদ-দুখান"
+    },
+    {
+      "pdf_page": 1242,
+      "surah_id": 45,
+      "surah_name_bn": "আল-জাসিয়াহ"
+    },
+    {
+      "pdf_page": 1243,
+      "surah_id": 45,
+      "surah_name_bn": "আল-জাসিয়াহ"
+    },
+    {
+      "pdf_page": 1244,
+      "surah_id": 45,
+      "surah_name_bn": "আল-জাসিয়াহ"
+    },
+    {
+      "pdf_page": 1245,
+      "surah_id": 45,
+      "surah_name_bn": "আল-জাসিয়াহ"
+    },
+    {
+      "pdf_page": 1246,
+      "surah_id": 45,
+      "surah_name_bn": "আল-জাসিয়াহ"
+    },
+    {
+      "pdf_page": 1247,
+      "surah_id": 45,
+      "surah_name_bn": "আল-জাসিয়াহ"
+    },
+    {
+      "pdf_page": 1248,
+      "surah_id": 46,
+      "surah_name_bn": "আল-আহকাফ"
+    },
+    {
+      "pdf_page": 1249,
+      "surah_id": 46,
+      "surah_name_bn": "আল-আহকাফ"
+    },
+    {
+      "pdf_page": 1250,
+      "surah_id": 46,
+      "surah_name_bn": "আল-আহকাফ"
+    },
+    {
+      "pdf_page": 1251,
+      "surah_id": 46,
+      "surah_name_bn": "আল-আহকাফ"
+    },
+    {
+      "pdf_page": 1252,
+      "surah_id": 46,
+      "surah_name_bn": "আল-আহকাফ"
+    },
+    {
+      "pdf_page": 1253,
+      "surah_id": 46,
+      "surah_name_bn": "আল-আহকাফ"
+    },
+    {
+      "pdf_page": 1254,
+      "surah_id": 46,
+      "surah_name_bn": "আল-আহকাফ"
+    },
+    {
+      "pdf_page": 1255,
+      "surah_id": 47,
+      "surah_name_bn": "মুহাম্মদ"
+    },
+    {
+      "pdf_page": 1256,
+      "surah_id": 47,
+      "surah_name_bn": "মুহাম্মদ"
+    },
+    {
+      "pdf_page": 1257,
+      "surah_id": 47,
+      "surah_name_bn": "মুহাম্মদ"
+    },
+    {
+      "pdf_page": 1258,
+      "surah_id": 47,
+      "surah_name_bn": "মুহাম্মদ"
+    },
+    {
+      "pdf_page": 1259,
+      "surah_id": 47,
+      "surah_name_bn": "মুহাম্মদ"
+    },
+    {
+      "pdf_page": 1260,
+      "surah_id": 47,
+      "surah_name_bn": "মুহাম্মদ"
+    },
+    {
+      "pdf_page": 1261,
+      "surah_id": 47,
+      "surah_name_bn": "মুহাম্মদ"
+    },
+    {
+      "pdf_page": 1262,
+      "surah_id": 47,
+      "surah_name_bn": "মুহাম্মদ"
+    },
+    {
+      "pdf_page": 1263,
+      "surah_id": 47,
+      "surah_name_bn": "মুহাম্মদ"
+    },
+    {
+      "pdf_page": 1264,
+      "surah_id": 47,
+      "surah_name_bn": "মুহাম্মদ"
+    },
+    {
+      "pdf_page": 1265,
+      "surah_id": 47,
+      "surah_name_bn": "মুহাম্মদ"
+    },
+    {
+      "pdf_page": 1266,
+      "surah_id": 48,
+      "surah_name_bn": "আল-ফাতহ"
+    },
+    {
+      "pdf_page": 1267,
+      "surah_id": 48,
+      "surah_name_bn": "আল-ফাতহ"
+    },
+    {
+      "pdf_page": 1268,
+      "surah_id": 48,
+      "surah_name_bn": "আল-ফাতহ"
+    },
+    {
+      "pdf_page": 1269,
+      "surah_id": 48,
+      "surah_name_bn": "আল-ফাতহ"
+    },
+    {
+      "pdf_page": 1270,
+      "surah_id": 48,
+      "surah_name_bn": "আল-ফাতহ"
+    },
+    {
+      "pdf_page": 1271,
+      "surah_id": 48,
+      "surah_name_bn": "আল-ফাতহ"
+    },
+    {
+      "pdf_page": 1272,
+      "surah_id": 48,
+      "surah_name_bn": "আল-ফাতহ"
+    },
+    {
+      "pdf_page": 1273,
+      "surah_id": 48,
+      "surah_name_bn": "আল-ফাতহ"
+    },
+    {
+      "pdf_page": 1274,
+      "surah_id": 48,
+      "surah_name_bn": "আল-ফাতহ"
+    },
+    {
+      "pdf_page": 1275,
+      "surah_id": 49,
+      "surah_name_bn": "আল-হুজুরাত"
+    },
+    {
+      "pdf_page": 1276,
+      "surah_id": 49,
+      "surah_name_bn": "আল-হুজুরাত"
+    },
+    {
+      "pdf_page": 1277,
+      "surah_id": 49,
+      "surah_name_bn": "আল-হুজুরাত"
+    },
+    {
+      "pdf_page": 1278,
+      "surah_id": 49,
+      "surah_name_bn": "আল-হুজুরাত"
+    },
+    {
+      "pdf_page": 1279,
+      "surah_id": 49,
+      "surah_name_bn": "আল-হুজুরাত"
+    },
+    {
+      "pdf_page": 1280,
+      "surah_id": 49,
+      "surah_name_bn": "আল-হুজুরাত"
+    },
+    {
+      "pdf_page": 1281,
+      "surah_id": 49,
+      "surah_name_bn": "আল-হুজুরাত"
+    },
+    {
+      "pdf_page": 1282,
+      "surah_id": 49,
+      "surah_name_bn": "আল-হুজুরাত"
+    },
+    {
+      "pdf_page": 1283,
+      "surah_id": 49,
+      "surah_name_bn": "আল-হুজুরাত"
+    },
+    {
+      "pdf_page": 1284,
+      "surah_id": 49,
+      "surah_name_bn": "আল-হুজুরাত"
+    },
+    {
+      "pdf_page": 1285,
+      "surah_id": 49,
+      "surah_name_bn": "আল-হুজুরাত"
+    },
+    {
+      "pdf_page": 1286,
+      "surah_id": 49,
+      "surah_name_bn": "আল-হুজুরাত"
+    },
+    {
+      "pdf_page": 1287,
+      "surah_id": 49,
+      "surah_name_bn": "আল-হুজুরাত"
+    },
+    {
+      "pdf_page": 1288,
+      "surah_id": 49,
+      "surah_name_bn": "আল-হুজুরাত"
+    },
+    {
+      "pdf_page": 1289,
+      "surah_id": 50,
+      "surah_name_bn": "ক্বাফ"
+    },
+    {
+      "pdf_page": 1290,
+      "surah_id": 50,
+      "surah_name_bn": "ক্বাফ"
+    },
+    {
+      "pdf_page": 1291,
+      "surah_id": 50,
+      "surah_name_bn": "ক্বাফ"
+    },
+    {
+      "pdf_page": 1292,
+      "surah_id": 50,
+      "surah_name_bn": "ক্বাফ"
+    },
+    {
+      "pdf_page": 1293,
+      "surah_id": 50,
+      "surah_name_bn": "ক্বাফ"
+    },
+    {
+      "pdf_page": 1294,
+      "surah_id": 51,
+      "surah_name_bn": "আয-যারিয়াত"
+    },
+    {
+      "pdf_page": 1295,
+      "surah_id": 51,
+      "surah_name_bn": "আয-যারিয়াত"
+    },
+    {
+      "pdf_page": 1296,
+      "surah_id": 51,
+      "surah_name_bn": "আয-যারিয়াত"
+    },
+    {
+      "pdf_page": 1297,
+      "surah_id": 51,
+      "surah_name_bn": "আয-যারিয়াত"
+    },
+    {
+      "pdf_page": 1298,
+      "surah_id": 51,
+      "surah_name_bn": "আয-যারিয়াত"
+    },
+    {
+      "pdf_page": 1299,
+      "surah_id": 51,
+      "surah_name_bn": "আয-যারিয়াত"
+    },
+    {
+      "pdf_page": 1300,
+      "surah_id": 52,
+      "surah_name_bn": "আত-তূর"
+    },
+    {
+      "pdf_page": 1301,
+      "surah_id": 52,
+      "surah_name_bn": "আত-তূর"
+    },
+    {
+      "pdf_page": 1302,
+      "surah_id": 52,
+      "surah_name_bn": "আত-তূর"
+    },
+    {
+      "pdf_page": 1303,
+      "surah_id": 52,
+      "surah_name_bn": "আত-তূর"
+    },
+    {
+      "pdf_page": 1304,
+      "surah_id": 53,
+      "surah_name_bn": "আন-নাজম"
+    },
+    {
+      "pdf_page": 1305,
+      "surah_id": 53,
+      "surah_name_bn": "আন-নাজম"
+    },
+    {
+      "pdf_page": 1306,
+      "surah_id": 53,
+      "surah_name_bn": "আন-নাজম"
+    },
+    {
+      "pdf_page": 1307,
+      "surah_id": 53,
+      "surah_name_bn": "আন-নাজম"
+    },
+    {
+      "pdf_page": 1308,
+      "surah_id": 53,
+      "surah_name_bn": "আন-নাজম"
+    },
+    {
+      "pdf_page": 1309,
+      "surah_id": 53,
+      "surah_name_bn": "আন-নাজম"
+    },
+    {
+      "pdf_page": 1310,
+      "surah_id": 53,
+      "surah_name_bn": "আন-নাজম"
+    },
+    {
+      "pdf_page": 1311,
+      "surah_id": 53,
+      "surah_name_bn": "আন-নাজম"
+    },
+    {
+      "pdf_page": 1312,
+      "surah_id": 54,
+      "surah_name_bn": "আল-কামার"
+    },
+    {
+      "pdf_page": 1313,
+      "surah_id": 54,
+      "surah_name_bn": "আল-কামার"
+    },
+    {
+      "pdf_page": 1314,
+      "surah_id": 54,
+      "surah_name_bn": "আল-কামার"
+    },
+    {
+      "pdf_page": 1315,
+      "surah_id": 54,
+      "surah_name_bn": "আল-কামার"
+    },
+    {
+      "pdf_page": 1316,
+      "surah_id": 54,
+      "surah_name_bn": "আল-কামার"
+    },
+    {
+      "pdf_page": 1317,
+      "surah_id": 55,
+      "surah_name_bn": "আর-রাহমান"
+    },
+    {
+      "pdf_page": 1318,
+      "surah_id": 55,
+      "surah_name_bn": "আর-রাহমান"
+    },
+    {
+      "pdf_page": 1319,
+      "surah_id": 55,
+      "surah_name_bn": "আর-রাহমান"
+    },
+    {
+      "pdf_page": 1320,
+      "surah_id": 55,
+      "surah_name_bn": "আর-রাহমান"
+    },
+    {
+      "pdf_page": 1321,
+      "surah_id": 55,
+      "surah_name_bn": "আর-রাহমান"
+    },
+    {
+      "pdf_page": 1322,
+      "surah_id": 55,
+      "surah_name_bn": "আর-রাহমান"
+    },
+    {
+      "pdf_page": 1323,
+      "surah_id": 55,
+      "surah_name_bn": "আর-রাহমান"
+    },
+    {
+      "pdf_page": 1324,
+      "surah_id": 55,
+      "surah_name_bn": "আর-রাহমান"
+    },
+    {
+      "pdf_page": 1325,
+      "surah_id": 56,
+      "surah_name_bn": "আল-ওয়াকিয়াহ"
+    },
+    {
+      "pdf_page": 1326,
+      "surah_id": 56,
+      "surah_name_bn": "আল-ওয়াকিয়াহ"
+    },
+    {
+      "pdf_page": 1327,
+      "surah_id": 56,
+      "surah_name_bn": "আল-ওয়াকিয়াহ"
+    },
+    {
+      "pdf_page": 1328,
+      "surah_id": 56,
+      "surah_name_bn": "আল-ওয়াকিয়াহ"
+    },
+    {
+      "pdf_page": 1329,
+      "surah_id": 56,
+      "surah_name_bn": "আল-ওয়াকিয়াহ"
+    },
+    {
+      "pdf_page": 1330,
+      "surah_id": 56,
+      "surah_name_bn": "আল-ওয়াকিয়াহ"
+    },
+    {
+      "pdf_page": 1331,
+      "surah_id": 56,
+      "surah_name_bn": "আল-ওয়াকিয়াহ"
+    },
+    {
+      "pdf_page": 1332,
+      "surah_id": 57,
+      "surah_name_bn": "আল-হাদীদ"
+    },
+    {
+      "pdf_page": 1333,
+      "surah_id": 57,
+      "surah_name_bn": "আল-হাদীদ"
+    },
+    {
+      "pdf_page": 1334,
+      "surah_id": 57,
+      "surah_name_bn": "আল-হাদীদ"
+    },
+    {
+      "pdf_page": 1335,
+      "surah_id": 57,
+      "surah_name_bn": "আল-হাদীদ"
+    },
+    {
+      "pdf_page": 1336,
+      "surah_id": 57,
+      "surah_name_bn": "আল-হাদীদ"
+    },
+    {
+      "pdf_page": 1337,
+      "surah_id": 57,
+      "surah_name_bn": "আল-হাদীদ"
+    },
+    {
+      "pdf_page": 1338,
+      "surah_id": 57,
+      "surah_name_bn": "আল-হাদীদ"
+    },
+    {
+      "pdf_page": 1339,
+      "surah_id": 57,
+      "surah_name_bn": "আল-হাদীদ"
+    },
+    {
+      "pdf_page": 1340,
+      "surah_id": 57,
+      "surah_name_bn": "আল-হাদীদ"
+    },
+    {
+      "pdf_page": 1341,
+      "surah_id": 57,
+      "surah_name_bn": "আল-হাদীদ"
+    },
+    {
+      "pdf_page": 1342,
+      "surah_id": 57,
+      "surah_name_bn": "আল-হাদীদ"
+    },
+    {
+      "pdf_page": 1343,
+      "surah_id": 57,
+      "surah_name_bn": "আল-হাদীদ"
+    },
+    {
+      "pdf_page": 1344,
+      "surah_id": 57,
+      "surah_name_bn": "আল-হাদীদ"
+    },
+    {
+      "pdf_page": 1345,
+      "surah_id": 58,
+      "surah_name_bn": "আল-মুজাদালাহ"
+    },
+    {
+      "pdf_page": 1346,
+      "surah_id": 58,
+      "surah_name_bn": "আল-মুজাদালাহ"
+    },
+    {
+      "pdf_page": 1347,
+      "surah_id": 58,
+      "surah_name_bn": "আল-মুজাদালাহ"
+    },
+    {
+      "pdf_page": 1348,
+      "surah_id": 58,
+      "surah_name_bn": "আল-মুজাদালাহ"
+    },
+    {
+      "pdf_page": 1349,
+      "surah_id": 58,
+      "surah_name_bn": "আল-মুজাদালাহ"
+    },
+    {
+      "pdf_page": 1350,
+      "surah_id": 59,
+      "surah_name_bn": "আল-হাশর"
+    },
+    {
+      "pdf_page": 1351,
+      "surah_id": 59,
+      "surah_name_bn": "আল-হাশর"
+    },
+    {
+      "pdf_page": 1352,
+      "surah_id": 59,
+      "surah_name_bn": "আল-হাশর"
+    },
+    {
+      "pdf_page": 1353,
+      "surah_id": 59,
+      "surah_name_bn": "আল-হাশর"
+    },
+    {
+      "pdf_page": 1354,
+      "surah_id": 59,
+      "surah_name_bn": "আল-হাশর"
+    },
+    {
+      "pdf_page": 1355,
+      "surah_id": 59,
+      "surah_name_bn": "আল-হাশর"
+    },
+    {
+      "pdf_page": 1356,
+      "surah_id": 59,
+      "surah_name_bn": "আল-হাশর"
+    },
+    {
+      "pdf_page": 1357,
+      "surah_id": 59,
+      "surah_name_bn": "আল-হাশর"
+    },
+    {
+      "pdf_page": 1358,
+      "surah_id": 59,
+      "surah_name_bn": "আল-হাশর"
+    },
+    {
+      "pdf_page": 1359,
+      "surah_id": 59,
+      "surah_name_bn": "আল-হাশর"
+    },
+    {
+      "pdf_page": 1360,
+      "surah_id": 60,
+      "surah_name_bn": "আল-মুমতাহিনাহ"
+    },
+    {
+      "pdf_page": 1361,
+      "surah_id": 60,
+      "surah_name_bn": "আল-মুমতাহিনাহ"
+    },
+    {
+      "pdf_page": 1362,
+      "surah_id": 60,
+      "surah_name_bn": "আল-মুমতাহিনাহ"
+    },
+    {
+      "pdf_page": 1363,
+      "surah_id": 60,
+      "surah_name_bn": "আল-মুমতাহিনাহ"
+    },
+    {
+      "pdf_page": 1364,
+      "surah_id": 60,
+      "surah_name_bn": "আল-মুমতাহিনাহ"
+    },
+    {
+      "pdf_page": 1365,
+      "surah_id": 60,
+      "surah_name_bn": "আল-মুমতাহিনাহ"
+    },
+    {
+      "pdf_page": 1366,
+      "surah_id": 61,
+      "surah_name_bn": "আস-সফ"
+    },
+    {
+      "pdf_page": 1367,
+      "surah_id": 61,
+      "surah_name_bn": "আস-সফ"
+    },
+    {
+      "pdf_page": 1368,
+      "surah_id": 61,
+      "surah_name_bn": "আস-সফ"
+    },
+    {
+      "pdf_page": 1369,
+      "surah_id": 61,
+      "surah_name_bn": "আস-সফ"
+    },
+    {
+      "pdf_page": 1370,
+      "surah_id": 62,
+      "surah_name_bn": "আল-জুমুআহ"
+    },
+    {
+      "pdf_page": 1371,
+      "surah_id": 62,
+      "surah_name_bn": "আল-জুমুআহ"
+    },
+    {
+      "pdf_page": 1372,
+      "surah_id": 63,
+      "surah_name_bn": "আল-মুনাফিকূন"
+    },
+    {
+      "pdf_page": 1373,
+      "surah_id": 63,
+      "surah_name_bn": "আল-মুনাফিকূন"
+    },
+    {
+      "pdf_page": 1374,
+      "surah_id": 63,
+      "surah_name_bn": "আল-মুনাফিকূন"
+    },
+    {
+      "pdf_page": 1375,
+      "surah_id": 63,
+      "surah_name_bn": "আল-মুনাফিকূন"
+    },
+    {
+      "pdf_page": 1376,
+      "surah_id": 63,
+      "surah_name_bn": "আল-মুনাফিকূন"
+    },
+    {
+      "pdf_page": 1377,
+      "surah_id": 63,
+      "surah_name_bn": "আল-মুনাফিকূন"
+    },
+    {
+      "pdf_page": 1378,
+      "surah_id": 64,
+      "surah_name_bn": "আত-তাগাবুন"
+    },
+    {
+      "pdf_page": 1379,
+      "surah_id": 64,
+      "surah_name_bn": "আত-তাগাবুন"
+    },
+    {
+      "pdf_page": 1380,
+      "surah_id": 64,
+      "surah_name_bn": "আত-তাগাবুন"
+    },
+    {
+      "pdf_page": 1381,
+      "surah_id": 65,
+      "surah_name_bn": "আত-ত্বালাক"
+    },
+    {
+      "pdf_page": 1382,
+      "surah_id": 65,
+      "surah_name_bn": "আত-ত্বালাক"
+    },
+    {
+      "pdf_page": 1383,
+      "surah_id": 65,
+      "surah_name_bn": "আত-ত্বালাক"
+    },
+    {
+      "pdf_page": 1384,
+      "surah_id": 65,
+      "surah_name_bn": "আত-ত্বালাক"
+    },
+    {
+      "pdf_page": 1385,
+      "surah_id": 66,
+      "surah_name_bn": "আত-তাহরীম"
+    },
+    {
+      "pdf_page": 1386,
+      "surah_id": 66,
+      "surah_name_bn": "আত-তাহরীম"
+    },
+    {
+      "pdf_page": 1387,
+      "surah_id": 66,
+      "surah_name_bn": "আত-তাহরীম"
+    },
+    {
+      "pdf_page": 1388,
+      "surah_id": 66,
+      "surah_name_bn": "আত-তাহরীম"
+    },
+    {
+      "pdf_page": 1389,
+      "surah_id": 66,
+      "surah_name_bn": "আত-তাহরীম"
+    },
+    {
+      "pdf_page": 1390,
+      "surah_id": 66,
+      "surah_name_bn": "আত-তাহরীম"
+    },
+    {
+      "pdf_page": 1391,
+      "surah_id": 66,
+      "surah_name_bn": "আত-তাহরীম"
+    },
+    {
+      "pdf_page": 1392,
+      "surah_id": 67,
+      "surah_name_bn": "আল-মুলক"
+    },
+    {
+      "pdf_page": 1393,
+      "surah_id": 67,
+      "surah_name_bn": "আল-মুলক"
+    },
+    {
+      "pdf_page": 1394,
+      "surah_id": 67,
+      "surah_name_bn": "আল-মুলক"
+    },
+    {
+      "pdf_page": 1395,
+      "surah_id": 67,
+      "surah_name_bn": "আল-মুলক"
+    },
+    {
+      "pdf_page": 1396,
+      "surah_id": 68,
+      "surah_name_bn": "আল-কলম"
+    },
+    {
+      "pdf_page": 1397,
+      "surah_id": 68,
+      "surah_name_bn": "আল-কলম"
+    },
+    {
+      "pdf_page": 1398,
+      "surah_id": 68,
+      "surah_name_bn": "আল-কলম"
+    },
+    {
+      "pdf_page": 1399,
+      "surah_id": 68,
+      "surah_name_bn": "আল-কলম"
+    },
+    {
+      "pdf_page": 1400,
+      "surah_id": 68,
+      "surah_name_bn": "আল-কলম"
+    },
+    {
+      "pdf_page": 1401,
+      "surah_id": 69,
+      "surah_name_bn": "আল-হাক্কাহ"
+    },
+    {
+      "pdf_page": 1402,
+      "surah_id": 69,
+      "surah_name_bn": "আল-হাক্কাহ"
+    },
+    {
+      "pdf_page": 1403,
+      "surah_id": 70,
+      "surah_name_bn": "আল-মাআরিজ"
+    },
+    {
+      "pdf_page": 1404,
+      "surah_id": 70,
+      "surah_name_bn": "আল-মাআরিজ"
+    },
+    {
+      "pdf_page": 1405,
+      "surah_id": 70,
+      "surah_name_bn": "আল-মাআরিজ"
+    },
+    {
+      "pdf_page": 1406,
+      "surah_id": 70,
+      "surah_name_bn": "আল-মাআরিজ"
+    },
+    {
+      "pdf_page": 1407,
+      "surah_id": 71,
+      "surah_name_bn": "নূহ"
+    },
+    {
+      "pdf_page": 1408,
+      "surah_id": 71,
+      "surah_name_bn": "নূহ"
+    },
+    {
+      "pdf_page": 1409,
+      "surah_id": 71,
+      "surah_name_bn": "নূহ"
+    },
+    {
+      "pdf_page": 1410,
+      "surah_id": 72,
+      "surah_name_bn": "আল-জিন"
+    },
+    {
+      "pdf_page": 1411,
+      "surah_id": 72,
+      "surah_name_bn": "আল-জিন"
+    },
+    {
+      "pdf_page": 1412,
+      "surah_id": 72,
+      "surah_name_bn": "আল-জিন"
+    },
+    {
+      "pdf_page": 1413,
+      "surah_id": 72,
+      "surah_name_bn": "আল-জিন"
+    },
+    {
+      "pdf_page": 1414,
+      "surah_id": 72,
+      "surah_name_bn": "আল-জিন"
+    },
+    {
+      "pdf_page": 1415,
+      "surah_id": 73,
+      "surah_name_bn": "আল-মুযযাম্মিল"
+    },
+    {
+      "pdf_page": 1416,
+      "surah_id": 73,
+      "surah_name_bn": "আল-মুযযাম্মিল"
+    },
+    {
+      "pdf_page": 1417,
+      "surah_id": 73,
+      "surah_name_bn": "আল-মুযযাম্মিল"
+    },
+    {
+      "pdf_page": 1418,
+      "surah_id": 73,
+      "surah_name_bn": "আল-মুযযাম্মিল"
+    },
+    {
+      "pdf_page": 1419,
+      "surah_id": 73,
+      "surah_name_bn": "আল-মুযযাম্মিল"
+    },
+    {
+      "pdf_page": 1420,
+      "surah_id": 73,
+      "surah_name_bn": "আল-মুযযাম্মিল"
+    },
+    {
+      "pdf_page": 1421,
+      "surah_id": 74,
+      "surah_name_bn": "আল-মুদ্দাসসির"
+    },
+    {
+      "pdf_page": 1422,
+      "surah_id": 74,
+      "surah_name_bn": "আল-মুদ্দাসসির"
+    },
+    {
+      "pdf_page": 1423,
+      "surah_id": 74,
+      "surah_name_bn": "আল-মুদ্দাসসির"
+    },
+    {
+      "pdf_page": 1424,
+      "surah_id": 75,
+      "surah_name_bn": "আল-কিয়ামাহ"
+    },
+    {
+      "pdf_page": 1425,
+      "surah_id": 75,
+      "surah_name_bn": "আল-কিয়ামাহ"
+    },
+    {
+      "pdf_page": 1426,
+      "surah_id": 75,
+      "surah_name_bn": "আল-কিয়ামাহ"
+    },
+    {
+      "pdf_page": 1427,
+      "surah_id": 75,
+      "surah_name_bn": "আল-কিয়ামাহ"
+    },
+    {
+      "pdf_page": 1428,
+      "surah_id": 76,
+      "surah_name_bn": "আল-ইনসান"
+    },
+    {
+      "pdf_page": 1429,
+      "surah_id": 76,
+      "surah_name_bn": "আল-ইনসান"
+    },
+    {
+      "pdf_page": 1430,
+      "surah_id": 76,
+      "surah_name_bn": "আল-ইনসান"
+    },
+    {
+      "pdf_page": 1431,
+      "surah_id": 77,
+      "surah_name_bn": "আল-মুরসালাত"
+    },
+    {
+      "pdf_page": 1432,
+      "surah_id": 77,
+      "surah_name_bn": "আল-মুরসালাত"
+    },
+    {
+      "pdf_page": 1433,
+      "surah_id": 78,
+      "surah_name_bn": "আন-নাবা"
+    },
+    {
+      "pdf_page": 1434,
+      "surah_id": 78,
+      "surah_name_bn": "আন-নাবা"
+    },
+    {
+      "pdf_page": 1435,
+      "surah_id": 79,
+      "surah_name_bn": "আন-নাযিআত"
+    },
+    {
+      "pdf_page": 1436,
+      "surah_id": 79,
+      "surah_name_bn": "আন-নাযিআত"
+    },
+    {
+      "pdf_page": 1437,
+      "surah_id": 79,
+      "surah_name_bn": "আন-নাযিআত"
+    },
+    {
+      "pdf_page": 1438,
+      "surah_id": 80,
+      "surah_name_bn": "আবাসা"
+    },
+    {
+      "pdf_page": 1439,
+      "surah_id": 80,
+      "surah_name_bn": "আবাসা"
+    },
+    {
+      "pdf_page": 1440,
+      "surah_id": 81,
+      "surah_name_bn": "আত-তাকবীর"
+    },
+    {
+      "pdf_page": 1441,
+      "surah_id": 81,
+      "surah_name_bn": "আত-তাকবীর"
+    },
+    {
+      "pdf_page": 1442,
+      "surah_id": 82,
+      "surah_name_bn": "আল-ইনফিতার"
+    },
+    {
+      "pdf_page": 1443,
+      "surah_id": 83,
+      "surah_name_bn": "আল-মুতাফফিফীন"
+    },
+    {
+      "pdf_page": 1444,
+      "surah_id": 83,
+      "surah_name_bn": "আল-মুতাফফিফীন"
+    },
+    {
+      "pdf_page": 1445,
+      "surah_id": 83,
+      "surah_name_bn": "আল-মুতাফফিফীন"
+    },
+    {
+      "pdf_page": 1446,
+      "surah_id": 84,
+      "surah_name_bn": "আল-ইনশিকাক"
+    },
+    {
+      "pdf_page": 1447,
+      "surah_id": 84,
+      "surah_name_bn": "আল-ইনশিকাক"
+    },
+    {
+      "pdf_page": 1448,
+      "surah_id": 85,
+      "surah_name_bn": "আল-বুরূজ"
+    },
+    {
+      "pdf_page": 1449,
+      "surah_id": 86,
+      "surah_name_bn": "আত-তারিক"
+    },
+    {
+      "pdf_page": 1450,
+      "surah_id": 86,
+      "surah_name_bn": "আত-তারিক"
+    },
+    {
+      "pdf_page": 1451,
+      "surah_id": 88,
+      "surah_name_bn": "আল-গাশিয়াহ"
+    },
+    {
+      "pdf_page": 1452,
+      "surah_id": 88,
+      "surah_name_bn": "আল-গাশিয়াহ"
+    },
+    {
+      "pdf_page": 1453,
+      "surah_id": 88,
+      "surah_name_bn": "আল-গাশিয়াহ"
+    },
+    {
+      "pdf_page": 1454,
+      "surah_id": 89,
+      "surah_name_bn": "আল-ফজর"
+    },
+    {
+      "pdf_page": 1455,
+      "surah_id": 89,
+      "surah_name_bn": "আল-ফজর"
+    },
+    {
+      "pdf_page": 1456,
+      "surah_id": 89,
+      "surah_name_bn": "আল-ফজর"
+    },
+    {
+      "pdf_page": 1457,
+      "surah_id": 89,
+      "surah_name_bn": "আল-ফজর"
+    },
+    {
+      "pdf_page": 1458,
+      "surah_id": 89,
+      "surah_name_bn": "আল-ফজর"
+    },
+    {
+      "pdf_page": 1459,
+      "surah_id": 91,
+      "surah_name_bn": "আশ-শামস"
+    },
+    {
+      "pdf_page": 1460,
+      "surah_id": 91,
+      "surah_name_bn": "আশ-শামস"
+    },
+    {
+      "pdf_page": 1461,
+      "surah_id": 92,
+      "surah_name_bn": "আল-লাইল"
+    },
+    {
+      "pdf_page": 1462,
+      "surah_id": 92,
+      "surah_name_bn": "আল-লাইল"
+    },
+    {
+      "pdf_page": 1463,
+      "surah_id": 94,
+      "surah_name_bn": "আল-ইনশিরাহ"
+    },
+    {
+      "pdf_page": 1464,
+      "surah_id": 94,
+      "surah_name_bn": "আল-ইনশিরাহ"
+    },
+    {
+      "pdf_page": 1465,
+      "surah_id": 94,
+      "surah_name_bn": "আল-ইনশিরাহ"
+    },
+    {
+      "pdf_page": 1466,
+      "surah_id": 96,
+      "surah_name_bn": "আল-আলাক"
+    },
+    {
+      "pdf_page": 1467,
+      "surah_id": 96,
+      "surah_name_bn": "আল-আলাক"
+    },
+    {
+      "pdf_page": 1468,
+      "surah_id": 96,
+      "surah_name_bn": "আল-আলাক"
+    },
+    {
+      "pdf_page": 1469,
+      "surah_id": 98,
+      "surah_name_bn": "আল-বাইয়িনাহ"
+    },
+    {
+      "pdf_page": 1470,
+      "surah_id": 98,
+      "surah_name_bn": "আল-বাইয়িনাহ"
+    },
+    {
+      "pdf_page": 1471,
+      "surah_id": 98,
+      "surah_name_bn": "আল-বাইয়িনাহ"
+    },
+    {
+      "pdf_page": 1472,
+      "surah_id": 100,
+      "surah_name_bn": "আল-আদিয়াত"
+    },
+    {
+      "pdf_page": 1473,
+      "surah_id": 100,
+      "surah_name_bn": "আল-আদিয়াত"
+    },
+    {
+      "pdf_page": 1474,
+      "surah_id": 102,
+      "surah_name_bn": "আত-তাকাসুর"
+    },
+    {
+      "pdf_page": 1475,
+      "surah_id": 102,
+      "surah_name_bn": "আত-তাকাসুর"
+    },
+    {
+      "pdf_page": 1476,
+      "surah_id": 105,
+      "surah_name_bn": "আল-ফীল"
+    },
+    {
+      "pdf_page": 1477,
+      "surah_id": 105,
+      "surah_name_bn": "আল-ফীল"
+    },
+    {
+      "pdf_page": 1478,
+      "surah_id": 109,
+      "surah_name_bn": "আল-কাফিরূন"
+    },
+    {
+      "pdf_page": 1479,
+      "surah_id": 109,
+      "surah_name_bn": "আল-কাফিরূন"
+    },
+    {
+      "pdf_page": 1480,
+      "surah_id": 109,
+      "surah_name_bn": "আল-কাফিরূন"
+    },
+    {
+      "pdf_page": 1481,
+      "surah_id": 109,
+      "surah_name_bn": "আল-কাফিরূন"
+    },
+    {
+      "pdf_page": 1482,
+      "surah_id": 112,
+      "surah_name_bn": "আল-ইখলাস"
+    },
+    {
+      "pdf_page": 1483,
+      "surah_id": 112,
+      "surah_name_bn": "আল-ইখলাস"
+    },
+    {
+      "pdf_page": 1484,
+      "surah_id": 112,
+      "surah_name_bn": "আল-ইখলাস"
+    },
+    {
+      "pdf_page": 1485,
+      "surah_id": 112,
+      "surah_name_bn": "আল-ইখলাস"
+    },
+    {
+      "pdf_page": 1486,
+      "surah_id": 114,
+      "surah_name_bn": "আন-নাস"
+    },
+    {
+      "pdf_page": 1487,
+      "surah_id": 114,
+      "surah_name_bn": "আন-নাস"
+    },
+    {
+      "pdf_page": 1488,
+      "surah_id": 114,
+      "surah_name_bn": "আন-নাস"
+    },
+    {
+      "pdf_page": 1489,
+      "surah_id": 114,
+      "surah_name_bn": "আন-নাস"
+    },
+    {
+      "pdf_page": 1490,
+      "surah_id": 114,
+      "surah_name_bn": "আন-নাস"
+    },
+    {
+      "pdf_page": 1491,
+      "surah_id": 114,
+      "surah_name_bn": "আন-নাস"
+    }
+  ]
+}

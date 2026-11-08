@@ -566,6 +566,9 @@
           <button id="tafsirBtnTQ" class="px-2 py-0.5 rounded-lg text-[11px] sm:text-xs font-semibold bg-emerald-600 text-white transition shadow-sm whitespace-nowrap">
             তাওযীহুল
           </button>
+          <button id="tafsirBtnMQS" class="px-2 py-0.5 rounded-lg text-[11px] sm:text-xs font-semibold text-emerald-300 hover:text-white transition whitespace-nowrap">
+            মা'আরিফুল (সংক্ষিপ্ত)
+          </button>
           <button id="tafsirBtnMQ" class="px-2 py-0.5 rounded-lg text-[11px] sm:text-xs font-semibold text-emerald-300 hover:text-white transition whitespace-nowrap">
             মা'আরিফুল (৮ খণ্ড)
           </button>
@@ -1145,6 +1148,7 @@
     const transBtnTK = document.getElementById('transBtnTK');
     const tafsirSourceBar = document.getElementById('tafsirSourceBar');
     const tafsirBtnTQ = document.getElementById('tafsirBtnTQ');
+    const tafsirBtnMQS = document.getElementById('tafsirBtnMQS');
     const tafsirBtnMQ = document.getElementById('tafsirBtnMQ');
     const tafsirBtnAB = document.getElementById('tafsirBtnAB');
     const tafsirBtnIK = document.getElementById('tafsirBtnIK');
@@ -1356,10 +1360,11 @@
         const activeTafBtnClass = 'px-2 py-0.5 rounded-lg text-[11px] sm:text-xs font-semibold bg-emerald-600 text-white transition shadow-sm whitespace-nowrap';
         const inactiveTafBtnClass = 'px-2 py-0.5 rounded-lg text-[11px] sm:text-xs font-semibold text-emerald-300 hover:text-white transition whitespace-nowrap';
         if (tafsirBtnTQ) tafsirBtnTQ.className = selectedTafsirSource === 'tq' ? activeTafBtnClass : inactiveTafBtnClass;
+        if (tafsirBtnMQS) tafsirBtnMQS.className = selectedTafsirSource === 'mqs' ? activeTafBtnClass : inactiveTafBtnClass;
         if (tafsirBtnMQ) tafsirBtnMQ.className = selectedTafsirSource === 'mq' ? activeTafBtnClass : inactiveTafBtnClass;
         if (tafsirBtnAB) tafsirBtnAB.className = selectedTafsirSource === 'ab' ? activeTafBtnClass : inactiveTafBtnClass;
         if (tafsirBtnIK) tafsirBtnIK.className = selectedTafsirSource === 'ik' ? activeTafBtnClass : inactiveTafBtnClass;
-        const tafName = selectedTafsirSource === 'tq' ? 'তাওযীহুল কুরআন' : selectedTafsirSource === 'mq' ? "মা'আরিফুল কুরআন (৮ খণ্ড)" : selectedTafsirSource === 'ab' ? 'আহসানুল বায়ান' : 'ইবনে কাসীর';
+        const tafName = selectedTafsirSource === 'tq' ? 'তাওযীহুল কুরআন' : selectedTafsirSource === 'mqs' ? "মা'আরিফুল কুরআন (সংক্ষিপ্ত)" : selectedTafsirSource === 'mq' ? "মা'আরিফুল কুরআন (৮ খণ্ড)" : selectedTafsirSource === 'ab' ? 'আহসানুল বায়ান' : 'ইবনে কাসীর';
         studyModalTitle.textContent = `${info.sn} (পৃষ্ঠা ${currentPage} • আয়াত ${startAyah}–${endAyah})`;
         studyModalSubTitle.textContent = `তাফসীর ${tafName}`;
       }
@@ -1461,7 +1466,7 @@
         } else {
           // Tafsir Mode
           const tafsirData = await fetchPageTafsir(currentPage);
-          const tafsirLabel = selectedTafsirSource === 'tq' ? 'তাফসীরে তাওযীহুল কুরআন' : selectedTafsirSource === 'ab' ? 'তাফসীর আহসানুল বায়ান' : 'তাফসীর ইবনে কাসীর';
+          const tafsirLabel = selectedTafsirSource === 'tq' ? 'তাফসীরে তাওযীহুল কুরআন' : selectedTafsirSource === 'mqs' ? "মা'আরিফুল কুরআন (সংক্ষিপ্ত)" : selectedTafsirSource === 'ab' ? 'তাফসীর আহসানুল বায়ান' : 'তাফসীর ইবনে কাসীর';
 
           let cardsHtml = '';
           for (const sId of surahIds) {
@@ -1482,7 +1487,7 @@
             for (const a of ayahsOnPage) {
               const vk = `${sId}:${a.a}`;
               const tfEntry = tafsirData[vk] || {};
-              const tfText = selectedTafsirSource === 'tq' ? (tfEntry.tq || '') : selectedTafsirSource === 'ab' ? (tfEntry.ab || '') : (tfEntry.ik || '');
+              const tfText = selectedTafsirSource === 'tq' ? (tfEntry.tq || '') : selectedTafsirSource === 'mqs' ? (tfEntry.mqs || '') : selectedTafsirSource === 'ab' ? (tfEntry.ab || '') : (tfEntry.ik || '');
               cardsHtml += renderTafsirCard(a.a, surahIds.length > 1 ? sData.name_bn : '', a.ar, tfText, tafsirLabel);
             }
           }
@@ -1574,6 +1579,15 @@
       tafsirBtnTQ.addEventListener('click', () => {
         if (selectedTafsirSource !== 'tq') {
           selectedTafsirSource = 'tq';
+          renderStudyContent();
+        }
+      });
+    }
+
+    if (tafsirBtnMQS) {
+      tafsirBtnMQS.addEventListener('click', () => {
+        if (selectedTafsirSource !== 'mqs') {
+          selectedTafsirSource = 'mqs';
           renderStudyContent();
         }
       });
