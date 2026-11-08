@@ -14,7 +14,7 @@ class QuranDbHelper {
   static Database? _database;
   static Future<Database>? _initDbFuture;
 
-  static const int kDatabaseVersion = 3;
+  static const int kDatabaseVersion = 4;
 
   // In-memory static caches for instant zero-lag page navigation
   static List<Surah>? _cachedSurahs;

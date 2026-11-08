@@ -5,6 +5,7 @@ build/
 .flutter-plugins
 .flutter-plugins-dependencies
 /data/tafsir/maariful_short
+/data/tafsir/tafsir_usmani
 # Android
 android/**/gradle-wrapper.jar
 android/.gradle

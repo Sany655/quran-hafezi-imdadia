@@ -1,0 +1,1060 @@
+{
+  "volumes": {
+    "1": {
+      "file": "reference_books/tafsir_usmani_bangla/Tafsir_Usmani_Vol_1_Surah_1-6.pdf",
+      "surah_start": 1,
+      "surah_end": 6,
+      "total_pages": 735,
+      "content_start_page": 35
+    },
+    "2": {
+      "file": "reference_books/tafsir_usmani_bangla/Tafsir_Usmani_Vol_2_Surah_7-18.pdf",
+      "surah_start": 7,
+      "surah_end": 18,
+      "total_pages": 777,
+      "content_start_page": 15
+    },
+    "3": {
+      "file": "reference_books/tafsir_usmani_bangla/Tafsir_Usmani_Vol_3_Surah_19-38.pdf",
+      "surah_start": 19,
+      "surah_end": 38,
+      "total_pages": 748,
+      "content_start_page": 15
+    },
+    "4": {
+      "file": "reference_books/tafsir_usmani_bangla/Tafsir_Usmani_Vol_4_Surah_39-114.pdf",
+      "surah_start": 39,
+      "surah_end": 114,
+      "total_pages": 777,
+      "content_start_page": 15
+    }
+  },
+  "surahs": {
+    "1": {
+      "surah_id": 1,
+      "name_bn": "আল-ফাতিহা",
+      "name_en": "Al-Fatihah",
+      "name_ar": "الفاتحة",
+      "total_ayahs": 7,
+      "mushaf_page": 2,
+      "volume": 1
+    },
+    "2": {
+      "surah_id": 2,
+      "name_bn": "আল-বাকারাহ",
+      "name_en": "Al-Baqarah",
+      "name_ar": "البقرة",
+      "total_ayahs": 286,
+      "mushaf_page": 3,
+      "volume": 1
+    },
+    "3": {
+      "surah_id": 3,
+      "name_bn": "আলে ইমরান",
+      "name_en": "Ali 'Imran",
+      "name_ar": "آل عمران",
+      "total_ayahs": 200,
+      "mushaf_page": 51,
+      "volume": 1
+    },
+    "4": {
+      "surah_id": 4,
+      "name_bn": "আন-নিসা",
+      "name_en": "An-Nisa",
+      "name_ar": "النساء",
+      "total_ayahs": 176,
+      "mushaf_page": 78,
+      "volume": 1
+    },
+    "5": {
+      "surah_id": 5,
+      "name_bn": "আল-মায়িদাহ",
+      "name_en": "Al-Ma'idah",
+      "name_ar": "المائدة",
+      "total_ayahs": 120,
+      "mushaf_page": 107,
+      "volume": 1
+    },
+    "6": {
+      "surah_id": 6,
+      "name_bn": "আল-আনআম",
+      "name_en": "Al-An'am",
+      "name_ar": "الأنعام",
+      "total_ayahs": 165,
+      "mushaf_page": 129,
+      "volume": 1
+    },
+    "7": {
+      "surah_id": 7,
+      "name_bn": "আল-আরাফ",
+      "name_en": "Al-A'raf",
+      "name_ar": "الأعراف",
+      "total_ayahs": 206,
+      "mushaf_page": 152,
+      "volume": 2
+    },
+    "8": {
+      "surah_id": 8,
+      "name_bn": "আল-আনফাল",
+      "name_en": "Al-Anfal",
+      "name_ar": "الأنفال",
+      "total_ayahs": 75,
+      "mushaf_page": 178,
+      "volume": 2
+    },
+    "9": {
+      "surah_id": 9,
+      "name_bn": "আত-তাওবাহ",
+      "name_en": "At-Tawbah",
+      "name_ar": "التوبة",
+      "total_ayahs": 129,
+      "mushaf_page": 188,
+      "volume": 2
+    },
+    "10": {
+      "surah_id": 10,
+      "name_bn": "ইউনুস",
+      "name_en": "Yunus",
+      "name_ar": "يونس",
+      "total_ayahs": 109,
+      "mushaf_page": 209,
+      "volume": 2
+    },
+    "11": {
+      "surah_id": 11,
+      "name_bn": "হুদ",
+      "name_en": "Hud",
+      "name_ar": "هود",
+      "total_ayahs": 123,
+      "mushaf_page": 222,
+      "volume": 2
+    },
+    "12": {
+      "surah_id": 12,
+      "name_bn": "ইউসুফ",
+      "name_en": "Yusuf",
+      "name_ar": "يوسف",
+      "total_ayahs": 111,
+      "mushaf_page": 236,
+      "volume": 2
+    },
+    "13": {
+      "surah_id": 13,
+      "name_bn": "আর-রাদ",
+      "name_en": "Ar-Ra'd",
+      "name_ar": "الرعد",
+      "total_ayahs": 43,
+      "mushaf_page": 250,
+      "volume": 2
+    },
+    "14": {
+      "surah_id": 14,
+      "name_bn": "ইবরাহীম",
+      "name_en": "Ibrahim",
+      "name_ar": "ابراهيم",
+      "total_ayahs": 52,
+      "mushaf_page": 256,
+      "volume": 2
+    },
+    "15": {
+      "surah_id": 15,
+      "name_bn": "আল-হিজর",
+      "name_en": "Al-Hijr",
+      "name_ar": "الحجر",
+      "total_ayahs": 99,
+      "mushaf_page": 262,
+      "volume": 2
+    },
+    "16": {
+      "surah_id": 16,
+      "name_bn": "আন-নাহল",
+      "name_en": "An-Nahl",
+      "name_ar": "النحل",
+      "total_ayahs": 128,
+      "mushaf_page": 268,
+      "volume": 2
+    },
+    "17": {
+      "surah_id": 17,
+      "name_bn": "বনী ইসরাঈল",
+      "name_en": "Al-Isra",
+      "name_ar": "الإسراء",
+      "total_ayahs": 111,
+      "mushaf_page": 283,
+      "volume": 2
+    },
+    "18": {
+      "surah_id": 18,
+      "name_bn": "আল-কাহফ",
+      "name_en": "Al-Kahf",
+      "name_ar": "الكهف",
+      "total_ayahs": 110,
+      "mushaf_page": 294,
+      "volume": 2
+    },
+    "19": {
+      "surah_id": 19,
+      "name_bn": "মারিয়াম",
+      "name_en": "Maryam",
+      "name_ar": "مريم",
+      "total_ayahs": 98,
+      "mushaf_page": 306,
+      "volume": 3
+    },
+    "20": {
+      "surah_id": 20,
+      "name_bn": "ত্বা-হা",
+      "name_en": "Taha",
+      "name_ar": "طه",
+      "total_ayahs": 135,
+      "mushaf_page": 313,
+      "volume": 3
+    },
+    "21": {
+      "surah_id": 21,
+      "name_bn": "আল-আম্বিয়া",
+      "name_en": "Al-Anbya",
+      "name_ar": "الأنبياء",
+      "total_ayahs": 112,
+      "mushaf_page": 323,
+      "volume": 3
+    },
+    "22": {
+      "surah_id": 22,
+      "name_bn": "আল-হাজ্জ",
+      "name_en": "Al-Hajj",
+      "name_ar": "الحج",
+      "total_ayahs": 78,
+      "mushaf_page": 332,
+      "volume": 3
+    },
+    "23": {
+      "surah_id": 23,
+      "name_bn": "আল-মুমিনূন",
+      "name_en": "Al-Mu'minun",
+      "name_ar": "المؤمنون",
+      "total_ayahs": 118,
+      "mushaf_page": 343,
+      "volume": 3
+    },
+    "24": {
+      "surah_id": 24,
+      "name_bn": "আন-নূর",
+      "name_en": "An-Nur",
+      "name_ar": "النور",
+      "total_ayahs": 64,
+      "mushaf_page": 351,
+      "volume": 3
+    },
+    "25": {
+      "surah_id": 25,
+      "name_bn": "আল-ফুরকান",
+      "name_en": "Al-Furqan",
+      "name_ar": "الفرقان",
+      "total_ayahs": 77,
+      "mushaf_page": 360,
+      "volume": 3
+    },
+    "26": {
+      "surah_id": 26,
+      "name_bn": "আশ-শুআরা",
+      "name_en": "Ash-Shu'ara",
+      "name_ar": "الشعراء",
+      "total_ayahs": 227,
+      "mushaf_page": 367,
+      "volume": 3
+    },
+    "27": {
+      "surah_id": 27,
+      "name_bn": "আন-নামল",
+      "name_en": "An-Naml",
+      "name_ar": "النمل",
+      "total_ayahs": 93,
+      "mushaf_page": 377,
+      "volume": 3
+    },
+    "28": {
+      "surah_id": 28,
+      "name_bn": "আল-কাসাস",
+      "name_en": "Al-Qasas",
+      "name_ar": "القصص",
+      "total_ayahs": 88,
+      "mushaf_page": 386,
+      "volume": 3
+    },
+    "29": {
+      "surah_id": 29,
+      "name_bn": "আল-আনকাবূত",
+      "name_en": "Al-'Ankabut",
+      "name_ar": "العنكبوت",
+      "total_ayahs": 69,
+      "mushaf_page": 397,
+      "volume": 3
+    },
+    "30": {
+      "surah_id": 30,
+      "name_bn": "আর-রূম",
+      "name_en": "Ar-Rum",
+      "name_ar": "الروم",
+      "total_ayahs": 60,
+      "mushaf_page": 405,
+      "volume": 3
+    },
+    "31": {
+      "surah_id": 31,
+      "name_bn": "লুকমান",
+      "name_en": "Luqman",
+      "name_ar": "لقمان",
+      "total_ayahs": 34,
+      "mushaf_page": 412,
+      "volume": 3
+    },
+    "32": {
+      "surah_id": 32,
+      "name_bn": "আস-সাজদাহ",
+      "name_en": "As-Sajdah",
+      "name_ar": "السجدة",
+      "total_ayahs": 30,
+      "mushaf_page": 416,
+      "volume": 3
+    },
+    "33": {
+      "surah_id": 33,
+      "name_bn": "আল-আহযাব",
+      "name_en": "Al-Ahzab",
+      "name_ar": "الأحزاب",
+      "total_ayahs": 73,
+      "mushaf_page": 419,
+      "volume": 3
+    },
+    "34": {
+      "surah_id": 34,
+      "name_bn": "সাবা",
+      "name_en": "Saba",
+      "name_ar": "سبإ",
+      "total_ayahs": 54,
+      "mushaf_page": 429,
+      "volume": 3
+    },
+    "35": {
+      "surah_id": 35,
+      "name_bn": "ফাতির",
+      "name_en": "Fatir",
+      "name_ar": "فاطر",
+      "total_ayahs": 45,
+      "mushaf_page": 435,
+      "volume": 3
+    },
+    "36": {
+      "surah_id": 36,
+      "name_bn": "ইয়াসীন",
+      "name_en": "Ya-Sin",
+      "name_ar": "يس",
+      "total_ayahs": 83,
+      "mushaf_page": 441,
+      "volume": 3
+    },
+    "37": {
+      "surah_id": 37,
+      "name_bn": "আস-সাফফাত",
+      "name_en": "As-Saffat",
+      "name_ar": "الصافات",
+      "total_ayahs": 182,
+      "mushaf_page": 446,
+      "volume": 3
+    },
+    "38": {
+      "surah_id": 38,
+      "name_bn": "সোয়াদ",
+      "name_en": "Sad",
+      "name_ar": "ص",
+      "total_ayahs": 88,
+      "mushaf_page": 453,
+      "volume": 3
+    },
+    "39": {
+      "surah_id": 39,
+      "name_bn": "আয-যুমার",
+      "name_en": "Az-Zumar",
+      "name_ar": "الزمر",
+      "total_ayahs": 75,
+      "mushaf_page": 459,
+      "volume": 4
+    },
+    "40": {
+      "surah_id": 40,
+      "name_bn": "গাফির",
+      "name_en": "Ghafir",
+      "name_ar": "غافر",
+      "total_ayahs": 85,
+      "mushaf_page": 468,
+      "volume": 4
+    },
+    "41": {
+      "surah_id": 41,
+      "name_bn": "ফুসসিলাত",
+      "name_en": "Fussilat",
+      "name_ar": "فصلت",
+      "total_ayahs": 54,
+      "mushaf_page": 478,
+      "volume": 4
+    },
+    "42": {
+      "surah_id": 42,
+      "name_bn": "আশ-শূরা",
+      "name_en": "Ash-Shuraa",
+      "name_ar": "الشورى",
+      "total_ayahs": 53,
+      "mushaf_page": 484,
+      "volume": 4
+    },
+    "43": {
+      "surah_id": 43,
+      "name_bn": "আয-যুখরুফ",
+      "name_en": "Az-Zukhruf",
+      "name_ar": "الزخرف",
+      "total_ayahs": 89,
+      "mushaf_page": 490,
+      "volume": 4
+    },
+    "44": {
+      "surah_id": 44,
+      "name_bn": "আদ-দুখান",
+      "name_en": "Ad-Dukhan",
+      "name_ar": "الدخان",
+      "total_ayahs": 59,
+      "mushaf_page": 496,
+      "volume": 4
+    },
+    "45": {
+      "surah_id": 45,
+      "name_bn": "আল-জাসিয়াহ",
+      "name_en": "Al-Jathiyah",
+      "name_ar": "الجاثية",
+      "total_ayahs": 37,
+      "mushaf_page": 499,
+      "volume": 4
+    },
+    "46": {
+      "surah_id": 46,
+      "name_bn": "আল-আহকাফ",
+      "name_en": "Al-Ahqaf",
+      "name_ar": "الأحقاف",
+      "total_ayahs": 35,
+      "mushaf_page": 503,
+      "volume": 4
+    },
+    "47": {
+      "surah_id": 47,
+      "name_bn": "মুহাম্মদ",
+      "name_en": "Muhammad",
+      "name_ar": "محمد",
+      "total_ayahs": 38,
+      "mushaf_page": 507,
+      "volume": 4
+    },
+    "48": {
+      "surah_id": 48,
+      "name_bn": "আল-ফাতহ",
+      "name_en": "Al-Fath",
+      "name_ar": "الفتح",
+      "total_ayahs": 29,
+      "mushaf_page": 512,
+      "volume": 4
+    },
+    "49": {
+      "surah_id": 49,
+      "name_bn": "আল-হুজুরাত",
+      "name_en": "Al-Hujurat",
+      "name_ar": "الحجرات",
+      "total_ayahs": 18,
+      "mushaf_page": 516,
+      "volume": 4
+    },
+    "50": {
+      "surah_id": 50,
+      "name_bn": "ক্বাফ",
+      "name_en": "Qaf",
+      "name_ar": "ق",
+      "total_ayahs": 45,
+      "mushaf_page": 519,
+      "volume": 4
+    },
+    "51": {
+      "surah_id": 51,
+      "name_bn": "আয-যারিয়াত",
+      "name_en": "Adh-Dhariyat",
+      "name_ar": "الذاريات",
+      "total_ayahs": 60,
+      "mushaf_page": 521,
+      "volume": 4
+    },
+    "52": {
+      "surah_id": 52,
+      "name_bn": "আত-তূর",
+      "name_en": "At-Tur",
+      "name_ar": "الطور",
+      "total_ayahs": 49,
+      "mushaf_page": 524,
+      "volume": 4
+    },
+    "53": {
+      "surah_id": 53,
+      "name_bn": "আন-নাজম",
+      "name_en": "An-Najm",
+      "name_ar": "النجم",
+      "total_ayahs": 62,
+      "mushaf_page": 527,
+      "volume": 4
+    },
+    "54": {
+      "surah_id": 54,
+      "name_bn": "আল-কামার",
+      "name_en": "Al-Qamar",
+      "name_ar": "القمر",
+      "total_ayahs": 55,
+      "mushaf_page": 529,
+      "volume": 4
+    },
+    "55": {
+      "surah_id": 55,
+      "name_bn": "আর-রাহমান",
+      "name_en": "Ar-Rahman",
+      "name_ar": "الرحمن",
+      "total_ayahs": 78,
+      "mushaf_page": 532,
+      "volume": 4
+    },
+    "56": {
+      "surah_id": 56,
+      "name_bn": "আল-ওয়াকিয়াহ",
+      "name_en": "Al-Waqi'ah",
+      "name_ar": "الواقعة",
+      "total_ayahs": 96,
+      "mushaf_page": 535,
+      "volume": 4
+    },
+    "57": {
+      "surah_id": 57,
+      "name_bn": "আল-হাদীদ",
+      "name_en": "Al-Hadid",
+      "name_ar": "الحديد",
+      "total_ayahs": 29,
+      "mushaf_page": 538,
+      "volume": 4
+    },
+    "58": {
+      "surah_id": 58,
+      "name_bn": "আল-মুজাদালাহ",
+      "name_en": "Al-Mujadila",
+      "name_ar": "المجادلة",
+      "total_ayahs": 22,
+      "mushaf_page": 543,
+      "volume": 4
+    },
+    "59": {
+      "surah_id": 59,
+      "name_bn": "আল-হাশর",
+      "name_en": "Al-Hashr",
+      "name_ar": "الحشر",
+      "total_ayahs": 24,
+      "mushaf_page": 546,
+      "volume": 4
+    },
+    "60": {
+      "surah_id": 60,
+      "name_bn": "আল-মুমতাহিনাহ",
+      "name_en": "Al-Mumtahanah",
+      "name_ar": "الممتحنة",
+      "total_ayahs": 13,
+      "mushaf_page": 550,
+      "volume": 4
+    },
+    "61": {
+      "surah_id": 61,
+      "name_bn": "আস-সফ",
+      "name_en": "As-Saf",
+      "name_ar": "الصف",
+      "total_ayahs": 14,
+      "mushaf_page": 552,
+      "volume": 4
+    },
+    "62": {
+      "surah_id": 62,
+      "name_bn": "আল-জুমুআহ",
+      "name_en": "Al-Jumu'ah",
+      "name_ar": "الجمعة",
+      "total_ayahs": 11,
+      "mushaf_page": 554,
+      "volume": 4
+    },
+    "63": {
+      "surah_id": 63,
+      "name_bn": "আল-মুনাফিকূন",
+      "name_en": "Al-Munafiqun",
+      "name_ar": "المنافقون",
+      "total_ayahs": 11,
+      "mushaf_page": 555,
+      "volume": 4
+    },
+    "64": {
+      "surah_id": 64,
+      "name_bn": "আত-তাগাবুন",
+      "name_en": "At-Taghabun",
+      "name_ar": "التغابن",
+      "total_ayahs": 18,
+      "mushaf_page": 557,
+      "volume": 4
+    },
+    "65": {
+      "surah_id": 65,
+      "name_bn": "আত-ত্বালাক",
+      "name_en": "At-Talaq",
+      "name_ar": "الطلاق",
+      "total_ayahs": 12,
+      "mushaf_page": 559,
+      "volume": 4
+    },
+    "66": {
+      "surah_id": 66,
+      "name_bn": "আত-তাহরীম",
+      "name_en": "At-Tahrim",
+      "name_ar": "التحريم",
+      "total_ayahs": 12,
+      "mushaf_page": 561,
+      "volume": 4
+    },
+    "67": {
+      "surah_id": 67,
+      "name_bn": "আল-মুলক",
+      "name_en": "Al-Mulk",
+      "name_ar": "الملك",
+      "total_ayahs": 30,
+      "mushaf_page": 563,
+      "volume": 4
+    },
+    "68": {
+      "surah_id": 68,
+      "name_bn": "আল-কলম",
+      "name_en": "Al-Qalam",
+      "name_ar": "القلم",
+      "total_ayahs": 52,
+      "mushaf_page": 565,
+      "volume": 4
+    },
+    "69": {
+      "surah_id": 69,
+      "name_bn": "আল-হাক্কাহ",
+      "name_en": "Al-Haqqah",
+      "name_ar": "الحاقة",
+      "total_ayahs": 52,
+      "mushaf_page": 568,
+      "volume": 4
+    },
+    "70": {
+      "surah_id": 70,
+      "name_bn": "আল-মাআরিজ",
+      "name_en": "Al-Ma'arij",
+      "name_ar": "المعارج",
+      "total_ayahs": 44,
+      "mushaf_page": 570,
+      "volume": 4
+    },
+    "71": {
+      "surah_id": 71,
+      "name_bn": "নূহ",
+      "name_en": "Nuh",
+      "name_ar": "نوح",
+      "total_ayahs": 28,
+      "mushaf_page": 572,
+      "volume": 4
+    },
+    "72": {
+      "surah_id": 72,
+      "name_bn": "আল-জিন",
+      "name_en": "Al-Jinn",
+      "name_ar": "الجن",
+      "total_ayahs": 28,
+      "mushaf_page": 574,
+      "volume": 4
+    },
+    "73": {
+      "surah_id": 73,
+      "name_bn": "আল-মুযযাম্মিল",
+      "name_en": "Al-Muzzammil",
+      "name_ar": "المزمل",
+      "total_ayahs": 20,
+      "mushaf_page": 577,
+      "volume": 4
+    },
+    "74": {
+      "surah_id": 74,
+      "name_bn": "আল-মুদ্দাসসির",
+      "name_en": "Al-Muddaththir",
+      "name_ar": "المدثر",
+      "total_ayahs": 56,
+      "mushaf_page": 579,
+      "volume": 4
+    },
+    "75": {
+      "surah_id": 75,
+      "name_bn": "আল-কিয়ামাহ",
+      "name_en": "Al-Qiyamah",
+      "name_ar": "القيامة",
+      "total_ayahs": 40,
+      "mushaf_page": 581,
+      "volume": 4
+    },
+    "76": {
+      "surah_id": 76,
+      "name_bn": "আল-ইনসান",
+      "name_en": "Al-Insan",
+      "name_ar": "الانسان",
+      "total_ayahs": 31,
+      "mushaf_page": 583,
+      "volume": 4
+    },
+    "77": {
+      "surah_id": 77,
+      "name_bn": "আল-মুরসালাত",
+      "name_en": "Al-Mursalat",
+      "name_ar": "المرسلات",
+      "total_ayahs": 50,
+      "mushaf_page": 585,
+      "volume": 4
+    },
+    "78": {
+      "surah_id": 78,
+      "name_bn": "আন-নাবা",
+      "name_en": "An-Naba",
+      "name_ar": "النبإ",
+      "total_ayahs": 40,
+      "mushaf_page": 587,
+      "volume": 4
+    },
+    "79": {
+      "surah_id": 79,
+      "name_bn": "আন-নাযিআত",
+      "name_en": "An-Nazi'at",
+      "name_ar": "النازعات",
+      "total_ayahs": 46,
+      "mushaf_page": 588,
+      "volume": 4
+    },
+    "80": {
+      "surah_id": 80,
+      "name_bn": "আবাসা",
+      "name_en": "'Abasa",
+      "name_ar": "عبس",
+      "total_ayahs": 42,
+      "mushaf_page": 590,
+      "volume": 4
+    },
+    "81": {
+      "surah_id": 81,
+      "name_bn": "আত-তাকবীর",
+      "name_en": "At-Takwir",
+      "name_ar": "التكوير",
+      "total_ayahs": 29,
+      "mushaf_page": 591,
+      "volume": 4
+    },
+    "82": {
+      "surah_id": 82,
+      "name_bn": "আল-ইনফিতার",
+      "name_en": "Al-Infitar",
+      "name_ar": "الإنفطار",
+      "total_ayahs": 19,
+      "mushaf_page": 592,
+      "volume": 4
+    },
+    "83": {
+      "surah_id": 83,
+      "name_bn": "আল-মুতাফফিফীন",
+      "name_en": "Al-Mutaffifin",
+      "name_ar": "المطففين",
+      "total_ayahs": 36,
+      "mushaf_page": 593,
+      "volume": 4
+    },
+    "84": {
+      "surah_id": 84,
+      "name_bn": "আল-ইনশিকাক",
+      "name_en": "Al-Inshiqaq",
+      "name_ar": "الإنشقاق",
+      "total_ayahs": 25,
+      "mushaf_page": 595,
+      "volume": 4
+    },
+    "85": {
+      "surah_id": 85,
+      "name_bn": "আল-বুরূজ",
+      "name_en": "Al-Buruj",
+      "name_ar": "البروج",
+      "total_ayahs": 22,
+      "mushaf_page": 596,
+      "volume": 4
+    },
+    "86": {
+      "surah_id": 86,
+      "name_bn": "আত-তারিক",
+      "name_en": "At-Tariq",
+      "name_ar": "الطارق",
+      "total_ayahs": 17,
+      "mushaf_page": 597,
+      "volume": 4
+    },
+    "87": {
+      "surah_id": 87,
+      "name_bn": "আল-আলা",
+      "name_en": "Al-A'la",
+      "name_ar": "الأعلى",
+      "total_ayahs": 19,
+      "mushaf_page": 598,
+      "volume": 4
+    },
+    "88": {
+      "surah_id": 88,
+      "name_bn": "আল-গাশিয়াহ",
+      "name_en": "Al-Ghashiyah",
+      "name_ar": "الغاشية",
+      "total_ayahs": 26,
+      "mushaf_page": 598,
+      "volume": 4
+    },
+    "89": {
+      "surah_id": 89,
+      "name_bn": "আল-ফজর",
+      "name_en": "Al-Fajr",
+      "name_ar": "الفجر",
+      "total_ayahs": 30,
+      "mushaf_page": 599,
+      "volume": 4
+    },
+    "90": {
+      "surah_id": 90,
+      "name_bn": "আল-বালাদ",
+      "name_en": "Al-Balad",
+      "name_ar": "البلد",
+      "total_ayahs": 20,
+      "mushaf_page": 601,
+      "volume": 4
+    },
+    "91": {
+      "surah_id": 91,
+      "name_bn": "আশ-শামস",
+      "name_en": "Ash-Shams",
+      "name_ar": "الشمس",
+      "total_ayahs": 15,
+      "mushaf_page": 601,
+      "volume": 4
+    },
+    "92": {
+      "surah_id": 92,
+      "name_bn": "আল-লাইল",
+      "name_en": "Al-Layl",
+      "name_ar": "الليل",
+      "total_ayahs": 21,
+      "mushaf_page": 602,
+      "volume": 4
+    },
+    "93": {
+      "surah_id": 93,
+      "name_bn": "আদ-দুহা",
+      "name_en": "Ad-Duhaa",
+      "name_ar": "الضحى",
+      "total_ayahs": 11,
+      "mushaf_page": 603,
+      "volume": 4
+    },
+    "94": {
+      "surah_id": 94,
+      "name_bn": "আল-ইনশিরাহ",
+      "name_en": "Ash-Sharh",
+      "name_ar": "الشرح",
+      "total_ayahs": 8,
+      "mushaf_page": 603,
+      "volume": 4
+    },
+    "95": {
+      "surah_id": 95,
+      "name_bn": "আত-তীন",
+      "name_en": "At-Tin",
+      "name_ar": "التين",
+      "total_ayahs": 8,
+      "mushaf_page": 604,
+      "volume": 4
+    },
+    "96": {
+      "surah_id": 96,
+      "name_bn": "আল-আলাক",
+      "name_en": "Al-'Alaq",
+      "name_ar": "العلق",
+      "total_ayahs": 19,
+      "mushaf_page": 604,
+      "volume": 4
+    },
+    "97": {
+      "surah_id": 97,
+      "name_bn": "আল-কদর",
+      "name_en": "Al-Qadr",
+      "name_ar": "القدر",
+      "total_ayahs": 5,
+      "mushaf_page": 605,
+      "volume": 4
+    },
+    "98": {
+      "surah_id": 98,
+      "name_bn": "আল-বাইয়িনাহ",
+      "name_en": "Al-Bayyinah",
+      "name_ar": "البينة",
+      "total_ayahs": 8,
+      "mushaf_page": 605,
+      "volume": 4
+    },
+    "99": {
+      "surah_id": 99,
+      "name_bn": "আল-যিলযাল",
+      "name_en": "Az-Zalzalah",
+      "name_ar": "الزلزلة",
+      "total_ayahs": 8,
+      "mushaf_page": 606,
+      "volume": 4
+    },
+    "100": {
+      "surah_id": 100,
+      "name_bn": "আল-আদিয়াত",
+      "name_en": "Al-'Adiyat",
+      "name_ar": "العاديات",
+      "total_ayahs": 11,
+      "mushaf_page": 606,
+      "volume": 4
+    },
+    "101": {
+      "surah_id": 101,
+      "name_bn": "আল-কারিআহ",
+      "name_en": "Al-Qari'ah",
+      "name_ar": "القارعة",
+      "total_ayahs": 11,
+      "mushaf_page": 607,
+      "volume": 4
+    },
+    "102": {
+      "surah_id": 102,
+      "name_bn": "আত-তাকাসুর",
+      "name_en": "At-Takathur",
+      "name_ar": "التكاثر",
+      "total_ayahs": 8,
+      "mushaf_page": 607,
+      "volume": 4
+    },
+    "103": {
+      "surah_id": 103,
+      "name_bn": "আল-আসর",
+      "name_en": "Al-'Asr",
+      "name_ar": "العصر",
+      "total_ayahs": 3,
+      "mushaf_page": 608,
+      "volume": 4
+    },
+    "104": {
+      "surah_id": 104,
+      "name_bn": "আল-হুমাযাহ",
+      "name_en": "Al-Humazah",
+      "name_ar": "الهمزة",
+      "total_ayahs": 9,
+      "mushaf_page": 608,
+      "volume": 4
+    },
+    "105": {
+      "surah_id": 105,
+      "name_bn": "আল-ফীল",
+      "name_en": "Al-Fil",
+      "name_ar": "الفيل",
+      "total_ayahs": 5,
+      "mushaf_page": 608,
+      "volume": 4
+    },
+    "106": {
+      "surah_id": 106,
+      "name_bn": "কুরাইশ",
+      "name_en": "Quraysh",
+      "name_ar": "قريش",
+      "total_ayahs": 4,
+      "mushaf_page": 609,
+      "volume": 4
+    },
+    "107": {
+      "surah_id": 107,
+      "name_bn": "আল-মাউন",
+      "name_en": "Al-Ma'un",
+      "name_ar": "الماعون",
+      "total_ayahs": 7,
+      "mushaf_page": 609,
+      "volume": 4
+    },
+    "108": {
+      "surah_id": 108,
+      "name_bn": "আল-কাওসার",
+      "name_en": "Al-Kawthar",
+      "name_ar": "الكوثر",
+      "total_ayahs": 3,
+      "mushaf_page": 609,
+      "volume": 4
+    },
+    "109": {
+      "surah_id": 109,
+      "name_bn": "আল-কাফিরূন",
+      "name_en": "Al-Kafirun",
+      "name_ar": "الكافرون",
+      "total_ayahs": 6,
+      "mushaf_page": 609,
+      "volume": 4
+    },
+    "110": {
+      "surah_id": 110,
+      "name_bn": "আন-নাসর",
+      "name_en": "An-Nasr",
+      "name_ar": "النصر",
+      "total_ayahs": 3,
+      "mushaf_page": 610,
+      "volume": 4
+    },
+    "111": {
+      "surah_id": 111,
+      "name_bn": "আল-লাহাব",
+      "name_en": "Al-Masad",
+      "name_ar": "المسد",
+      "total_ayahs": 5,
+      "mushaf_page": 610,
+      "volume": 4
+    },
+    "112": {
+      "surah_id": 112,
+      "name_bn": "আল-ইখলাস",
+      "name_en": "Al-Ikhlas",
+      "name_ar": "الإخلاص",
+      "total_ayahs": 4,
+      "mushaf_page": 610,
+      "volume": 4
+    },
+    "113": {
+      "surah_id": 113,
+      "name_bn": "আল-ফালাক",
+      "name_en": "Al-Falaq",
+      "name_ar": "الفلق",
+      "total_ayahs": 5,
+      "mushaf_page": 611,
+      "volume": 4
+    },
+    "114": {
+      "surah_id": 114,
+      "name_bn": "আন-নাস",
+      "name_en": "An-Nas",
+      "name_ar": "الناس",
+      "total_ayahs": 6,
+      "mushaf_page": 611,
+      "volume": 4
+    }
+  }
+}
