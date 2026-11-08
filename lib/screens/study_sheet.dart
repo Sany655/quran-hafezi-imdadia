@@ -55,7 +55,7 @@ class _StudySheetState extends State<StudySheet> {
       ),
       builder: (ctx) {
         return DefaultTabController(
-          length: 6,
+          length: 4,
           child: DraggableScrollableSheet(
             initialChildSize: 0.75,
             maxChildSize: 0.95,
@@ -112,9 +112,7 @@ class _StudySheetState extends State<StudySheet> {
                     ),
                     tabs: const [
                       Tab(text: 'তাওযীহুল কুরআন'),
-                      Tab(text: 'মা\'আরিফুল কুরআন (সংক্ষিপ্ত)'),
                       Tab(text: 'মা\'আরিফুল কুরআন (৮ খণ্ড)'),
-                      Tab(text: 'তাফসীরে উসমানী'),
                       Tab(text: 'আহসানুল বায়ান'),
                       Tab(text: 'ইবনে কাসীর'),
                     ],
@@ -123,9 +121,7 @@ class _StudySheetState extends State<StudySheet> {
                     child: TabBarView(
                       children: [
                         _buildTafsirContent(tafsirs['tawzeehul_quran'], scrollController),
-                        _buildTafsirContent(tafsirs['maariful_quran_short'], scrollController),
                         _buildMaarifulQuranTab(maarifulRef, ayah, scrollController),
-                        _buildTafsirContent(tafsirs['tafsir_usmani'], scrollController),
                         _buildTafsirContent(tafsirs['ahsanul_bayan'], scrollController),
                         _buildTafsirContent(tafsirs['ibn_kathir'], scrollController),
                       ],
