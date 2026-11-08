@@ -117,6 +117,7 @@ jobs:
             --workers ${{ inputs.workers }} \
             --dpi ${{ inputs.dpi }} \
             --psm ${{ inputs.psm }} \
+            --lang 'ben+ara' \
             --no-resume
 
       - name: Upload Volume ${{ matrix.volume }} Artifact
@@ -141,10 +142,10 @@ jobs:
           python-version: '3.12'
           cache: 'pip'
 
-      - name: Install System Tesseract & Bengali Language Data
+      - name: Install System Tesseract & Bengali/Arabic Language Data
         run: |
           sudo apt-get update
-          sudo apt-get install -y tesseract-ocr tesseract-ocr-ben
+          sudo apt-get install -y tesseract-ocr tesseract-ocr-ben tesseract-ocr-ara
 
       - name: Install Python Dependencies
         run: |
@@ -169,6 +170,7 @@ jobs:
             --workers ${{ inputs.workers }} \
             --dpi ${{ inputs.dpi }} \
             --psm ${{ inputs.psm }} \
+            --lang 'ben+ara' \
             --no-resume
 
       - name: Upload Maariful Short Artifact

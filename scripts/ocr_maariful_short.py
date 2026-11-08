@@ -71,8 +71,8 @@ def main():
                         help='Re-OCR all pages even if already done')
     parser.add_argument('--dpi', type=int, default=200,
                         help='Render DPI (default: 200, optimum quality and speed)')
-    parser.add_argument('--lang', type=str, default='ben',
-                        help='OCR language (default: ben)')
+    parser.add_argument('--lang', type=str, default='ben+ara',
+                        help='OCR language (default: ben+ara)')
     parser.add_argument('--psm', type=int, default=3,
                         help='Page segmentation mode (default: 3 for multi-column automatic layout)')
     parser.add_argument('--start', type=int, default=0,

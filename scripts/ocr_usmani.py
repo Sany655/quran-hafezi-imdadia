@@ -62,8 +62,8 @@ def main():
     parser.add_argument('--no-resume', action='store_false', dest='resume')
     parser.add_argument('--dpi', type=int, default=200,
                         help='Render DPI (default: 200)')
-    parser.add_argument('--lang', type=str, default='ben',
-                        help='OCR language (default: ben)')
+    parser.add_argument('--lang', type=str, default='ben+ara',
+                        help='OCR language (default: ben+ara)')
     parser.add_argument('--psm', type=int, default=3,
                         help='Tesseract PSM (default: 3)')
     parser.add_argument('--start', type=int, default=0,

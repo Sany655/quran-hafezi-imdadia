@@ -34,10 +34,10 @@ def main():
     print("Starting Complete Re-OCR & Update for Maariful Quran Short...")
     t_start = time.time()
 
-    # Step 1: Run Full OCR with PSM 3 and 4 workers
+    # Step 1: Run Full OCR with PSM 3, 4 workers, and ben+ara
     run_step(
-        "Re-OCR All 1492 Pages with PSM 3",
-        [sys.executable, "scripts/ocr_maariful_short.py", "--no-resume", "--workers", "4", "--dpi", "200", "--psm", "3"]
+        "Re-OCR All 1492 Pages with PSM 3 and ben+ara",
+        [sys.executable, "scripts/ocr_maariful_short.py", "--no-resume", "--workers", "4", "--dpi", "200", "--psm", "3", "--lang", "ben+ara"]
     )
 
     # Step 2: Assign Ayahs with rigorous Bengali cleaning

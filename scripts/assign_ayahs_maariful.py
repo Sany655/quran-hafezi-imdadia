@@ -34,7 +34,7 @@ def bn_to_int(s: str) -> int | None:
     return int(res) if res.isdigit() else None
 
 def clean_page_text(raw: str) -> str:
-    """Strip watermark lines, top running headers, and garbled OCR."""
+    """Strip watermark lines, top running headers, garbled OCR and normalize Arabic/Bengali text."""
     lines = raw.splitlines()
     clean_lines = []
     
@@ -46,26 +46,29 @@ def clean_page_text(raw: str) -> str:
             continue
         if re.match(r'^[০-৯\s]*(সূরা|সুরা|তফসীর|তাফসীর|পারা|রুকু).*$', l):
             continue
-        if re.match(r'^[০-৯0-9\s\.\-\–\—\:\,\/\\_\|\~£]+$', l):
+        # Drop lines that are pure symbols/punctuation/digits
+        if re.match(r'^[০-৯0-9\s\.\-\–\—\:\,\/\\_\|\~£\+\*\#\(\)\[\]\{\}\<\>]+$', l):
             continue
         
         # Strip all Latin/English alphabet characters (no English in Bengali tafsir)
         l = re.sub(r'[A-Za-z]+', '', l)
         
-        # Strip strange OCR symbols
+        # Strip strange OCR symbols and stray math/symbol artifacts
         l = re.sub(r'[/\\_\|\~£@#\$%\^&\*\<\>]+', ' ', l)
+        l = re.sub(r'\+[\s\-]*', ' ', l)
         
         # Strip garbled digit/symbol clusters
         l = re.sub(r'[0-9০-৯\:\.]{4,}', ' ', l)
         l = re.sub(r'[\s]{2,}', ' ', l).strip()
         
-        # Check Bengali character density
+        # Check density of Bengali and Arabic characters
         bengali_chars = len(re.findall(r'[\u0980-\u09FF]', l))
-        if bengali_chars < 5:
+        arabic_chars = len(re.findall(r'[\u0600-\u06FF]', l))
+        if (bengali_chars + arabic_chars) < 5:
             continue
             
         # Clean leading noise punctuation
-        l = re.sub(r'^[\s\:\.\,\-–—\(\)]+', '', l).strip()
+        l = re.sub(r'^[\s\:\.\,\-–—\(\)\[\]]+', '', l).strip()
         if len(l) > 2:
             clean_lines.append(l)
             
