@@ -44,13 +44,28 @@ def clean_page_text(raw: str) -> str:
             continue
         if 'contents' in l.lower() or 'www.almodina.com' in l.lower() or 'www.al-madina.com' in l.lower():
             continue
-        if re.match(r'^[০-৯\s]*(সূরা|সুরা|তফসীর|তাফসীর).*$', l):
+        if re.match(r'^[০-৯\s]*(সূরা|সুরা|তফসীর|তাফসীর|পারা|রুকু).*$', l):
             continue
-        if re.match(r'^[০-৯0-9\s\.\-\–\—]+$', l):
+        if re.match(r'^[০-৯0-9\s\.\-\–\—\:\,\/\\_\|\~£]+$', l):
             continue
         
-        l = re.sub(r'[A-Za-z0-9_\-\.]{6,}', ' ', l)
+        # Strip all Latin/English alphabet characters (no English in Bengali tafsir)
+        l = re.sub(r'[A-Za-z]+', '', l)
+        
+        # Strip strange OCR symbols
+        l = re.sub(r'[/\\_\|\~£@#\$%\^&\*\<\>]+', ' ', l)
+        
+        # Strip garbled digit/symbol clusters
+        l = re.sub(r'[0-9০-৯\:\.]{4,}', ' ', l)
         l = re.sub(r'[\s]{2,}', ' ', l).strip()
+        
+        # Check Bengali character density
+        bengali_chars = len(re.findall(r'[\u0980-\u09FF]', l))
+        if bengali_chars < 5:
+            continue
+            
+        # Clean leading noise punctuation
+        l = re.sub(r'^[\s\:\.\,\-–—\(\)]+', '', l).strip()
         if len(l) > 2:
             clean_lines.append(l)
             

@@ -149,6 +149,37 @@ def main():
                 elif first_known:
                     tafsir_results[(1, a)] = list(first_known)
 
+    # Process Surah 3 (Ali 'Imran) from pages 227-234
+    s3_files = [p for p in all_txts if any(f"vol1_page_{pi:04d}" in p.stem for pi in range(227, 235))]
+    if s3_files:
+        s3_blocks = []
+        for p in s3_files:
+            raw = p.read_text(encoding='utf-8', errors='ignore')
+            cleaned = clean_page_text(raw)
+            if cleaned:
+                s3_blocks.append(cleaned)
+        if s3_blocks:
+            full_s3 = '\n\n'.join(s3_blocks)
+            segments = split_ayah_segments(full_s3, 8)
+            for a_start, a_end, seg in segments:
+                for a in range(a_start, a_end + 1):
+                    if a <= 8:
+                        tafsir_results.setdefault((3, a), []).append(seg)
+                        
+            # Fill any missing ayahs in Surah 3 (ayahs 1-8 for page 51)
+            last_known = []
+            for a in range(1, 9):
+                if (3, a) in tafsir_results:
+                    last_known = tafsir_results[(3, a)]
+                elif last_known:
+                    tafsir_results[(3, a)] = list(last_known)
+            first_known = []
+            for a in range(8, 0, -1):
+                if (3, a) in tafsir_results:
+                    first_known = tafsir_results[(3, a)]
+                elif first_known:
+                    tafsir_results[(3, a)] = list(first_known)
+
     final_output = []
     for (sid, a_num), snippets in sorted(tafsir_results.items()):
         combined = '\n\n'.join(snippets).strip()
