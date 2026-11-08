@@ -1,0 +1,253 @@
+name: OCR Tafsir Pipeline
+
+on:
+  workflow_dispatch:
+    inputs:
+      tafsir:
+        description: 'Tafsir to OCR'
+        required: true
+        default: 'tafsir_usmani'
+        type: choice
+        options:
+          - 'tafsir_usmani'
+          - 'maariful_short'
+          - 'all'
+      volume:
+        description: 'Volume number (for Tafsir Usmani: 1, 2, 3, 4, or all)'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - 'all'
+          - '1'
+          - '2'
+          - '3'
+          - '4'
+      dpi:
+        description: 'OCR Rendering DPI'
+        required: true
+        default: '200'
+        type: string
+      psm:
+        description: 'Tesseract Page Segmentation Mode (PSM)'
+        required: true
+        default: '3'
+        type: string
+      workers:
+        description: 'Parallel OCR workers per runner'
+        required: true
+        default: '4'
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  ocr-usmani:
+    if: (inputs.tafsir == 'tafsir_usmani' || inputs.tafsir == 'all')
+    name: 'OCR Usmani Vol ${{ matrix.volume }}'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        volume: [1, 2, 3, 4]
+    steps:
+      - name: Check whether this volume was selected
+        run: |
+          if [ "${{ inputs.volume }}" != "all" ] && [ "${{ inputs.volume }}" != "${{ matrix.volume }}" ]; then
+            echo "SKIPPED=true" >> $GITHUB_ENV
+          else
+            echo "SKIPPED=false" >> $GITHUB_ENV
+          fi
+
+      - name: Checkout repository
+        if: env.SKIPPED != 'true'
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        if: env.SKIPPED != 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install System Tesseract & Bengali Language Data
+        if: env.SKIPPED != 'true'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tesseract-ocr tesseract-ocr-ben tesseract-ocr-ara
+
+      - name: Install Python Dependencies
+        if: env.SKIPPED != 'true'
+        run: |
+          python -m pip install --upgrade pip
+          pip install pymupdf pytesseract pillow requests
+
+      - name: Download Volume ${{ matrix.volume }} PDF
+        if: env.SKIPPED != 'true'
+        run: |
+          python -c "
+          import urllib.request, os
+          urls = {
+              1: 'https://archive.org/download/20251118_20251118_1818/%E0%A6%A4%E0%A6%BE%E0%A6%AB%E0%A6%B8%E0%A7%80%E0%A6%B0%E0%A7%87%20%E0%A6%89%E0%A6%B8%E0%A6%AE%E0%A6%BE%E0%A6%A8%E0%A7%80%20%E0%A7%A7%E0%A6%AE%20%E0%A6%96%E0%A6%8E%20%28%E0%A6%B8%E0%A7%82%E0%A6%B0%E0%A6%BE%20%E0%A7%A7%E2%80%94%E0%A7%AC%29.pdf',
+              2: 'https://archive.org/download/20251118_20251118_1906/%E0%A6%A4%E0%A6%BE%E0%A6%AB%E0%A6%B8%E0%A7%80%E0%A6%B0%E0%A7%87%20%E0%A6%89%E0%A6%B8%E0%A6%AE%E0%A6%BE%E0%A6%A8%E0%A7%80%20%E0%A7%A8%E0%A7%9F%20%E0%A6%96%E0%A6%8E%20%28%E0%A6%B8%E0%A7%82%E0%A6%B0%E0%A6%BE%20%E0%A7%AD%E2%80%94%E0%A7%A7%E0%A7%AE%29.pdf',
+              3: 'https://archive.org/download/20251118_20251118_1940/%E0%A6%A4%E0%A6%BE%E0%A6%AB%E0%A6%B8%E0%A7%80%E0%A6%B0%E0%A7%87%20%E0%A6%89%E0%A6%B8%E0%A6%AE%E0%A6%BE%E0%A6%A8%E0%A7%80%20%E0%A7%A9%E0%A7%9F%20%E0%A6%96%E0%A6%8E%20%28%E0%A6%B8%E0%A7%82%E0%A6%B0%E0%A6%BE%20%E0%A7%A7%E0%A7%AF%E2%80%94%E0%A7%A9%E0%A7%AE%29.pdf',
+              4: 'https://archive.org/download/20251118_20251118_2004/%E0%A6%A4%E0%A6%BE%E0%A6%AB%E0%A6%B8%E0%A7%80%E0%A6%B0%E0%A7%87%20%E0%A6%89%E0%A6%B8%E0%A6%AE%E0%A6%BE%E0%A6%A8%E0%A7%80%20%E0%A7%AA%E0%A6%B0%E0%A7%8D%E0%A6%A5%20%E0%A6%96%E0%A6%8E%20%28%E0%A6%B8%E0%A7%82%E0%A6%B0%E0%A6%BE%20%E0%A7%A9%E0%A7%AF%E2%80%94%E0%A7%A7%E0%A7%A7%E0%A7%AA%29.pdf'
+          }
+          v = ${{ matrix.volume }}
+          out_dir = 'reference_books/tafsir_usmani_bangla'
+          os.makedirs(out_dir, exist_ok=True)
+          names = {
+              1: 'Tafsir_Usmani_Vol_1_Surah_1-6.pdf',
+              2: 'Tafsir_Usmani_Vol_2_Surah_7-18.pdf',
+              3: 'Tafsir_Usmani_Vol_3_Surah_19-38.pdf',
+              4: 'Tafsir_Usmani_Vol_4_Surah_39-114.pdf'
+          }
+          dest = os.path.join(out_dir, names[v])
+          print(f'Downloading Volume {v} from {urls[v]} to {dest}...')
+          urllib.request.urlretrieve(urls[v], dest)
+          print(f'Download complete: {os.path.getsize(dest) / 1024 / 1024:.2f} MB')
+          "
+
+      - name: Run OCR for Volume ${{ matrix.volume }}
+        if: env.SKIPPED != 'true'
+        run: |
+          python scripts/ocr_usmani.py \
+            --volume ${{ matrix.volume }} \
+            --workers ${{ inputs.workers }} \
+            --dpi ${{ inputs.dpi }} \
+            --psm ${{ inputs.psm }} \
+            --no-resume
+
+      - name: Upload Volume ${{ matrix.volume }} Artifact
+        if: env.SKIPPED != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: tafsir-usmani-vol-${{ matrix.volume }}-txt
+          path: data/tafsir/tafsir_usmani/vol${{ matrix.volume }}_page_*.txt
+          retention-days: 7
+
+  ocr-maariful-short:
+    if: inputs.tafsir == 'maariful_short' || inputs.tafsir == 'all'
+    name: 'OCR Maariful Quran Short'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install System Tesseract & Bengali Language Data
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tesseract-ocr tesseract-ocr-ben
+
+      - name: Install Python Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pymupdf pytesseract pillow requests
+
+      - name: Download Maariful Quran Short Complete PDF
+        run: |
+          python -c "
+          import urllib.request, os
+          url = 'https://archive.org/download/maariful-quran-bangla/Maariful_Quran_Short_Complete.pdf'
+          dest = 'reference_books/maariful_quran_bangla/Maariful_Quran_Short_Complete.pdf'
+          os.makedirs(os.path.dirname(dest), exist_ok=True)
+          print(f'Downloading Maariful Quran Short PDF...')
+          urllib.request.urlretrieve(url, dest)
+          print(f'Download complete: {os.path.getsize(dest) / 1024 / 1024:.2f} MB')
+          "
+
+      - name: Run OCR for Maariful Short
+        run: |
+          python scripts/ocr_maariful_short.py \
+            --workers ${{ inputs.workers }} \
+            --dpi ${{ inputs.dpi }} \
+            --psm ${{ inputs.psm }} \
+            --no-resume
+
+      - name: Upload Maariful Short Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: maariful-short-txt
+          path: data/tafsir/maariful_short/page_*.txt
+          retention-days: 7
+
+  ingest-and-publish:
+    name: 'Ingest OCR & Update Database/Web'
+    needs: [ocr-usmani, ocr-maariful-short]
+    if: always() && (needs.ocr-usmani.result == 'success' || needs.ocr-maariful-short.result == 'success')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository with Git LFS
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 1
+
+      - name: Pull LFS files
+        run: git lfs pull
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Download All OCR Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: downloaded-artifacts
+
+      - name: Merge Downloaded Artifacts to Data Directory
+        run: |
+          python -c "
+          import os, shutil, glob
+          os.makedirs('data/tafsir/tafsir_usmani', exist_ok=True)
+          os.makedirs('data/tafsir/maariful_short', exist_ok=True)
+          
+          # Move usmani text files recursively
+          usmani_count = 0
+          for f in glob.glob('downloaded-artifacts/**/vol*.txt', recursive=True):
+              dest = os.path.join('data/tafsir/tafsir_usmani', os.path.basename(f))
+              shutil.copy(f, dest)
+              usmani_count += 1
+              
+          # Move maariful text files recursively
+          maariful_count = 0
+          for f in glob.glob('downloaded-artifacts/**/page_*.txt', recursive=True):
+              dest = os.path.join('data/tafsir/maariful_short', os.path.basename(f))
+              shutil.copy(f, dest)
+              maariful_count += 1
+          
+          print(f'Merged {usmani_count} Usmani pages and {maariful_count} Maariful pages successfully.')
+          "
+
+      - name: Process & Ingest Tafsirs into SQLite DB
+        run: |
+          if ls data/tafsir/tafsir_usmani/*.txt 1> /dev/null 2>&1; then
+            echo "Processing Tafsir Usmani..."
+            python scripts/assign_ayahs_usmani.py
+            python scripts/import_usmani_to_db.py
+          fi
+          if ls data/tafsir/maariful_short/*.txt 1> /dev/null 2>&1; then
+            echo "Processing Maariful Quran Short..."
+            python scripts/assign_ayahs_maariful.py
+            python scripts/import_maariful_to_db.py
+          fi
+
+      - name: Regenerate Web Data JSONs
+        run: |
+          python scripts/generate_web_data.py
+
+      - name: Commit and Push Updates
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/quran_imdadia.db docs/data/tafsir/ data/tafsir/*_tafsir.json
+          git commit -m "Auto-update Tafsir data via CI/CD OCR pipeline [skip ci]" || echo "No changes to commit"
+          git push origin main

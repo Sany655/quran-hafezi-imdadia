@@ -27,7 +27,7 @@ VOL_FILES = {
 }
 
 def ocr_single_page(args: tuple) -> tuple[int, int, str]:
-    vol, pdf_path, out_dir, page_idx, dpi, skip_existing = args
+    vol, pdf_path, out_dir, page_idx, dpi, skip_existing, lang, psm = args
     out_file = os.path.join(out_dir, f"vol{vol}_page_{page_idx:04d}.txt")
     
     if skip_existing and os.path.exists(out_file):
@@ -43,7 +43,7 @@ def ocr_single_page(args: tuple) -> tuple[int, int, str]:
     img = Image.open(io.BytesIO(pix.tobytes("png")))
     doc.close()
     
-    text = pytesseract.image_to_string(img, lang='ben+eng', config='--psm 6')
+    text = pytesseract.image_to_string(img, lang=lang, config=f'--psm {psm}')
     
     os.makedirs(out_dir, exist_ok=True)
     with open(out_file, 'w', encoding='utf-8') as f:
@@ -55,13 +55,17 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--volume', type=int, default=1, choices=[1, 2, 3, 4],
                         help='Volume number to OCR (default: 1)')
-    parser.add_argument('--workers', type=int, default=1,
-                        help='Number of parallel worker processes (default: 1)')
+    parser.add_argument('--workers', type=int, default=4,
+                        help='Number of parallel worker processes (default: 4)')
     parser.add_argument('--resume', action='store_true', default=True,
                         help='Skip already-processed pages')
     parser.add_argument('--no-resume', action='store_false', dest='resume')
-    parser.add_argument('--dpi', type=int, default=150,
-                        help='Render DPI (default: 150)')
+    parser.add_argument('--dpi', type=int, default=200,
+                        help='Render DPI (default: 200)')
+    parser.add_argument('--lang', type=str, default='ben',
+                        help='OCR language (default: ben)')
+    parser.add_argument('--psm', type=int, default=3,
+                        help='Tesseract PSM (default: 3)')
     parser.add_argument('--start', type=int, default=0,
                         help='Starting PDF page index (0-based)')
     parser.add_argument('--end', type=int, default=None,
@@ -82,7 +86,7 @@ def main():
     page_range = range(args.start, min(end_page, total_pages))
 
     task_args = [
-        (args.volume, pdf_path, OUT_DIR, pi, args.dpi, args.resume)
+        (args.volume, pdf_path, OUT_DIR, pi, args.dpi, args.resume, args.lang, args.psm)
         for pi in page_range
     ]
 

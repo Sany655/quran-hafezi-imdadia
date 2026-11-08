@@ -35,7 +35,7 @@ def ocr_single_page(args: tuple) -> tuple[int, str]:
     OCR one page. Returns (page_index, ocr_text).
     Designed to run in a subprocess (ProcessPoolExecutor).
     """
-    pdf_path, out_dir, page_idx, dpi, skip_existing = args
+    pdf_path, out_dir, page_idx, dpi, skip_existing, lang, psm = args
     
     out_file = os.path.join(out_dir, f"page_{page_idx:04d}.txt")
     
@@ -52,7 +52,7 @@ def ocr_single_page(args: tuple) -> tuple[int, str]:
     img = Image.open(io.BytesIO(pix.tobytes("png")))
     doc.close()
     
-    text = pytesseract.image_to_string(img, lang='ben+eng', config='--psm 6')
+    text = pytesseract.image_to_string(img, lang=lang, config=f'--psm {psm}')
     
     os.makedirs(out_dir, exist_ok=True)
     with open(out_file, 'w', encoding='utf-8') as f:
@@ -63,14 +63,18 @@ def ocr_single_page(args: tuple) -> tuple[int, str]:
 
 def main():
     parser = argparse.ArgumentParser(description='OCR Maariful Quran Short Complete PDF')
-    parser.add_argument('--workers', type=int, default=1,
-                        help='Number of parallel worker processes (default: 1)')
+    parser.add_argument('--workers', type=int, default=3,
+                        help='Number of parallel worker processes (default: 3)')
     parser.add_argument('--resume', action='store_true', default=True,
                         help='Skip already-processed pages (default: True)')
     parser.add_argument('--no-resume', action='store_false', dest='resume',
                         help='Re-OCR all pages even if already done')
-    parser.add_argument('--dpi', type=int, default=300,
-                        help='Render DPI (default: 300, higher = better quality but slower)')
+    parser.add_argument('--dpi', type=int, default=200,
+                        help='Render DPI (default: 200, optimum quality and speed)')
+    parser.add_argument('--lang', type=str, default='ben',
+                        help='OCR language (default: ben)')
+    parser.add_argument('--psm', type=int, default=3,
+                        help='Page segmentation mode (default: 3 for multi-column automatic layout)')
     parser.add_argument('--start', type=int, default=0,
                         help='Starting PDF page index (0-based, default: 0)')
     parser.add_argument('--end', type=int, default=None,
@@ -97,11 +101,11 @@ def main():
     print(f"  Pages: {args.start}–{end_page-1} ({len(page_range)} pages)")
     print(f"  Already done: {already_done} pages")
     print(f"  Remaining: {len(page_range) - already_done} pages")
-    print(f"  Workers: {args.workers}, DPI: {args.dpi}, Resume: {args.resume}")
+    print(f"  Workers: {args.workers}, DPI: {args.dpi}, Lang: {args.lang}, PSM: {args.psm}, Resume: {args.resume}")
     print()
 
     task_args = [
-        (PDF_PATH, OUT_DIR, pi, args.dpi, args.resume)
+        (PDF_PATH, OUT_DIR, pi, args.dpi, args.resume, args.lang, args.psm)
         for pi in page_range
     ]
 
