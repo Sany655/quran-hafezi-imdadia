@@ -166,9 +166,15 @@ class _IndexScreenState extends State<IndexScreen> {
                   MaterialPageRoute(
                     builder: (_) => SearchScreen(
                       onResultSelected: (sid, aid) async {
-                        final s = await QuranDbHelper.instance.getSurah(sid);
-                        if (s != null) {
-                          _openPage(s.startPage);
+                        final ayahPage = await QuranDbHelper.instance.getPageForAyah(sid, aid);
+                        if (!mounted) return;
+                        if (ayahPage != null) {
+                          _openPage(ayahPage);
+                        } else {
+                          final s = await QuranDbHelper.instance.getSurah(sid);
+                          if (s != null && mounted) {
+                            _openPage(s.startPage);
+                          }
                         }
                       },
                     ),

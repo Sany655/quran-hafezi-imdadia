@@ -156,6 +156,23 @@
           <span id="searchResultsCount" class="text-xs text-slate-500 dark:text-slate-400 font-medium font-mono"></span>
         </div>
 
+        <!-- Bengali Translation Edition Filter -->
+        <div id="searchEditionFilterBar" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar text-[11px]">
+          <span class="text-slate-400 shrink-0">অনুবাদ:</span>
+          <button data-edition="all" class="search-edition-btn px-2.5 py-0.5 rounded-lg font-semibold bg-gold-500/20 text-gold-700 dark:text-gold-300 border border-gold-500/40 shrink-0 transition">
+            সবগুলো (৩টি)
+          </button>
+          <button data-edition="bntw" class="search-edition-btn px-2.5 py-0.5 rounded-lg font-semibold bg-slate-200/70 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0 transition">
+            তাওযীহুল
+          </button>
+          <button data-edition="bns" class="search-edition-btn px-2.5 py-0.5 rounded-lg font-semibold bg-slate-200/70 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0 transition">
+            মা'আরিফুল
+          </button>
+          <button data-edition="bnt" class="search-edition-btn px-2.5 py-0.5 rounded-lg font-semibold bg-slate-200/70 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0 transition">
+            তাইসীরুল
+          </button>
+        </div>
+
         <!-- Popular Suggested Tags -->
         <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar text-[11px] pt-0.5">
           <span class="text-slate-400 shrink-0">পরামর্শ:</span>
@@ -1260,11 +1277,25 @@
         `;
       }
 
-      const activeTransText = (selectedTranslationSource === 'mk' && a.bn_s) 
-        ? a.bn_s 
-        : (selectedTranslationSource === 'tk' && a.bn_t) 
-          ? a.bn_t 
-          : (a.bn_tw || a.bn_t || '');
+      let activeTransText = '';
+      let activeTransLabel = 'তাওযীহুল কুরআন';
+      if (selectedTranslationSource === 'all') {
+        const parts = [];
+        if (a.bn_tw) parts.push(`• তাওযীহুল কুরআন:\n"${a.bn_tw}"`);
+        if (a.bn_s) parts.push(`• মা'আরিফুল কুরআন:\n"${a.bn_s}"`);
+        if (a.bn_t) parts.push(`• তাইসীরুল কুরআন:\n"${a.bn_t}"`);
+        activeTransText = parts.join('\n\n');
+        activeTransLabel = 'সকল প্রামাণ্য অনুবাদ';
+      } else if (selectedTranslationSource === 'mk' && a.bn_s) {
+        activeTransText = a.bn_s;
+        activeTransLabel = "মা'আরিফুল কুরআন (মুফতী শফী রহ.)";
+      } else if (selectedTranslationSource === 'tk' && a.bn_t) {
+        activeTransText = a.bn_t;
+        activeTransLabel = 'তাইসীরুল কুরআন';
+      } else {
+        activeTransText = a.bn_tw || a.bn_t || '';
+        activeTransLabel = a.bn_tw ? 'তাওযীহুল কুরআন (মুফতী তাকী উসমানী)' : 'তাইসীরুল কুরআন';
+      }
 
       return `
         <div id="study-ayah-${a.a}" class="p-3.5 rounded-2xl transition duration-200 ${
@@ -1281,7 +1312,7 @@
             </div>
             <div class="flex items-center gap-1.5">
               ${isFirstVerse ? `<span class="text-[10px] bg-emerald-700 text-white px-2 py-0.5 rounded-full font-bold">পৃষ্ঠার শুরু</span>` : isPageVerse ? `<span class="text-[10px] bg-emerald-100 dark:bg-emerald-900/60 text-emerald-800 dark:text-emerald-300 px-2 py-0.5 rounded-full">পৃষ্ঠা ${currentPage}</span>` : ''}
-              <button onclick="shareVerse('${surahName || (pageMap[currentPage] && pageMap[currentPage].sn) || "আল-কুরআন"}', ${a.a}, ${currentPage}, ${encodeURIComponent(JSON.stringify(a.ar))}, ${encodeURIComponent(JSON.stringify(activeTransText))})" class="p-1 rounded-lg text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-slate-700 transition" title="আয়াত শেয়ার করুন">
+              <button onclick="shareVerse('${(surahName || (pageMap[currentPage] && pageMap[currentPage].sn) || 'আল-কুরআন').replace(/'/g, "\\'")}', ${a.a}, ${currentPage}, '${encodeURIComponent(JSON.stringify(a.ar))}', '${encodeURIComponent(JSON.stringify(activeTransText))}', '${encodeURIComponent(activeTransLabel)}')" class="p-1 rounded-lg text-emerald-600 dark:text-emerald-400 hover:bg-emerald-100 dark:hover:bg-slate-700 transition" title="আয়াত শেয়ার করুন">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
               </button>
             </div>
@@ -1671,12 +1702,14 @@
       });
     }
 
-    window.shareVerse = function(surahName, ayahNum, pageNum, encAr, encBn) {
+    window.shareVerse = function(surahName, ayahNum, pageNum, encAr, encBn, encLabel) {
       try {
         const arText = JSON.parse(decodeURIComponent(encAr));
         const bnText = JSON.parse(decodeURIComponent(encBn));
+        const transLabel = encLabel ? decodeURIComponent(encLabel) : 'বাংলা অনুবাদ';
+        const formattedBn = bnText.includes('\n• ') ? `বাংলা অর্থ (${transLabel}):\n${bnText}` : `বাংলা অর্থ (${transLabel}):\n"${bnText}"`;
         const text = `﴿ ${arText} ﴾\n\n` +
-                     `বাংলা অর্থ (তাইসীরুল কুরআন):\n"${bnText}"\n\n` +
+                     `${formattedBn}\n\n` +
                      `[সূরা ${surahName}, আয়াত ${toBnNum(ayahNum)}, পৃষ্ঠা ${toBnNum(pageNum)}]\n` +
                      `আল-কুরআন`;
         executeOfflineShare({
@@ -1915,36 +1948,76 @@
     let searchIndexData = null;
     let isSearchIndexLoading = false;
     let currentSearchScope = 'all'; // 'all' | 'arabic' | 'bengali'
+    let currentSearchEdition = 'all'; // 'all' | 'bntw' | 'bns' | 'bnt'
     let searchDebounceTimer = null;
+
+    const SEARCH_EDITION_LABELS = {
+      bntw: 'তাওযীহুল কুরআন',
+      bns: "মা'আরিফুল কুরআন",
+      bnt: 'তাইসীরুল কুরআন'
+    };
 
     const SEARCH_SYNONYMS = {
       'salat': ['সালাত', 'নামাজ', 'নামায'],
-      'salah': ['সালাত', 'নামাজ'],
+      'salah': ['সালাত', 'নামাজ', 'নামায'],
       'namaz': ['নামাজ', 'সালাত', 'নামায'],
-      'namaj': ['নামাজ', 'সালাত'],
-      'roza': ['রোজা', 'রোযা', 'সিয়াম', 'সিয়াম'],
-      'roja': ['রোজা', 'সিয়াম'],
-      'sawm': ['সওম', 'সাওম', 'রোজা', 'সিয়াম'],
-      'siyam': ['সিয়াম', 'রোজা'],
-      'ramadan': ['রমাদান', 'রমজান'],
-      'ramzan': ['রমজান', 'রমাদান'],
+      'namaj': ['নামাজ', 'সালাত', 'নামায'],
+      'roza': ['রোজা', 'রোযা', 'সিয়াম', 'সিয়াম', 'সাওম'],
+      'roja': ['রোজা', 'রোযা', 'সিয়াম', 'সিয়াম'],
+      'sawm': ['সওম', 'সাওম', 'রোজা', 'সিয়াম', 'সিয়াম'],
+      'siyam': ['সিয়াম', 'সিয়াম', 'রোজা', 'সাওম'],
+      'ramadan': ['রমাদান', 'রমজান', 'রমযান'],
+      'ramzan': ['রমজান', 'রমাদান', 'রমযান'],
       'zakat': ['যাকাত', 'জাকাত'],
       'jakat': ['যাকাত', 'জাকাত'],
       'jannat': ['জান্নাত', 'জান্নাতুল', 'বেহেশত'],
-      'jannah': ['জান্নাত'],
+      'jannah': ['জান্নাত', 'জান্নাতুল'],
       'jahannam': ['জাহান্নাম', 'জাহান্নামের', 'দোযখ', 'আগুন'],
-      'jahanam': ['জাহান্নাম'],
-      'tawbah': ['তাওবা', 'তওবা'],
-      'touba': ['তাওবা', 'তওবা'],
-      'iman': ['ঈমান', 'ইমান'],
-      'eeman': ['ঈমান'],
+      'jahanam': ['জাহান্নাম', 'জাহান্নামের'],
+      'tawbah': ['তাওবা', 'তওবা', 'তাওবাহ'],
+      'touba': ['তাওবা', 'তওবা', 'তাওবাহ'],
+      'iman': ['ঈমান', 'ইমান', 'বিশ্বাস'],
+      'eeman': ['ঈমান', 'ইমান'],
       'sabr': ['সবর', 'ধৈর্য'],
       'shobor': ['সবর', 'ধৈর্য'],
       'quran': ['কুরআন', 'কোরআন', 'কিতাব'],
-      'kitab': ['কিতাব', 'কুরআন'],
-      'dua': ['দোয়া', 'দুয়া', 'প্রার্থনা'],
-      'doya': ['দোয়া', 'দুয়া']
+      'kitab': ['কিতাব', 'কুরআন', 'কোরআন'],
+      'dua': ['দোয়া', 'দুয়া', 'দুআ', 'প্রার্থনা'],
+      'doya': ['দোয়া', 'দুয়া', 'দুআ'],
+      'নামাজ': ['নামায', 'সালাত'],
+      'নামায': ['নামাজ', 'সালাত'],
+      'সালাত': ['নামায', 'নামাজ'],
+      'রোজা': ['রোযা', 'সাওম', 'সিয়াম', 'সিয়াম'],
+      'রোযা': ['রোজা', 'সাওম', 'সিয়াম', 'সিয়াম'],
+      'যাকাত': ['জাকাত'],
+      'জাকাত': ['যাকাত'],
+      'সবর': ['ধৈর্য'],
+      'ধৈর্য': ['সবর'],
+      'তওবা': ['তাওবা', 'তাওবাহ'],
+      'তাওবা': ['তওবা', 'তাওবাহ']
     };
+
+    function bnDigitsToAscii(str) {
+      const bn = '০১২৩৪৫৬৭৮৯';
+      return str.replace(/[০-৯]/g, d => String(bn.indexOf(d)));
+    }
+
+    function escapeHtml(str) {
+      return String(str).replace(/[&<>"']/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[s]));
+    }
+
+    function highlightSearchHtml(text, terms) {
+      if (!text) return '';
+      const valid = (terms || []).map(t => t.trim()).filter(t => t.length >= 2);
+      if (!valid.length) return escapeHtml(text);
+      const pattern = valid.map(t => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join('|');
+      const regex = new RegExp(`(${pattern})`, 'gi');
+      return text.split(regex).map((part, idx) =>
+        idx % 2 === 1
+          ? `<mark class="bg-gold-500/30 text-emerald-950 dark:text-gold-200 px-0.5 rounded font-semibold">${escapeHtml(part)}</mark>`
+          : escapeHtml(part)
+      ).join('');
+    }
 
     function normalizeArabic(text) {
       if (!text) return '';
@@ -2047,6 +2120,21 @@
       });
     });
 
+    // Edition filter buttons
+    document.querySelectorAll('.search-edition-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentSearchEdition = btn.getAttribute('data-edition') || 'all';
+        document.querySelectorAll('.search-edition-btn').forEach(b => {
+          b.className = 'search-edition-btn px-2.5 py-0.5 rounded-lg font-semibold bg-slate-200/70 dark:bg-slate-800 text-slate-600 dark:text-slate-300 shrink-0 transition';
+        });
+        btn.className = 'search-edition-btn px-2.5 py-0.5 rounded-lg font-semibold bg-gold-500/20 text-gold-700 dark:text-gold-300 border border-gold-500/40 shrink-0 transition';
+
+        if (globalSearchInput.value.trim()) {
+          triggerSearch(globalSearchInput.value.trim());
+        }
+      });
+    });
+
     if (globalSearchInput) {
       globalSearchInput.addEventListener('input', (e) => {
         const val = e.target.value.trim();
@@ -2072,7 +2160,7 @@
           </div>
           <h3 class="font-bold text-base text-slate-800 dark:text-slate-200">কুরআনের যেকোনো আয়াত অনুসন্ধান করুন</h3>
           <p class="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto leading-relaxed">
-            আরবি হরকত দিয়ে (যেমন: <span class="font-arabic font-bold text-emerald-700 dark:text-emerald-400">الرَّحۡمٰنِ</span>) বা হরকত ছাড়া (যেমন: <span class="font-arabic font-bold text-emerald-700 dark:text-emerald-400">الرحمن</span>), বাংলা অনুবাদ কিংবা রোমান ব্যাংলিশে লিখুন।
+            আরবি হরকত দিয়ে (যেমন: <span class="font-arabic font-bold text-emerald-700 dark:text-emerald-400">الرَّحۡمٰنِ</span>) বা হরকত ছাড়া (<span class="font-arabic font-bold text-emerald-700 dark:text-emerald-400">الرحمن</span>), বাংলা অনুবাদ (তাওযীহুল, মা'আরিফুল, তাইসীরুল), কিংবা <span class="font-mono font-semibold">২:২৫৫</span> লিখে খুঁজুন।
           </p>
         </div>
       `;
@@ -2102,29 +2190,47 @@
         return;
       }
 
+      const activeKeys = currentSearchEdition === 'all' ? ['bntw', 'bns', 'bnt'] : [currentSearchEdition];
+      const asciiQ = bnDigitsToAscii(q);
+      const refMatch = asciiQ.match(/^(\d{1,3})\s*[:\-/.]\s*(\d{1,3})$/);
       const isArabic = /[\u0600-\u06FF]/.test(q);
       let results = [];
+      let highlightTerms = [];
 
-      if (isArabic || currentSearchScope === 'arabic') {
+      if (refMatch) {
+        const sId = parseInt(refMatch[1], 10);
+        const aNum = parseInt(refMatch[2], 10);
+        results = data
+          .filter(item => item.s === sId && item.a === aNum)
+          .map(item => ({ item, matchedKeys: activeKeys.filter(k => Boolean(item[k])) }));
+      } else if (isArabic || currentSearchScope === 'arabic') {
         const normQ = normalizeArabic(q);
-        results = data.filter(item => {
-          return item.arc.includes(normQ) || item.ar.includes(q);
-        });
+        results = data
+          .filter(item => item.arc.includes(normQ) || item.ar.includes(q))
+          .map(item => ({ item, matchedKeys: activeKeys.filter(k => Boolean(item[k])) }));
       } else {
-        const lower = q.toLowerCase();
-        let terms = [q];
-        if (SEARCH_SYNONYMS[lower]) {
-          terms = terms.concat(SEARCH_SYNONYMS[lower]);
-        }
-
-        results = data.filter(item => {
-          const matchBnT = item.bnt && terms.some(t => item.bnt.includes(t));
-          const matchBnZ = item.bnz && terms.some(t => item.bnz.includes(t));
-          return matchBnT || matchBnZ;
+        const tokens = q.split(/\s+/).filter(Boolean).slice(0, 5);
+        const tokenGroups = tokens.map(tok => {
+          const low = tok.toLowerCase();
+          const syns = SEARCH_SYNONYMS[low] || SEARCH_SYNONYMS[tok] || [];
+          const grp = [...new Set([tok, ...syns])];
+          highlightTerms.push(...grp);
+          return grp;
         });
+
+        for (const item of data) {
+          const matchedKeys = activeKeys.filter(k => {
+            const text = item[k];
+            if (!text) return false;
+            return tokenGroups.every(grp => grp.some(t => text.includes(t)));
+          });
+          if (matchedKeys.length > 0) {
+            results.push({ item, matchedKeys });
+          }
+        }
       }
 
-      searchResultsCount.textContent = `মোট ${toBnNum(results.length)}টি ফলাফল`;
+      searchResultsCount.textContent = `মোট ${toBnNum(results.length)}টি আয়াত`;
 
       if (results.length === 0) {
         searchResultsContainer.innerHTML = `
@@ -2139,9 +2245,31 @@
         return;
       }
 
-      // Render top results (up to 100)
+      // Render top results (up to 100 unique ayahs)
       const displayResults = results.slice(0, 100);
-      searchResultsContainer.innerHTML = displayResults.map(item => {
+      searchResultsContainer.innerHTML = displayResults.map(({ item, matchedKeys }) => {
+        const shownKeys = matchedKeys.length > 0 ? matchedKeys : ['bntw', 'bns', 'bnt'].filter(k => Boolean(item[k]));
+        const translationsHtml = shownKeys.map(k => `
+          <div class="pt-1.5 border-t border-slate-100 dark:border-slate-700/50 first:border-t-0 first:pt-0">
+            <span class="inline-block text-[10px] px-1.5 py-0.5 rounded bg-emerald-100/80 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-bold mb-1">
+              ${SEARCH_EDITION_LABELS[k] || k}
+            </span>
+            <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-bengali">
+              ${highlightSearchHtml(item[k], highlightTerms)}
+            </p>
+          </div>
+        `).join('');
+
+        const shareParts = shownKeys
+          .filter(k => Boolean(item[k]))
+          .map(k => `• ${SEARCH_EDITION_LABELS[k]}:\n"${item[k]}"`);
+        const shareText = shareParts.length > 1
+          ? shareParts.join('\n\n')
+          : (item[shownKeys[0]] || '');
+        const shareLabel = shareParts.length > 1
+          ? 'সকল প্রামাণ্য অনুবাদ'
+          : (SEARCH_EDITION_LABELS[shownKeys[0]] || 'বাংলা অনুবাদ');
+
         return `
           <div class="p-4 rounded-2xl bg-white dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 hover:border-emerald-500 shadow-xs transition space-y-2.5">
             <div class="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-700/60">
@@ -2159,9 +2287,9 @@
               ${item.ar}
             </div>
 
-            <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-bengali">
-              ${item.bnt || 'অনুবাদ সংরক্ষিত হচ্ছে'}
-            </p>
+            <div class="space-y-2">
+              ${translationsHtml || '<p class="text-xs text-slate-400">অনুবাদ সংরক্ষিত হচ্ছে</p>'}
+            </div>
 
             <div class="flex items-center justify-between pt-2 border-t border-slate-100 dark:border-slate-700/60">
               <div class="flex items-center gap-2">
@@ -2174,7 +2302,7 @@
                   <span>অনুবাদ ও তাফসীর</span>
                 </button>
               </div>
-              <button onclick="shareVerse('${item.sn}', ${item.a}, ${item.p}, '${encodeURIComponent(JSON.stringify(item.ar))}', '${encodeURIComponent(JSON.stringify(item.bnt || ''))}')" class="p-1.5 rounded-xl text-slate-500 hover:text-emerald-600 hover:bg-slate-100 dark:hover:bg-slate-700 transition" title="শেয়ার করুন">
+              <button onclick="shareVerse('${item.sn.replace(/'/g, "\\'")}', ${item.a}, ${item.p}, '${encodeURIComponent(JSON.stringify(item.ar))}', '${encodeURIComponent(JSON.stringify(shareText))}', '${encodeURIComponent(shareLabel)}')" class="p-1.5 rounded-xl text-slate-500 hover:text-emerald-600 hover:bg-slate-100 dark:hover:bg-slate-700 transition" title="শেয়ার করুন">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
               </button>
             </div>

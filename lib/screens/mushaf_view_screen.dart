@@ -30,6 +30,27 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
     _loadSurahs();
     _checkBookmarkStatus();
     _saveCurrentLastRead();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _precacheAdjacentPages(_currentPage);
+    });
+  }
+
+  /// Pre-caches 2 pages ahead and 2 pages behind (images + DB ayahs) so
+  /// rapid sliding and study-sheet opening never hang or stutter.
+  Future<void> _precacheAdjacentPages(int centerPage) async {
+    if (!mounted) return;
+    // Prefetch DB ayah/translation/WBW data for ±2 pages
+    QuranDbHelper.instance.prefetchAdjacentPages(centerPage, radius: 2);
+
+    // Pre-decode scan images in priority order: ±1 first, then ±2
+    for (final offset in [1, -1, 2, -2]) {
+      final p = centerPage + offset;
+      if (p < 1 || p > 612 || !mounted) continue;
+      final fileName = 'assets/pages/page_${p.toString().padLeft(3, '0')}.jpg';
+      try {
+        await precacheImage(AssetImage(fileName), context);
+      } catch (_) {}
+    }
   }
 
   void _loadSurahs() async {
@@ -96,6 +117,7 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
       });
       _checkBookmarkStatus();
       _saveCurrentLastRead();
+      _precacheAdjacentPages(pageNumber);
     }
   }
 
@@ -357,9 +379,15 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (_) => SearchScreen(
-                          onResultSelected: (sid, aid) {
-                            final s = _surahs.firstWhere((e) => e.id == sid);
-                            _goToPage(s.startPage);
+                          onResultSelected: (sid, aid) async {
+                            final ayahPage = await QuranDbHelper.instance.getPageForAyah(sid, aid);
+                            if (!mounted) return;
+                            if (ayahPage != null) {
+                              _goToPage(ayahPage);
+                            } else {
+                              final s = _surahs.firstWhere((e) => e.id == sid);
+                              _goToPage(s.startPage);
+                            }
                           },
                         ),
                       ),
@@ -383,12 +411,15 @@ class _MushafViewScreenState extends State<MushafViewScreen> {
               child: PageView.builder(
                 controller: _pageController,
                 itemCount: 612,
+                allowImplicitScrolling: true,
                 onPageChanged: (index) {
+                  final newPage = index + 1;
                   setState(() {
-                    _currentPage = index + 1;
+                    _currentPage = newPage;
                   });
                   _checkBookmarkStatus();
                   _saveCurrentLastRead();
+                  _precacheAdjacentPages(newPage);
                 },
                 itemBuilder: (context, index) {
                   final pageNum = index + 1;

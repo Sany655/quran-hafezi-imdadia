@@ -21,6 +21,11 @@ class QuranDbHelper {
   static List<Juz>? _cachedJuz;
   static Map<int, Map<String, dynamic>>? _cachedPagesInfo;
 
+  // Sliding-window LRU cache for per-page ayahs (±2 adjacent page prefetch)
+  static const int _maxCachedAyahPages = 12;
+  static final Map<int, List<Ayah>> _cachedPageAyahs = {};
+  static final Map<int, Future<List<Ayah>>> _inFlightPageAyahs = {};
+
   QuranDbHelper._init();
 
   Future<Database> get database async {
@@ -156,8 +161,53 @@ class QuranDbHelper {
     return page is int ? page : int.tryParse(page?.toString() ?? '');
   }
 
-  // 4. Fetch Ayahs for a Page with Translations & Word-by-Word
-  Future<List<Ayah>> getAyahsForPage(int pageNumber) async {
+  // 4. Fetch Ayahs for a Page with Translations & Word-by-Word (with LRU sliding cache)
+  Future<List<Ayah>> getAyahsForPage(int pageNumber) {
+    if (pageNumber < 1 || pageNumber > 612) return Future.value([]);
+
+    final cached = _cachedPageAyahs.remove(pageNumber);
+    if (cached != null) {
+      // Refresh LRU position
+      _cachedPageAyahs[pageNumber] = cached;
+      return Future.value(cached);
+    }
+
+    final inFlight = _inFlightPageAyahs[pageNumber];
+    if (inFlight != null) return inFlight;
+
+    final future = _fetchAyahsForPageFromDb(pageNumber).then((ayahs) {
+      if (ayahs.isNotEmpty) {
+        _cachedPageAyahs.remove(pageNumber);
+        _cachedPageAyahs[pageNumber] = ayahs;
+        while (_cachedPageAyahs.length > _maxCachedAyahPages) {
+          _cachedPageAyahs.remove(_cachedPageAyahs.keys.first);
+        }
+      }
+      return ayahs;
+    }).whenComplete(() {
+      _inFlightPageAyahs.remove(pageNumber);
+    });
+
+    _inFlightPageAyahs[pageNumber] = future;
+    return future;
+  }
+
+  /// Preloads up to [radius] pages ahead and behind [centerPage] sequentially
+  /// so sliding/opening study sheet on adjacent pages has zero DB wait.
+  Future<void> prefetchAdjacentPages(int centerPage, {int radius = 2}) async {
+    final targets = <int>[];
+    for (int offset = 1; offset <= radius; offset++) {
+      final next = centerPage + offset;
+      final prev = centerPage - offset;
+      if (next <= 612 && !_cachedPageAyahs.containsKey(next)) targets.add(next);
+      if (prev >= 1 && !_cachedPageAyahs.containsKey(prev)) targets.add(prev);
+    }
+    for (final p in targets) {
+      await getAyahsForPage(p);
+    }
+  }
+
+  Future<List<Ayah>> _fetchAyahsForPageFromDb(int pageNumber) async {
     try {
       final db = await database;
 
@@ -473,33 +523,215 @@ class QuranDbHelper {
     'কুরবানী': ['কুরবানী', 'কোরবানী'],
   };
 
-  Future<List<Map<String, dynamic>>> searchBengali(String query) async {
+  static String _normalizeToAsciiDigits(String input) {
+    const bn = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+    var out = input;
+    for (int i = 0; i < 10; i++) {
+      out = out.replaceAll(bn[i], i.toString());
+    }
+    return out;
+  }
+
+  static String _stripArabicDiacritics(String input) {
+    return input
+        .replaceAll(RegExp(r'[\u064B-\u065F\u0670\u06D6-\u06ED\u0610-\u061A\u08D4-\u08E1\u08E3-\u08FF\u0640]'), '')
+        .replaceAll(RegExp(r'[إأآٱ]'), 'ا')
+        .replaceAll(RegExp(r'[يى]'), 'ي')
+        .replaceAll('ة', 'ه')
+        .trim();
+  }
+
+  static const List<String> _activeEditions = ['tawzeehul', 'shafi', 'taisirul'];
+
+  Future<List<Map<String, dynamic>>> searchBengali(
+    String query, {
+    String editionFilter = 'all',
+  }) async {
     final db = await database;
     final clean = query.trim();
     if (clean.isEmpty) return [];
 
-    // Query expansion
-    final lower = clean.toLowerCase();
-    List<String> terms = [clean];
-    if (_searchSynonyms.containsKey(lower)) {
-      terms.addAll(_searchSynonyms[lower]!);
-    } else if (_searchSynonyms.containsKey(clean)) {
-      terms.addAll(_searchSynonyms[clean]!);
+    // 1. Direct surah:ayah reference lookup (supports Bengali & ASCII digits)
+    final asciiQuery = _normalizeToAsciiDigits(clean);
+    final refMatch = RegExp(r'^(\d{1,3})\s*[:\-/\.]\s*(\d{1,3})$').firstMatch(asciiQuery);
+    if (refMatch != null) {
+      final sid = int.tryParse(refMatch.group(1)!);
+      final aid = int.tryParse(refMatch.group(2)!);
+      if (sid != null && aid != null && sid >= 1 && sid <= 114 && aid >= 1) {
+        final ayahRows = await db.rawQuery('''
+          SELECT a.surah_id, a.ayah_number, a.page_number, a.text_indopak,
+                 s.name_bn, s.name_en
+          FROM ayahs a
+          JOIN surahs s ON s.id = a.surah_id
+          WHERE a.surah_id = ? AND a.ayah_number = ?
+          LIMIT 1;
+        ''', [sid, aid]);
+        if (ayahRows.isEmpty) return [];
+        return _attachAllTranslations(db, ayahRows, _activeEditions, const []);
+      }
     }
 
-    final uniqueTerms = terms.toSet().toList();
-    final clauses = uniqueTerms.map((_) => 't.text_bn LIKE ?').join(' OR ');
-    final params = uniqueTerms.map((t) => '%$t%').toList();
+    // 2. Arabic script search (diacritic-insensitive)
+    if (RegExp(r'[\u0600-\u06FF]').hasMatch(clean)) {
+      final normQ = _stripArabicDiacritics(clean);
+      if (normQ.isEmpty) return [];
+      final allAyahRows = await db.rawQuery('''
+        SELECT a.surah_id, a.ayah_number, a.page_number, a.text_indopak, a.text_uthmani,
+               s.name_bn, s.name_en
+        FROM ayahs a
+        JOIN surahs s ON s.id = a.surah_id
+        ORDER BY a.surah_id ASC, a.ayah_number ASC;
+      ''');
+      final matchedRows = <Map<String, dynamic>>[];
+      for (final row in allAyahRows) {
+        final indo = (row['text_indopak'] as String?) ?? '';
+        final uth = (row['text_uthmani'] as String?) ?? '';
+        if (indo.contains(clean) ||
+            _stripArabicDiacritics(uth).contains(normQ) ||
+            _stripArabicDiacritics(indo).contains(normQ)) {
+          matchedRows.add(row);
+          if (matchedRows.length >= 100) break;
+        }
+      }
+      return _attachAllTranslations(db, matchedRows, _activeEditions, [clean]);
+    }
 
-    final results = await db.rawQuery('''
-      SELECT s.id as surah_id, s.name_bn, s.name_en, t.ayah_number, t.edition, t.text_bn
+    // 3. Multi-word + synonym expansion across active Bengali translations
+    final lower = clean.toLowerCase();
+    final List<String> tokenClauses = [];
+    final List<dynamic> params = [];
+    final Set<String> allExpandedTerms = {};
+
+    if (_searchSynonyms.containsKey(lower) || _searchSynonyms.containsKey(clean)) {
+      final syns = _searchSynonyms[lower] ?? _searchSynonyms[clean]!;
+      final terms = <String>{clean, ...syns}.toList();
+      allExpandedTerms.addAll(terms);
+      tokenClauses.add('(${terms.map((_) => 't.text_bn LIKE ?').join(' OR ')})');
+      for (final t in terms) {
+        params.add('%$t%');
+      }
+    } else {
+      final tokens = clean
+          .split(RegExp(r'\s+'))
+          .where((t) => t.isNotEmpty)
+          .take(5)
+          .toList();
+      for (final token in tokens) {
+        final tLower = token.toLowerCase();
+        final syns = _searchSynonyms[tLower] ?? _searchSynonyms[token] ?? const <String>[];
+        final terms = <String>{token, ...syns}.toList();
+        allExpandedTerms.addAll(terms);
+        tokenClauses.add('(${terms.map((_) => 't.text_bn LIKE ?').join(' OR ')})');
+        for (final t in terms) {
+          params.add('%$t%');
+        }
+      }
+    }
+
+    if (tokenClauses.isEmpty) return [];
+
+    final String editionClause;
+    if (editionFilter != 'all' && _activeEditions.contains(editionFilter)) {
+      editionClause = 't.edition = ?';
+      params.add(editionFilter);
+    } else {
+      editionClause = "t.edition IN ('tawzeehul', 'shafi', 'taisirul')";
+    }
+
+    final whereSql = '${tokenClauses.join(' AND ')} AND $editionClause';
+
+    // Deduplicate by unique ayah and capture which editions matched
+    final ayahRows = await db.rawQuery('''
+      SELECT a.surah_id, a.ayah_number, a.page_number, a.text_indopak,
+             s.name_bn, s.name_en,
+             GROUP_CONCAT(DISTINCT t.edition) AS matched_editions
       FROM translations t
+      JOIN ayahs a ON a.surah_id = t.surah_id AND a.ayah_number = t.ayah_number
       JOIN surahs s ON s.id = t.surah_id
-      WHERE ($clauses)
-      ORDER BY s.id ASC, t.ayah_number ASC
+      WHERE $whereSql
+      GROUP BY a.surah_id, a.ayah_number
+      ORDER BY a.surah_id ASC, a.ayah_number ASC
       LIMIT 100;
     ''', params);
-    return results;
+
+    if (ayahRows.isEmpty) return [];
+
+    return _attachAllTranslations(
+      db,
+      ayahRows,
+      editionFilter != 'all' ? [editionFilter] : _activeEditions,
+      allExpandedTerms.toList(),
+    );
+  }
+
+  Future<List<Map<String, dynamic>>> _attachAllTranslations(
+    Database db,
+    List<Map<String, dynamic>> ayahRows,
+    List<String> preferredOrder,
+    List<String> matchedTerms,
+  ) async {
+    if (ayahRows.isEmpty) return [];
+
+    final conditions = List.filled(ayahRows.length, '(surah_id = ? AND ayah_number = ?)').join(' OR ');
+    final params = <dynamic>[];
+    for (final row in ayahRows) {
+      params.add(row['surah_id']);
+      params.add(row['ayah_number']);
+    }
+
+    final transRows = await db.rawQuery('''
+      SELECT surah_id, ayah_number, edition, text_bn
+      FROM translations
+      WHERE edition IN ('tawzeehul', 'shafi', 'taisirul')
+        AND ($conditions)
+    ''', params);
+
+    final Map<String, Map<String, String>> transByKey = {};
+    for (final tr in transRows) {
+      final key = '${tr['surah_id']}:${tr['ayah_number']}';
+      final ed = tr['edition'] as String;
+      final txt = (tr['text_bn'] as String?) ?? '';
+      transByKey.putIfAbsent(key, () => {})[ed] = txt;
+    }
+
+    final List<Map<String, dynamic>> finalResults = [];
+    for (final row in ayahRows) {
+      final sid = row['surah_id'] as int;
+      final aid = row['ayah_number'] as int;
+      final key = '$sid:$aid';
+      final transMap = transByKey[key] ?? {};
+
+      final rawMatched = (row['matched_editions'] as String?) ?? '';
+      final matchedSet = rawMatched
+          .split(',')
+          .map((e) => e.trim())
+          .where((e) => e.isNotEmpty)
+          .toSet();
+      final orderedMatched = _activeEditions.where((e) => matchedSet.contains(e)).toList();
+      if (orderedMatched.isEmpty) {
+        orderedMatched.addAll(preferredOrder.where((e) => (transMap[e] ?? '').isNotEmpty));
+      }
+
+      final primaryEdition = orderedMatched.isNotEmpty
+          ? orderedMatched.first
+          : _activeEditions.firstWhere((e) => (transMap[e] ?? '').isNotEmpty, orElse: () => 'tawzeehul');
+
+      finalResults.add({
+        'surah_id': sid,
+        'ayah_number': aid,
+        'page_number': row['page_number'] as int,
+        'name_bn': row['name_bn'] as String,
+        'name_en': row['name_en'] as String,
+        'text_indopak': (row['text_indopak'] as String?) ?? '',
+        'matched_editions': orderedMatched,
+        'translations': transMap,
+        'matched_terms': matchedTerms,
+        'edition': primaryEdition,
+        'text_bn': transMap[primaryEdition] ?? '',
+      });
+    }
+
+    return finalResults;
   }
 
   // 7. Bookmarks Management
