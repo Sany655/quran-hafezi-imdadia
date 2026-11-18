@@ -1,0 +1,70 @@
+name: PWA / Web Validation
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+    paths:
+      - 'landing/**'
+      - 'docs/**'
+      - 'scripts/**'
+      - 'assets/pages/**'
+      - 'data/**'
+      - '.github/workflows/web_validation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pwa-validation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate_web_bundle:
+    name: Generate & Validate Web Bundle
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Verify Git LFS Assets
+        shell: bash
+        run: |
+          test -f data/quran_imdadia.db
+          test -d assets/pages
+          DB_SIZE=$(stat -c%s data/quran_imdadia.db)
+          if [ "$DB_SIZE" -lt 1000000 ]; then
+            echo "::error::SQLite database is missing or is only a Git LFS pointer"
+            exit 1
+          fi
+          PAGE_COUNT=$(find assets/pages -maxdepth 1 -type f | wc -l)
+          if [ "$PAGE_COUNT" -lt 612 ]; then
+            echo "::error::Expected at least 612 Mushaf page assets, found $PAGE_COUNT"
+            exit 1
+          fi
+
+      - name: Generate Web Data
+        run: python scripts/generate_web_data.py
+
+      - name: Prepare Web Validation Bundle
+        shell: bash
+        run: |
+          mkdir -p docs/pages
+          cp -r landing/* docs/
+          cp -r assets/pages/* docs/pages/
+
+      - name: Validate Web Files and JSON
+        shell: bash
+        run: |
+          python -c "import glob,json,os; required=['docs/index.html','docs/reader.html','docs/manifest.json','docs/sw.js']; missing=[p for p in required if not os.path.isfile(p)]; assert not missing, 'Missing: '+str(missing); files=glob.glob('docs/**/*.json',recursive=True); [json.load(open(p,encoding='utf-8')) for p in files]; print(f'Validated {len(required)} required files and {len(files)} JSON files')"
+          test "$(find docs/pages -maxdepth 1 -type f | wc -l)" -ge 612
+

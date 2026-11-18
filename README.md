@@ -83,6 +83,8 @@ The website root is a non-commercial introduction to the project, its purpose, f
 
 We warmly invite you to join this collective effort. You can contribute in whatever capacity Allah has blessed you with:
 
+For feature requests and integration ideas, add a proposed item to [`FEATURE_BACKLOG.md`](FEATURE_BACKLOG.md). Ask an agent explicitly to refine or implement an item; adding it does not start work automatically.
+
 | Role | How You Can Help | Starting Point |
 |---|---|---|
 | **Flutter / Dart Developers** | Optimize database queries, enhance UI performance, build desktop/web/iOS versions, accessibility. | Check open [Issues](https://github.com/Sany655/quran-hafezi-imdadia/issues) |
@@ -118,6 +120,8 @@ flutter run
 The **Android Test Build** (`android_test_build.yml`) workflow runs code analysis, unit tests, and builds an Android test APK on pushes to `main`, pull requests, or on-demand via manual trigger (`workflow_dispatch`). The generated APK is uploaded as a downloadable workflow artifact for internal preview and testing without publishing.
 
 To publish an APK, push a version tag such as `v2.3.2`, or manually run **Build & Release Android APK (Manual or Tagged Only)** from the repository's Actions tab. The release workflow attaches `Quran-Hafezi-Imdadia.apk` to a GitHub Release.
+
+For the required signing secrets, OCR token, environments, and branch-protection setup, see [`CI_CD_SETUP.md`](CI_CD_SETUP.md).
 
 ---
 

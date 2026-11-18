@@ -40,7 +40,7 @@ on:
         type: string
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   ocr-usmani:
@@ -53,12 +53,26 @@ jobs:
         volume: [1, 2, 3, 4]
     steps:
       - name: Check whether this volume was selected
+        env:
+          REQUESTED_VOLUME: ${{ inputs.volume }}
         run: |
-          if [ "${{ inputs.volume }}" != "all" ] && [ "${{ inputs.volume }}" != "${{ matrix.volume }}" ]; then
+          if [ "$REQUESTED_VOLUME" != "all" ] && [ "$REQUESTED_VOLUME" != "${{ matrix.volume }}" ]; then
             echo "SKIPPED=true" >> $GITHUB_ENV
           else
             echo "SKIPPED=false" >> $GITHUB_ENV
           fi
+
+      - name: Validate OCR Parameters
+        if: env.SKIPPED != 'true'
+        env:
+          OCR_DPI: ${{ inputs.dpi }}
+          OCR_PSM: ${{ inputs.psm }}
+          OCR_WORKERS: ${{ inputs.workers }}
+        shell: bash
+        run: |
+          [[ "$OCR_DPI" =~ ^[0-9]+$ ]] && (( OCR_DPI >= 100 && OCR_DPI <= 600 )) || { echo "::error::DPI must be an integer from 100 to 600"; exit 1; }
+          [[ "$OCR_PSM" =~ ^[0-9]+$ ]] && (( OCR_PSM <= 13 )) || { echo "::error::PSM must be an integer from 0 to 13"; exit 1; }
+          [[ "$OCR_WORKERS" =~ ^[0-9]+$ ]] && (( OCR_WORKERS >= 1 && OCR_WORKERS <= 16 )) || { echo "::error::Workers must be an integer from 1 to 16"; exit 1; }
 
       - name: Checkout repository
         if: env.SKIPPED != 'true'
@@ -111,12 +125,16 @@ jobs:
 
       - name: Run OCR for Volume ${{ matrix.volume }}
         if: env.SKIPPED != 'true'
+        env:
+          OCR_WORKERS: ${{ inputs.workers }}
+          OCR_DPI: ${{ inputs.dpi }}
+          OCR_PSM: ${{ inputs.psm }}
         run: |
           python scripts/ocr_usmani.py \
             --volume ${{ matrix.volume }} \
-            --workers ${{ inputs.workers }} \
-            --dpi ${{ inputs.dpi }} \
-            --psm ${{ inputs.psm }} \
+            --workers "$OCR_WORKERS" \
+            --dpi "$OCR_DPI" \
+            --psm "$OCR_PSM" \
             --lang 'ben+ara' \
             --no-resume
 
@@ -152,6 +170,17 @@ jobs:
           python -m pip install --upgrade pip
           pip install pymupdf pytesseract pillow requests
 
+      - name: Validate OCR Parameters
+        env:
+          OCR_DPI: ${{ inputs.dpi }}
+          OCR_PSM: ${{ inputs.psm }}
+          OCR_WORKERS: ${{ inputs.workers }}
+        shell: bash
+        run: |
+          [[ "$OCR_DPI" =~ ^[0-9]+$ ]] && (( OCR_DPI >= 100 && OCR_DPI <= 600 )) || { echo "::error::DPI must be an integer from 100 to 600"; exit 1; }
+          [[ "$OCR_PSM" =~ ^[0-9]+$ ]] && (( OCR_PSM <= 13 )) || { echo "::error::PSM must be an integer from 0 to 13"; exit 1; }
+          [[ "$OCR_WORKERS" =~ ^[0-9]+$ ]] && (( OCR_WORKERS >= 1 && OCR_WORKERS <= 16 )) || { echo "::error::Workers must be an integer from 1 to 16"; exit 1; }
+
       - name: Download Maariful Quran Short Complete PDF
         run: |
           python -c "
@@ -165,11 +194,15 @@ jobs:
           "
 
       - name: Run OCR for Maariful Short
+        env:
+          OCR_WORKERS: ${{ inputs.workers }}
+          OCR_DPI: ${{ inputs.dpi }}
+          OCR_PSM: ${{ inputs.psm }}
         run: |
           python scripts/ocr_maariful_short.py \
-            --workers ${{ inputs.workers }} \
-            --dpi ${{ inputs.dpi }} \
-            --psm ${{ inputs.psm }} \
+            --workers "$OCR_WORKERS" \
+            --dpi "$OCR_DPI" \
+            --psm "$OCR_PSM" \
             --lang 'ben+ara' \
             --no-resume
 
@@ -183,7 +216,15 @@ jobs:
   ingest-and-publish:
     name: 'Ingest OCR & Update Database/Web'
     needs: [ocr-usmani, ocr-maariful-short]
-    if: always() && (needs.ocr-usmani.result == 'success' || needs.ocr-maariful-short.result == 'success')
+    if: >-
+      ${{
+        always() &&
+        (
+          (inputs.tafsir == 'tafsir_usmani' && needs.ocr-usmani.result == 'success') ||
+          (inputs.tafsir == 'maariful_short' && needs.ocr-maariful-short.result == 'success') ||
+          (inputs.tafsir == 'all' && needs.ocr-usmani.result == 'success' && needs.ocr-maariful-short.result == 'success')
+        )
+      }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository with Git LFS
@@ -191,6 +232,7 @@ jobs:
         with:
           lfs: true
           fetch-depth: 1
+          token: ${{ secrets.TAFSIR_PR_TOKEN }}
 
       - name: Pull LFS files
         run: git lfs pull
@@ -242,14 +284,36 @@ jobs:
             python scripts/import_maariful_to_db.py
           fi
 
+      - name: Verify Quran Database Integrity
+        run: |
+          python -c "import sqlite3; c=sqlite3.connect('data/quran_imdadia.db'); assert c.execute('PRAGMA integrity_check').fetchone()[0] == 'ok'; assert c.execute('SELECT COUNT(*) FROM pages').fetchone()[0] == 612; assert c.execute('SELECT COUNT(*) FROM ayahs').fetchone()[0] == 6236; print('SQLite integrity, 612 pages, and 6,236 Ayahs verified')"
+
       - name: Regenerate Web Data JSONs
         run: |
           python scripts/generate_web_data.py
 
-      - name: Commit and Push Updates
+      - name: Open Review Pull Request
+        env:
+          GH_TOKEN: ${{ secrets.TAFSIR_PR_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/quran_imdadia.db docs/data/tafsir/ data/tafsir/*_tafsir.json
-          git commit -m "Auto-update Tafsir data via CI/CD OCR pipeline [skip ci]" || echo "No changes to commit"
-          git push origin main
+          BRANCH="automation/tafsir-ocr-${GITHUB_RUN_ID}"
+          git checkout -b "$BRANCH"
+          git add -A -- data/quran_imdadia.db docs/data/tafsir
+          shopt -s nullglob
+          TAFSIR_JSON=(data/tafsir/*_tafsir.json)
+          if [ "${#TAFSIR_JSON[@]}" -gt 0 ]; then
+            git add -A -- "${TAFSIR_JSON[@]}"
+          fi
+          if git diff --cached --quiet; then
+            echo "No generated data changes to review."
+            exit 0
+          fi
+          git commit -m "data: update OCR tafsir content"
+          git push --set-upstream origin "$BRANCH"
+          gh pr create \
+            --base main \
+            --head "$BRANCH" \
+            --title "Review OCR tafsir data update" \
+            --body "Automated OCR output and database/web data update. Please review the generated tafsir content and verify Quranic data integrity before merging."

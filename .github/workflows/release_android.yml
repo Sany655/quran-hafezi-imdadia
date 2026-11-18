@@ -4,9 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       tag_name:
-        description: 'Tag name for the release (e.g. v1.0.1 or latest)'
+        description: 'Existing stable tag, for example v3.3.1'
         required: true
-        default: 'latest'
   push:
     tags:
       - 'v*'
@@ -17,12 +16,51 @@ permissions:
 jobs:
   test_and_analyze:
     name: Code Quality & Unit Tests
+    if: >-
+      ${{
+        (github.event_name == 'workflow_dispatch' &&
+         !contains(github.event.inputs.tag_name, '-beta.')) ||
+        (github.event_name == 'push' && !contains(github.ref_name, '-beta.'))
+      }}
     runs-on: ubuntu-latest
+    outputs:
+      release_tag: ${{ steps.validate.outputs.release_tag }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           lfs: true
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.tag_name || github.ref }}
+
+      - name: Verify Git LFS Database
+        shell: bash
+        run: |
+          test -f data/quran_imdadia.db
+          DB_SIZE=$(stat -c%s data/quran_imdadia.db)
+          if [ "$DB_SIZE" -lt 1000000 ]; then
+            echo "::error::SQLite database is missing or is only a Git LFS pointer"
+            exit 1
+          fi
+
+      - name: Validate Stable Tag and Version
+        id: validate
+        env:
+          TAG_INPUT: ${{ inputs.tag_name }}
+          REF_NAME: ${{ github.ref_name }}
+        shell: bash
+        run: |
+          TAG="${TAG_INPUT:-$REF_NAME}"
+          if [[ ! "$TAG" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
+            echo "::error::Stable tags must use vMAJOR.MINOR.PATCH (beta tags use the beta workflow)"
+            exit 1
+          fi
+          PROJECT_VERSION=$(sed -n 's/^version: *//p' pubspec.yaml | tr -d "'\"")
+          PROJECT_VERSION="${PROJECT_VERSION%%+*}"
+          if [ "${TAG#v}" != "$PROJECT_VERSION" ]; then
+            echo "::error::pubspec.yaml version ($PROJECT_VERSION) must match stable tag ${TAG#v}"
+            exit 1
+          fi
+          echo "release_tag=$TAG" >> "$GITHUB_OUTPUT"
 
       - name: Set up Java 17
         uses: actions/setup-java@v4
@@ -48,13 +86,21 @@ jobs:
   build_and_release_apk:
     name: Build Android APK & Publish Release
     needs: test_and_analyze
+    if: >-
+      ${{
+        (github.event_name == 'workflow_dispatch' &&
+         !contains(github.event.inputs.tag_name, '-beta.')) ||
+        (github.event_name == 'push' && !contains(github.ref_name, '-beta.'))
+      }}
     runs-on: ubuntu-latest
+    environment: android-production
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           lfs: true
+          ref: ${{ needs.test_and_analyze.outputs.release_tag }}
 
       - name: Set up Java 17
         uses: actions/setup-java@v4
@@ -99,20 +145,16 @@ jobs:
           APK_NAME="Quran-Hafezi-Imdadia.apk"
           cp build/app/outputs/flutter-apk/app-release.apk "./${APK_NAME}"
           echo "apk_path=./${APK_NAME}" >> $GITHUB_OUTPUT
-          
-          TAG="${{ github.event.inputs.tag_name }}"
-          if [ -z "$TAG" ]; then
-            TAG="${{ github.ref_name }}"
-          fi
-          echo "release_tag=${TAG}" >> $GITHUB_OUTPUT
+          sha256sum "${APK_NAME}" > "${APK_NAME}.sha256"
+          echo "checksum_path=./${APK_NAME}.sha256" >> $GITHUB_OUTPUT
 
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ steps.prep.outputs.release_tag }}
-          name: "আল-কুরআন হাফেজী (${{ steps.prep.outputs.release_tag }})"
+          tag_name: ${{ needs.test_and_analyze.outputs.release_tag }}
+          name: "আল-কুরআন হাফেজী (${{ needs.test_and_analyze.outputs.release_tag }})"
           body: |
-            ## আল-কুরআন হাফেজী (১৫ লাইন) - ${{ steps.prep.outputs.release_tag }}
+            ## আল-কুরআন হাফেজী (১৫ লাইন) - ${{ needs.test_and_analyze.outputs.release_tag }}
             
             স্বয়ংক্রিয়ভাবে সংকলিত অ্যান্ড্রয়েড রিলিজ।
             
@@ -129,7 +171,9 @@ jobs:
             
             ---
             ### 📥 সরাসরি ডাউনলোড লিংক:
-            - [Quran-Hafezi-Imdadia.apk](https://github.com/Sany655/quran-hafezi-imdadia/releases/download/${{ steps.prep.outputs.release_tag }}/Quran-Hafezi-Imdadia.apk)
-          files: ${{ steps.prep.outputs.apk_path }}
+            - [Quran-Hafezi-Imdadia.apk](https://github.com/Sany655/quran-hafezi-imdadia/releases/download/${{ needs.test_and_analyze.outputs.release_tag }}/Quran-Hafezi-Imdadia.apk)
+          files: |
+            ${{ steps.prep.outputs.apk_path }}
+            ${{ steps.prep.outputs.checksum_path }}
           draft: false
           prerelease: false

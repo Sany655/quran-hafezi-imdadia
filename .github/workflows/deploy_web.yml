@@ -44,6 +44,22 @@ jobs:
           cp -r assets/pages/* docs/pages/
           echo "Web bundle prepared with $(ls -1 docs/pages | wc -l) pages"
 
+      - name: Validate Web Bundle
+        shell: bash
+        run: |
+          test -f data/quran_imdadia.db
+          DB_SIZE=$(stat -c%s data/quran_imdadia.db)
+          if [ "$DB_SIZE" -lt 1000000 ]; then
+            echo "::error::SQLite database is missing or is only a Git LFS pointer"
+            exit 1
+          fi
+          PAGE_COUNT=$(find docs/pages -maxdepth 1 -type f | wc -l)
+          if [ "$PAGE_COUNT" -lt 612 ]; then
+            echo "::error::Expected at least 612 Mushaf page assets, found $PAGE_COUNT"
+            exit 1
+          fi
+          python -c "import glob,json,os; required=['docs/index.html','docs/reader.html','docs/manifest.json','docs/sw.js']; missing=[p for p in required if not os.path.isfile(p)]; assert not missing, 'Missing: '+str(missing); files=glob.glob('docs/**/*.json',recursive=True); [json.load(open(p,encoding='utf-8')) for p in files]; print(f'Validated {len(required)} required files and {len(files)} JSON files')"
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
 

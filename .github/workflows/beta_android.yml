@@ -1,0 +1,158 @@
+name: Android Beta Build (Prerelease)
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Existing beta tag, for example v3.4.0-beta.1'
+        required: true
+  push:
+    tags:
+      - 'v*-beta.*'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: android-beta-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  beta_build_and_publish:
+    name: Build & Publish Android Beta
+    runs-on: ubuntu-latest
+    environment: android-beta
+    steps:
+      - name: Validate Beta Tag
+        id: validate
+        env:
+          TAG_INPUT: ${{ inputs.tag_name }}
+          REF_NAME: ${{ github.ref_name }}
+        shell: bash
+        run: |
+          TAG="${TAG_INPUT:-$REF_NAME}"
+          if [[ ! "$TAG" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)-beta\.(0|[1-9][0-9]*)$ ]]; then
+            echo "::error::Beta tags must use vMAJOR.MINOR.PATCH-beta.N"
+            exit 1
+          fi
+          echo "beta_tag=$TAG" >> "$GITHUB_OUTPUT"
+
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+          fetch-depth: 0
+          ref: ${{ github.event_name == 'workflow_dispatch' && inputs.tag_name || github.ref }}
+
+      - name: Verify Beta Version
+        env:
+          BETA_TAG: ${{ steps.validate.outputs.beta_tag }}
+        shell: bash
+        run: |
+          PROJECT_VERSION=$(sed -n 's/^version: *//p' pubspec.yaml | tr -d "'\"")
+          PROJECT_VERSION="${PROJECT_VERSION%%+*}"
+          EXPECTED_VERSION="${BETA_TAG#v}"
+          if [ "$PROJECT_VERSION" != "$EXPECTED_VERSION" ]; then
+            echo "::error::pubspec.yaml version ($PROJECT_VERSION) must match beta tag version ($EXPECTED_VERSION)"
+            exit 1
+          fi
+
+      - name: Verify Git LFS Assets
+        shell: bash
+        run: |
+          test -f data/quran_imdadia.db
+          test -d assets/pages
+          DB_SIZE=$(stat -c%s data/quran_imdadia.db)
+          if [ "$DB_SIZE" -lt 1000000 ]; then
+            echo "::error::SQLite database is missing or is only a Git LFS pointer"
+            exit 1
+          fi
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'gradle'
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Run Flutter Analyzer
+        run: flutter analyze --no-fatal-infos
+
+      - name: Run Unit Tests
+        run: flutter test
+
+      - name: Configure Android Release Signing
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        shell: bash
+        run: |
+          if [ -z "$ANDROID_KEYSTORE_BASE64" ] || [ -z "$ANDROID_KEYSTORE_PASSWORD" ] || [ -z "$ANDROID_KEY_ALIAS" ] || [ -z "$ANDROID_KEY_PASSWORD" ]; then
+            echo "::error::Missing Android signing secrets"
+            exit 1
+          fi
+          echo "$ANDROID_KEYSTORE_BASE64" | tr -d '\r\n ' | base64 --decode > android/app/upload-keystore.jks
+          printf 'storePassword=%s\nkeyPassword=%s\nkeyAlias=%s\nstoreFile=upload-keystore.jks\n' \
+            "$ANDROID_KEYSTORE_PASSWORD" "$ANDROID_KEY_PASSWORD" "$ANDROID_KEY_ALIAS" > android/key.properties
+
+      - name: Build Android Beta APK
+        run: flutter build apk --release --android-skip-build-dependency-validation
+
+      - name: Prepare Beta Asset
+        id: prep
+        env:
+          BETA_TAG: ${{ steps.validate.outputs.beta_tag }}
+        shell: bash
+        run: |
+          APK_NAME="Quran-Hafezi-Imdadia-${BETA_TAG}.apk"
+          cp build/app/outputs/flutter-apk/app-release.apk "$APK_NAME"
+          sha256sum "$APK_NAME" > "${APK_NAME}.sha256"
+          echo "apk_path=${APK_NAME}" >> "$GITHUB_OUTPUT"
+          echo "checksum_path=${APK_NAME}.sha256" >> "$GITHUB_OUTPUT"
+
+      - name: Upload Beta APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: quran-hafezi-beta-${{ steps.validate.outputs.beta_tag }}
+          path: |
+            ${{ steps.prep.outputs.apk_path }}
+            ${{ steps.prep.outputs.checksum_path }}
+          retention-days: 30
+          if-no-files-found: error
+
+      - name: Publish GitHub Prerelease
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.validate.outputs.beta_tag }}
+          name: "আল-কুরআন হাফেজী (Beta ${{ steps.validate.outputs.beta_tag }})"
+          prerelease: true
+          draft: false
+          body: |
+            ## Android Beta - ${{ steps.validate.outputs.beta_tag }}
+
+            This is a prerelease candidate for internal or invited beta testing only.
+
+            ### Required beta checks
+            - Install and upgrade from the previous stable APK
+            - Offline startup, search, navigation, and bookmarks
+            - Mushaf pages, translations, and tafsir
+            - Verify the APK checksum before installation
+          files: |
+            ${{ steps.prep.outputs.apk_path }}
+            ${{ steps.prep.outputs.checksum_path }}
+
+      - name: Cleanup Signing Files
+        if: always()
+        shell: bash
+        run: rm -f android/key.properties android/app/upload-keystore.jks
