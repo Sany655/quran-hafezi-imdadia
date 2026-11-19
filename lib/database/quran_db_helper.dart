@@ -8,13 +8,16 @@ import '../models/juz.dart';
 import '../models/ayah.dart';
 import '../models/word_wbw.dart';
 import '../models/bookmark.dart';
+import 'legacy_user_data_validator.dart';
 
 class QuranDbHelper {
   static final QuranDbHelper instance = QuranDbHelper._init();
   static Database? _database;
+  static Database? _userDatabase;
   static Future<Database>? _initDbFuture;
 
   static const int kDatabaseVersion = 4;
+  static const String _legacyUserDataMigration = 'legacy_user_data_v1';
 
   // In-memory static caches for instant zero-lag page navigation
   static List<Surah>? _cachedSurahs;
@@ -35,10 +38,13 @@ class QuranDbHelper {
     return _database!;
   }
 
+  Future<Database> get _userDataDatabase async {
+    await database;
+    return _userDatabase!;
+  }
+
   Future<void> _copyAssetDb(String path) async {
-    try {
-      await Directory(dirname(path)).create(recursive: true);
-    } catch (_) {}
+    await Directory(dirname(path)).create(recursive: true);
     ByteData data = await rootBundle.load('data/quran_imdadia.db');
     final bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
     await File(path).writeAsBytes(bytes, flush: true);
@@ -56,44 +62,139 @@ class QuranDbHelper {
 
     var db = await openDatabase(path, readOnly: false);
 
-    // Fast version check: PRAGMA user_version takes 0.1ms
-    try {
-      final vRes = await db.rawQuery("PRAGMA user_version");
-      final currentVersion = Sqflite.firstIntValue(vRes) ?? 0;
+    final userDataPath = join(dbPath, 'quran_user_data.db');
+    final userDb = await openDatabase(
+      userDataPath,
+      version: 1,
+      onCreate: (database, version) async {
+        await database.execute('''
+          CREATE TABLE bookmarks (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            page_number INTEGER NOT NULL UNIQUE,
+            surah_name TEXT NOT NULL,
+            juz_number INTEGER NOT NULL,
+            created_at TEXT NOT NULL
+          );
+        ''');
+        await database.execute('''
+          CREATE TABLE last_read (
+            id INTEGER PRIMARY KEY,
+            page_number INTEGER NOT NULL,
+            surah_name TEXT NOT NULL,
+            updated_at TEXT NOT NULL
+          );
+        ''');
+        await database.execute('''
+          CREATE TABLE schema_migrations (
+            migration_id TEXT PRIMARY KEY,
+            applied_at TEXT NOT NULL
+          );
+        ''');
+      },
+    );
+    _userDatabase = userDb;
 
-      if (currentVersion < kDatabaseVersion) {
-        debugPrint('Old database version ($currentVersion < $kDatabaseVersion), upgrading...');
-        await db.close();
-        await deleteDatabase(path);
-        await _copyAssetDb(path);
-        db = await openDatabase(path, readOnly: false);
-        await db.execute('PRAGMA user_version = $kDatabaseVersion;');
-      }
-    } catch (e) {
-      debugPrint('Error during version verification: $e');
+    await _migrateLegacyUserData(db, userDb);
+
+    final vRes = await db.rawQuery('PRAGMA user_version');
+    final currentVersion = Sqflite.firstIntValue(vRes) ?? 0;
+    if (currentVersion < kDatabaseVersion) {
+      debugPrint('Old database version ($currentVersion < $kDatabaseVersion), upgrading...');
+      await db.close();
+      await deleteDatabase(path);
+      await _copyAssetDb(path);
+      db = await openDatabase(path, readOnly: false);
+      await db.execute('PRAGMA user_version = $kDatabaseVersion;');
     }
 
-    // Fast table creation with IF NOT EXISTS
-    await db.execute('''
-      CREATE TABLE IF NOT EXISTS bookmarks (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        page_number INTEGER NOT NULL UNIQUE,
-        surah_name TEXT NOT NULL,
-        juz_number INTEGER NOT NULL,
-        created_at TEXT NOT NULL
-      );
-    ''');
-
-    await db.execute('''
-      CREATE TABLE IF NOT EXISTS last_read (
-        id INTEGER PRIMARY KEY,
-        page_number INTEGER NOT NULL,
-        surah_name TEXT NOT NULL,
-        updated_at TEXT NOT NULL
-      );
-    ''');
-
     return db;
+  }
+
+  Future<void> _migrateLegacyUserData(Database legacyDb, Database userDb) async {
+    final applied = await userDb.query(
+      'schema_migrations',
+      where: 'migration_id = ?',
+      whereArgs: [_legacyUserDataMigration],
+      limit: 1,
+    );
+    if (applied.isNotEmpty) return;
+
+    final bookmarksExist = await _tableExists(legacyDb, 'bookmarks');
+    final lastReadExists = await _tableExists(legacyDb, 'last_read');
+    final legacyBookmarks =
+        bookmarksExist ? await legacyDb.query('bookmarks') : <Map<String, Object?>>[];
+    final legacyLastRead = lastReadExists
+        ? await legacyDb.query('last_read', where: 'id = ?', whereArgs: [1], limit: 1)
+        : <Map<String, Object?>>[];
+    final validBookmarks = LegacyUserDataValidator.validBookmarks(legacyBookmarks);
+    final validLastRead = LegacyUserDataValidator.validLastRead(legacyLastRead);
+    final skippedBookmarks = legacyBookmarks.length - validBookmarks.length;
+
+    await userDb.transaction((transaction) async {
+      final alreadyApplied = await transaction.query(
+        'schema_migrations',
+        where: 'migration_id = ?',
+        whereArgs: [_legacyUserDataMigration],
+        limit: 1,
+      );
+      if (alreadyApplied.isNotEmpty) return;
+
+      final initialBookmarkCount = Sqflite.firstIntValue(
+        await transaction.rawQuery('SELECT COUNT(*) FROM bookmarks'),
+      );
+      if (initialBookmarkCount == null) {
+        throw StateError('Could not verify the initial bookmark count.');
+      }
+      for (final bookmark in validBookmarks) {
+        await transaction.insert('bookmarks', bookmark);
+      }
+      if (validLastRead != null) {
+        await transaction.insert('last_read', validLastRead);
+      }
+
+      final finalBookmarkCount = Sqflite.firstIntValue(
+        await transaction.rawQuery('SELECT COUNT(*) FROM bookmarks'),
+      );
+      if (finalBookmarkCount == null) {
+        throw StateError('Could not verify the migrated bookmark count.');
+      }
+      if (finalBookmarkCount != initialBookmarkCount + validBookmarks.length) {
+        throw StateError('Legacy bookmark migration did not copy every valid bookmark.');
+      }
+      if (validLastRead != null) {
+        final copiedLastRead = await transaction.query(
+          'last_read',
+          where: 'id = ?',
+          whereArgs: [1],
+          limit: 1,
+        );
+        if (copiedLastRead.length != 1 ||
+            copiedLastRead.first['page_number'] != validLastRead['page_number'] ||
+            copiedLastRead.first['surah_name'] != validLastRead['surah_name'] ||
+            copiedLastRead.first['updated_at'] != validLastRead['updated_at']) {
+          throw StateError('Legacy last-read migration verification failed.');
+        }
+      }
+      await transaction.insert('schema_migrations', {
+        'migration_id': _legacyUserDataMigration,
+        'applied_at': DateTime.now().toIso8601String(),
+      });
+    });
+
+    if (skippedBookmarks > 0) {
+      debugPrint('Skipped $skippedBookmarks invalid legacy bookmark(s) during migration.');
+    }
+    if (legacyLastRead.isNotEmpty && validLastRead == null) {
+      debugPrint('Skipped invalid legacy last-read state during migration.');
+    }
+  }
+
+  Future<bool> _tableExists(Database database, String tableName) async {
+    final result = await database.rawQuery(
+      "SELECT name FROM sqlite_master WHERE type = 'table' AND name = ?",
+      [tableName],
+    );
+    return result.isNotEmpty;
   }
 
   // 1. Fetch all Surahs (with in-memory cache)
@@ -736,7 +837,7 @@ class QuranDbHelper {
 
   // 7. Bookmarks Management
   Future<bool> isBookmarked(int pageNumber) async {
-    final db = await database;
+    final db = await _userDataDatabase;
     final maps = await db.query(
       'bookmarks',
       where: 'page_number = ?',
@@ -746,7 +847,7 @@ class QuranDbHelper {
   }
 
   Future<void> addBookmark(int pageNumber, String surahName, int juzNumber) async {
-    final db = await database;
+    final db = await _userDataDatabase;
     await db.insert(
       'bookmarks',
       {
@@ -760,7 +861,7 @@ class QuranDbHelper {
   }
 
   Future<void> removeBookmark(int pageNumber) async {
-    final db = await database;
+    final db = await _userDataDatabase;
     await db.delete(
       'bookmarks',
       where: 'page_number = ?',
@@ -769,14 +870,14 @@ class QuranDbHelper {
   }
 
   Future<List<Bookmark>> getAllBookmarks() async {
-    final db = await database;
+    final db = await _userDataDatabase;
     final maps = await db.query('bookmarks', orderBy: 'page_number ASC');
     return maps.map((e) => Bookmark.fromMap(e)).toList();
   }
 
   // 8. Last Read Management
   Future<void> saveLastRead(int pageNumber, String surahName) async {
-    final db = await database;
+    final db = await _userDataDatabase;
     await db.insert(
       'last_read',
       {
@@ -790,7 +891,7 @@ class QuranDbHelper {
   }
 
   Future<Map<String, dynamic>?> getLastRead() async {
-    final db = await database;
+    final db = await _userDataDatabase;
     final maps = await db.query('last_read', where: 'id = 1');
     if (maps.isNotEmpty) {
       return maps.first;

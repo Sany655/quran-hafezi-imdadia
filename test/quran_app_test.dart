@@ -5,8 +5,79 @@ import 'package:quran_hafezi_imdadia/models/ayah.dart';
 import 'package:quran_hafezi_imdadia/models/word_wbw.dart';
 import 'package:quran_hafezi_imdadia/models/bookmark.dart';
 import 'package:quran_hafezi_imdadia/utils/tri_calendar_helper.dart';
+import 'package:quran_hafezi_imdadia/database/legacy_user_data_validator.dart';
 
 void main() {
+  group('Legacy user data migration validation', () {
+    test(
+      'preserves valid bookmarks and excludes out-of-range or malformed rows',
+      () {
+        final valid = {
+          'page_number': 612,
+          'surah_name': 'An-Nas',
+          'juz_number': 30,
+          'created_at': '2026-11-19T12:00:00Z',
+        };
+        final invalidPage = {
+          'page_number': 613,
+          'surah_name': 'An-Nas',
+          'juz_number': 30,
+          'created_at': '2026-11-19T12:00:00Z',
+        };
+        final invalidName = {
+          'page_number': 1,
+          'surah_name': ' ',
+          'juz_number': 1,
+          'created_at': '2026-11-19T12:00:00Z',
+        };
+
+        expect(
+          LegacyUserDataValidator.validBookmarks(
+            [valid, invalidPage, invalidName],
+          ),
+          [
+            {
+              'page_number': 612,
+              'surah_name': 'An-Nas',
+              'juz_number': 30,
+              'created_at': '2026-11-19T12:00:00Z',
+            },
+          ],
+        );
+      },
+    );
+
+    test('preserves valid last-read state and rejects invalid pages', () {
+      expect(
+        LegacyUserDataValidator.validLastRead([
+          {
+            'id': 1,
+            'page_number': 1,
+            'surah_name': 'Al-Fatihah',
+            'updated_at': '2026-11-19T12:00:00Z',
+          },
+        ]),
+        {
+          'id': 1,
+          'page_number': 1,
+          'surah_name': 'Al-Fatihah',
+          'updated_at': '2026-11-19T12:00:00Z',
+        },
+      );
+      expect(
+        LegacyUserDataValidator.validLastRead([
+          {
+            'id': 1,
+            'page_number': 0,
+            'surah_name': 'Al-Fatihah',
+            'updated_at': '2026-11-19T12:00:00Z',
+          },
+        ]),
+        isNull,
+      );
+    });
+  });
+
   group('Quran Data Models Verification Tests', () {
     test('Bookmark model mapping should parse correctly', () {
       final map = {

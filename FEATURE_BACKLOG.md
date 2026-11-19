@@ -478,7 +478,8 @@ Phase 0 execution order: **FEAT-016 → FEAT-002 → FEAT-014 → FEAT-018**. La
 
 ## In Progress
 
-None. Ready means the technical scope is refined; implementation still requires an explicit request.
+- FEAT-016 — Life Guidance Offline Reliability & Data Integrity
+  - Preserving Flutter Android bookmarks and last-read state across bundled Quran database upgrades.
 
 ## Blocked
 
