@@ -77,6 +77,12 @@ The website root is a non-commercial introduction to the project, its purpose, f
 - 🔊 **Page Turn Experience**: Realistic flipping audio for an authentic Mushaf feel.
 - 🔖 **Smart Bookmarks & Navigation**: Jump seamlessly between Surahs, Juz (Paras), Pages, and Ayahs.
 
+### Reading data, deletion, and backups
+
+- On Android, bookmarks and last-read state are stored in the app's local `quran_user_data.db`, separate from the replaceable Quran content database. They do not require an internet connection or an app account.
+- Android system backup or device-to-device transfer may include app data according to the device's backup settings. The app does not provide its own export or restore feature. Clearing app storage or uninstalling can remove local reading state; a system backup may restore it later.
+- The PWA stores bookmarks and last-read state in the current browser profile's `localStorage`. Clearing site data removes it. It is not synchronized with Android or another browser/device.
+
 ---
 
 ## 🤝 How You Can Serve with Us (সহযোগিতার সুযোগ)
